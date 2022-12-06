@@ -10,63 +10,10 @@
     <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"/>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.css">
-    <link rel="stylesheet" href="./common.css">
+    <link rel="stylesheet" href="../css/common.css">
+    <link rel="stylesheet" href="./css/product.css">
     <style>
-        /*product*/
-       #product > section {} 
-       #product > section > nav{} 
-       #product > section > nav > p{} 
-       #product > section > nav > h1{}
-       #product h6.rating{} 
-       #product h6.rating.star1{} 
-       #product h6.rating.star2{} 
-       #product h6.rating.star3{} 
-       #product h6.rating.star4{} 
-       #product h6.rating.star5{} 
-       #product h5.rating{} 
-       #product h5.rating.star1{} 
-       #product h5.rating.star2{} 
-       #product h5.rating.star3{} 
-       #product h5.rating.star4{} 
-       #product h5.rating.star5{}
-       #product .badge {}
-       #product .badge.power {}
-       #product .badge.great {}
-       #product .badge.power.great {}
-
-       /*list*/
-       #product > .list{}
-       #product > .list > .sort{}
-       #product > .list > .sort > li{}
-       #product > .list > .sort > li > a{}
-       #product > .list > .sort > li > a.on{}
-       #product > .list > table{}
-       #product > .list > table tr{}
-       #product > .list > table tr > td{}
-       #product > .list > table tr > td:nth-child(1){}
-       #product > .list > table tr > td:nth-child(2){}
-       #product > .list > table tr > td:nth-child(3){}
-       #product > .list > table tr > td:nth-child(4){}
-       #product > .list > table .thumb{}
-       #product > .list > table .thumb > img{}
-       #product > .list > table .name{}
-       #product > .list > table .desc{}
-       #product > .list > table .desc:hover{}
-       #product > .list > table .org-price{}
-       #product > .list > table .dis-price{}
-       #product > .list > table .org-price::after{}
-       #product > .list > table .dis-price::after{}
-       #product > .list > table .discount{}
-       #product > .list > table .discount::after{}
-       #product > .list > table .free-delivery{}
-       #product > .list > table .seller{}
-       #product > .list > table .rating{}
-       #product > .list > .paging{}
-       #product > .list > .paging > span > a{}
-       #product > .list > .paging > span > a:hover{}
-       #product > .list > .paging > .num > a{}
-       #product > .list > .paging > .num > a:hover{}
-       #product > .list > .paging > .num > a.on{}
+       
     </style>
 </head>
 <body>
@@ -110,7 +57,7 @@
         </header>
         <main id="product">
             <aside>
-                <ul>
+                <ul class="category">
                     <li><i class="fa fa-bars" aria-hidden="true"></i>카테고리</li>
                     <li>
                         <a href="#"><i class="fas fa-tshirt"></i>패션·의류·뷰티</a>
@@ -168,7 +115,7 @@
                 </ul>
 
                 <!--상품목록-->
-                <table border="1">
+                <table border="0">
                     <tr>
                         <td><a href="#" class="thumb"><img src="https://via.placeholder.com/120x120" alt="상품이미지"></a></td>
                         <td>
