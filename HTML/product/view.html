@@ -13,22 +13,80 @@
     <link rel="stylesheet" href="../css/common.css">
     <link rel="stylesheet" href="./css/product.css">
     <style>
-       #product > .view > article{}
-       #product > .view > article > nav{}
-       #product > .view > article > nav > h1{}
-       #product > .view > article > nav > p{}
-       #product > .view > .info > div{}
-       #product > .view > .info > .image > img {}
-       #product > .view > .info > .summary > nav{}
-       #product > .view > .info > .summary > nav > h1{}
-       #product > .view > .info > .summary > nav > h2{}
-       #product > .view > .info > .summary > nav > h3{}
-       #product > .view > .info > .summary > nav > p{}
-       #product > .view > .info > .summary > .rating > a{}
+       #product > .view > article{
+        width: 100%;
+        height: auto;
+        overflow: hidden;
+       }
+       #product > .view > article > nav{
+        border-bottom: 1px solid #a4a9b0;
+        padding: 6px 0;
+        font-weight: bold;
+        font-size: 1.5em;
+       }
+       #product > .view > article > nav > h1{
+        float: left;
+        color: #1e2732;
+        font-weight: bold;
+        font-size: 1.5em;
+       }
+       #product > .view > article > nav > p{
+        float: left;
+        color: #777;
+        margin-top: 6px;
+        margin-left: 6px;
+       }
+       #product > .view > .info > div{
+        float: left;
+        width: 50%;
+        height: 100%;
+        padding: 10px;
+        box-sizing: border-box;
+       }
+       #product > .view > .info > .image > img {width: 100%;}
+       #product > .view > .info > .summary > nav{
+        border-bottom: 1px solid #eaeaea;
+        padding-bottom: 10px;
+        margin-bottom: 12px;
+        overflow: hidden;
+       }
+       #product > .view > .info > .summary > nav > h1{
+        float: left;
+        color: #0231a6;
+        font-weight: bold;
+        font-size: 1.5em;
+       }
+       #product > .view > .info > .summary > nav > h2{
+        float: right;
+        color: #777;
+        margin-top: 8px;
+       }
+       #product > .view > .info > .summary > nav > h3{
+        font-size: 18px;
+        font-weight: bold;
+        color: #1e2732;
+       }
+       #product > .view > .info > .summary > nav > p{
+        font-size: 14px;
+        color: #474747;
+        line-height: 36px;
+        letter-spacing: -1px;
+       }
+       #product > .view > .info > .summary > .rating > a{
+        color: #346aff;
+        text-decoration: underline;
+       }
        #product > .view > .info > .summary .org_price > del::after {content: "원";}
        #product > .view > .info > .summary .org_price > span::after {content: "↓";}
-       #product > .view > .info > .summary .org_price > del {}
-       #product > .view > .info > .summary .org_price > span {}
+       #product > .view > .info > .summary .org_price > del {
+        font-size: 18px;
+        color: #aaa;
+       }
+       #product > .view > .info > .summary .org_price > span {
+        color: #eb000a;
+        font-size: 16px;
+        margin-left: 6px;
+       }
        #product > .view > .info > .summary .org_price > ins::after {}
        #product > .view > .info > .summary .dis_price > ins {}
        #product > .view > .info > .summary .dis_price > ins::after { content: ""; }
