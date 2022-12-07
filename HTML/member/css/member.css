@@ -53,7 +53,7 @@
 #member > div > div > a {
 }
 
-/* login */
+/* login(로그인화면) */
 #member > .login {
     width: 900px;
     height: auto;
@@ -124,7 +124,7 @@
     top: 16px;
 }
 
-/* join */
+/* join(구매자or판매자 회원가입 선택화면) */
 
 #member > .join {
     width: 900px;
@@ -172,7 +172,7 @@
     float: right;
 }
 
-/* signup */
+/* signup(약관동의) */
 #member > .signup {
     width: 900px;
     margin: 0 auto;
@@ -340,4 +340,70 @@
     outline: 0;
     border-radius: 2px;
     cursor: pointer;
+}
+
+/* registerSeller(판매자회원가입) */
+#member > .registerSeller {
+    width: 900px;
+    margin: 0 auto;
+    box-sizing: border-box;
+}
+#member > .registerSeller > nav {
+    border-bottom: 2px solid #0e6ad3;
+}
+
+#member > .registerSeller > nav > h1 {
+    font-size: 24px;
+    margin-bottom: 6px;
+}
+
+#member > .registerSeller table {
+    position: relative;
+    width: 100%;
+    table-layout: fixed;
+    border-top: 1px solid #b6bdc7;
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+#member > .registerSeller table caption {
+    text-align: left;
+    font-size: 16px;
+    padding-left: 10px;
+    margin-top: 20px;
+    margin-bottom: 12px;
+    font-weight: 500;
+}
+
+#member > .registerSeller table th {
+    width: 200px;
+    padding: 20px 20px;
+    vertical-align: top;
+    background: #f4f6f9;
+    font-weight: 500;
+    text-align: left;
+    line-height: 1.4;
+    border-bottom: 1px solid #dfe5ed;
+    word-break: break-word;
+    font-size: 14px;
+}
+
+#member > .registerSeller table td {
+    position: relative;
+    vertical-align: middle;
+    padding: 10px 20px;
+    text-align: left;
+    line-height: 1.4;
+    border-bottom: 1px solid #dfe5ed;
+    word-break: break-word;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+#member > .registerSeller table input {
+    padding : 0 8px;
+    height: 31px;
+    font-size: 14px;
+    border: 1px solid #dfe5ed;
+    vertical-align: middle;
 }
