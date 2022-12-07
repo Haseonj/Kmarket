@@ -53,6 +53,7 @@
 #member > div > div > a {
 }
 
+/* login */
 #member > .login {
     width: 900px;
     height: auto;
@@ -121,4 +122,222 @@
     position: absolute;
     right: 0;
     top: 16px;
+}
+
+/* join */
+
+#member > .join {
+    width: 900px;
+    margin: 0 auto;
+    box-sizing: border-box;
+}
+
+#member > .join > .welcome {
+    display: block;
+    margin: 10px auto;
+}
+
+#member > .join > .type {
+    width: 100%;
+    height: 200px;
+    margin: 60px auto;
+}
+
+#member > .join > .type > div {
+    width: 420px;
+    height: 100%;
+    border: 1px solid #d5d5d5;
+    box-sizing: border-box;
+    overflow: hidden;
+}
+
+#member > .join .normal {
+    float: left;
+}
+
+#member > .join .seller {
+    float: right;
+}
+
+#member > .join .banner {
+    display: block;
+    margin-bottom: 20px;
+}
+
+#member > .join > .type > div > .txt{
+    padding: 40px;
+}
+
+#member > .join > .type > div > .txt > a {
+    float: right;
+}
+
+/* signup */
+#member > .signup {
+    width: 900px;
+    margin: 0 auto;
+    box-sizing: border-box;
+}
+
+#member > .signup > nav {
+    border-bottom: 2px solid #0e6ad3;
+}
+
+#member > .signup > nav > h1{
+    font-size: 24px;
+    margin-bottom: 6px;
+}
+
+#member > .signup h3 {
+    font-size: 14px;
+    margin-top: 26px;
+    margin-bottom: 6px;
+}
+
+#member > .signup h3 > span.essential {
+    color: #ef3f43;
+    margin-right: 5px;
+}
+
+#member > .signup h3 > span.optional {
+    color: #01c1c4;
+    margin-right: 5px;
+}
+
+#member > .signup textarea {
+    width: 100%;
+    height: 160px;
+    margin-bottom: 10px;
+    border: 1px solid #bababa;
+    box-sizing: border-box;
+    resize: none;
+}
+#member > .signup label {
+    float: right;
+    font-size: 14px;
+}
+
+#member > .signup input[type="checkbox"] {
+    width: 16px;
+    height: 16px;
+    margin-right: 6px;
+    vertical-align: bottom;
+}
+
+#member > .signup input.agree {
+    display: block;
+    background: #ef3f43;
+    color: #fff;
+    font-size: 20px;
+    padding: 10px 72px;
+    margin: 40px auto;
+    border: 0;
+    outline: 0;
+    border-radius: 2px;
+    cursor: pointer;
+}
+
+/* register */
+
+#member > .register {
+    width: 900px;
+    margin: 0 auto;
+    box-sizing: border-box;
+    
+}
+
+#member > .register > nav {
+    border-bottom: 2px solid #0e6ad3;
+}
+
+#member > .register > nav > h1 {
+    font-size: 24px;
+    margin-bottom: 6px;
+}
+
+#member > .register table {
+    position: relative;
+    width: 100%;
+    table-layout: fixed;
+    border-top: 1px solid #b6bdc7;
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+#member > .register table * {
+}
+
+#member > .register table caption {
+    text-align: left;
+    font-size: 16px;
+    padding-left: 10px;
+    margin-top: 20px;
+    margin-bottom: 12px;
+    font-weight: 500;
+}
+
+#member > .register table th {
+    width: 200px;
+    padding: 20px 20px;
+    vertical-align: top;
+    background: #f4f6f9;
+    font-weight: 500;
+    text-align: left;
+    line-height: 1.4;
+    border-bottom: 1px solid #dfe5ed;
+    word-break: break-word;
+    font-size: 14px;
+}
+
+#member > .register table td {
+    position: relative;
+    vertical-align: middle;
+    padding: 10px 20px;
+    text-align: left;
+    line-height: 1.4;
+    border-bottom: 1px solid #dfe5ed;
+    word-break: break-word;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+#member > .register table input {
+    padding: 0 8px;
+    height: 31px;
+    font-size: 14px;
+    border: 1px solid #dfe5ed;
+    vertical-align: middle;
+}
+
+#member > .register table label {
+    display: inline-block;
+    width: 60px;
+    font-size: 17px;
+}
+
+#member > .register table .addr input {
+    margin-top: 6px;
+}
+
+#member > .register table .addr th {
+    padding-left: 30px;
+}
+
+#member > .register table .essential {
+    color: #ef3f43;
+    vertical-align: middle;
+    margin-right: 5px;
+}
+
+#member > .register form input[type="submit"] {
+    display: block;
+    background: #ef3f43;
+    color: #fff;
+    font-size: 20px;
+    padding: 10px 72px;
+    margin: 40px auto;
+    border: 0;
+    outline: 0;
+    border-radius: 2px;
+    cursor: pointer;
 }
