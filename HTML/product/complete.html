@@ -98,204 +98,168 @@
                 </ul>
             </aside>
 
-            <!-- 주문 페이지 시작-->
-            <section class="order">
+            <!-- 결제완료 페이지 시작 -->
+            <section class="complete">
               
               <!-- 제목, 페이지 네비게이션 -->
               <nav>
-                <h1>주문결제</h1>
+                <h1>주문완료</h1>
                 <p>
-                  HOME > 장바구니 > <strong>주문결제</strong>
+                  HOME > 장바구니 > 주문결제 > <strong>주문완료</strong>
                 </p>
               </nav>
 
-              <form action="#">
-                <!-- 주문 상품 목록 -->                  
-                <table>
+              <!-- 완료 멘트 -->
+              <article class="message">
+                <h2>고객님의 주문이 정상적으로 완료되었습니다.<i class="far fa-smile"></i></h2>
+                <p>
+                  즐거운 쇼핑이 되셨습니까? 항상 고객님을 최우선으로 생각하는 케이마켓이 되겠습니다.
+                </p>
+              </article>
+
+              <!-- 상품정보 -->
+              <article class="info">
+                <h1>상품정보</h1>
+                <table border="0">
                   <tr>
                     <th>상품명</th>
-                    <th>총수량</th>
-                    <th>판매가</th>
-                    <th>배송비</th>
-                    <th>소계</th>
+                    <th>상품금액</th>
+                    <th>할인금액</th>
+                    <th>수량</th>
+                    <th>주문금액</th>
+                  </tr>
+                  <tr>
+                    <td>
+                      <article>
+                        <img src="https://via.placeholder.com/80x80" alt="">
+                        <div>
+                          <h2><a href="#">상품명</a></h2>
+                          <p>상품설명</p>
+                        </div>
+                      </article>
+                    </td>
+                    <td>17,000원</td>
+                    <td>1,000원</td>
+                    <td>1</td>
+                    <td>16,000원</td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <article>
+                        <img src="https://via.placeholder.com/80x80" alt="">
+                        <div>
+                          <h2><a href="#">상품명</a></h2>
+                          <p>상품설명</p>
+                        </div>
+                      </article>
+                    </td>
+                    <td>17,000원</td>
+                    <td>1,000원</td>
+                    <td>1</td>
+                    <td>16,000원</td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <article>
+                        <img src="https://via.placeholder.com/80x80" alt="">
+                        <div>
+                          <h2><a href="#">상품명</a></h2>
+                          <p>상품설명</p>
+                        </div>
+                      </article>
+                    </td>
+                    <td>17,000원</td>
+                    <td>1,000원</td>
+                    <td>1</td>
+                    <td>16,000원</td>
                   </tr>
                   
-                    <tr class="empty">
-                      <td colspan="7">장바구니에 상품이 없습니다.</td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <article>
-                          <a href="#"><img src="https://via.placeholder.com/80x80" alt=""></a>
-                          <div>
-                            <h2><a href="#">상품명</a></h2>
-                            <p>상품설명</p>
-                          </div>
-                        </article>
-                      </td>
-                      <td>1</td>
-                      <td>27,000</td>
-                      <td>무료배송</td>
-                      <td>27,000</td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <article>
-                          <a href="#"><img src="https://via.placeholder.com/80x80" alt=""></a>
-                          <div>
-                            <h2><a href="#">상품명</a></h2>
-                            <p>상품설명</p>
-                          </div>
-                        </article>
-                      </td>
-                      <td>1</td>
-                      <td>27,000</td>
-                      <td>무료배송</td>
-                      <td>27,000</td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <article>
-                          <a href="#"><img src="https://via.placeholder.com/80x80" alt=""></a>
-                          <div>
-                            <h2><a href="#">상품명</a></h2>
-                            <p>상품설명</p>
-                          </div>
-                        </article>
-                      </td>
-                      <td>1</td>
-                      <td>27,000</td>
-                      <td>무료배송</td>
-                      <td>27,000</td>
-                    </tr>                    
-                  
-                </table>                 
-                
-                <!-- 최종 결제 정보 -->
-                <div class="final">
-                  <h2>최종결제 정보</h2>
-                  <table border="0">
-                    <tr>
-                      <td>총</td>
-                      <td>2 건</td>
-                    </tr>
-                    <tr>
-                      <td>상품금액</td>
-                      <td>27,000</td>
-                    </tr>
-                    <tr>
-                      <td>할인금액</td>
-                      <td>-1,000</td>
-                    </tr>
-                    <tr>
-                      <td>배송비</td>
-                      <td>0</td>
-                    </tr>
-                    <tr>
-                      <td>포인트 할인</td>
-                      <td>-1000</td>
-                    </tr>
-                    <tr>
-                      <td>전체주문금액</td>
-                      <td>25,000</td>
-                    </tr>                            
-                  </table>
-                  <input type="button" name="" value="결제하기">              
-                </div>
-                  
-                <!-- 배송정보 -->
-                <article class="delivery">
-                  <h1>배송정보</h1>                          
-                  <table>
-                    <tr>
-                      <td>주문자</td>
-                      <td><input type="text" name="orderer" /></td>
-                    </tr>
-                    <tr>
-                      <td>휴대폰</td>
-                      <td>
-                        <input type="text" name="hp" />
-                        <span>- 포함 입력</span>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>우편번호</td>
-                      <td>
-                        <input type="text" name="zip"/>
-                        <input type="button" value="검색"/>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>기본주소</td>
-                      <td>
-                        <input type="text" name="addr1"/>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>상세주소</td>
-                      <td>
-                        <input type="text" name="addr2"/>
-                      </td>
-                    </tr>
-                  </table>
-                </article>
+                  <tr class="total">
+                    <td colspan="4"></td>
+                    <td>
+                      <table border="0">
+                        <tr>
+                          <td>총 상품금액</td>
+                          <td><span>34,000</span>원</td>
+                        </tr>
+                        <tr>
+                          <td>총 할인금액</td>
+                          <td><span>-2,000</span>원</td>
+                        </tr>
+                        <tr>
+                          <td>배송비</td>
+                          <td><span>3,000</span>원</td>
+                        </tr>
+                        <tr>
+                          <td>총 결제금액</td>
+                          <td><span>35,000</span>원</td>
+                        </tr>
+                      </table>                      
+                    </td>
+                  </tr>
+                </table>
+              </article>
+            
+              <!-- 주문정보 -->
+              <article class="order">
+                <h1>주문정보</h1>          
+                <table border="0">
+                  <tr>
+                    <td>주문번호</td>
+                    <td>2008101324568</td>
+                    <td rowspan="3">총 결제금액</td>
+                    <td rowspan="3"><span>35,000</span>원</td>
+                  </tr>
+                  <tr>
+                    <td>결제방법</td>
+                    <td>신용카드</td>
+                  </tr>
+                  <tr>
+                    <td>주문자/연락처</td>
+                    <td>홍길동/010-1234-1234</td>
+                  </tr>
+                </table>
+              </article>
+            
+              <!-- 배송정보 -->
+              <article class="delivery">
+                <h1>배송정보</h1>
+                <table border="0">
+                  <tr>
+                    <td>수취인</td>
+                    <td>홍길동</td>                    
+                    <td>주문자 정보</td>
+                  </tr>
+                  <tr>
+                    <td>연락처</td>
+                    <td>010-1234-1234</td>
+                    <td rowspan="2">
+                      홍길동<br/>
+                      010-1234-1234
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>배송지 주소</td>
+                    <td>부산광역시 강남구 대연동 123 10층</td>
+                  </tr>
+                </table>
+              </article>
+            
+              <!-- 꼭 알아두세요. -->
+              <article class="alert">
+                <h1>꼭 알아두세요.</h1>
+                <ul>
+                  <li><span>케이마켓은 통신판매중개자이며 통신판매의 당사자가 아닙니다. 따라서 케이마켓은 상품, 거래정보 및 거래에 대하여 책임을 지지 않습니다.</span></li>
+                  <li><span>구매주문내역, 배송상태 확인, 구매영수증 출력, 구매취소/반품/교환은 사이트 상단의 주문/배송조회에서 확인 할 수 있습니다.</span></li>
+                  <li><span>고객님의 주문이 체결된 후 상품품절 및 단종 등에 의해 배송이 불가능할 경우, 전자상거래등에서의 소비자 보호에 관한 법률 제15조 2항에 의거하여 3영업일(공휴일 제외) 이내에 자동으로 취소될 수 있으며, 이 경우 취소 안내 메일이 고객님께 발송되오니 양지 바랍니다.</span></li>
+                  <li><span>극히 일부 상품에 대해 수량부족, 카드결제승인 오류등의 사례가 간혹 있을 수 있으니 `나의쇼핑정보`에서 다시 한번 확인해 주세요.</span></li>
+                  <li><span>현금잔고로 구매하셨을 경우, 나의 쇼핑정보에서 입금확인이 되었는지를 다시 한번 확인해 주세요.</span></li>
+                  <li><span>배송주소를 추가하거나 변경, 삭제 등의 관리는 `나의쇼핑정보 > 나의정보` 에서 가능합니다.</span></li>
+                </ul>
+              </article>
 
-                <!-- 할인정보 -->
-                <article class="discount">
-                  <h1>할인정보</h1>
-
-                  <div>
-                    <p>현재 포인트 : <span>7200</span>점</p>
-                    <label>
-                        <input type="text" name="point" />점
-                        <input type="button" value="적용"/>
-                    </label>
-                    <span>포인트 5,000점 이상이면 현금처럼 사용 가능합니다.</span>
-                  </div>
-                </article>
-
-                <!-- 결제방법 -->
-                <article class="payment">
-                    <h1>결제방법</h1>
-                    <div>
-                        <span>신용카드</span>
-                        <p>
-                            <label><input type="radio" name="payment" value="type1"/>신용카드 결제</label>
-                            <label><input type="radio" name="payment" value="type2"/>체크카드 결제</label>                                
-                        </p>
-                    </div>
-                    <div>
-                        <span>계좌이체</span>
-                        <p>
-                            <label><input type="radio" name="payment" value="type3"/>실시간 계좌이체</label>
-                            <label><input type="radio" name="payment" value="type4"/>무통장 입금</label>                                
-                        </p>
-                    </div>
-                    <div>
-                        <span>기타</span>
-                        <p>
-                            <label><input type="radio" name="payment" value="type3"/>휴대폰결제</label>
-                            <label>
-                                <input type="radio" name="payment" value="type4"/>카카오페이
-                                <img src="../img/ico_kakaopay.gif" alt="카카오페이"/>
-                            </label>                                
-                        </p>
-                    </div>
-                </article>
-
-                <!-- 경고 -->
-                <article class="alert">
-                  <ul>
-                      <li><span>케이마켓의 모든 판매자는 안전거래를 위해 구매금액, 결제수단에 상관없이 모든거래에 대하여 케이마켓 유한책임회사의 구매안전서비스(에스크로)를 제공하고 있습니다.</span></li>
-                      <li><span>케이마켓 유한책임회사의 전자금융거래법에 의해 결제대금예치업 등록번호는 02-006-00008 입니다.</span></li>
-                      <li><span>등록여부는 금융감독원 홈페이지(www.fss.or.kr)의 업무자료>인허가업무안내>전자금융업등록현황에서 확인하실수 있습니다.</span></li>
-                  </ul>
-                </article>
-             
-              </form>
-              
             </section>
-            <!-- 주문 페이지 끝-->
+            <!-- 결제완료 페이지 끝 -->
         </main>
         <footer>
             <ul>
