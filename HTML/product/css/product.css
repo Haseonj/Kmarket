@@ -1,0 +1,157 @@
+ /*product*/
+ #product > section {
+  padding: 16px;
+  box-sizing: border-box;
+ } 
+ #product > section > nav{
+  width: 100%;
+  height: 36px;
+  margin-bottom: 20px;
+  border-bottom: 1px solid #000;
+  box-sizing: border-box;
+ } 
+ #product > section > nav > p{
+  float: right;
+  margin-top: 10px;
+ } 
+ #product > section > nav > h1{
+  display: inline-block;
+  font-weight: bold;
+  font-size: 1.5em;
+  padding: 0 0 7px;
+  line-height: 1em;
+ }
+ #product h6.rating{
+  font-size: 11px;
+  background-image: url('../img/rating_star.png');
+  background-repeat: no-repeat;
+  background-position: 36px 0px;
+  background-size: auto 100%;
+ } 
+ #product h6.rating.star1{width: 55px;} 
+ #product h6.rating.star2{width: 70px;} 
+ #product h6.rating.star3{width: 85px;} 
+ #product h6.rating.star4{width: 100px;} 
+ #product h6.rating.star5{width: 120px;} 
+ #product h5.rating{
+  width: 150px;
+  height: 20px;
+  font-size: 0px;
+  background-image: url('../img/ico_rating_star.png');
+  background-repeat: no-repeat;
+  background-position: 36px 0px;
+  text-indent: 86px;
+ } 
+ #product h5.rating.star1{background-position: 0 -40px;} 
+ #product h5.rating.star2{background-position: 0 -80px;} 
+ #product h5.rating.star3{background-position: 0 -120px;} 
+ #product h5.rating.star4{background-position: 0 -160px;} 
+ #product h5.rating.star5{background-position: 0 -200px;}
+ #product .badge {
+  font-size: 0;
+  width: 80px;
+  height: 19px;
+  background-repeat: no-repeat;
+ }
+ #product .badge.power {background-image: url('../img/ico_power_dealer.gif');}
+ #product .badge.great {background-image: url('../img/ico_great_seller.gif');}
+ #product .badge.power.great {
+  background: url('../img/ico_power_dealer.gif') no-repeat, url('../img/ico_great_seller.gif') no-repeat 63px;
+  width: 160px; 
+ }
+
+ /*list*/
+ #product > .list{}
+ #product > .list > .sort{
+  margin: 0 0 20px 0;
+  border-top: 2px solid #111;
+  border-bottom: 1px solid #dfdfdf;
+  overflow: hidden;
+ }
+ #product > .list > .sort > li{
+  float: left;
+  position: relative;
+  padding: 15px 0;
+  line-height: 15px;
+ }
+ #product > .list > .sort > li > a{
+  display: block;
+  padding: 0 10px;
+  border-right: 1px solid #ddd;
+ }
+ #product > .list > .sort > li > a.on{font-weight: bold;}
+ #product > .list > table{width: 100%; height: auto; border-collapse: collapse;}
+ #product > .list > table tr{
+  border-bottom: 1px solid #ececec;
+ }
+ #product > .list > table tr > td{
+  vertical-align: top;
+  padding-top: 20px;
+  padding-left: 16px;
+  box-sizing: border-box;
+ }
+ #product > .list > table tr > td:nth-child(1){width: 20%; padding: 0;}
+ #product > .list > table tr > td:nth-child(2){width: 40%;}
+ #product > .list > table tr > td:nth-child(3){width: 20%;}
+ #product > .list > table tr > td:nth-child(4){width: 20%;}
+ #product > .list > table .thumb{
+  display: block;
+  width: 100%;
+  height: 100%;
+ }
+ #product > .list > table .thumb > img{width: 120px;}
+ #product > .list > table .name{
+  font-size: 16px;
+  font-weight: bold;
+  color: #111;
+  margin-bottom: 6px;
+ }
+ #product > .list > table .desc{font-size: 12px; color: #333;}
+ #product > .list > table .desc:hover{text-decoration: underline;}
+ #product > .list > table .org-price{font-size: 12px; color: #aaa;}
+ #product > .list > table .dis-price{font-size: 16px; text-decoration: none;}
+ #product > .list > table .org-price::after{content: "원";}
+ #product > .list > table .dis-price::after{content: "원";}
+ #product > .list > table .discount{color: #eb000a; font-size: 10px;}
+ #product > .list > table .discount::after{content: "↓";}
+ #product > .list > table .free-delivery{
+  display: inline-block;
+  font-size: 0;
+  vertical-align: text-bottom;
+  width: 55px;
+  height: 13px;
+  background: url('../img/ico_free_delivery.gif') no-repeat;
+  margin-top: 4px;
+ }
+ #product > .list > table .seller{
+  font-size: 12px;
+  margin-bottom: 6px;
+ }
+ #product > .list > table .rating{margin-top: 12px;}
+ #product > .list > .paging{
+  width: 100%;
+  padding: 30px 0;
+  text-align: center;
+ }
+ #product > .list > .paging > span > a{
+  color: #777;
+  font-size: 11px;
+  letter-spacing: -1px;
+ }
+ #product > .list > .paging > span > a:hover{text-decoration: underline;}
+ #product > .list > .paging > .num > a{
+  display: inline-block;
+  min-width: 14px;
+  padding: 8px 9px;
+  border: 1px solid #c4c4c4;
+  background: url() 0 0 repeat-x;
+  color: #000;
+  font-size: 12px;
+  text-align: center;
+  text-decoration: none;
+ }
+ #product > .list > .paging > .num > a:hover{
+  border: 1px solid #454c5f;
+  text-decoration: none;
+ }
+ #product > .list > .paging > .num > a.on{color: #fe434c; font-weight: bold;}
