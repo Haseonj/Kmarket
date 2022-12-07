@@ -690,3 +690,192 @@
     box-sizing: border-box;
     margin-top: 10px;
    }
+
+   /*product - order(주문결제)*/
+
+   #product > .order input[name=del]{
+    border-color: #bdbdbd;
+    border-bottom-color: #828282;
+    background: #fafafa;
+    color: #4d4d4d;
+    padding: 6px 11px;
+    border-width: 1px;
+    margin-top: 6px;
+   }
+   #product > .order > form > table{
+    width: 100%;
+    border-collapse: collapse;
+    border-spacing: 0;
+    border-top: 2px solid #000;
+   }
+   #product > .order > form > table th{
+    padding: 12px 0;
+    background: #fff;
+    color: #383838;
+    font-size: 0.95em;
+    text-align: center;
+    letter-spacing: -0.1em;
+   }
+   #product > .order > form > table .empty{display: none;}
+   #product > .order > form > table .empty td{
+    padding: 50px 0 !important;
+    text-align: center;
+    color: #777 !important;
+   }
+   #product > .order > form > table tr{border-bottom: 1px solid #d3d3d3;}
+   #product > .order > form > table td{text-align: center;}
+   #product > .order > form > table td:last-child{
+    color: #ff006c;
+    font-weight: bold;
+   }
+   #product > .order > form > table td > article{
+    overflow: hidden;
+    padding: 6px;
+   }
+   #product > .order > form > table td > article > a{
+    float: left;
+    display: inline-block;
+   }
+   #product > .order > form > table td > article > div{
+    float: left;
+    margin-left: 10px;
+   }
+   #product > .order > form > table td > article > div > h2{text-align: left;}
+   #product > .order > form > table td > article > div > p{
+    text-align: left;
+    color: #777;
+    margin-top: 4px;
+   }
+   #product > .order > form > table article img{width: 80px;}
+   #product > .order > form > .final{
+    float: right;
+    width: 360px;
+    height: 412px;
+    padding: 20px;
+    margin-top: 12px;
+    background: #fff;
+    border: 1px solid #d3d3d3;
+    box-sizing: border-box;
+   }
+   #product > .order > form > .final > h2{
+    width: 100%;
+    font-weight: bold;
+    font-size: 16px;
+    border-bottom: 1px solid #111;
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+    box-sizing: border-box;
+    color: #1e1e1e;
+   }
+   #product > .order > form > .final > table{width: 100%;}
+   #product > .order > form > .final > table tr:nth-last-child(1) td{font-size: 20px;}
+   #product > .order > form > .final > table tr:nth-last-child(1) td:last-child{
+    color: #ff006c;
+    font-size: 20px;
+    font-weight: bold;
+   }
+   #product > .order > form > .final > table td{
+    padding: 10px 0;
+    font-size: 14px;
+    color: #555;
+   }
+   #product > .order > form > .final > table td:last-child{text-align: center;}
+   #product > .order > form > .final > input[type=button]{
+    width: 100%;
+    height: 56px;
+    font-size: 26px;
+    border-width: 1px;
+    border-color: #d81818;
+    border-bottom-color: #9e1212;
+    background: #ed2f2f;
+    background-image: linear-gradient(#ed2f2f, #dd0e0e);
+    background-image: -webkit-linear-gradient(#ed2f2f, #dd0e0e);
+    color: #fff;
+    box-sizing: border-box;
+    margin-top: 10px;
+   }
+   #product > .order > form > .product > h3{
+    font-size: 15px;
+    font-weight: bold;
+    padding: 10px 0;
+   }
+   #product > .order > form > article{
+    width: 560px;
+    height: auto;
+    margin-top: 16px;
+   }
+   #product > .order > form > article > h1{
+    font-weight: bold;
+    font-size: 14px;
+    padding: 6px 0;
+    margin-bottom: 12px;
+    border-bottom: 1px solid #111;
+   }
+   #product > .order > form > article > div{
+    padding: 6px;
+    box-sizing: border-box;
+   }
+   #product > .order > form input{
+    color: #555;
+    padding: 2px 0;
+    border: 1px solid #999;
+    box-sizing: border-box;
+   }
+   #product > .order > form > .delivery > table{margin-top: 10px;}
+   #product > .order > form > .delivery > table tr > td:nth-child(1){padding: 6px;}
+   #product > .order > form > .delivery > table input[name=addr1]{width: 400px;}
+   #product > .order > form > .delivery > table input[name=addr2]{width: 400px;}
+   #product > .order > form > .delivery > table input[type=button]{
+    padding: 4px 6px;
+    border: 1px solid #ccc;
+    background-color: #f0f4f9;
+    border-color: #acc0e0;
+    color: #3371c9;
+    outline: none;
+   }
+   #product > .order > form > .discount > div{overflow: hidden;}
+   #product > .order > form > .discount > div > p{float: left;}
+   #product > .order > form > .discount > div > label{float: right;}
+   #product > .order > form > .discount > div > label > input[type=text]{
+    display: inline-block;
+    outline: none;
+   }
+   #product > .order > form > .discount > div > label > input[type=button]{
+    padding: 4px 6px;
+    border: 1px solid #ccc;
+    background-color: #f0f4f9;
+    border-color: #acc0e0;
+    color: #3371c9;
+    outline: none;
+   }
+   #product > .order > form > .discount > div > span{
+    display: block;
+    margin-top: 20px;
+    color: #888;
+   }
+   #product > .order > form > .payment{}
+   #product > .order > form > .payment > div{margin-bottom: 10px;}
+   #product > .order > form > .payment > div > span{
+    display: inline-block;
+    color: #3a85c8;
+    margin: 6px 0;
+   }
+   #product > .order > form > .payment > div label{margin-right: 16px;}
+   #product > .order > form > .payment > div input{
+    vertical-align: bottom;
+    margin-right: 4px;
+   }
+   #product > .order > form > .alert{
+    width: 560px;
+    background-color: #f7f7f7;
+    padding: 6px;
+    padding-left: 20px;
+    color: #999;
+    box-sizing: border-box;
+   }
+   #product > .order > form > .alert > ul{list-style: inherit;}
+   #product > .order > form > .alert > ul > li{line-height: 20px;}
+   #product > .order > form > .alert > ul > li > span{
+    position: relative;
+    left: -6px;
+   }
