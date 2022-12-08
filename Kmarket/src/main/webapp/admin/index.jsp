@@ -298,4 +298,4 @@
         </div>
     </section>
 </main>
-<jsp:include page="./footer.jsp"/>
+<jsp:include page="./_footer.jsp"/>
