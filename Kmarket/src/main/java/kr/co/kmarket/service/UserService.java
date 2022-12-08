@@ -17,4 +17,6 @@ public enum UserService {
 	private UserService() {
 		dao = new UserDAO();
 	}
+	
+	public void insertUser() {}
 }
