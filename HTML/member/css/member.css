@@ -407,3 +407,32 @@
     border: 1px solid #dfe5ed;
     vertical-align: middle;
 }
+
+#member > .registerSeller table label {
+    display: inline-block;
+    width: 60px;
+    font-size: 17px;
+}
+
+#member > .registerSeller table .addr input {
+    margin-top: 6px;
+}
+
+#member > .registerSeller table .essential {
+    color: #ef3f43;
+    vertical-align:middle;
+    margin-right: 5px;
+}
+
+#member > .registerSeller form input[type="submit"] {
+    display: block;
+    background: #ef3f43;
+    color: #fff;
+    font-size: 20px;
+    padding: 10px 72px;
+    margin: 40px auto;
+    border: 0;
+    outline: 0;
+    border-radius: 2px;
+    cursor: pointer;
+}
