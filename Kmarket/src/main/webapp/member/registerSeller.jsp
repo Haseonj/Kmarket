@@ -1,135 +1,115 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">    
-    <title>ì¼ì´ë§ì¼::ëíë¯¼êµ­ 1ë± ì¨ë¼ì¸ ì¼íëª°</title>    
-    <link rel="shortcut icon" type="image/x-icon" href="../img/favicon.ico" />
-    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"/>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.css">
-    <link rel="stylesheet" href="../css/common.css"/>
-    <link rel="stylesheet" href="./css/member.css"/>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
-    <script src="https://kit.fontawesome.com/20962f3e4b.js" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.min.js"></script>
-</head>
-<body>
-    <div id="wrapper">
-        <header>
-            <div class="top">
-                <div>
-                    <a href="./member/login.html">ë¡ê·¸ì¸</a>
-                    <a href="#">íìê°ì</a>
-                    <a href="#">ë§ì´íì´ì§</a>
-                    <a href="#"><i class="fa fa-shopping-cart" aria-hidden="true"></i>&nbsp;ì¥ë°êµ¬ë</a>
-                </div>
-            </div>
-            <div class="logo">
-                <div>
-                    <a href="../index.html"><img src="../img/header_logo.png" alt="ë¡ê³ "/></a>
-                </div>
-            </div>
-        </header>
-        <main id="member">
-            <div class="registerSeller">
-                <nav>
-                    <h1>íë§¤ì íìê°ì</h1>
-                </nav>
-                <form action="#" method="POST">
-                    <section>
-                        <table>
-                            <caption>íì ì ë³´ìë ¥</caption>
-                            <tr>
-                                <th><span class="essential">*</span>ìì´ë</th>
-                                <td><input type="text" name="km_uid" placeholder="ìì´ëë¥¼ ìë ¥" required>
-                                <span class="msgSId">&nbsp;&nbsp;ìë¬¸, ì«ìë¡ 4~12ìê¹ì§ ì¤ì í´ ì£¼ì¸ì.</span></td>
-                            </tr>
-                            <tr>
-                                <th><span class="essential">*</span>ë¹ë°ë²í¸</th>
-                                <td><input type="password" name="km_pass" placeholder="ë¹ë°ë²í¸ë¥¼ ìë ¥" required>
-                                <span class="msgPass">&nbsp;&nbsp;ìë¬¸, ì«ì, í¹ìë¬¸ìë¥¼ ì¡°í©íì¬ 8~12ìê¹ì§ ì¤ì í´ ì£¼ì¸ì.</span></td>
-                            </tr>
-                            <tr>
-                                <th><span class="essential">*</span>ë¹ë°ë²í¸íì¸</th>
-                                <td><input type="password" name="km_pass" placeholder="ë¹ë°ë²í¸ë¥¼ íì¸" required>
-                                <span class="msgPass">&nbsp;&nbsp;ë¹ë°ë²í¸ ì¬ìë ¥</span></td>
-                            </tr>
-                        </table>
-                    </section>
+<jsp:include page="./_header.jsp"/>
+   <main id="member">
+       <div class="registerSeller">
+           <nav>
+               <h1>판매자 회원가입</h1>
+           </nav>
+           <form action="#" method="POST">
+               <section>
+                   <table>
+                       <caption>필수 정보입력</caption>
+                       <tr>
+                           <th><span class="essential">*</span>아이디</th>
+                           <td><input type="text" name="km_uid" placeholder="아이디를 입력" required>
+                           <span class="msgSId">&nbsp;&nbsp;영문, 숫자로 4~12자까지 설정해 주세요.</span></td>
+                       </tr>
+                       <tr>
+                           <th><span class="essential">*</span>비밀번호</th>
+                           <td><input type="password" name="km_pass" placeholder="비밀번호를 입력" required>
+                           <span class="msgPass">&nbsp;&nbsp;영문, 숫자, 특수문자를 조합하여 8~12자까지 설정해 주세요.</span></td>
+                       </tr>
+                       <tr>
+                           <th><span class="essential">*</span>비밀번호확인</th>
+                           <td><input type="password" name="km_pass" placeholder="비밀번호를 확인" required>
+                           <span class="msgPass">&nbsp;&nbsp;비밀번호 재입력</span></td>
+                       </tr>
+                   </table>
+               </section>
 
-                    <section>
-                        <table>
-                            <caption>íë§¤ì ì ë³´ìë ¥</caption>
-                            <tr>
-                                <th><span class="essential">*</span>íì¬ëª</th>
-                                <td><input type="text" name="kms_company" placeholder="íì¬ëª ìë ¥" required/>
-                                    <span class="msgCompany">&nbsp;&nbsp;(ì£¼)í¬í¨ ìë ¥, ì) (ì£¼)ì¼ì´ë§ì¼</span>
-                                </td>
-                            </tr>
-                            <tr>
-                                <th><span class="essential">*</span>ëíì</th>
-                                <td><input type="text" name="kms_ceo"  placeholder="ëíì ìë ¥" required />
-                                </td>
-                            </tr>
-                            <tr>
-                                <th><span class="essential">*</span>ì¬ììë±ë¡ë²í¸</th>
-                                <td><input type="text" name="kms_corp_reg" placeholder="ì¬ììë±ë¡ë²í¸ ìë ¥" required />
-                                </td>
-                            </tr>
-                            <tr>
-                                <th><span class="essential">*</span>í´ëí°</th>
-                                <td><input type="text" name="km_hp" maxlength="13" placeholder="í´ëí°ë²í¸ ìë ¥" required>
-                                <span class="msgHp"> - í¬í¨ 13ìë¦¬ë¥¼ ìë ¥íì¸ì.</span></td>
-                            </tr>
-                            <tr class="addr">
-                                <th>ì£¼ì</th>
-                                <td>
-                                    <div>
-                                        <input type="text" name="km_zip" id="zip" placeholder="ì°í¸ë²í¸ ìë ¥ í´ë¦­" readonly />
-                                    </div>
-                                    <div>
-                                        <input type="text" name="km_addr1" id="addr1" size="50" placeholder="ì£¼ìë¥¼ ê²ìíì¸ì." readonly />
-                                    </div>
-                                    <div>
-                                        <input type="text" name="km_addr2" id="addr2" size="50" placeholder="ìì¸ì£¼ìë¥¼ ìë ¥íì¸ì." />
-                                    </div>
-                                </td>
-                            </tr>
-                        </table>
-                    </section>
-                    <div>
-                        <input type="submit" class="join" value="íìê°ì" />
-                    </div>
-                </form>
-            </div>
-        </main>
-        <footer>
-            <ul>
-                <li><a href="#">íì¬ìê°</a></li>
-                <li><a href="#">ìë¹ì¤ì´ì©ì½ê´</a></li>
-                <li><a href="#">ê°ì¸ì ë³´ì²ë¦¬ë°©ì¹¨</a></li>
-                <li><a href="#">ì ìê¸ìµê±°ëì½ê´</a></li>
-            </ul>
-            <div>
-                <p><img src="./img/footer_logo.png" alt="ë¡ê³ "></p>
-                <p>
-                  <strong>(ì£¼)KMARKET</strong><br />
-                  ë¶ì°ì ê°ë¨êµ¬ íí¤ëë¡ 152 (ì­ì¼ë ê°ë¨íì´ë¸ì¤ì¼í°)<br />
-                  ëíì´ì¬ : íê¸¸ë<br />
-                  ì¬ììë±ë¡ë²í¸ : 220-81-83676 ì¬ììì ë³´íì¸<br />
-                  íµì íë§¤ìì ê³  : ê°ë¨ 10630í¸ Fax : 02-589-8842
-                </p>
-                <p>
-                  <strong>ê³ ê°ì¼í°</strong><br />
-                  Tel : 1234-5678 (íì¼ 09:00~18:00)<br />
-                  ì¤ë§ì¼í´ë½/SVIP ì ì© : 1522-5700 (365ì¼ 09:00~18:00)<br />
-                  ê²½ê¸°ë ë¶ì²ì ìë¯¸êµ¬ ë¶ì¼ë¡ 223(ìë) í¬ëë¹ë© 6ì¸µ<br />
-                  Fax : 051-123-4567 | Mail : kmarket@kmarket.co.kr<br />
-                </p>
-            </div>              
-        </footer>
-    </div>    
-</body>
-</html>
+               <section>
+                   <table>
+                       <caption>판매자 정보입력</caption>
+                       <tr>
+                           <th><span class="essential">*</span>회사명</th>
+                           <td><input type="text" name="kms_company" placeholder="회사명 입력" required/>
+                               <span class="msgCompany">&nbsp;&nbsp;(주)포함 입력, 예) (주)케이마켓</span>
+                           </td>
+                       </tr>
+                       <tr>
+                           <th><span class="essential">*</span>대표자</th>
+                           <td><input type="text" name="kms_ceo"  placeholder="대표자 입력" required />
+                           </td>
+                       </tr>
+                       <tr>
+                           <th><span class="essential">*</span>사업자등록번호</th>
+                           <td><input type="text" name="kms_corp_reg" placeholder="사업자등록번호 입력" required />
+                               <span class="msgCorp">&nbsp;&nbsp; - 표시 포함 12자리 입력, 예) 123-45-67890</span>
+                           </td>
+                       </tr>
+                       <tr>
+			<th><span class="essential">*</span>통신판매업신고 번호</th>
+			<td><input type="text" name="kms_online_reg"
+				placeholder="통신판매업신고 입력" required /> <span class="msgOnline">&nbsp;&nbsp;-
+					표시 포함, 예) 강남-12345, 제 1-01-23-4567호, 2017-경기성남-0011</span></td>
+		</tr>
+		<tr>
+			<th><span class="essential">*</span>전화번호</th>
+			<td><input type="text" name="kms_tel" placeholder="전화번호 입력"
+				required /> <span class="msgTel">&nbsp;&nbsp;- 표시 포함,
+					지역번호 포함, 예) 02-234-1234</span></td>
+		</tr>
+		<tr>
+			<th><span class="essential">*</span>팩스번호</th>
+			<td><input type="text" name="kms_fax" placeholder="팩스번호 입력"
+				required /> <span class="msgFax">&nbsp;&nbsp;- 표시 포함,
+					지역번호 포함, 예) 02-234-1234</span></td>
+		</tr>
+		<tr>
+			<th><span class="essential">*</span>EMAIL</th>
+			<td><input type="email" name="kms_email"
+				placeholder="이메일 입력" required /></td>
+		</tr>
+		<tr class="addr">
+			<th>회사주소</th>
+			<td>
+				<div>
+					<input type="text" name="kms_zip" id="zip"
+						placeholder="우편번호 입력 클릭" readonly />
+				</div>
+				<div>
+					<input type="text" name="kms_addr1" id="addr1" size="50"
+						placeholder="주소를 검색하세요." readonly />
+				</div>
+				<div>
+					<input type="text" name="kms_addr2" id="addr2" size="50"
+						placeholder="상세주소를 입력하세요." />
+				</div>
+			</td>
+		</tr>
+	</table>
+</section>
+<section>
+	<table>
+		<caption>담당자 정보입력</caption>
+		<tr>
+			<th><span class="essential">*</span>이름</th>
+			<td><input type="text" name="km_name" placeholder="이름을 입력"
+				required /></td>
+		</tr>
+		<tr>
+			<th><span class="essential">*</span>휴대폰</th>
+			<td><input type="text" name="km_hp" maxlength="13"
+				placeholder="휴대폰번호 입력" required /> <span class="msgHp">&nbsp;&nbsp;-
+					포함 13자리를 입력하세요.</span></td>
+		</tr>
+	</table>
+</section>
+
+<div>
+	<input type="submit" class="join" value="회원가입" />
+</div>
+</form>
+       </div>
+   </main>        
+   <jsp:include page="./_footer.jsp"/>
