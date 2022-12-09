@@ -3,7 +3,30 @@
 <jsp:include page="../_header.jsp"></jsp:include>
 <script>
 	$(function(){
-		$('').click();
+		
+		$(document).on('change', 'select[name=prodCate1]', function(){
+			
+			let cate1 = $('select[name=prodCate1]').val();
+			let cate2 = $('select[name=prodCate2]');
+			cate2.children().remove();
+			
+			let jsonData = {'cate1':cate1};
+			
+			$.ajax({
+				url: '/Kmarket/admin/product/loadcate2.do',
+				type: 'post',
+				data: jsonData,
+				dataType: 'json',
+				success: function(data){
+					let option = "";
+					for(let cate2 of data){
+						option = "<option value='"+cate2.prodCate2+"'>"+cate2.c2Name+"</option>";
+					}
+					$('.cate2').append(option);
+				}
+			});
+			
+		});
 	});
 </script>
 <main>
@@ -90,12 +113,8 @@
                             <tr>
                                 <td>2차 분류</td>
                                 <td>
-                                    <select name="prodCate2">
+                                    <select name="prodCate2" class="cate2">
                                         <option value="cate0">2차 분류 선택</option>
-                                        <option value="cate21">남성의류</option>
-                                        <option value="cate22">여성의류</option>
-                                        <option value="cate23">잡화</option>
-                                        <option value="cate24">뷰티</option>
                                     </select>
                                 </td>
                             </tr>

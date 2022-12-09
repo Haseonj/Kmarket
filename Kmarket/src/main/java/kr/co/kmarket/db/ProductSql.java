@@ -9,4 +9,5 @@ public class ProductSql {
 												+ "`delivery`=?, `thumb1`=?, `thumb2`=?, "
 												+ "`thumb3`=?, `detail`=?";
 	public static final String SELECT_PRODCATE1 = "select * from `km_product_cate1`";
+	public static final String SELECT_PRODCATE2 = "select * from `km_product_cate2` where `cate1`=?";
 }
