@@ -62,4 +62,22 @@ public class ProductDAO extends DBHelper{
 		}
 		return cates;
 	}
+	public CateVO selectProdCate2(String prodCate1) {
+		CateVO cate2 = null;
+		try {
+			logger.info("selectProdCate2...");
+			conn = getConnection();
+			stmt = conn.createStatement();
+			rs = stmt.executeQuery(ProductSql.SELECT_PRODCATE2);
+			while(rs.next()) {
+				cate2 = new CateVO();
+				cate2.setCate2(rs.getInt(1));
+				cate2.setC2Name(rs.getString(2));
+			}
+			close();
+		}catch(Exception e) {
+			logger.error(e.getMessage());
+		}
+		return cate2;
+	}
 }
