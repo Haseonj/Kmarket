@@ -1,4 +1,5 @@
-<%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%><!DOCTYPE html>
+<%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
+<!DOCTYPE html>
 <jsp:include page="./_header.jsp"/>
 <main id="member">
     <div class="login">
@@ -9,7 +10,7 @@
             </p>
         </nav>
 
-        <form action="#">
+        <form action="/Kmarket/member/login.do">
             
             <table border="0">
                 <tr>
@@ -26,13 +27,13 @@
                 <label><input type="checkbox" name="auto"/>자동 로그인</label>
                 <a href="#">아이디찾기</a>
                 <a href="#">비밀번호찾기</a>
-                <a href="#">회원가입찾기</a>
+                <a href="/Kmarket/member/register.do">회원가입</a>
             </span>
 
             <a href="#" class="banner"><img src="../img/member_login_banner.jpg" alt="1만원 할인 쿠폰 받기"></a>
 
         </form>
-<img src="./img/member_certifi_logo.gif" alt="banner">
+<img src="/Kmarket/member/img/member_certifi_logo.gif" alt="banner">
     </div>
 </main>        
 <jsp:include page="./_footer.jsp"/>
