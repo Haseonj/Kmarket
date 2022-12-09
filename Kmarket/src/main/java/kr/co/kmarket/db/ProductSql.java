@@ -8,5 +8,5 @@ public class ProductSql {
 												+ "`discount`=?, `point`=?, `stock`=?, "
 												+ "`delivery`=?, `thumb1`=?, `thumb2`=?, "
 												+ "`thumb3`=?, `detail`=?";
-	
+	public static final String SELECT_PRODCATE1 = "select * from `km_product_cate1`";
 }

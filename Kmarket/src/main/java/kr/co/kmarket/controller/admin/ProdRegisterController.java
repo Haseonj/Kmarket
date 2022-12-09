@@ -1,6 +1,7 @@
 package kr.co.kmarket.controller.admin;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -10,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import kr.co.kmarket.service.ProductService;
+import kr.co.kmarket.vo.CateVO;
 import kr.co.kmarket.vo.ProductVO;
 
 @WebServlet("/admin/product/register.do")
@@ -24,6 +26,9 @@ public class ProdRegisterController extends HttpServlet{
 	}
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		List<CateVO> categories = service.selectProdCate1();
+		req.setAttribute("categories", categories);
+		
 		RequestDispatcher dispatcher = req.getRequestDispatcher("/admin/product/register.jsp");
 		dispatcher.forward(req, resp);
 	}

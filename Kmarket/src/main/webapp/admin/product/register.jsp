@@ -1,5 +1,11 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <jsp:include page="../_header.jsp"></jsp:include>
+<script>
+	$(function(){
+		$('').click();
+	});
+</script>
 <main>
     <aside>
         <ul id="gnb">
@@ -75,10 +81,9 @@
                                 <td>
                                     <select name="prodCate1">
                                         <option value="cate0">1차 분류 선택</option>
-                                        <option value="cate11">패션·의류·뷰티</option>
-                                        <option value="cate12">가전·디지털</option>
-                                        <option value="cate13">식품·생필품</option>
-                                        <option value="cate14">홈·문구·취미</option>
+                                        <c:forEach var="category" items="${categories}">
+                                        	<option value="${category.cate1}">${category.c1Name}</option>
+                                        </c:forEach>
                                     </select>
                                 </td>
                             </tr>
