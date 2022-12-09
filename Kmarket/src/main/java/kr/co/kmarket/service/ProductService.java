@@ -58,7 +58,7 @@ public enum ProductService {
 		int i = fname.lastIndexOf(".");
 		String ext = fname.substring(i);
 		
-		UUID name = UUID.randomUUID();
+		String name = UUID.randomUUID().toString();
 		String newName = name+ext;
 		
 		File f1 = new File(savePath+"/"+fname);
