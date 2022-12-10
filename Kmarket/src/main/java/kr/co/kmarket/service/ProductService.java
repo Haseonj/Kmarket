@@ -2,8 +2,6 @@ package kr.co.kmarket.service;
 
 import java.io.File;
 import java.io.IOException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
@@ -60,7 +58,7 @@ public enum ProductService {
 		int i = fname.lastIndexOf(".");
 		String ext = fname.substring(i);
 		
-		UUID name = UUID.randomUUID();
+		String name = UUID.randomUUID().toString();
 		String newName = name+ext;
 		
 		File f1 = new File(savePath+"/"+fname);

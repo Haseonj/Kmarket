@@ -80,7 +80,7 @@ public class ProdRegisterController extends HttpServlet{
 			newdetail = service.renameFile(detail, savePath);
 		}
 		
-		logger.debug("ProdRegister...6");
+		logger.debug("ProdRegister...3");
 		ProductVO vo = new ProductVO();
 		vo.setProdCate1(prodCate1);
 		vo.setProdCate2(prodCate2);
@@ -102,7 +102,7 @@ public class ProdRegisterController extends HttpServlet{
 		vo.setBizType(bizType);
 		vo.setOrigin(origin);
 		
-		logger.debug("ProdRegister...7");
+		logger.debug("ProdRegister...4");
 		service.insertProduct(vo);
 		
 		resp.sendRedirect("/Kmarket/admin/product/register.do");
