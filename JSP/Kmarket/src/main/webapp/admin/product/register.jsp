@@ -48,6 +48,13 @@
 			}
 			
 		});
+		
+		$('input[name=price]').focusout(function(){
+			
+			let count = $(this).val();
+			
+			$('input[name=point]').append(count * 0.1);
+		});
 	});
 </script>
 <main>
