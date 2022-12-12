@@ -16,6 +16,10 @@ public enum MemberService {
 	private MemberService() {
 		dao = new MemberDAO();
 }
+	
+	public void insertMember(MemberVO vo) {
+		dao.insertMember(vo);
+	}
 	public MemberVO selectMember(String uid, String pass) {
 		return dao.selectMember(uid, pass);
 	}
