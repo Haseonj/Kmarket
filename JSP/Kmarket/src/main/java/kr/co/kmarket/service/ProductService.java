@@ -33,6 +33,10 @@ public enum ProductService {
 		logger.info("ProductService...insertProdcut...");
 		dao.insertProduct(vo);
 	}
+	public List<ProductVO> selectProducts(String prodCate1, String prodCate2) {
+		logger.info("ProductService...selectProducts...");
+		return dao.selectProducts(prodCate1, prodCate2);
+	}
 	public List<CateVO> selectProdCate1() {
 		logger.info("ProductService...selectProdCate1...");
 		return dao.selectProdCate1();
@@ -40,6 +44,13 @@ public enum ProductService {
 	public List<CateVO> selectProdCate2(String prodCate1) {
 		logger.info("ProductService...selectProdCate2...");
 		return dao.selectProdCate2(prodCate1);
+	}
+	public CateVO selectProdCates(String prodCate1, String prodCate2) {
+		logger.info("ProductService...selectProdCates...");
+		return dao.selectProdCates(prodCate1, prodCate2);
+	}
+	public int selectCountTotal(String prodCate1, String prodCate2) {
+		return dao.selectCountTotal(prodCate1, prodCate2);
 	}
 	
 	// 서비스 로직
@@ -69,4 +80,59 @@ public enum ProductService {
 		return newName;
 		
 	}
+	
+	public int getLastPageNum(int total) {
+		int lastPageNum = 0;
+		
+		if(total % 10 == 0) {
+			lastPageNum = (total/10);
+		}else {
+			lastPageNum = (total/10)+1;
+		}
+		return lastPageNum;
+		
+	}
+	
+	public int getCurrentPage(String pg) {
+		int currentPage = 1;
+		
+		if(pg != null) {
+			currentPage = Integer.parseInt(pg);
+		}
+		return currentPage;
+	}
+	
+	public int getLimitStart(int currentPage) {
+		int limitStart = 0;
+		limitStart = (currentPage-1)*10;
+		return limitStart;
+	}
+	
+	public int[] getPageGroupNum(int currentPage, int lastPageNum) {
+		int pageGroupCurrent = (int)Math.ceil(currentPage/10.0);
+		int pageGroupStart = (pageGroupCurrent - 1) * 10 + 1;
+		int pageGroupEnd = pageGroupCurrent * 10;
+		
+		if(pageGroupEnd > lastPageNum) {
+			pageGroupEnd = lastPageNum;
+		}
+		
+		int[] result = {pageGroupStart, pageGroupEnd};
+		return result;
+	}
+	
+	public int getPageStartNum(int total, int limitStart) {
+		logger.debug("getPageStartNum...");
+		int pageStartNum = 0;
+		
+		pageStartNum = total - limitStart;
+		
+		return pageStartNum;
+	}
+	
+	public int getStartNum(int currentPage) {
+		return (currentPage - 1)*10;
+	}
+
+	
 }
