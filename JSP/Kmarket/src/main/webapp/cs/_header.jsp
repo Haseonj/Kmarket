@@ -4,8 +4,8 @@
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>케이마켓 고객센터</title>
-    <link rel="shortcut icon" type="image/x-icon" href="../../img/favicon.ico">
-    <link rel="stylesheet" href="../css/style.css">
+    <link rel="shortcut icon" type="image/x-icon" href="/Kmarket/img/favicon.ico">
+    <link rel="stylesheet" href="/Kmarket/cs/css/style.css">
 </head>
 <body>
     <div id="wrapper">
@@ -25,7 +25,7 @@
             </div>
             <div class="logo">
                 <div>
-                    <a href="#"><img src="../img/logo.png" alt="로고">고객센터</a>
+                    <a href="/Kmarket/cs/index.do"><img src="../img/logo.png" alt="로고">고객센터</a>
                 </div>
             </div>
         </header>

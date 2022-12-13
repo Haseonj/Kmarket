@@ -501,6 +501,7 @@ footer p > strong {
     line-height: 32px;
 }
 
+
 /* faq 전체 */
 #cs > .faq {}
 
@@ -881,6 +882,50 @@ footer p > strong {
 }
 
 #cs > .qna > .write > article table textarea {
+    width: 100%;
+    height: 360px;
+    resize: none;
+    font-size: 16px;
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+/* notice - 글쓰기 */
+#cs > .notice > .write > article table {
+    width: 100%;
+    border-collapse: collapse;
+    border-top: 2px solid #111;
+}
+#cs > .notice > .write > article table tr {
+    width: 100%;
+    height: 26px;
+}
+#cs > .notice > .write > article table td {
+    padding: 16px;
+    border-bottom: 1px solid #ccc;
+    font-size: 16px;
+}
+#cs > .notice > .write > article table td:first-child {width: 100px;}
+
+#cs > .notice > .write > article table input {
+    width: 100%;
+    height: 40px;
+    font-size: 16px;
+    box-sizing: border-box;
+    text-indent: 10px;
+}
+
+#cs > .notice > .write > article table select {
+    width: 100px;
+    height: 40px;
+    font-size: 16px;
+    box-sizing: border-box;
+}
+#cs > .notice > .write > article table select * {
+    font-size: inherit;
+}
+
+#cs > .notice > .write > article table textarea {
     width: 100%;
     height: 360px;
     resize: none;
