@@ -27,7 +27,7 @@
                 <label><input type="checkbox" name="auto"/>자동 로그인</label>
                 <a href="#">아이디찾기</a>
                 <a href="#">비밀번호찾기</a>
-                <a href="/Kmarket/member/register.do">회원가입</a>
+                <a href="/Kmarket/member/join.do">회원가입</a>
             </span>
 
             <a href="#" class="banner"><img src="../img/member_login_banner.jpg" alt="1만원 할인 쿠폰 받기"></a>

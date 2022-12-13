@@ -16,23 +16,24 @@ let regHp    = /^01(?:0|1|[6-9])-(?:\d{4})-\d{4}$/;
 let isUidOk   = false;
 let isPassOk  = false;
 let isNameOk  = false;
+let isGenderOk= false;
 let isNickOk  = false;
 let isEmailOk = false;
 let isHpOk    = false;
-let isEmailAuthOk = false;
-let isEmailAuthCodeOk = false;
+//let isEmailAuthOk = false;
+//let isEmailAuthCodeOk = false;
 let receivedCode = 0;	
 
 $(function(){
 	
 	// 아이디 유효성 검증 & 중복체크
-	$('input[name=uid]').keydown(function(){
+	$('input[name=km_uid]').keydown(function(){
 		isUidOk = false;
 	});
 	
-	$('#btnUidCheck').click(function(){
+	$('input[name=km_uid]').focusout(function(){
 		
-		let uid = $('input[name=uid]').val();
+		let uid = $('input[name=km_uid]').val();
 		//alert(uid);
 		
 		if(isUidOk){
@@ -41,18 +42,16 @@ $(function(){
 		
 		if(!uid.match(regUid)){
 			isUidOk = false;
-			$('.resultUid').css('color', 'red').text('아이디가 유효하지 않습니다.');
+			$('.msgId').css('color', 'red').text('아이디가 유효하지 않습니다. 영문, 숫자로 4~12자까지 설정해 주세요.');
 			return;
 		}
 		
 		let jsonData = {"uid":uid};
 		
-		$('.resultUid').css('color', 'black').text('...');
 		
-		setTimeout(()=>{
 			
 			$.ajax({
-				url: '/Jboard2/user/checkUid.do',
+				url: '/Kmarket/member/checkUid.do',
 				method: 'get',
 				data: jsonData,
 				dataType: 'json',
@@ -60,69 +59,68 @@ $(function(){
 					//console.log(data);
 					if(data.result == 0){
 						isUidOk = true;
-						$('.resultUid').css('color', 'green').text('사용 가능한 아이디 입니다.');
+						$('.msgId').css('color', 'green').text('사용 가능한 아이디 입니다.');
 					}else{
 						isUidOk = false;
-						$('.resultUid').css('color', 'red').text('이미 사용중인 아이디 입니다.');
+						$('.msgId').css('color', 'red').text('이미 사용중인 아이디 입니다.');
 					}
 				}
 			});
 			
-		}, 500);
 	});		
 	
 	// 비밀번호 일치여부 확인
-	$('input[name=pass2]').focusout(function(){			
-		let pass1 = $('input[name=pass1]').val();
+	$('input[name=km_pass2]').focusout(function(){			
+		let pass1 = $('input[name=km_pass1]').val();
 		let pass2 = $(this).val();
 		
 		if(pass1 == pass2){
 							
 			if(pass2.match(regPass)){
 				isPassOk = true;
-				$('.resultPass').css('color', 'green').text('비밀번호가 일치합니다.');	
+				$('.msgPass1').css('color', 'green').text('비밀번호가 일치합니다.');	
 			}else{
 				isPassOk = false;
-				$('.resultPass').css('color', 'red').text('영문, 숫자, 특수문자 조합 최소 5자 이상 이어야 합니다.');
+				$('.msgPass1').css('color', 'red').text('영문, 숫자, 특수문자 조합 최소 5자 이상 이어야 합니다.');
 			}				
 			
 		}else{
 			isPassOk = false;
-			$('.resultPass').css('color', 'red').text('비밀번호가 일치하지 않습니다.');
+			$('.msgPass2').css('color', 'red').text('비밀번호가 일치하지 않습니다.');
 		}			
 	});
 	
 	// 이름 유효성 검증
-	$('input[name=name]').focusout(function(){
+	$('input[name=km_name]').focusout(function(){
 		
 		let name = $(this).val();
 		
 		if(!name.match(regName)){
 			isNameOk = false;
-			$('.resultName').css('color', 'red').text('이름은 한글 2자 이상 이어야 합니다.');
+			$('.msgName').css('color', 'red').text('이름은 한글 2자 이상 이어야 합니다.');
 		}else{
 			isNameOk = true;
-			$('.resultName').text('');
+			$('.msgName').text('');
 		}
 	});
 	
 	
 	
 	// 이메일 유효성 검사
-	$('input[name=email]').focusout(function(){
+	$('input[name=km_email]').focusout(function(){
 		let email = $(this).val();
 		
 		if(!email.match(regEmail)){
 			isEmailOk = false;
-			$('.resultEmail').css('color', 'red').text('이메일이 유효하지 않습니다.');
+			$('.msgEmail').css('color', 'red').text('이메일이 유효하지 않습니다.');
 		}else{
 			isEmailOk = true;
-			$('.resultEmail').text('');
+			$('.msgEmail').text('');
 		}			
 	});
 	
 	// 이메일 인증코드 발송 클릭
-	$('#btnEmail').click(function(){
+	/*$('#btnEmail').click(function(){
 		
 		$(this).hide();			
 		let email = $('input[name=email]').val();
@@ -193,17 +191,17 @@ $(function(){
 			alert('인증코드가 틀립니다.\n다시 확인 하십시요.');
 		}
 	});
-	
+	*/
 	// 휴대폰 유효성 검사
-	$('input[name=hp]').focusout(function(){
+	$('input[name=km_hp]').focusout(function(){
 		let hp = $(this).val();
 		
 		if(!hp.match(regHp)){
 			isHpOk = false;
-			$('.resultHp').css('color', 'red').text('휴대폰이 유효하지 않습니다.');
+			$('.msgHp').css('color', 'red').text('휴대폰이 유효하지 않습니다.');
 		}else{
 			isHpOk = true;
-			$('.resultHp').text('');
+			$('.msgHp').text('');
 		}
 	});
 	
@@ -233,11 +231,11 @@ $(function(){
 			alert('이메일을 확인 하십시요.');
 			return false;
 		}
-		// 이메일 인증코드 검증
+		/*// 이메일 인증코드 검증
 		if(!isEmailAuthCodeOk){
 			alert('이메일을 인증을 수행 하십시요.');
 			return false;
-		}
+		}*/
 		// 휴대폰 검증
 		if(!isHpOk){
 			alert('휴대폰을 확인 하십시요.');

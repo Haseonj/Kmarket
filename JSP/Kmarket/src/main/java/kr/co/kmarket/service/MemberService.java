@@ -6,6 +6,7 @@ import org.slf4j.LoggerFactory;
 import kr.co.kmarket.dao.MemberDAO;
 import kr.co.kmarket.dao.UserDAO;
 import kr.co.kmarket.vo.MemberVO;
+import kr.co.kmarket.vo.TermsVO;
 
 public enum MemberService {
 	
@@ -22,5 +23,11 @@ public enum MemberService {
 	}
 	public MemberVO selectMember(String uid, String pass) {
 		return dao.selectMember(uid, pass);
+	}
+	public TermsVO selectTerms() {
+		return dao.selectTerms();
+	}
+	public int selectCountUid(String uid) {
+		return dao.selectCountUid(uid);
 	}
 }
