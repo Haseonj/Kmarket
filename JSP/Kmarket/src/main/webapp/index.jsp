@@ -57,7 +57,7 @@
             </div>
             <div class="logo">
                 <div>
-                    <a href="#"><img src="./img/header_logo.png" alt="로고"></a>
+                    <a href="/Kmarket/"><img src="./img/header_logo.png" alt="로고"></a>
                     <form action="#">
                         <input type="text" name="search">
                         <button>

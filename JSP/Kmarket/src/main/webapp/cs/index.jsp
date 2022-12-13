@@ -39,13 +39,13 @@
                         <a href="/Kmarket/cs/board/list.do?group=faq&cate=user&type=list">전체보기</a>
                     </h1>
                     <ol>
-                        <li><a href="#"><span>회원</span></a></li>
-                        <li><a href="#"><span>쿠폰/이벤트</span></a></li>
-                        <li><a href="#"><span>주문/결제</span></a></li>
-                        <li><a href="#"><span>배송</span></a></li>
-                        <li><a href="#"><span>취소/반품/교환</span></a></li>
-                        <li><a href="#"><span>여행/숙박/항공</span></a></li>
-                        <li><a href="#"><span>안전거래</span></a></li>
+                        <li><a href="/Kmarket/cs/board/list.do?group=faq&cate=user&type=list"><span>회원</span></a></li>
+                        <li><a href="/Kmarket/cs/board/list.do?group=faq&cate=event&type=list"><span>쿠폰/이벤트</span></a></li>
+                        <li><a href="/Kmarket/cs/board/list.do?group=faq&cate=order&type=list"><span>주문/결제</span></a></li>
+                        <li><a href="/Kmarket/cs/board/list.do?group=faq&cate=shipping&type=list"><span>배송</span></a></li>
+                        <li><a href="/Kmarket/cs/board/list.do?group=faq&cate=cancel&type=list"><span>취소/반품/교환</span></a></li>
+                        <li><a href="/Kmarket/cs/board/list.do?group=faq&cate=travel&type=list"><span>여행/숙박/항공</span></a></li>
+                        <li><a href="/Kmarket/cs/board/list.do?group=faq&cate=safe&type=list"><span>안전거래</span></a></li>
                     </ol>
                 </section>
                 <section class="qna">
