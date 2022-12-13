@@ -1,6 +1,32 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <jsp:include page="./_header.jsp"/>
+<script>
+	
+	
+	$(function(){
+		
+		$(document).on('click', '#highsold', function(e){
+			e.preventDefault();
+			var highsold = document.getElementById('highsold');
+			
+			let cate1 = '${vo.cate1}';
+			let cate2 = '${vo.cate2}';
+			
+			let jsonData = {"cate1":cate1, "cate2":cate2};
+			
+			$.ajax({
+				url:'/Kmarket/product/productsort1.do',
+				method:'post',
+				data:jsonData,
+				dataType:'json',
+				success:function(data){
+					highsold.classList.add('on');
+				}
+			});
+		});
+	});
+</script>
     <section class="list">
         <!--제목, 페이지 네비게이션-->
         <nav>
@@ -10,12 +36,12 @@
 
         <!--정렬 메뉴-->
         <ul class="sort">
-            <li><a href="#" class="on">판매많은순</a></li>
-            <li><a href="#">낮은가격순</a></li>
-            <li><a href="#">높은가격순</a></li>
-            <li><a href="#">평점높은순</a></li>
-            <li><a href="#">후기많은순</a></li>
-            <li><a href="#">최근등록순</a></li>
+            <li><a href="#" id="highsold">판매많은순</a></li>
+            <li><a href="#" id="lowprice">낮은가격순</a></li>
+            <li><a href="#" id="highprice">높은가격순</a></li>
+            <li><a href="#" id="highrating">평점높은순</a></li>
+            <li><a href="#" id="highreview">후기많은순</a></li>
+            <li><a href="#" id="new">최근등록순</a></li>
         </ul>
 
         <!--상품목록-->
@@ -31,7 +57,7 @@
                     <ul>
                     	<c:choose>
                     		<c:when test="${product.discount gt 0}">
-                    			<li><ins class="dis-price">${product.price * (100-product.discount) / 100}</ins></li>
+                    			<li><ins class="dis-price">${product.price * (100-product.discount) * 0.01}</ins></li>
 		                        <li>
 		                            <del class="org-price">${product.price}</del>
 		                            <span class="discount">${product.discount}%</span>
