@@ -15,8 +15,8 @@ import com.google.gson.Gson;
 import kr.co.kmarket.service.ProductService;
 import kr.co.kmarket.vo.ProductVO;
 
-@WebServlet("/product/productsort1.do")
-public class ProductSort1 extends HttpServlet{
+@WebServlet("/product/productsort2.do")
+public class ProductSort2 extends HttpServlet{
 
 	private static final long serialVersionUID = 1L;
 	private ProductService service = ProductService.INSTANCE;
@@ -30,7 +30,7 @@ public class ProductSort1 extends HttpServlet{
 		String cate1 = req.getParameter("cate1");	
 		String cate2 = req.getParameter("cate2");
 		
-		List<ProductVO> products = service.selectOrderByHighsold(cate1,  cate2);
+		List<ProductVO> products = service.selectOrderByLowPrice(cate1,  cate2);
 		
 		Gson gson = new Gson();
 		String jsonData = gson.toJson(products);

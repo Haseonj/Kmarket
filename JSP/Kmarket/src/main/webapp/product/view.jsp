@@ -1,41 +1,110 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <jsp:include page="./_header.jsp"/>
+<script>
+	function getTodayLabel() {
+	    
+		var week = new Array('일', '월', '화', '수', '목', '금', '토');
+	    
+	    var today = new Date().getDay()+3;
+	    var todayLabel = week[today];
+	    return todayLabel;
+	}
 
+	$(function(){
+		$('.decrease').click(function(){
+			$('.total > span').empty();
+			let pricenum = Number($('input[name=num]').val()) - 1;
+			$('input[name=num]').attr("value", pricenum);
+			let price = pricenum * '${disprice}';
+			$('.total > span').append(price);
+		});
+		$('.increase').click(function(){
+			$('.total > span').empty();
+			let pricenum = Number($('input[name=num]').val()) + 1;
+			$('input[name=num]').attr("value", pricenum);
+			
+			let price = pricenum * '${disprice}';
+			$('.total > span').append(price);
+		});
+		
+		const date = new Date();
+
+		const month = date.getMonth() + 1;
+		const day = date.getDate()+3;
+	    
+		const dateStr = '모레('+ getTodayLabel() +') ' + month + '/' + day + ' 도착예정';
+
+		$('.arrival').append(dateStr);
+	});
+</script>
     <!--상품 상세페이지 시작-->
     <section class="view">
         <!--제목, 페이지 네비게이션-->
         <nav>
             <h1>상품보기</h1>
-            <p>HOME > <span>패션·의류·뷰티</span> > <strong>남성의류</strong></p>
+            <p>HOME > <span>${vo.c1Name}</span> > <strong>${vo.c2Name}</strong></p>
         </nav>
 
         <!--상품 전체 정보 내용-->
         <article class="info">
             <div class="image">
-                <img src="https://via.placeholder.com/460x460" alt="상품이미지">
+                <img src="http://3.39.231.136:8080/Kmarket/file/${product.thumb3}" alt="상품이미지">
             </div>
             <div class="summary">
                 <nav>
-                    <h1>(주)판매자명</h1>
-                    <h2>상품번호&nbsp;:&nbsp;<span>10010118412</span></h2>
+                    <h1>${product.seller}</h1>
+                    <h2>상품번호&nbsp;:&nbsp;<span>${product.prodNo}</span></h2>
                 </nav>
                 <nav>
                     <h3>상품명</h3>
-                    <p>상품설명 출력</p>
-                    <h5 class="rating star4"><a href="#">상품평보기</a></h5>
+                    <p>${product.descript}</p>
+                    <c:choose>
+                    	<c:when test="${product.score eq 1}">
+                    		<h5 class="rating star1"><a href="#">상품평보기</a></h5>
+                    	</c:when>
+                    	<c:when test="${product.score eq 2}">
+                    		<h5 class="rating star2"><a href="#">상품평보기</a></h5>
+                    	</c:when>
+                    	<c:when test="${product.score eq 3}">
+                    		<h5 class="rating star3"><a href="#">상품평보기</a></h5>
+                    	</c:when>
+                    	<c:when test="${product.score eq 4}">
+                    		<h5 class="rating star4"><a href="#">상품평보기</a></h5>
+                    	</c:when>
+                    	<c:otherwise>
+                    		<h5 class="rating star5"><a href="#">상품평보기</a></h5>
+                    	</c:otherwise>
+                    </c:choose>
                 </nav>
                 <nav>
-                    <div class="org_price">
-                        <del>30,000</del>
-                        <span>10%</span>
-                    </div>
-                    <div class="dis_price">
-                        <ins>27,000</ins>
-                    </div>
+                	<c:choose>
+                    	<c:when test="${product.discount gt 0}">
+		                    <div class="org_price">
+		                        <del>${product.price}</del>
+		                        <span>${product.discount}%</span>
+		                    </div>
+		                    <div class="dis_price">
+		                        <ins>${disprice}</ins>
+		                    </div>
+	                    </c:when>
+                   		<c:otherwise>
+                            <div class="dis_price">
+                           		<ins>${product.price}</ins> 
+                            </div>
+                   		</c:otherwise>
+                   	</c:choose>
                 </nav>
                 <nav>
-                    <span class="delivery">무료배송</span>
-                    <span class="arrival">모레(금) 7/8 도착예정</span>
+	                <c:choose>
+	                	<c:when test="${product.delivery eq 0}">
+	                		<span class="delivery">무료배송</span>	
+	                	</c:when>
+	                	<c:otherwise>
+	                		<span class="delivery">${product.delivery}원</span>	
+	                	</c:otherwise>
+	                </c:choose>
+                    <span class="arrival"></span>
                     <span class="desc">본 상품은 국내배송만 가능합니다.</span>
                 </nav>
                 <nav>
@@ -54,8 +123,8 @@
                 </div>
                 
                 <div class="total">
-                    <span>35,000</span>
-                    <em>총 상품금액</em>
+                    <span>${disprice}</span>
+                    <em>총 상품금액 </em>
                 </div>
 
                 <div class="button">
@@ -71,9 +140,7 @@
                 <h1>상품정보</h1>
             </nav>
             <!-- 상품상세페이지 이미지 -->
-            <img src="https://via.placeholder.com/860x460" alt="상세페이지1">
-            <img src="https://via.placeholder.com/860x460" alt="상세페이지2">
-            <img src="https://via.placeholder.com/860x460" alt="상세페이지3">
+            <img src="http://3.39.231.136:8080/Kmarket/file/${product.detail}" alt="상세페이지1">
         </article>
         <!-- 상품 정보 제공 고시 내용 -->
         <article class="notice">
@@ -84,31 +151,31 @@
             <table border="0">
                 <tr>
                     <td>상품번호</td>
-                    <td>10110125435</td>
+                    <td>${product.prodNo}</td>
                 </tr>
                 <tr>
                     <td>상품상태</td>
-                    <td>새상품</td>
+                    <td>${product.status}</td>
                 </tr>
                 <tr>
                     <td>부가세 면세여부</td>
-                    <td>과세상품</td>
+                    <td>${product.duty}</td>
                 </tr>
                 <tr>
                     <td>영수증발행</td>
-                    <td>발행가능 - 신용카드 전표, 온라인 현금영수증</td>
+                    <td>${product.receipt}</td>
                 </tr>
                 <tr>
                     <td>사업자구분</td>
-                    <td>사업자 판매자</td>
+                    <td>${product.bizType}</td>
                 </tr>
                 <tr>
                     <td>브랜드</td>
-                    <td>블루포스</td>
+                    <td>${product.company}</td>
                 </tr>
                 <tr>
                     <td>원산지</td>
-                    <td>국내생산</td>
+                    <td>${product.origin}</td>
                 </tr>
             </table>
             <table border="0">
