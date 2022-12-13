@@ -66,8 +66,17 @@ public class ProductListController extends HttpServlet{
 		
 		logger.debug("here8");
 		
+		int disprice = 0;
+		
+		for(int i=0; i<products.size(); i++) {
+			ProductVO product = products.get(i);
+			int oriprice = product.getPrice();
+			disprice = (int) (oriprice * (100-product.getDiscount()) * 0.01);
+		}
+		
 		req.setAttribute("products", products);
 		req.setAttribute("vo", vo);
+		req.setAttribute("pg", pg);
 		req.setAttribute("lastPageNum", lastPageNum);
 		req.setAttribute("currentPage", currentPage);
 		req.setAttribute("limitStart", limitStart);
@@ -75,6 +84,7 @@ public class ProductListController extends HttpServlet{
 		req.setAttribute("pageGroupStart", result[0]);
 		req.setAttribute("pageStartNum", pageStartNum);
 		req.setAttribute("start", start);
+		req.setAttribute("disprice", disprice);
 		
 		RequestDispatcher dispatcher = req.getRequestDispatcher("/product/list.jsp");
 		dispatcher.forward(req, resp);

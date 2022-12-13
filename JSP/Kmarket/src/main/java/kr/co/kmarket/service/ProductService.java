@@ -49,8 +49,30 @@ public enum ProductService {
 		logger.info("ProductService...selectProdCates...");
 		return dao.selectProdCates(prodCate1, prodCate2);
 	}
+	public ProductVO selectProduct(String prodNo) {
+		logger.info("ProductService...selectProduct...");
+		return dao.selectProduct(prodNo);
+	}
 	public int selectCountTotal(String prodCate1, String prodCate2) {
 		return dao.selectCountTotal(prodCate1, prodCate2);
+	}
+	public List<ProductVO> selectOrderByHighsold(String prodCate1, String prodCate2) {
+		return dao.selectOrderByHighsold(prodCate1, prodCate2);
+	}
+	public List<ProductVO> selectOrderByLowPrice(String prodCate1, String prodCate2) {
+		return dao.selectOrderByLowPrice(prodCate1, prodCate2);
+	}
+	public List<ProductVO> selectOrderByHighPrice(String prodCate1, String prodCate2) {
+		return dao.selectOrderByHighPrice(prodCate1, prodCate2);
+	}
+	public List<ProductVO> selectOrderByHighRating(String prodCate1, String prodCate2) {
+		return dao.selectOrderByHighRating(prodCate1, prodCate2);
+	}
+	public List<ProductVO> selectOrderByHighReview(String prodCate1, String prodCate2) {
+		return dao.selectOrderByHighReview(prodCate1, prodCate2);
+	}
+	public List<ProductVO> selectOrderByNewold(String prodCate1, String prodCate2) {
+		return dao.selectOrderByNewold(prodCate1, prodCate2);
 	}
 	
 	// 서비스 로직
