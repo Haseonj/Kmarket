@@ -6,6 +6,7 @@ import org.slf4j.LoggerFactory;
 import kr.co.kmarket.db.DBHelper;
 import kr.co.kmarket.db.MemberSql;
 import kr.co.kmarket.vo.MemberVO;
+import kr.co.kmarket.vo.TermsVO;
 
 public class MemberDAO extends DBHelper{
 
@@ -80,5 +81,58 @@ public class MemberDAO extends DBHelper{
 			logger.error(e.getMessage());
 		}
 		return vo;
+	}
+	public TermsVO selectTerms() {
+		
+		TermsVO vo = null;
+		
+		try {
+			logger.info("selectTerms...");
+		
+			conn = getConnection();
+			stmt = conn.createStatement();
+			rs = stmt.executeQuery(MemberSql.SELECT_TERMS);
+			
+			if(rs.next()) {
+				vo = new TermsVO();
+				vo.setTerms(rs.getString(1));
+				vo.setPrivacy(rs.getString(2));
+				vo.setLocation(rs.getString(3));
+				vo.setFinance(rs.getString(4));
+				vo.setTax(rs.getString(5));
+			}
+			
+			close();
+			
+		}catch (Exception e) {
+			logger.error(e.getMessage());
+		}
+		
+		return vo;
+	}
+	public int selectCountUid(String uid) {
+		
+		int result = 0;
+		
+		try {
+			logger.info("selectCheckUid");
+			
+			conn = getConnection();
+			psmt = conn.prepareStatement(MemberSql.SELECT_COUNT_UID);
+			psmt.setString(1, uid);
+			rs = psmt.executeQuery();
+			
+			if(rs.next()) {
+				result = rs.getInt(1);
+			}
+			
+			close();
+		}catch (Exception e) {
+			logger.error(e.getMessage());
+		}
+		
+		logger.debug("result : " + result);
+		
+		return result;
 	}
 }

@@ -1,5 +1,8 @@
-<%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
+`<%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
 <jsp:include page="./_header.jsp"/>
+<script src="http://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<script src="/Kmarket/member/js/zipcode.js"></script>
+<script src="/Kmarket/member/js/validation.js"></script>
 <main id="member">
     <div class="register">
         <nav>
@@ -16,13 +19,13 @@
                     </tr>
                     <tr>
                         <th><span class="essential">*</span>비밀번호</th>
-                        <td><input type="password" name="km_pass" placeholder="비밀번호를 입력" required>
-                        <span class="msgPass">영문, 숫자, 특수문자를 조합하여 8~12자까지 설정해 주세요.</span></td>
+                        <td><input type="password" name="km_pass1" placeholder="비밀번호를 입력" required>
+                        <span class="msgPass1">영문, 숫자, 특수문자를 조합하여 8~12자까지 설정해 주세요.</span></td>
                     </tr>
                     <tr>
                         <th><span class="essential">*</span>비밀번호확인</th>
-                        <td><input type="password" name="km_pass" placeholder="비밀번호를 확인" required>
-                        <span class="msgPass">비밀번호 재입력</span></td>
+                        <td><input type="password" name="km_pass2" placeholder="비밀번호를 확인" required>
+                        <span class="msgPass2">비밀번호 재입력</span></td>
                     </tr>
                 </table>
             </section>
@@ -32,6 +35,7 @@
                     <tr>
                         <th><span class="essential">*</span>이름</th>
                         <td><input type="text" name="km_name" placeholder="이름을 입력" required>
+                        <span class="msgName"></span>
                         </td>
                     </tr>
                     <tr>
@@ -41,7 +45,8 @@
                     </tr>
                     <tr>
                         <th><span class="essential">*</span>EMAIL</th>
-                        <td><input type="email" name="km_email" placeholder="이메일 입력" required /></td>
+                        <td><input type="email" name="km_email" placeholder="이메일 입력" required />
+                        <span class="msgEmail"></span></td>
                     </tr>
                     <tr>
                         <th><span class="essential">*</span>휴대폰</th>
@@ -52,7 +57,7 @@
                         <th>주소</th>
                         <td>
                             <div>
-                                <input type="text" name="km_zip" id="zip" placeholder="우편번호 입력 클릭" readonly />
+                                <input type="text" name="km_zip" id="zip" onclick="zipcode()" placeholder="주소 입력시 클릭." readonly />
                             </div>
                             <div>
                                 <input type="text" name="km_addr1" id="addr1" size="50" placeholder="주소를 검색하세요." readonly />
