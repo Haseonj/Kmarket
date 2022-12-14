@@ -10,7 +10,7 @@
             </p>
         </nav>
 
-        <form action="/Kmarket/member/login.do">
+        <form action="/Kmarket/member/login.do" method="post">
             
             <table border="0">
                 <tr>

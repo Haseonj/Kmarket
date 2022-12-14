@@ -40,7 +40,7 @@ public class LoginController extends HttpServlet {
 		
 		String uid  = req.getParameter("uid");
 		String pass = req.getParameter("pass");
-		String auto = req.getParameter("auto");
+		//String auto = req.getParameter("auto");
 	
 		MemberVO vo = service.selectMember(uid, pass);
 		
@@ -48,7 +48,7 @@ public class LoginController extends HttpServlet {
 			// 회원이 맞을경우
 			HttpSession sess = req.getSession();
 			sess.setAttribute("sessMember", vo);
-			
+			resp.sendRedirect("/Kmarket/index.do");
 		}else {
 			// 회원이 아닌경우
 			resp.sendRedirect("/Kmarket/member/login.do?success=100");
