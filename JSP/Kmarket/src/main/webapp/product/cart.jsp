@@ -1,4 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <jsp:include page="./_header.jsp"/>
 
     <!-- 장바구니 페이지 시작 -->
@@ -8,7 +9,7 @@
       <nav>
         <h1>장바구니</h1>
         <p>
-          HOME > <span>패션·의류·뷰티</span> > <strong>장바구니</strong>
+          HOME > <span>${vo.c1Name}</span> > <strong>장바구니</strong>
         </p>
       </nav>
                     
@@ -31,61 +32,26 @@
             <tr class="empty">
               <td colspan="7">장바구니에 상품이 없습니다.</td>
             </tr>
-            <tr>
-              <td><input type="checkbox" name=""></td>
-              <td>
-                <article>
-                  <a href="#"><img src="https://via.placeholder.com/80x80" alt=""></a>
-                  <div>
-                    <h2><a href="#">상품명</a></h2>
-                    <p>상품설명</p>
-                  </div>
-                </article>
-              </td>
-              <td>1</td>
-              <td>27,000</td>
-              <td>5%</td>
-              <td>270</td>
-              <td>무료배송</td>
-              <td>27,000</td>
-            </tr>
-            <tr>
-              <td><input type="checkbox" name=""></td>
-              <td>
-                <article>
-                  <a href="#"><img src="https://via.placeholder.com/80x80" alt=""></a>
-                  <div>
-                    <h2><a href="#">상품명</a></h2>
-                    <p>상품설명</p>
-                  </div>
-                </article>
-              </td>
-              <td>1</td>
-              <td>27,000</td>
-              <td>5%</td>
-              <td>270</td>
-              <td>무료배송</td>
-              <td>27,000</td>
-            </tr>
-            <tr>
-              <td><input type="checkbox" name=""></td>
-              <td>
-                <article>
-                  <a href="#"><img src="https://via.placeholder.com/80x80" alt=""></a>
-                  <div>
-                    <h2><a href="#">상품명</a></h2>
-                    <p>상품설명</p>
-                  </div>
-                </article>
-              </td>
-              <td>1</td>
-              <td>27,000</td>
-              <td>5%</td>
-              <td>270</td>
-              <td>무료배송</td>
-              <td>27,000</td>
-            </tr>
-            
+            <c:forEach var="productlist" items="${productlist}">
+            	<tr>
+	              <td><input type="checkbox" name=""></td>
+	              <td>
+	                <article>
+	                  <a href="#"><img src="http://3.39.231.136:8080/Kmarket/file/${productlist.thumb1}" alt=""></a>
+	                  <div>
+	                    <h2><a href="#">${productlist.prodName}</a></h2>
+	                    <p>${productlist.descript}</p>
+	                  </div>
+	                </article>
+	              </td>
+	              <td>1</td>
+	              <td>27,000</td>
+	              <td>${productlist.discount}%</td>
+	              <td>270</td>
+	              <td>무료배송</td>
+	              <td>27,000</td>
+	            </tr>
+            </c:forEach>
           </tbody>
         </table>
         <input type="button" name="del" value="선택삭제">
