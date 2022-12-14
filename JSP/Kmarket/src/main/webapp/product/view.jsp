@@ -43,11 +43,11 @@
 		
 		$(document).on('click', '.cart', function(){
 			
-			let notLogin = '${empty sessMember}';
-			console.log('here1 : ' + notLogin);
+			let uid = '${sessMember.uid}';
+			console.log('here1 : ' + uid);
 			
 			
-			if(notLogin){
+			if(uid == ''){
 				alert('로그인 후 이용 가능합니다.');
 			}else{
 				let cate1 = '${vo.cate1}';
@@ -75,24 +75,33 @@
 					"total":total,
 				};
 				
+				console.log('here5 : ' + jsonData);
+				
+				
 				$.ajax({
 					url:'/Kmarket/product/gocart.do',
-					method:'post'
+					method:'post',
 					data:jsonData,
 					dataType:'json',
 					success:function(data){
 						if(data.result > 0){
-							if (window.confirm('장바구니로 이동하시겠습니까?'))
-							{
+							
+							console.log('here6');
+							
+							var confirm = confirm('장바구니로 이동하시겠습니까?');
+							
+							if (confirm){
+								console.log('here7');
 								location.href = '/Kmarket/product/cart.do?cate1='+cate1+'&cate2='+cate2;
 							}
-							else
-							{
+							else{
+								console.log('here8');
 							    location.href = '/Kmarket/product/view.do?cate1='+cate1+'&cate2='+cate2+'&prodNo='+prodNo;
 							}
 						}
 					}
 				});
+				
 			}
 			
 		});

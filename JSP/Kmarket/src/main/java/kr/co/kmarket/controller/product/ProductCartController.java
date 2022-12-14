@@ -33,14 +33,7 @@ public class ProductCartController extends HttpServlet{
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		
-		RequestDispatcher dispatcher = req.getRequestDispatcher("/product/cart.jsp");
-		dispatcher.forward(req, resp);
-	}
-	@Override
-	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		logger.info("ProductCartController...");
-		
+
 		HttpSession session = req.getSession();
 		MemberVO sessMember = (MemberVO) session.getAttribute("sessMember");
 		
@@ -50,9 +43,18 @@ public class ProductCartController extends HttpServlet{
 		
 		CateVO cate = service.selectProdCates(prodCate1, prodCate2);
 		List<CartVO> carts = service.selectCarts(uid);
-        
+		
 		req.setAttribute("cate", cate);
 		req.setAttribute("carts", carts);
+		
+		RequestDispatcher dispatcher = req.getRequestDispatcher("/product/cart.jsp");
+		dispatcher.forward(req, resp);
+	}
+	@Override
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		
+        
+		
 	}
 	
 }
