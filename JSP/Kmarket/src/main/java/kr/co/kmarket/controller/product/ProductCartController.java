@@ -33,20 +33,24 @@ public class ProductCartController extends HttpServlet{
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
+		logger.info("ProductCartController...");
 		HttpSession session = req.getSession();
 		MemberVO sessMember = (MemberVO) session.getAttribute("sessMember");
 		
+		logger.debug("here1");
 		String prodCate1 = req.getParameter("cate1");
 		String prodCate2 = req.getParameter("cate2");
 		String uid = sessMember.getUid();
 		
+		logger.debug("here2");
 		CateVO cate = service.selectProdCates(prodCate1, prodCate2);
 		List<CartVO> carts = service.selectCarts(uid);
 		
+		logger.debug("here3");
 		req.setAttribute("cate", cate);
 		req.setAttribute("carts", carts);
 		
+		logger.debug("here4");
 		RequestDispatcher dispatcher = req.getRequestDispatcher("/product/cart.jsp");
 		dispatcher.forward(req, resp);
 	}
