@@ -17,7 +17,7 @@ import com.google.gson.JsonObject;
 import kr.co.kmarket.service.ProductService;
 import kr.co.kmarket.vo.CartVO;
 
-@WebServlet("/product/cart.do")
+@WebServlet("/product/gocart.do")
 public class ProductGoCartController extends HttpServlet{
 
 	private static final long serialVersionUID = 1L;

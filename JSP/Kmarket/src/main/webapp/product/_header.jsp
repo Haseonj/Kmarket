@@ -167,4 +167,5 @@
                     <li><a href="/Kmarket/product/list.do?cate1=18&cate2=14">상품권</a></li>
                 </ol>
             </li>
+          </ul>
     </aside>
