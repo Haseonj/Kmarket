@@ -23,4 +23,9 @@ public class ProductSql {
 	public static final String SELECT_ORDER_BY_HIGHRATING = "select * from `km_product` where `prodCate1`=? and `prodCate2`=? order by `score` desc limit 10 ";
 	public static final String SELECT_ORDER_BY_HIGHREVIEW = "select * from `km_product` where `prodCate1`=? and `prodCate2`=? order by `review` desc limit 10 ";
 	public static final String SELECT_ORDER_BY_NEWOLD = "select * from `km_product` where `prodCate1`=? and `prodCate2`=? order by `rdate` desc limit 10 ";
+
+	// cart
+	public static final String INSERT_CART = "insert into `km_product_cart` set "
+											+ "`uid`=?, `prodNo`=?, `count`=?, `price`=?, `discount`=?, `point`=?, `delivery`=?, `total`=?, `rdate`=NOW()";
+	public static final String SELECT_CARTS = "select * from `km_product_cart` where `uid`=?";
 }
