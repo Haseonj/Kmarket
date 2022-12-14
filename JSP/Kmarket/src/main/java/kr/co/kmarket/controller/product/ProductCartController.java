@@ -1,6 +1,7 @@
 package kr.co.kmarket.controller.product;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -10,47 +11,48 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import kr.co.kmarket.service.ProductService;
-import kr.co.kmarket.vo.CateVO;
-import kr.co.kmarket.vo.ProductVO;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-@WebServlet("/product/view.do")
-public class ProductViewController extends HttpServlet{
+import kr.co.kmarket.service.ProductService;
+import kr.co.kmarket.vo.CartVO;
+import kr.co.kmarket.vo.CateVO;
+import kr.co.kmarket.vo.MemberVO;
+
+@WebServlet("/product/cart.do")
+public class ProductCartController extends HttpServlet{
 
 	private static final long serialVersionUID = 1L;
 	private ProductService service = ProductService.INSTANCE;
+	private Logger logger = LoggerFactory.getLogger(this.getClass());
 
 	@Override
 	public void init() throws ServletException {
 	
 	}
+	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		String prodCate1 = req.getParameter("cate1");
-		String prodCate2 = req.getParameter("cate2");
-		String prodNo = req.getParameter("prodNo");
-		String pg = req.getParameter("pg");
 		
-		HttpSession sess = req.getSession();
-		sess.getAttribute("sessMember");
-		
-		ProductVO product = service.selectProduct(prodNo);
-		CateVO vo = service.selectProdCates(prodCate1, prodCate2);
-
-		int oriprice = product.getPrice();
-		int disprice = (int) (oriprice * (100-product.getDiscount()) * 0.01);
-		
-		req.setAttribute("product", product);
-		req.setAttribute("vo", vo);
-		req.setAttribute("pg", pg);
-		req.setAttribute("disprice", disprice);
-		
-		RequestDispatcher dispatcher = req.getRequestDispatcher("/product/view.jsp");
+		RequestDispatcher dispatcher = req.getRequestDispatcher("/product/cart.jsp");
 		dispatcher.forward(req, resp);
 	}
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		logger.info("ProductCartController...");
 		
+		HttpSession session = req.getSession();
+		MemberVO sessMember = (MemberVO) session.getAttribute("sessMember");
+		
+		String prodCate1 = req.getParameter("cate1");
+		String prodCate2 = req.getParameter("cate2");
+		String uid = sessMember.getUid();
+		
+		CateVO cate = service.selectProdCates(prodCate1, prodCate2);
+		List<CartVO> carts = service.selectCarts(uid);
+        
+		req.setAttribute("cate", cate);
+		req.setAttribute("carts", carts);
 	}
 	
 }
