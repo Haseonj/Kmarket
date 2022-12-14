@@ -54,7 +54,9 @@
 				let cate2 = '${vo.cate2}';
 				let prodNo = '${product.prodNo}';
 				let price = '${disprice}';
+
 				let uid = '${sessMember.uid}'
+
 				let discount = '${product.discount}';
 				let point = '${product.point}';
 				let delivery = '${product.delivery}';
@@ -88,9 +90,7 @@
 							
 							console.log('here6');
 							
-							var confirm = confirm('장바구니로 이동하시겠습니까?');
-							
-							if (confirm){
+							if (confirm("장바구니로 이동하시겠습니까?")){
 								console.log('here7');
 								location.href = '/Kmarket/product/cart.do?cate1='+cate1+'&cate2='+cate2;
 							}
