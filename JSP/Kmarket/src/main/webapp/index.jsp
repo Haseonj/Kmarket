@@ -76,10 +76,10 @@
                         <li><a href="#">할인상품</a></li>
                     </ul>
                     <ul>
-                        <li><a href="#">공지사항</a></li>
-                        <li><a href="#">자주묻는질문</a></li>
-                        <li><a href="#">문의하기</a></li>
-                        <li><a href="#">고객센터</a></li>
+                        <li><a href="/Kmarket/cs/board/list.do?group=notice&cate=all&type=list">공지사항</a></li>
+                        <li><a href="/Kmarket/cs/board/list.do?group=faq&cate=user&type=list">자주묻는질문</a></li>
+                        <li><a href="/Kmarket/cs/board/list.do?group=qna&cate=user&type=list">문의하기</a></li>
+                        <li><a href="/Kmarket/cs/index.do?">고객센터</a></li>
                     </ul>
                 </div>
             </div>

@@ -1,7 +1,6 @@
 package kr.co.kmarket.controller.cs;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -11,7 +10,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.google.gson.Gson;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import kr.co.kmarket.service.BoardService;
 import kr.co.kmarket.vo.CateVO;
@@ -21,6 +21,7 @@ public class WriteController extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
 	private BoardService service = BoardService.INSTANCE;
+	private Logger logger = LoggerFactory.getLogger(this.getClass());
 	
 	@Override
 	public void init() throws ServletException {
@@ -45,16 +46,15 @@ public class WriteController extends HttpServlet {
 	
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		String cate1 = req.getParameter("cate1");
+		String uid = req.getParameter("uid");
+		String cate1 = req.getParameter("type1");
+		String cate2 = req.getParameter("type2");
+		String title = req.getParameter("title");
+		String content = req.getParameter("content");
+		String regip = req.getRemoteAddr();
 		
-		List<CateVO> cate2 = service.selectCate2(cate1);
 		
-		Gson gson = new Gson();
-		resp.setContentType("application/json;charset=UTF-8");
-		String jsonData = gson.toJson(cate2);
 		
-		PrintWriter writer = resp.getWriter();
-		writer.print(jsonData.toString());
 	}
 
 }

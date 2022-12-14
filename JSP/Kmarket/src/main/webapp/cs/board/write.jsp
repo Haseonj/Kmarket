@@ -4,78 +4,119 @@
 <jsp:include page="./_${group}.jsp"/>
 <script>
 	$(function(){
-		$('select[name=type1]').change(function(){
-			let cate1 = $('select[name=type1] > option:selected').val();
-			console.log("cate1 : " + cate1);
-			let cate2;
-			/*
-			let user = ['가입','탈퇴','회원정보','로그인'];
-			let event = ['쿠폰/할인혜택','포인트','제휴','이벤트'];
-			let order = ['상품','결제','구매내역','영수증/증빙'];
-			let shipping = ['배송상태/기간','배송정보확인/변경','해외배송','당일배송','해외직구'];
-			let cancel = ['반품신청/철회','반품정보확인/변경','교환 AS신청/철회','교환정보확인/변경','취소신청/철회','취소확인/환불정보'];
-			let travel = ['여행/숙박','항공'];
-			let safe = ['서비스 이용규칙 위반','지식재산권침해','법령 및 정책위반 상품','게시물 정책위반','직거래/외부거래유도','표시광고','청소년 위해상품/이미지'];
+		let isCate1Ok = false;
+		let isCate2Ok = false;
+		let isTitleOk = false;
+		let isContentOk = false;
+		
+		$('input[name=title]').focusout(function(){
 			
-			if(cate1 == '1'){
-				cate2 = user;
-			}else if(cate1 == '2'){
-				cate2 = event;
-			}else if(cate1 == '3'){
-				cate2 = order;
-			}else if(cate1 == '4'){
-				cate2 = shipping;
-			}else if(cate1 == '5'){
-				cate2 = cancel;
-			}else if(cate1 == '6'){
-				cate2 = travel;
+			let title = $('input[name=title]').val();
+			
+			if(title == ''){
+				isTitleOk = false;
 			}else{
-				cate2 = safe; 
+				isTitleOk = true;
 			}
+		});
+		
+		$('textarea[name=content]').focusout(function(){
 			
-			$('select[name=type2]').show();
-			$('select[name=type2]').empty();
+			let content = $('textarea[name=content]').val();
 			
-			for(let i = 0; i < cate2.length; i++){
-				html = $("<option value="+[i]+">"+cate2[i]+"</option>");
-				$('select[name=type2]').append(html);
+			if(content == ''){
+				isContentOk = false;
+			}else{
+				isContentOk = true;
 			}
-			*/
+		});
+		
+		$('select[name=type1]').change(function(){
+			
+			let cate1 = $('select[name=type1] > option:selected').val();
+			let cate2;
 			
 			$.ajax({
-				url: '/Kmarket/cs/board/write.do',
-				method: 'post',
-				type: {'cate1': cate1},
+				url: '/Kmarket/cs/board/category.do',
+				method: 'get',
+				data: {'cate1': cate1},
 				dataType: 'json',
 				success: function(data){
-					$('select[name=type2]').show();
 					$('select[name=type2]').empty();
-
-					console.log(data);
-					for(let cate2 of data){
-						let html = $("<option value="+data.cate2+">"+data.c2Name+"</option>");
+					let html;
+					
+					if(data == ""){
+						html = $("<option value="+0+">상세유형 선택</option>");
 						$('select[name=type2]').append(html);
 					}
+
+					for(cate2 of data){
+						html = $("<option value="+cate2.cate2+">"+cate2.c2Name+"</option>");
+						$('select[name=type2]').append(html);
+					}
+					
+					cate2 = $('select[name=type2] > option:selected').val();
+					
 				}
+				
+				
 			});
+			
+			if(cate1 == '0'){
+				isCate1Ok = false;
+			}else{
+				isCate1Ok = true;
+			}
+			
+			if(cate2 == '0'){
+				isCate2Ok = false;
+			}else{
+				isCate2Ok = true;
+			}
+		});
+		
+		
+		$('article > form').submit(function(){
+			
+			if(!isCate1Ok){
+				alert('문의 유형을 선택해 주십시오.');
+				return false;
+			}
+			
+			if(!isCate2Ok){
+				alert('상세 유형을 선택해 주십시오.');
+				return false;
+			}
+			
+			if(!isTitleOk){
+				alert('제목을 작성해 주십시오.');
+				return false;
+			}
+			
+			if(!isContentOk){
+				alert('내용을 작성해 주십시오.');
+				return false;
+			}
+			
+			return true;
+			
 		});
 	});
 </script>
-            <article>
-                <form action="#">
+                <form action="/Kmarket/cs/board/write.do" method="post">
                     <table>
                         <tbody>
                             <tr>
                                 <td>문의유형</td>
                                 <td>
                                     <select name="type1">
-                                        <option value="0">선택</option>
+                                        <option value="0">문의유형 선택</option>
                                         <c:forEach var="cate1" items="${cate1}">
                                         <option value="${cate1.cate1}">${cate1.c1Name}</option>
                                         </c:forEach>
                                     </select>
-                                    <select name="type2" style="display: none;">
-                                		<option value="0">선택</option>
+                                    <select name="type2">
+                                		<option value="0">상세유형 선택</option>
                                 	</select>
                                 </td>
                             </tr>

@@ -45,6 +45,8 @@ public class ProductGoCartController extends HttpServlet{
 		String delivery = req.getParameter("delivery");
 		String total = req.getParameter("total");
 		
+		logger.info("prodCart uid : " + uid);
+		
 		CartVO vo =	new CartVO();
 		vo.setUid(uid);
 		vo.setProdNo(prodNo);

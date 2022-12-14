@@ -54,7 +54,9 @@
 				let cate2 = '${vo.cate2}';
 				let prodNo = '${product.prodNo}';
 				let price = '${disprice}';
-				let uid = '${sessMember.uid};';
+
+				let uid = '${sessMember.uid}'
+
 				let discount = '${product.discount}';
 				let point = '${product.point}';
 				let delivery = '${product.delivery}';
