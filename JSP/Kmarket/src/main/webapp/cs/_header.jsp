@@ -14,8 +14,8 @@
             <div class="top">
                 <div>
                     <p>
-                        <a href="#">로그인</a>
-                        <a href="#">회원가입</a>
+                        <a href="/Kmarket/member/login.do">로그인</a>
+                        <a href="/Kmarket/member/join.do">회원가입</a>
                         <a href="#">마이페이지</a>
                         <a href="#">
                             <i class="fa fa-shopping-cart" aria-hidden="true"></i>
