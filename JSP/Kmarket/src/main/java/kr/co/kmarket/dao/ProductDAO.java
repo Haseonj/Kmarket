@@ -549,6 +549,7 @@ public class ProductDAO extends DBHelper {
 			conn = getConnection();
 			psmt = conn.prepareStatement(ProductSql.INSERT_CART);
 			psmt.setString(1, vo.getUid());
+			logger.info("insertCart... uid : " + vo.getUid());
 			psmt.setInt(2, vo.getProdNo());
 			psmt.setInt(3, vo.getCount());
 			psmt.setInt(4, vo.getPrice());
