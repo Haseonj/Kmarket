@@ -22,8 +22,8 @@ public class BoardDAO extends DBHelper {
 			psmt = conn.prepareStatement(BoardSql.INSERT_ARTICLE);
 			psmt.setString(1, vo.getUid());
 			psmt.setString(2, vo.getGroup());
-			psmt.setString(3, vo.getCate1());
-			psmt.setInt(4, vo.getCate2());
+			psmt.setString(3, vo.getC1Name());
+			psmt.setString(4, vo.getCate2());
 			psmt.setString(5, vo.getTitle());
 			psmt.setString(6, vo.getContent());
 			psmt.setString(7, vo.getRegip());
@@ -50,13 +50,12 @@ public class BoardDAO extends DBHelper {
 				vo.setNo(rs.getInt(1));
 				vo.setUid(rs.getString(2));
 				vo.setGroup(rs.getString(3));
-				vo.setCate1(rs.getString(4));
-				vo.setCate2(rs.getInt(5));
+				vo.setC1Name(rs.getString(4));
+				vo.setCate2(rs.getString(5));
 				vo.setTitle(rs.getString(6));
 				vo.setContent(rs.getString(7));
 				vo.setRegip(rs.getString(8));
 				vo.setRdate(rs.getString(9));
-				vo.setC2Name(rs.getString(10));
 				articles.add(vo);
 			}
 			close();
@@ -121,9 +120,9 @@ public class BoardDAO extends DBHelper {
 			
 			while(rs.next()) {
 				BoardVO vo = new BoardVO();
-				vo.setCate1(rs.getString(1));
-				vo.setCate2(rs.getInt(2));
-				vo.setC2Name(rs.getString(3));
+				vo.setC1Name(rs.getString(1));
+				vo.setCate1(rs.getString(2));
+				vo.setCate2(rs.getString(3));
 				cate2.add(vo);
 			}
 			close();
