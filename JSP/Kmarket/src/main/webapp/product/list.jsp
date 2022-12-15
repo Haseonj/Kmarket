@@ -32,13 +32,11 @@
                     <ul>
                     	<c:choose>
                     		<c:when test="${product.discount gt 0}">
-                    			<c:forEach var="i" begin="1" end="${products.size()}">
-                    				<li><ins class="dis-price">${disprice[i]}</ins></li>
-			                        <li>
-			                            <del class="org-price">${product.price}</del>
-			                            <span class="discount">${product.discount}%</span>
-			                        </li>
-                    			</c:forEach>
+                   				<li><ins class="dis-price">${product.saleprice}</ins></li>
+		                        <li>
+		                            <del class="org-price">${product.price}</del>
+		                            <span class="discount">${product.discount}%</span>
+		                        </li>
                     		</c:when>
                     		<c:otherwise>
 		                        <li>

@@ -33,6 +33,7 @@ public class ProductVO {
 	private String etc3;
 	private String etc4;
 	private String etc5;
+	private int saleprice;
 	public int getProdNo() {
 		return prodNo;
 	}
@@ -245,6 +246,12 @@ public class ProductVO {
 	}
 	public void setEtc5(String etc5) {
 		this.etc5 = etc5;
+	}
+	public int getSaleprice() {
+		return saleprice;
+	}
+	public void setSaleprice(int saleprice) {
+		this.saleprice = saleprice;
 	}
 	
 	

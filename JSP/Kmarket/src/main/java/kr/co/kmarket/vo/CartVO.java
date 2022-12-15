@@ -17,6 +17,12 @@ public class CartVO {
 	private String seller;
 	private String thumb1;
 	private int disprice;
+	private int totalCount;
+	private int totalPrice;
+	private int totalDiscount;
+	private int totalDelivery;
+	private int totalPoint;
+	private int totalSalePrice;
 	public int getCartNo() {
 		return cartNo;
 	}
@@ -133,6 +139,42 @@ public class CartVO {
 	}
 	public void setDisprice(int disprice) {
 		this.disprice = disprice;
+	}
+	public int getTotalCount() {
+		return totalCount;
+	}
+	public void setTotalCount(int totalCount) {
+		this.totalCount = totalCount;
+	}
+	public int getTotalPrice() {
+		return totalPrice;
+	}
+	public void setTotalPrice(int totalPrice) {
+		this.totalPrice = totalPrice;
+	}
+	public int getTotalDiscount() {
+		return totalDiscount;
+	}
+	public void setTotalDiscount(int totalDiscount) {
+		this.totalDiscount = totalDiscount;
+	}
+	public int getTotalDelivery() {
+		return totalDelivery;
+	}
+	public void setTotalDelivery(int totalDelivery) {
+		this.totalDelivery = totalDelivery;
+	}
+	public int getTotalPoint() {
+		return totalPoint;
+	}
+	public void setTotalPoint(int totalPoint) {
+		this.totalPoint = totalPoint;
+	}
+	public int getTotalSalePrice() {
+		return totalSalePrice;
+	}
+	public void setTotalSalePrice(int totalSalePrice) {
+		this.totalSalePrice = totalSalePrice;
 	}
 	
 	
