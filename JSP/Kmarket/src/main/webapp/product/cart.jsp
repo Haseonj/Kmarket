@@ -48,21 +48,34 @@
 			// 상품수 계산
 			var checked  = $(this).is(':checked');
 			let counttotal = Number($('#totalCount').text());
+			let pricetotal = Number($('#totalPrice').text());
+			let discounttotal = Number($('#totalDiscount').text());
+			
 			let count  = Number($(this).parents('tr').find('#count').text());			
 			console.log('count : ' + count);
+			let price  = Number($(this).parents('tr').find('#price').text());
+			console.log('price : '+price);
+			let discount  = Number($(this).parents('tr').find('#discount').text());
+			console.log('discount : '+discount);
 			
 			if(checked){
 				// 체크했을 때
-				counttotal = counttotal + count;				
+				counttotal = counttotal + count;
+				pricetotal = pricetotal + price;
+				discounttotal = discounttotal + (price * discount/100);
 				console.log('1.counttotal : ' + counttotal);
-				$('#totalCount').text(counttotal);
+				
 			}else{
 				// 체크해제 했을때
 				counttotal = counttotal - count;
+				pricetotal = pricetotal - price;
+				discounttotal = discounttotal - (price * discount/100);
 				console.log('2.counttotal : ' + counttotal);
-				$('#totalCount').text(counttotal);
+				
 			}
-			
+			$('#totalCount').text(counttotal);
+			$('#totalPrice').text(pricetotal);
+			$('#totalDiscount').text(discounttotal);
 			
 			// 상품금액 계산
 			// 할인금액 계산
@@ -119,7 +132,7 @@
 	              </td>
 	              <td id="count">${cart.count}</td>
 	              <td id="price">${cart.price}</td>
-	              <td id="discount">${cart.discount}%</td>
+	              <td id="discount">${cart.discount}</td>
 	              <td id="point">${cart.point}</td>
 	              <c:choose>
 	              	 <c:when test="${cart.delivery eq 0}">
