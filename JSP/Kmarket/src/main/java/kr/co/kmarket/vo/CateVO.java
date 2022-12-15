@@ -13,6 +13,9 @@ public class CateVO {
 	public void setCate1(int cate1) {
 		this.cate1 = cate1;
 	}
+	public void setCate1(String cate1) {
+		this.cate1 = Integer.parseInt(cate1);
+	}
 	public String getC1Name() {
 		return c1Name;
 	}

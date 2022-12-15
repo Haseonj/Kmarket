@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.google.gson.Gson;
 
 import kr.co.kmarket.service.BoardService;
+import kr.co.kmarket.vo.BoardVO;
 import kr.co.kmarket.vo.CateVO;
 
 @WebServlet("/cs/board/category.do")
@@ -29,7 +30,7 @@ public class CategoryController extends HttpServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		String cate1 = req.getParameter("cate1");
 		
-		List<CateVO> cate2 = service.selectCate2(cate1);
+		List<BoardVO> cate2 = service.selectCate2(cate1);
 		
 		Gson gson = new Gson();
 		resp.setContentType("application/json;charset=UTF-8");

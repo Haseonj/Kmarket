@@ -14,6 +14,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import kr.co.kmarket.service.BoardService;
+import kr.co.kmarket.vo.BoardVO;
 import kr.co.kmarket.vo.CateVO;
 
 @WebServlet("/cs/board/write.do")
@@ -33,7 +34,7 @@ public class WriteController extends HttpServlet {
 		String cate = req.getParameter("cate");
 		String type = req.getParameter("type");
 		
-		List<CateVO> cate1 = service.selectCate1();
+		List<BoardVO> cate1 = service.selectCate1();
 		
 		req.setAttribute("group", group);
 		req.setAttribute("cate", cate);
@@ -47,14 +48,27 @@ public class WriteController extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		String uid = req.getParameter("uid");
+		String group = req.getParameter("group");
 		String cate1 = req.getParameter("type1");
 		String cate2 = req.getParameter("type2");
 		String title = req.getParameter("title");
 		String content = req.getParameter("content");
 		String regip = req.getRemoteAddr();
 		
+		BoardVO vo = new BoardVO();
+		vo.setUid(uid);
+		vo.setGroup(group);
+		vo.setCate1(cate1);
+		vo.setCate2(cate2);
+		vo.setTitle(title);
+		vo.setContent(content);
+		vo.setRegip(regip);
+		
+		service.insertArticle(vo);
 		
 		
+		resp.sendRedirect("/Kmarket/cs/board/list.do?group=qna&cate="+cate1+"&type=list");
+
 	}
 
 }

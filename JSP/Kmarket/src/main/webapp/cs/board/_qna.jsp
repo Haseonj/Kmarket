@@ -35,7 +35,7 @@
                 <nav>
                 <c:if test="${cate eq 'user'}">
                     <h1>회원</h1>
-                    <h2>가장 자주 묻는 질문입니다.</h2>
+                    <h2>회원관련 문의 내용입니다.</h2>
 				</c:if>
                 <c:if test="${cate eq 'event'}">
                     <h1>쿠폰/이벤트</h1>

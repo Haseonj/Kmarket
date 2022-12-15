@@ -104,6 +104,8 @@
 	});
 </script>
                 <form action="/Kmarket/cs/board/write.do" method="post">
+                <input type="hidden" name="uid" value="${sessMember.uid}">
+                <input type="hidden" name="group" value="qna">
                     <table>
                         <tbody>
                             <tr>
