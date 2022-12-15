@@ -17,7 +17,9 @@ public enum MemberService {
 	private MemberService() {
 		dao = new MemberDAO();
 }
-	
+	public void insertSellerMember(MemberVO vo) {
+		dao.insertSellerMember(vo);
+	}
 	public void insertMember(MemberVO vo) {
 		dao.insertMember(vo);
 	}
@@ -29,5 +31,8 @@ public enum MemberService {
 	}
 	public int selectCountUid(String uid) {
 		return dao.selectCountUid(uid);
+	}
+	public void updateUserForSessionOut(String uid) {
+		dao.updateUserForSessionOut(uid);
 	}
 }

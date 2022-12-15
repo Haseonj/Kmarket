@@ -34,6 +34,33 @@ public class MemberDAO extends DBHelper{
 			logger.error(e.getMessage());
 		}
 	}
+	public void insertSellerMember(MemberVO vo) {
+		try {
+			logger.info("insertSellerMember...");
+			
+			conn= getConnection();
+			psmt = conn.prepareStatement(MemberSql.INSERT_SELLER_MEMBER);
+			psmt.setString(1, vo.getUid());
+			psmt.setString(2, vo.getPass());
+			psmt.setString(3, vo.getCompany());
+			psmt.setString(4, vo.getCeo());
+			psmt.setString(5, vo.getBizRegNum());
+			psmt.setString(6, vo.getComRegNum());
+			psmt.setString(7, vo.getTel());
+			psmt.setString(8, vo.getHp());
+			psmt.setString(9, vo.getFax());
+			psmt.setString(10, vo.getEmail());
+			psmt.setString(11, vo.getZip());
+			psmt.setString(12, vo.getAddr1());
+			psmt.setString(13, vo.getAddr2());
+			psmt.setString(14, vo.getName());
+			psmt.setString(15, vo.getRegip());
+			psmt.executeUpdate();
+			close();
+		}catch(Exception e) {
+			logger.error(e.getMessage());
+		}
+	}
 	public MemberVO selectMember(String uid, String pass) {
 		
 		MemberVO vo =null;
@@ -134,5 +161,17 @@ public class MemberDAO extends DBHelper{
 		logger.debug("result : " + result);
 		
 		return result;
+	}
+	public void updateUserForSessionOut(String uid) {
+		try {
+			logger.info("updateUserForSessionOut...");
+			conn = getConnection();
+			psmt = conn.prepareStatement(MemberSql.UPDATE_USER_FOR_SESSION_OUT);
+			psmt.setString(1, uid);
+			psmt.executeUpdate();
+			close();
+		}catch (Exception e) {
+			logger.error(e.getMessage());
+		}
 	}
 }

@@ -82,7 +82,7 @@
       <nav>
         <h1>장바구니</h1>
         <p>
-          HOME > <span>${vo.c1Name}</span> > <strong>장바구니</strong>
+          HOME > <span>${sessMember.uid}</span> > <strong>장바구니</strong>
         </p>
       </nav>
                     
