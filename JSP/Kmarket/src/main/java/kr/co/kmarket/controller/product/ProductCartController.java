@@ -46,6 +46,7 @@ public class ProductCartController extends HttpServlet{
 		CateVO cate = service.selectProdCates(prodCate1, prodCate2);
 		List<CartVO> carts = service.selectCarts(uid);
 		
+		
 		logger.debug("here3");
 		req.setAttribute("cate", cate);
 		req.setAttribute("carts", carts);

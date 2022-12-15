@@ -11,6 +11,12 @@ public class CartVO {
 	private int delivery;
 	private int total;
 	private String rdate;
+	private String prodName;
+	private String descript;
+	private String company;
+	private String seller;
+	private String thumb1;
+	private int disprice;
 	public int getCartNo() {
 		return cartNo;
 	}
@@ -91,6 +97,42 @@ public class CartVO {
 	}
 	public void setRdate(String rdate) {
 		this.rdate = rdate;
+	}
+	public String getProdName() {
+		return prodName;
+	}
+	public void setProdName(String prodName) {
+		this.prodName = prodName;
+	}
+	public String getDescript() {
+		return descript;
+	}
+	public void setDescript(String descript) {
+		this.descript = descript;
+	}
+	public String getCompany() {
+		return company;
+	}
+	public void setCompany(String company) {
+		this.company = company;
+	}
+	public String getSeller() {
+		return seller;
+	}
+	public void setSeller(String seller) {
+		this.seller = seller;
+	}
+	public String getThumb1() {
+		return thumb1;
+	}
+	public void setThumb1(String thumb1) {
+		this.thumb1 = thumb1;
+	}
+	public int getDisprice() {
+		return disprice;
+	}
+	public void setDisprice(int disprice) {
+		this.disprice = disprice;
 	}
 	
 	
