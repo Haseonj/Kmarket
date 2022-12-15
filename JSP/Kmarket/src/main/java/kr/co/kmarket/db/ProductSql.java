@@ -10,7 +10,10 @@ public class ProductSql {
 												+ "`thumb2`=?,`thumb3`=?, `detail`=?, "
 												+ "`ip`=?, `rdate`=NOW()";
 	public static final String SELECT_PRODUCT = "select * from `km_product` where `prodNo`=?";
-	public static final String SELECT_PRODUCTS = "select * from `km_product` where `prodCate1`=? and `prodCate2`=? limit 10";
+	public static final String SELECT_PRODUCTS = "SELECT "
+												+ "	a.*, "
+												+ "	FLOOR(`price` * (1 - `discount` / 100)) AS `salePrice` "
+												+ "from `km_product` AS a where `prodCate1`=? and `prodCate2`=? limit 10;";
 	public static final String SELECT_PRODCATE1 = "select * from `km_product_cate1`";
 	public static final String SELECT_PRODCATE2 = "select * from `km_product_cate2` where `cate1`=?";
 	public static final String SELECT_PRODCATES = "SELECT * FROM `km_product_cate1` AS a "
@@ -27,5 +30,19 @@ public class ProductSql {
 	// cart
 	public static final String INSERT_CART = "insert into `km_product_cart` set "
 											+ "`uid`=?, `prodNo`=?, `count`=?, `price`=?, `discount`=?, `point`=?, `delivery`=?, `total`=?, `rdate`=NOW()";
-	public static final String SELECT_CARTS = "select a.*, b.prodName, b.descript, b.company, b.seller, b.thumb1 from `km_product_cart` as a join `km_product` as b on a.prodNo = b.prodNo where `uid`=?";
+	public static final String SELECT_CARTS = "SELECT a.*, b.prodName, b.descript, b.company, b.seller, b.thumb1, "
+												+ "FLOOR(a.price * (1 - a.discount / 100)) AS `salePrice` "
+												+ "from `km_product_cart` AS a "
+												+ "JOIN `km_product` AS b ON a.prodNo = b.prodNo "
+												+ "where `uid`=?";
+	public static final String SELECT_TOTAL_CARTS = "SELECT SUM(`count`) AS `totalCount`, "
+													+ "SUM(`price`) AS `totalPrice`, "
+													+ "SUM(FLOOR(`price` * `discount` / 100)) AS `totalDiscount`, "
+													+ "SUM(`delivery`) AS `totalDelivery`, "
+													+ "SUM(`point`) AS `totalPoint`, "
+													+ "SUM(FLOOR(`price` * (1 - `discount` / 100))) AS `totalSalePrice` "
+													+ "from `km_product_cart` "
+													+ "where `uid`=? and `prodNo`=?";
+	public static final String DELETE_CART_LIST = "delete from `km_product_cart` where `uid`=? and `prodNo`=?";
+			
 }

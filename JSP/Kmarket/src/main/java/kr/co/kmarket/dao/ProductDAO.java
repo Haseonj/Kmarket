@@ -89,6 +89,7 @@ public class ProductDAO extends DBHelper {
 				product.setEtc3(rs.getString(30));
 				product.setEtc4(rs.getString(31));
 				product.setEtc5(rs.getString(32));
+				product.setSaleprice(rs.getInt(33));
 				
 				products.add(product);
 			}
@@ -601,5 +602,48 @@ public class ProductDAO extends DBHelper {
 			logger.error(e.getMessage());
 		}
 		return carts;
+	}
+	public CartVO selectTotalCarts(String uid, String prodNo) {
+		CartVO totalcart = null;
+		try {
+			logger.info("selectTotalCarts...");
+			conn = getConnection();
+			psmt = conn.prepareStatement(ProductSql.SELECT_TOTAL_CARTS);
+			psmt.setString(1, uid);
+			psmt.setString(2, prodNo);
+			
+			rs = psmt.executeQuery();
+			while(rs.next()) {
+				totalcart = new CartVO();
+				totalcart.setTotalCount(rs.getInt(1));
+				totalcart.setTotalPrice(rs.getInt(2));
+				totalcart.setTotalDiscount(rs.getInt(3));
+				totalcart.setTotalDelivery(rs.getInt(4));
+				totalcart.setTotalPoint(rs.getInt(5));
+				totalcart.setTotalSalePrice(rs.getInt(6));
+			}
+			
+			close();
+		}catch(Exception e) {
+			logger.error(e.getMessage());
+		}
+		return totalcart;
+	}
+	public int deleteCartList(String uid, String prodNo) {
+		int result = 0;
+		try {
+			logger.info("deleteCartList...");
+			conn = getConnection();
+			psmt = conn.prepareStatement(ProductSql.DELETE_CART_LIST);
+			psmt.setString(1, uid);
+			psmt.setString(2, prodNo);
+			
+			result = psmt.executeUpdate();
+			
+			close();
+		}catch(Exception e) {
+			logger.error(e.getMessage());
+		}
+		return result;
 	}
 }

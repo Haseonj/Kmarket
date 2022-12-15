@@ -66,15 +66,6 @@ public class ProductListController extends HttpServlet{
 		
 		logger.debug("here8");
 		
-		int[] disprice = new int[]{};
-		
-		for(int i=1; i<=products.size(); i++) {
-			ProductVO product = products.get(i);
-			int oriprice = product.getPrice();
-			disprice[i-1] = (int) (oriprice * (100-product.getDiscount()) * 0.01);
-			req.setAttribute("disprice["+i+"]", disprice[i-1]);
-		}
-		
 		req.setAttribute("products", products);
 		req.setAttribute("vo", vo);
 		req.setAttribute("pg", pg);

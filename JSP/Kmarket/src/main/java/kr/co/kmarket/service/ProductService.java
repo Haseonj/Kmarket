@@ -86,6 +86,14 @@ public enum ProductService {
 		logger.info("ProductService...selectCarts...");
 		return dao.selectCarts(uid);
 	}
+	public CartVO selectTotalCarts(String uid, String prodNo) {
+		logger.info("ProductService...selectTotalCarts...");
+		return dao.selectTotalCarts(uid, prodNo);
+	}
+	public int deleteCartList(String uid, String prodNo) {
+		logger.info("ProductService...deleteCartList...");
+		return dao.deleteCartList(uid, prodNo);
+	}
 	
 	// 서비스 로직
 	public String getSavePath(HttpServletRequest req) {
