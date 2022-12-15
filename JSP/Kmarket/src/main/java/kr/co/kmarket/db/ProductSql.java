@@ -27,5 +27,5 @@ public class ProductSql {
 	// cart
 	public static final String INSERT_CART = "insert into `km_product_cart` set "
 											+ "`uid`=?, `prodNo`=?, `count`=?, `price`=?, `discount`=?, `point`=?, `delivery`=?, `total`=?, `rdate`=NOW()";
-	public static final String SELECT_CARTS = "select * from `km_product_cart` where `uid`=?";
+	public static final String SELECT_CARTS = "select a.*, b.prodName, b.descript, b.company, b.seller, b.thumb1 from `km_product_cart` as a join `km_product` as b on a.prodNo = b.prodNo where `uid`=?";
 }

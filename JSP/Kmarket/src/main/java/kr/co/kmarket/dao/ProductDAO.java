@@ -587,6 +587,11 @@ public class ProductDAO extends DBHelper {
 				cart.setDelivery(rs.getInt(8));
 				cart.setTotal(rs.getInt(9));
 				cart.setRdate(rs.getString(10));
+				cart.setProdName(rs.getString(11));
+				cart.setDescript(rs.getString(12));
+				cart.setCompany(rs.getString(13));
+				cart.setSeller(rs.getString(14));
+				cart.setThumb1(rs.getString(15));
 				
 				carts.add(cart);
 			}

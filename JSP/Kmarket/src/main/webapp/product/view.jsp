@@ -53,7 +53,7 @@
 				let cate1 = '${vo.cate1}';
 				let cate2 = '${vo.cate2}';
 				let prodNo = '${product.prodNo}';
-				let price = '${disprice}';
+				let price = '${product.price}';
 
 				let uid = '${sessMember.uid}'
 

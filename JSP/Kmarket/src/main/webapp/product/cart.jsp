@@ -32,24 +32,24 @@
             <tr class="empty">
               <td colspan="7">장바구니에 상품이 없습니다.</td>
             </tr>
-            <c:forEach var="productlist" items="${productlist}">
+            <c:forEach var="cart" items="${carts}">
             	<tr>
 	              <td><input type="checkbox" name=""></td>
 	              <td>
 	                <article>
-	                  <a href="#"><img src="http://3.39.231.136:8080/Kmarket/file/${productlist.thumb1}" alt=""></a>
+	                  <a href="#"><img src="http://3.39.231.136:8080/Kmarket/file/${cart.thumb1}" alt=""></a>
 	                  <div>
-	                    <h2><a href="#">${productlist.prodName}</a></h2>
-	                    <p>${productlist.descript}</p>
+	                    <h2><a href="#">${cart.prodName}</a></h2>
+	                    <p>${cart.descript}</p>
 	                  </div>
 	                </article>
 	              </td>
-	              <td>1</td>
-	              <td>27,000</td>
-	              <td>${productlist.discount}%</td>
-	              <td>270</td>
+	              <td>${cart.count}</td>
+	              <td>${cart.price}</td>
+	              <td>${cart.discount}%</td>
+	              <td>${cart.point}</td>
 	              <td>무료배송</td>
-	              <td>27,000</td>
+	              <td>${cart.total}</td>
 	            </tr>
             </c:forEach>
           </tbody>
