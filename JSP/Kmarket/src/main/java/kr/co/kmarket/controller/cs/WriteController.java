@@ -58,7 +58,7 @@ public class WriteController extends HttpServlet {
 		BoardVO vo = new BoardVO();
 		vo.setUid(uid);
 		vo.setGroup(group);
-		vo.setCate1(cate1);
+		vo.setC1Name(cate1);
 		vo.setCate2(cate2);
 		vo.setTitle(title);
 		vo.setContent(content);

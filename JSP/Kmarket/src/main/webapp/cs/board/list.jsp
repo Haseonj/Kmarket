@@ -7,7 +7,7 @@
                     <tbody>
                     <c:forEach var="articles" items="${articles}">
                         <tr>
-                            <td><a href="/Kmarket/cs/board/view.do?group=${group}&cate=${cate}&type=view">[${articles.c2Name}] ${articles.title}</a></td>
+                            <td><a href="/Kmarket/cs/board/view.do?group=${group}&cate=${cate}&type=view">[${articles.cate2}] ${articles.title}</a></td>
                             <td>${articles.uid}</td>
                             <td>${articles.rdate.substring(2, 10)}</td>
                         </tr>

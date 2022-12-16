@@ -51,7 +51,7 @@
 					}
 
 					for(cate2 of data){
-						html = $("<option value="+cate2.cate2+">"+cate2.c2Name+"</option>");
+						html = $("<option>"+cate2.cate2+"</option>");
 						$('select[name=type2]').append(html);
 					}
 					
@@ -114,7 +114,7 @@
                                     <select name="type1">
                                         <option value="0">문의유형 선택</option>
                                         <c:forEach var="cate1" items="${cate1}">
-                                        <option value="${cate1.cate1}">${cate1.c1Name}</option>
+                                        <option value="${cate1.c1Name}">${cate1.cate1}</option>
                                         </c:forEach>
                                     </select>
                                     <select name="type2">
