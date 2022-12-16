@@ -12,16 +12,19 @@
 	}
 
 	$(function(){
+		
+		let pricenum = Number($('input[name=num]').val());
+		
 		$('.decrease').click(function(){
 			$('.total > span').empty();
-			let pricenum = Number($('input[name=num]').val()) - 1;
+			pricenum = Number($('input[name=num]').val()) - 1;
 			$('input[name=num]').attr("value", pricenum);
 			let price = pricenum * '${disprice}';
 			$('.total > span').append(price);
 		});
 		$('.increase').click(function(){
 			$('.total > span').empty();
-			let pricenum = Number($('input[name=num]').val()) + 1;
+			pricenum = Number($('input[name=num]').val()) + 1;
 			$('input[name=num]').attr("value", pricenum);
 			
 			let price = pricenum * '${disprice}';
@@ -36,6 +39,82 @@
 		const dateStr = '모레('+ getTodayLabel() +') ' + month + '/' + day + ' 도착예정';
 
 		$('.arrival').append(dateStr);
+		
+		
+		$(document).on('click', '.cart', function(){
+			
+			let uid = '${sessMember.uid}';
+			console.log('here1 : ' + uid);
+			
+			
+			if(uid == ''){
+				alert('로그인 후 이용 가능합니다.');
+			}else{
+				let cate1 = '${vo.cate1}';
+				let cate2 = '${vo.cate2}';
+				let prodNo = '${product.prodNo}';
+				let price = '${product.price}';
+
+				let uid = '${sessMember.uid}'
+
+				let discount = '${product.discount}';
+				let point = '${product.point}';
+				let delivery = '${product.delivery}';
+				let total = pricenum * '${disprice}';
+				
+				console.log('here2 : ' + cate1);
+				console.log('here3 : ' + cate2);
+				console.log('here4 : ' + prodNo);
+				
+				let jsonData = {
+					"uid":uid,
+					"prodNo":prodNo,
+					"count":pricenum,
+					"price":price,
+					"discount":discount,
+					"point":point,
+					"delivery":delivery,
+					"total":total,
+				};
+				
+				console.log('here5 : ' + jsonData);
+				
+				
+				$.ajax({
+					url:'/Kmarket/product/gocart.do',
+					method:'post',
+					data:jsonData,
+					dataType:'json',
+					success:function(data){
+						if(data.result > 0){
+							
+							console.log('here6');
+							
+							if (confirm("장바구니로 이동하시겠습니까?")){
+								console.log('here7');
+								location.href = '/Kmarket/product/cart.do?cate1='+cate1+'&cate2='+cate2;
+							}
+							else{
+								console.log('here8');
+							    location.href = '/Kmarket/product/view.do?cate1='+cate1+'&cate2='+cate2+'&prodNo='+prodNo;
+							}
+						}
+					}
+				});
+				
+			}
+			
+		});
+		$(document).on('click', '.order', function(){
+			console.log('here2');
+			
+			let cate1 = '${vo.cate1}';
+			let cate2 = '${vo.cate2}';
+			let prodNo = '${product.prodNo}';
+			
+			location.href = "/Kmarket/product/order.do?cate1="+cate1+"&cate2="+cate2+"&prodNo="+prodNo+"&pricenum="+pricenum;
+			
+		});
 	});
 </script>
     <!--상품 상세페이지 시작-->
@@ -244,7 +323,7 @@
                         <h5 class="rating star4">상품평</h5>
                         <span>seo******	2018-07-10</span>
                     </div>
-                    <h3>상품명1/BLUE/L</h3>
+                    <h3>${product.prodName}</h3>
                     <p>
                         가격대비 정말 괜찮은 옷이라 생각되네요 핏은 음...제가 입기엔 어깨선이 맞고 루즈핏이라 하기도 좀 힘드네요.
                         아주 약간 루즈한정도...?그래도 이만한 옷은 없다고 봅니다 깨끗하고 포장도 괜찮고 다음에도 여기서 판매하는
@@ -256,7 +335,7 @@
                         <h5 class="rating star4">상품평</h5>
                         <span>seo******	2018-07-10</span>
                     </div>
-                    <h3>상품명1/BLUE/L</h3>
+                    <h3>${product.prodName}</h3>
                     <p>
                         가격대비 정말 괜찮은 옷이라 생각되네요 핏은 음...제가 입기엔 어깨선이 맞고 루즈핏이라 하기도 좀 힘드네요.
                         아주 약간 루즈한정도...?그래도 이만한 옷은 없다고 봅니다 깨끗하고 포장도 괜찮고 다음에도 여기서 판매하는
@@ -268,7 +347,7 @@
                         <h5 class="rating star4">상품평</h5>
                         <span>seo******	2018-07-10</span>
                     </div>
-                    <h3>상품명1/BLUE/L</h3>
+                    <h3>${product.prodName}</h3>
                     <p>
                         가격대비 정말 괜찮은 옷이라 생각되네요 핏은 음...제가 입기엔 어깨선이 맞고 루즈핏이라 하기도 좀 힘드네요.
                         아주 약간 루즈한정도...?그래도 이만한 옷은 없다고 봅니다 깨끗하고 포장도 괜찮고 다음에도 여기서 판매하는
@@ -280,7 +359,7 @@
                         <h5 class="rating star4">상품평</h5>
                         <span>seo******	2018-07-10</span>
                     </div>
-                    <h3>상품명1/BLUE/L</h3>
+                    <h3>${product.prodName}</h3>
                     <p>
                         가격대비 정말 괜찮은 옷이라 생각되네요 핏은 음...제가 입기엔 어깨선이 맞고 루즈핏이라 하기도 좀 힘드네요.
                         아주 약간 루즈한정도...?그래도 이만한 옷은 없다고 봅니다 깨끗하고 포장도 괜찮고 다음에도 여기서 판매하는
@@ -292,7 +371,7 @@
                         <h5 class="rating star4">상품평</h5>
                         <span>seo******	2018-07-10</span>
                     </div>
-                    <h3>상품명1/BLUE/L</h3>
+                    <h3>${product.prodName}</h3>
                     <p>
                         가격대비 정말 괜찮은 옷이라 생각되네요 핏은 음...제가 입기엔 어깨선이 맞고 루즈핏이라 하기도 좀 힘드네요.
                         아주 약간 루즈한정도...?그래도 이만한 옷은 없다고 봅니다 깨끗하고 포장도 괜찮고 다음에도 여기서 판매하는

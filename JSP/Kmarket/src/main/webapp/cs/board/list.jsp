@@ -15,62 +15,13 @@
 			<c:if test="${group eq 'qna' or group eq 'notice'}">
                 <table>
                     <tbody>
+                    <c:forEach var="articles" items="${articles}">
                         <tr>
-<<<<<<< Updated upstream
-                            <td><a href="/Kmarket/cs/board/view.do?group=${group}&cate=${cate}&type=view">[가입] 가입 문의내용</a></td>
-                            <td>has*****</td>
-                            <td>2022.12.07</td>
-                        </tr>
-                        <tr>
-                            <td><a href="./view.html">[탈퇴] 탈퇴 문의내용</a></td>
-                            <td>has*****</td>
-                            <td>2022.12.07</td>
-                        </tr>
-                        <tr>
-                            <td><a href="./view.html">[회원정보] 회원정보 문의내용</a></td>
-                            <td>has*****</td>
-                            <td>2022.12.07</td>
-                        </tr>
-                        <tr>
-                            <td><a href="./view.html">[로그인] 회원정보 문의내용</a></td>
-                            <td>has*****</td>
-                            <td>2022.12.07</td>
-                        </tr>
-                        <tr>
-                            <td><a href="./view.html">[로그인] 회원정보 문의내용</a></td>
-                            <td>has*****</td>
-                            <td>2022.12.07</td>
-                        </tr>
-                        <tr>
-                            <td><a href="./view.html">[로그인] 회원정보 문의내용</a></td>
-                            <td>has*****</td>
-                            <td>2022.12.07</td>
-                        </tr>
-                        <tr>
-                            <td><a href="./view.html">[회원정보] 회원정보 문의내용</a></td>
-                            <td>has*****</td>
-                            <td>2022.12.07</td>
-                        </tr>
-                        <tr>
-                            <td><a href="./view.html">[회원정보] 회원정보 문의내용</a></td>
-                            <td>has*****</td>
-                            <td>2022.12.07</td>
-                        </tr>
-                        <tr>
-                            <td><a href="./view.html">[탈퇴] 회원정보 문의내용</a></td>
-                            <td>has*****</td>
-                            <td>2022.12.07</td>
-                        </tr>
-                        <tr>
-                            <td><a href="./view.html">[탈퇴] 회원정보 문의내용</a></td>
-                            <td>has*****</td>
-                            <td>2022.12.07</td>
-=======
                             <td><a href="/Kmarket/cs/board/view.do?group=${group}&cate=${cate}&type=view&no=${articles.no}&pg=${currentPage}">[${articles.cate2}] ${articles.title}</a></td>
                             <td>${articles.uid.substring(0, 5)}<c:forEach begin="6" end="${articles.uid.length()}" step="1">*</c:forEach></td>
                             <td>${articles.rdate.substring(2, 10)}</td>
->>>>>>> Stashed changes
                         </tr>
+                    </c:forEach>
                     </tbody>
                 </table>
                 <div class="page">

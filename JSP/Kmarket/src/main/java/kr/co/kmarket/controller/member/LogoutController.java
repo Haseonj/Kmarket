@@ -2,7 +2,6 @@ package kr.co.kmarket.controller.member;
 
 import java.io.IOException;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.Cookie;
@@ -15,44 +14,38 @@ import kr.co.kmarket.service.MemberService;
 import kr.co.kmarket.vo.MemberVO;
 
 
-@WebServlet("/member/login.do")
-public class LoginController extends HttpServlet {
+@WebServlet("/member/logout.do")
+public class LogoutController extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
 	private MemberService service = MemberService.instance;
-
+	
 	@Override
 	public void init() throws ServletException {
 	}
-	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
-		String success = req.getParameter("success");
-		req.setAttribute("success", success);
+		HttpSession sess = req.getSession();
+		MemberVO sessUser = (MemberVO)sess.getAttribute("sessUser");
+		String uid = sessUser.getUid();
 		
-		RequestDispatcher dispatcher = req.getRequestDispatcher("/member/login.jsp");
-		dispatcher.forward(req, resp);
+		// 세션 해제
+		sess.removeAttribute("sessUser");
+		sess.invalidate();
+
+		/*// 쿠키 삭제
+		Cookie cookie = new Cookie("SESSID", null);
+		cookie.setPath("/");
+		cookie.setMaxAge(0);
+		resp.addCookie(cookie);*/
+		
+		// 데이터베이스 사용자 sessId update
+		service.updateUserForSessionOut(uid);
+		
+		resp.sendRedirect("/Kmarket/member/index.do");
 	}
-	
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		
-		String uid  = req.getParameter("uid");
-		String pass = req.getParameter("pass");
-		//String auto = req.getParameter("auto");
-	
-		MemberVO vo = service.selectMember(uid, pass);
-		
-		if(vo != null) {
-			// 회원이 맞을경우
-			HttpSession sess = req.getSession();
-			sess.setAttribute("sessMember", vo);
-			resp.sendRedirect("/Kmarket/index.do");
-		}else {
-			// 회원이 아닌경우
-			resp.sendRedirect("/Kmarket/member/login.do?success=100");
-		}
-		
 	}
 }

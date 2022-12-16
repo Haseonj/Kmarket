@@ -8,16 +8,13 @@ import org.slf4j.LoggerFactory;
 
 import kr.co.kmarket.db.BoardSql;
 import kr.co.kmarket.db.DBHelper;
+import kr.co.kmarket.vo.BoardVO;
 import kr.co.kmarket.vo.CateVO;
 
 public class BoardDAO extends DBHelper {
 
 	Logger logger = LoggerFactory.getLogger(this.getClass());
 	
-<<<<<<< Updated upstream
-	public List<CateVO> selectCate1() {
-		List<CateVO> cate1 = new ArrayList<>();
-=======
 	public void insertArticle(BoardVO vo) {
 		try {
 			logger.info("insertArticle...");
@@ -153,7 +150,6 @@ public class BoardDAO extends DBHelper {
 	
 	public List<BoardVO> selectCate1() {
 		List<BoardVO> cate1 = new ArrayList<>();
->>>>>>> Stashed changes
 		try {
 			logger.info("selectCate1...");
 			conn = getConnection();
@@ -161,8 +157,8 @@ public class BoardDAO extends DBHelper {
 			rs = stmt.executeQuery(BoardSql.SELECT_CATE1);
 			
 			while(rs.next()) {
-				CateVO vo = new CateVO();
-				vo.setCate1(rs.getInt(1));
+				BoardVO vo = new BoardVO();
+				vo.setCate1(rs.getString(1));
 				vo.setC1Name(rs.getString(2));
 				cate1.add(vo);
 			}
@@ -174,8 +170,8 @@ public class BoardDAO extends DBHelper {
 		return cate1;
 	}
 	
-	public List<CateVO> selectCate2(String cate1) {
-		List<CateVO> cate2 = new ArrayList<>();
+	public List<BoardVO> selectCate2(String cate1) {
+		List<BoardVO> cate2 = new ArrayList<>();
 		try {
 			logger.info("selectCate2...");
 			conn = getConnection();
@@ -184,10 +180,10 @@ public class BoardDAO extends DBHelper {
 			rs = psmt.executeQuery();
 			
 			while(rs.next()) {
-				CateVO vo = new CateVO();
-				vo.setCate1(rs.getInt(1));
-				vo.setCate2(rs.getInt(2));
-				vo.setC2Name(rs.getString(3));
+				BoardVO vo = new BoardVO();
+				vo.setC1Name(rs.getString(1));
+				vo.setCate1(rs.getString(2));
+				vo.setCate2(rs.getString(3));
 				cate2.add(vo);
 			}
 			close();

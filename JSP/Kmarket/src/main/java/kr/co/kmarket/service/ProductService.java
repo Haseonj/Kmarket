@@ -15,6 +15,7 @@ import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
 import kr.co.kmarket.dao.ProductDAO;
+import kr.co.kmarket.vo.CartVO;
 import kr.co.kmarket.vo.CateVO;
 import kr.co.kmarket.vo.ProductVO;
 
@@ -30,9 +31,10 @@ public enum ProductService {
 	}
 	
 	public void insertProduct(ProductVO vo) {
-		logger.info("ProductService...insertProdcut...");
+		logger.info("ProductService...insertProduct...");
 		dao.insertProduct(vo);
 	}
+	
 	public List<ProductVO> selectProducts(String prodCate1, String prodCate2) {
 		logger.info("ProductService...selectProducts...");
 		return dao.selectProducts(prodCate1, prodCate2);
@@ -73,6 +75,29 @@ public enum ProductService {
 	}
 	public List<ProductVO> selectOrderByNewold(String prodCate1, String prodCate2) {
 		return dao.selectOrderByNewold(prodCate1, prodCate2);
+	}
+	// adminproducts
+	public List<ProductVO> selectadminproducts(){
+		return dao.selectadminProducts();
+	}
+	public int selectadminCountTotal() {
+		return dao.selectadminCountTotal();
+	}
+	public List<ProductVO> searchadminproducts(String search1,String search2){
+		return dao.searchadminproducts(search1,search2);
+	}
+	// cart 
+	public int insertCart(CartVO vo) {
+		logger.info("ProductService...insertCart...");
+		return dao.insertCart(vo);
+	}
+	public List<CartVO> selectCarts(String uid) {
+		logger.info("ProductService...selectCarts...");
+		return dao.selectCarts(uid);
+	}
+	public int deleteCartList(String uid, String prodNo) {
+		logger.info("ProductService...deleteCartList...");
+		return dao.deleteCartList(uid, prodNo);
 	}
 	
 	// 서비스 로직

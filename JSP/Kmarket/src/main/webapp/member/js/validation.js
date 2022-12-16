@@ -46,7 +46,7 @@ $(function(){
 			return;
 		}
 		
-		let jsonData = {"uid":uid};
+		let jsonData = {"km_uid":uid};
 		
 		
 			

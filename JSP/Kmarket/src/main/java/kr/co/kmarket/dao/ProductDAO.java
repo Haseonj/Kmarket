@@ -8,6 +8,7 @@ import org.slf4j.LoggerFactory;
 
 import kr.co.kmarket.db.DBHelper;
 import kr.co.kmarket.db.ProductSql;
+import kr.co.kmarket.vo.CartVO;
 import kr.co.kmarket.vo.CateVO;
 import kr.co.kmarket.vo.ProductVO;
 
@@ -44,6 +45,7 @@ public class ProductDAO extends DBHelper {
 			logger.error(e.getMessage());
 		}
 	}
+	
 	public List<ProductVO> selectProducts(String prodCate1, String prodCate2) {
 		List<ProductVO> products = new ArrayList<>();
 		try {
@@ -87,6 +89,7 @@ public class ProductDAO extends DBHelper {
 				product.setEtc3(rs.getString(30));
 				product.setEtc4(rs.getString(31));
 				product.setEtc5(rs.getString(32));
+				product.setSaleprice(rs.getInt(33));
 				
 				products.add(product);
 			}
@@ -216,6 +219,22 @@ public class ProductDAO extends DBHelper {
 			psmt = conn.prepareStatement(ProductSql.SELECT_COUNT_TOTAL);
 			psmt.setString(1, prodCate1);
 			psmt.setString(2, prodCate2);
+			rs = psmt.executeQuery();
+			if(rs.next()) {
+				total = rs.getInt(1);
+			}
+			close();
+		}catch(Exception e) {
+			logger.error(e.getMessage());
+		}
+		return total;
+	}
+	public int selectadminCountTotal() {
+		int total=0;
+		try {
+			logger.info("selectCountTotal...");
+			conn = getConnection();
+			psmt = conn.prepareStatement(ProductSql.SELECT_ADMIN_COUNT_TOTAL);
 			rs = psmt.executeQuery();
 			if(rs.next()) {
 				total = rs.getInt(1);
@@ -538,4 +557,187 @@ public class ProductDAO extends DBHelper {
 		}
 		return products;
 	}
+	
+	// cart
+	public int insertCart(CartVO vo) {
+		int result = 0;
+		try {
+			logger.info("insertCart...");
+			conn = getConnection();
+			psmt = conn.prepareStatement(ProductSql.INSERT_CART);
+			psmt.setString(1, vo.getUid());
+			logger.info("insertCart... uid : " + vo.getUid());
+			psmt.setInt(2, vo.getProdNo());
+			psmt.setInt(3, vo.getCount());
+			psmt.setInt(4, vo.getPrice());
+			psmt.setInt(5, vo.getDiscount());
+			psmt.setInt(6, vo.getPoint());
+			psmt.setInt(7, vo.getDelivery());
+			psmt.setInt(8, vo.getTotal());
+			
+			result = psmt.executeUpdate();
+			
+			close();
+		}catch(Exception e) {
+			logger.error(e.getMessage());
+		}
+		return result;
+	}
+	public List<CartVO> selectCarts(String uid) {
+		List<CartVO> carts = new ArrayList<>();
+		try {
+			logger.info("selectCarts...");
+			conn = getConnection();
+			psmt = conn.prepareStatement(ProductSql.SELECT_CARTS);
+			psmt.setString(1, uid);
+			
+			rs = psmt.executeQuery();
+			while(rs.next()) {
+				CartVO cart = new CartVO();
+				cart.setCartNo(rs.getInt(1));
+				cart.setUid(rs.getString(2));
+				cart.setProdNo(rs.getInt(3));
+				cart.setCount(rs.getInt(4));
+				cart.setPrice(rs.getInt(5));
+				cart.setDiscount(rs.getInt(6));
+				cart.setPoint(rs.getInt(7));
+				cart.setDelivery(rs.getInt(8));
+				cart.setTotal(rs.getInt(9));
+				cart.setRdate(rs.getString(10));
+				cart.setProdName(rs.getString(11));
+				cart.setDescript(rs.getString(12));
+				cart.setCompany(rs.getString(13));
+				cart.setSeller(rs.getString(14));
+				cart.setThumb1(rs.getString(15));
+				
+				carts.add(cart);
+			}
+			
+			close();
+		}catch(Exception e) {
+			logger.error(e.getMessage());
+		}
+		return carts;
+	}
+	
+	public int deleteCartList(String uid, String prodNo) {
+		int result = 0;
+		try {
+			logger.info("deleteCartList...");
+			conn = getConnection();
+			psmt = conn.prepareStatement(ProductSql.DELETE_CART_LIST);
+			psmt.setString(1, uid);
+			psmt.setString(2, prodNo);
+			
+			result = psmt.executeUpdate();
+			
+			close();
+		}catch(Exception e) {
+			logger.error(e.getMessage());
+		}
+		return result;
+	}
+	public List<ProductVO> selectadminProducts() {
+		List<ProductVO> adminproducts = new ArrayList<>();
+		try {
+			logger.info("selectadminProducts...");
+			conn =getConnection();
+			psmt = conn.prepareStatement(ProductSql.SELECT_ADMIN_PRODUCTS);
+			rs = psmt.executeQuery();
+			while(rs.next()) {
+				ProductVO product = new ProductVO();
+				product.setProdNo(rs.getInt(1));
+				product.setProdCate1(rs.getInt(2));
+				product.setProdCate2(rs.getInt(3));
+				product.setProdName(rs.getString(4));
+				product.setDescript(rs.getString(5));
+				product.setCompany(rs.getString(6));
+				product.setSeller(rs.getString(7));
+				product.setPrice(rs.getInt(8));
+				product.setDiscount(rs.getInt(9));
+				product.setPoint(rs.getInt(10));
+				product.setStock(rs.getInt(11));
+				product.setSold(rs.getInt(12));
+				product.setDelivery(rs.getInt(13));
+				product.setHit(rs.getInt(14));
+				product.setScore(rs.getInt(15));
+				product.setReview(rs.getInt(16));
+				product.setThumb1(rs.getString(17));
+				product.setThumb2(rs.getString(18));
+				product.setThumb3(rs.getString(19));
+				product.setDetail(rs.getString(20));
+				product.setStatus(rs.getString(21));
+				product.setDuty(rs.getString(22));
+				product.setReceipt(rs.getString(23));
+				product.setBizType(rs.getString(24));
+				product.setOrigin(rs.getString(25));
+				product.setIp(rs.getString(26));
+				product.setRdate(rs.getString(27));
+				product.setEtc1(rs.getInt(28));
+				product.setEtc2(rs.getInt(29));
+				product.setEtc3(rs.getString(30));
+				product.setEtc4(rs.getString(31));
+				product.setEtc5(rs.getString(32));
+				
+				adminproducts.add(product);
+			}
+			close();
+		}catch(Exception e) {
+			logger.error(e.getMessage());
+		}
+		return adminproducts;
+	}
+	public List<ProductVO> searchadminproducts(String search1,String search2) {
+		List<ProductVO> searchadpds = new ArrayList<>();
+		try {
+			logger.info("selectadminProducts...");
+			conn =getConnection();
+			psmt = conn.prepareStatement(ProductSql.SELECT_SEARCH_ADMIN_PRODUCTS);
+			psmt.setString(1, search1);
+			psmt.setString(2, search2);
+			rs = psmt.executeQuery();
+			while(rs.next()) {
+				ProductVO product = new ProductVO();
+				product.setProdNo(rs.getInt(1));
+				product.setProdCate1(rs.getInt(2));
+				product.setProdCate2(rs.getInt(3));
+				product.setProdName(rs.getString(4));
+				product.setDescript(rs.getString(5));
+				product.setCompany(rs.getString(6));
+				product.setSeller(rs.getString(7));
+				product.setPrice(rs.getInt(8));
+				product.setDiscount(rs.getInt(9));
+				product.setPoint(rs.getInt(10));
+				product.setStock(rs.getInt(11));
+				product.setSold(rs.getInt(12));
+				product.setDelivery(rs.getInt(13));
+				product.setHit(rs.getInt(14));
+				product.setScore(rs.getInt(15));
+				product.setReview(rs.getInt(16));
+				product.setThumb1(rs.getString(17));
+				product.setThumb2(rs.getString(18));
+				product.setThumb3(rs.getString(19));
+				product.setDetail(rs.getString(20));
+				product.setStatus(rs.getString(21));
+				product.setDuty(rs.getString(22));
+				product.setReceipt(rs.getString(23));
+				product.setBizType(rs.getString(24));
+				product.setOrigin(rs.getString(25));
+				product.setIp(rs.getString(26));
+				product.setRdate(rs.getString(27));
+				product.setEtc1(rs.getInt(28));
+				product.setEtc2(rs.getInt(29));
+				product.setEtc3(rs.getString(30));
+				product.setEtc4(rs.getString(31));
+				product.setEtc5(rs.getString(32));
+				
+				searchadpds.add(product);
+			}
+			close();
+		}catch(Exception e) {
+			logger.error(e.getMessage());
+		}
+		return searchadpds;
+	}
+	
 }

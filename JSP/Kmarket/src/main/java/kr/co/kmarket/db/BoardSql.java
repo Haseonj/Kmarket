@@ -1,10 +1,6 @@
 package kr.co.kmarket.db;
 
 public class BoardSql {
-<<<<<<< Updated upstream
-	public static final String SELECT_CATE1 = "SELECT * FROM `km_cs_cate1`";
-	public static final String SELECT_CATE2 = "SELECT * FROM `km_cs_cate2` WHERE `cate1`=?";
-=======
 	
 	public static final String INSERT_ARTICLE = "INSERT INTO `km_cs_article` set "
 												+ "`uid`=?, `group`=?, "
@@ -31,5 +27,5 @@ public class BoardSql {
 	
 	public static final String SELECT_COUNT_CATE2 = "SELECT count('c1Name') FROM `km_cs_cate2` WHERE `c1Name`=?";
 	
->>>>>>> Stashed changes
+
 }

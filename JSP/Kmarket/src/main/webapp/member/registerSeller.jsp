@@ -1,5 +1,8 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
 <jsp:include page="./_header.jsp"/>
+<script src="http://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<script src="/Kmarket/member/js/zipcode.js"></script>
+<script src="/Kmarket/member/js/validation.js"></script>
    <main id="member">
        <div class="registerSeller">
            <nav>
@@ -12,17 +15,17 @@
                        <tr>
                            <th><span class="essential">*</span>아이디</th>
                            <td><input type="text" name="km_uid" placeholder="아이디를 입력" required>
-                           <span class="msgSId">&nbsp;&nbsp;영문, 숫자로 4~12자까지 설정해 주세요.</span></td>
+                           <span class="msgId">영문, 숫자로 4~12자까지 설정해 주세요.</span></td>
                        </tr>
                        <tr>
                            <th><span class="essential">*</span>비밀번호</th>
-                           <td><input type="password" name="km_pass" placeholder="비밀번호를 입력" required>
-                           <span class="msgPass">&nbsp;&nbsp;영문, 숫자, 특수문자를 조합하여 8~12자까지 설정해 주세요.</span></td>
+                           <td><input type="password" name="km_pass1" placeholder="비밀번호를 입력" required>
+                           <span class="msgPass1">&nbsp;&nbsp;영문, 숫자, 특수문자를 조합하여 8~12자까지 설정해 주세요.</span></td>
                        </tr>
                        <tr>
                            <th><span class="essential">*</span>비밀번호확인</th>
-                           <td><input type="password" name="km_pass" placeholder="비밀번호를 확인" required>
-                           <span class="msgPass">&nbsp;&nbsp;비밀번호 재입력</span></td>
+                           <td><input type="password" name="km_pass2" placeholder="비밀번호를 확인" required>
+                           <span class="msgPass2">&nbsp;&nbsp;비밀번호 재입력</span></td>
                        </tr>
                    </table>
                </section>
@@ -68,14 +71,14 @@
 		<tr>
 			<th><span class="essential">*</span>EMAIL</th>
 			<td><input type="email" name="kms_email"
-				placeholder="이메일 입력" required /></td>
+				placeholder="이메일 입력" required /><span class="msgSEmail"></span></td>
 		</tr>
 		<tr class="addr">
 			<th>회사주소</th>
 			<td>
 				<div>
-					<input type="text" name="kms_zip" id="zip"
-						placeholder="우편번호 입력 클릭" readonly />
+					<input type="text" name="kms_zip" id="zip" onclick="zipcode()" 
+						placeholder="우편번호 입력 클릭" readonly required/>
 				</div>
 				<div>
 					<input type="text" name="kms_addr1" id="addr1" size="50"

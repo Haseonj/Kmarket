@@ -8,7 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
+import javax.servlet.http.HttpSession;
 
 import kr.co.kmarket.service.ProductService;
 import kr.co.kmarket.vo.CateVO;
@@ -30,6 +30,9 @@ public class ProductViewController extends HttpServlet{
 		String prodCate2 = req.getParameter("cate2");
 		String prodNo = req.getParameter("prodNo");
 		String pg = req.getParameter("pg");
+		
+		HttpSession sess = req.getSession();
+		sess.getAttribute("sessMember");
 		
 		ProductVO product = service.selectProduct(prodNo);
 		CateVO vo = service.selectProdCates(prodCate1, prodCate2);

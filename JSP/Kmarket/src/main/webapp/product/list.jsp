@@ -32,11 +32,11 @@
                     <ul>
                     	<c:choose>
                     		<c:when test="${product.discount gt 0}">
-                    			<li><ins class="dis-price">${disprice}</ins></li>
+                   				<li><ins class="dis-price">${product.saleprice}</ins></li>
 		                        <li>
 		                            <del class="org-price">${product.price}</del>
 		                            <span class="discount">${product.discount}%</span>
-		                        </li>	
+		                        </li>
                     		</c:when>
                     		<c:otherwise>
 		                        <li>

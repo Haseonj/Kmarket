@@ -1,6 +1,7 @@
 package kr.co.kmarket.controller.cs;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -9,24 +10,18 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-<<<<<<< Updated upstream
-=======
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import kr.co.kmarket.service.BoardService;
 import kr.co.kmarket.vo.BoardVO;
 
->>>>>>> Stashed changes
 @WebServlet("/cs/board/list.do")
 public class ListController extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
-<<<<<<< Updated upstream
-=======
 	private BoardService service = BoardService.INSTANCE;
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
->>>>>>> Stashed changes
 	
 	@Override
 	public void init() throws ServletException {
@@ -37,8 +32,6 @@ public class ListController extends HttpServlet {
 		String group = req.getParameter("group");
 		String cate = req.getParameter("cate");
 		String type = req.getParameter("type");
-<<<<<<< Updated upstream
-=======
 		String pg = req.getParameter("pg");
 		
 		// 상세 카테고리 조회
@@ -80,7 +73,6 @@ public class ListController extends HttpServlet {
 		req.setAttribute("pageGroupEnd", result[1]);
 		req.setAttribute("pageStartNum", pageStartNum + 1);
 		req.setAttribute("cate2", cate2);
->>>>>>> Stashed changes
 		
 		req.setAttribute("group", group);
 		req.setAttribute("cate", cate);
