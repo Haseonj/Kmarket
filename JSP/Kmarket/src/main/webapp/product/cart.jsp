@@ -50,6 +50,7 @@
 			let counttotal = Number($('#totalCount').text());
 			let pricetotal = Number($('#totalPrice').text());
 			let discounttotal = Number($('#totalDiscount').text());
+			let deliverytotal = Number($('#totalDelivery').text());
 			
 			let count  = Number($(this).parents('tr').find('#count').text());			
 			console.log('count : ' + count);
@@ -57,6 +58,7 @@
 			console.log('price : '+price);
 			let discount  = Number($(this).parents('tr').find('#discount').text());
 			console.log('discount : '+discount);
+			let delivery = $(this).parents('tr').find('#delivery').text();
 			
 			if(checked){
 				// 체크했을 때
@@ -65,6 +67,16 @@
 				discounttotal = discounttotal + (price * discount/100);
 				console.log('1.counttotal : ' + counttotal);
 				
+				if(delivery == '무료배송'){
+					delivery = 0;
+					deliverytotal = deliverytotal + delivery;
+				}else{
+					delivery = Number(delivery);
+					console.log('delivery : '+delivery);
+					deliverytotal = deliverytotal + delivery;
+					console.log('deliverytotal : '+deliverytotal);
+				}
+				
 			}else{
 				// 체크해제 했을때
 				counttotal = counttotal - count;
@@ -72,10 +84,18 @@
 				discounttotal = discounttotal - (price * discount/100);
 				console.log('2.counttotal : ' + counttotal);
 				
+				if(delivery == '무료배송'){
+					delivery = 0;
+					deliverytotal = deliverytotal - delivery;
+				}else{
+					delivery = Number(delivery);
+					deliverytotal = deliverytotal - delivery;
+				}
 			}
 			$('#totalCount').text(counttotal);
 			$('#totalPrice').text(pricetotal);
 			$('#totalDiscount').text(discounttotal);
+			$('#totalDelivery').text(deliverytotal);
 			
 			// 상품금액 계산
 			// 할인금액 계산
@@ -119,7 +139,7 @@
               <td colspan="7">장바구니에 상품이 없습니다.</td>
             </tr>
             <c:forEach var="cart" items="${carts}">
-            	<tr>
+            	<tr class="notempty">
 	              <td><input type="checkbox" name="cartlist" id="ck" value="${cart.prodNo}"></td>
 	              <td>
 	                <article>
@@ -136,7 +156,7 @@
 	              <td id="point">${cart.point}</td>
 	              <c:choose>
 	              	 <c:when test="${cart.delivery eq 0}">
-		              	<td>무료배송</td>
+		              	<td id="delivery">무료배송</td>
 		             </c:when>
 		             <c:otherwise>
 		             	<td id="delivery">${cart.delivery}</td>
@@ -167,15 +187,15 @@
             </tr>
             <tr>
               <td>배송비</td>
-              <td>0</td>
+              <td id="totalDelivery">0</td>
             </tr>              
             <tr>
               <td>포인트</td>
-              <td>0</td>
+              <td id="totalPoint">0</td>
             </tr>
             <tr>
               <td>전체주문금액</td>
-              <td>0</td>
+              <td id="totalSalePrice">0</td>
             </tr>
           </table>
           <input type="submit" name="" value="주문하기">    
