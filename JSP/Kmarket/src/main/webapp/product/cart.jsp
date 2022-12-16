@@ -116,19 +116,46 @@
 			
 		});
 		
-		$('input[name=submitorder]').click(function(){
-			
+		$('input[name=submitorder]').click(function(e){
+			e.preventDefault();
 			if(confirm('주문페이지로 이동하시겠습니까?')){
+				
+				let checkBoxArr = [];
+				let checkBoxCount = [];
+				console.log('here1');
+				
+				$('input:checkbox[name=cartlist]:checked').each(function(){
+					
+					console.log('here2');
+					checkBoxArr.push($(this).val());
+					checkBoxCount.push($(this).parents('tr').find('#count').text());
+					
+				}); 
+				
+				console.log('here3 : '+ checkBoxCount.length);
+				
+				let jsonData = {"checkBoxArr":checkBoxArr, "checkBoxCount":checkBoxCount};
+				
+				
+				console.log('here4');
 				
 				$.ajax({
 					url:'/Kmarket/product/order.do',
-					method:'post',
-					data:jsonData,
+					method:'POST',
+					data: jsonData,
 					dataType:'json',
-					success:function(){
+					success:function(data){
+												
+						console.log('here5');
+						
+						if(data.result > 0){
+							console.log('here6');
+							//location.href = '/Kmarket/product/order.do';	
+						}
 						
 					}
 				});
+				
 			}else{
 				return;
 			}
