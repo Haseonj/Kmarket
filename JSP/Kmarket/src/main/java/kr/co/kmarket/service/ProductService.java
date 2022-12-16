@@ -77,7 +77,16 @@ public enum ProductService {
 	public List<ProductVO> selectOrderByNewold(String prodCate1, String prodCate2) {
 		return dao.selectOrderByNewold(prodCate1, prodCate2);
 	}
-	
+	// adminproducts
+	public List<ProductVO> selectadminproducts(){
+		return dao.selectadminProducts();
+	}
+	public int selectadminCountTotal() {
+		return dao.selectadminCountTotal();
+	}
+	public List<ProductVO> searchadminproducts(String search1,String search2){
+		return dao.searchadminproducts(search1,search2);
+	}
 	// cart 
 	public int insertCart(CartVO vo) {
 		logger.info("ProductService...insertCart...");

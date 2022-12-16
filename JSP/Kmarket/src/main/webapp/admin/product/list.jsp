@@ -1,57 +1,47 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 <jsp:include page="../_header.jsp"/>
-<main>
-    <aside>
-        <ul id="gnb">
-            <li>
-                <a href="#"><i class="fa fa-cogs"></i>환경설정</a>
-                <ol>
-                    <li><a href="#">기본환경설정</a></li>
-                    <li><a href="#">배너관리</a></li>
-                </ol>
-            </li>
-            <li>
-                <a href="#"><i class="fa fa-store"></i>상점관리</a>
-                <ol>
-                    <li><a href="#">판매자현황</a></li>
-                    <li><a href="#">재고관리</a></li>
-                </ol>
-            </li>
-            <li>
-                <a href="#"><i class="fa fa-users"></i>회원관리</a>
-                <ol>
-                    <li><a href="#">회원현황</a></li>
-                    <li><a href="#">포인트관리</a></li>
-                    <li><a href="#">비회원관리</a></li>
-                    <li><a href="#">접속자집계</a></li>
-                </ol>
-            </li>
-            <li>
-                <a href="#"><i class="fas fa-box-open"></i>상품관리</a>
-                <ol>
-                    <li><a href="#">상품현황</a></li>
-                    <li><a href="#">상품등록</a></li>
-                    <li><a href="#">재고관리</a></li>
-                </ol>
-            </li>
-            <li>
-                <a href="#"><i class="fa fa-credit-card"></i>주문관리</a>
-                <ol>
-                    <li><a href="#">주문현황</a></li>
-                    <li><a href="#">매출관리</a></li>
-                    <li><a href="#">결제관리</a></li>
-                    <li><a href="#">배송관리</a></li>
-                </ol>
-            </li>
-            <li>
-                <a href="#"><i class="fa fa-pencil-square-o"></i>게시판관리</a>
-                <ol>
-                    <li><a href="#">게시판현황</a></li>
-                    <li><a href="#">고객문의</a></li>
-                </ol>
-            </li>
-        </ul>
-    </aside>
+<script>
+	$(function() {
+		$('#sch').click(function() {
+					
+			let search1var = $('select[value=search1]').var();
+			let search2var = $('input[name=search2]').var();
+			
+			switch(search1var){
+			case "상품명" :
+				search1var = "prodName";
+			break
+			case "상품코드" :
+				search1var = "prodNo";
+			break
+			case "제조사" :
+				search1var = "company";
+			break
+			//case "판매자" :
+				//let search1var = "판매자";
+			//break
+			};
+			let jsonData = {
+					"search1var":search1var,
+					"search2var":search2var
+					};
+			$.ajax({
+				url: '/Kmarket/admin/list.do',
+				method: 'get',
+				data: jsonData,
+				dataType: 'json',
+				success:function(data){
+					document.location.href = document.location.href;
+				}
+			});
+			
+			
+		});
+		
+	});
+</script>
     <section id="admin-product-list">
         <nav>
             <h3>상품목록</h3>
@@ -68,7 +58,8 @@
                     <option value="search1">제조사</option>
                     <option value="search1">판매자</option>
                 </select>
-                <input type="text" name="search">
+                <input type="text" name="search2">
+                <button type="button" id="sch">검색</button>
             </div>
             <table>
                 <tbody>
@@ -85,70 +76,40 @@
                         <th>조회</th>
                         <th>관리</th>
                     </tr>
+                    <c:forEach items="${adpd}" var="prod" begin="${start}" end="${start+9}">
                     <tr>
                         <td><input type="checkbox" name="상품코드"></td>
-                        <td><img src="../img/sample_thumb.jpg" class="thumb"></td>
-                        <td>201603292</td>
-                        <td>FreeMovement BLUEFORCE</td>
-                        <td>36,000</td>
-                        <td>10</td>
-                        <td>360</td>
-                        <td>400</td>
+                        <td><img src="http://3.39.231.136:8080/Kmarket/file/${prod.thumb1}" alt="상품이미지"></td>
+                        <td>${prod.prodNo}</td>
+                        <td>${prod.prodName}</td>
+                        <td>${prod.price}</td>
+                        <td>${prod.discount}</td>
+                        <td>${prod.point}</td>
+                        <td>${prod.stock}</td>
                         <td>홍길동</td>
-                        <td>126</td>
+                        <td>${prod.hit}</td>
                         <td>
                             <a href="#">[삭제]</a>
                             <a href="#">[수정]</a>
                         </td>
                     </tr>
-                    <tr>
-                        <td><input type="checkbox" name="상품코드"></td>
-                        <td><img src="../img/sample_thumb.jpg" class="thumb"></td>
-                        <td>201603292</td>
-                        <td>FreeMovement BLUEFORCE</td>
-                        <td>36,000</td>
-                        <td>10</td>
-                        <td>360</td>
-                        <td>400</td>
-                        <td>홍길동</td>
-                        <td>126</td>
-                        <td>
-                            <a href="#">[삭제]</a>
-                            <a href="#">[수정]</a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td><input type="checkbox" name="상품코드"></td>
-                        <td><img src="../img/sample_thumb.jpg" class="thumb"></td>
-                        <td>201603292</td>
-                        <td>FreeMovement BLUEFORCE</td>
-                        <td>36,000</td>
-                        <td>10</td>
-                        <td>360</td>
-                        <td>400</td>
-                        <td>홍길동</td>
-                        <td>126</td>
-                        <td>
-                            <a href="#">[삭제]</a>
-                            <a href="#">[수정]</a>
-                        </td>
-                    </tr>
+                    </c:forEach>
                 </tbody>
             </table>
             <input type="button" value="선택삭제">
-            <div class="paging">
-                <span class="prev"><a href="#">〈&nbsp;이전</a></span>
-                <span class="num">
-                    <a href="#" class="on">1</a>
-                    <a href="#">2</a>
-                    <a href="#">3</a>
-                    <a href="#">4</a>
-                    <a href="#">5</a>
-                    <a href="#">6</a>
-                    <a href="#">7</a>
-                </span>
-                <span class="next"><a href="#">다음&nbsp;〉</a></span>
-            </div>
+             <div class="paging">
+        	<c:if test="${pageGroupStart gt 1}">
+        		<span class="prev"><a href="/Kmarket/admin/product/list.do?pg=${pageGroupStart - 1}">이전</a></span>
+        	</c:if>
+        	<span class="num">
+			<c:forEach var="i" begin="${pageGroupStart}" end="${pageGroupEnd}">
+                <a href="/Kmarket/admin/product/list.do?pg=${i}" class="${currentPage eq i?'on':'off'}">${i}</a>
+			</c:forEach>
+			</span>            
+            <c:if test="${pageGroupEnd lt lastPageNum}">
+            	<span class="next"><a href="/Kmarket/admin/product/list.do?pg=${pageGroupEnd + 1}">다음</a></span>
+            </c:if>
+        </div>
         </section>
         <p class="ico info">
             <strong>Tip!</strong>

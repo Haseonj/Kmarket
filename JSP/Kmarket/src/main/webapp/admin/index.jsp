@@ -1,57 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
 <jsp:include page="./_header.jsp"/>
-<main>
-    <aside>
-        <ul id="gnb">
-            <li>
-                <a href="#"><i class="fa fa-cogs"></i>환경설정</a>
-                <ol>
-                    <li><a href="#">기본환경설정</a></li>
-                    <li><a href="#">배너관리</a></li>
-                </ol>
-            </li>
-            <li>
-                <a href="#"><i class="fa fa-store"></i>상점관리</a>
-                <ol>
-                    <li><a href="#">판매자현황</a></li>
-                    <li><a href="#">재고관리</a></li>
-                </ol>
-            </li>
-            <li>
-                <a href="#"><i class="fa fa-users"></i>회원관리</a>
-                <ol>
-                    <li><a href="#">회원현황</a></li>
-                    <li><a href="#">포인트관리</a></li>
-                    <li><a href="#">비회원관리</a></li>
-                    <li><a href="#">접속자집계</a></li>
-                </ol>
-            </li>
-            <li>
-                <a href="#"><i class="fas fa-box-open"></i>상품관리</a>
-                <ol>
-                    <li><a href="#">상품현황</a></li>
-                    <li><a href="#">상품등록</a></li>
-                    <li><a href="#">재고관리</a></li>
-                </ol>
-            </li>
-            <li>
-                <a href="#"><i class="fa fa-credit-card"></i>주문관리</a>
-                <ol>
-                    <li><a href="#">주문현황</a></li>
-                    <li><a href="#">매출관리</a></li>
-                    <li><a href="#">결제관리</a></li>
-                    <li><a href="#">배송관리</a></li>
-                </ol>
-            </li>
-            <li>
-                <a href="#"><i class="fa fa-pencil-square-o"></i>게시판관리</a>
-                <ol>
-                    <li><a href="#">게시판현황</a></li>
-                    <li><a href="#">고객문의</a></li>
-                </ol>
-            </li>
-        </ul>
-    </aside>
+
     <section id="admin-index">
         <nav>
             <h3>관리자 메인</h3>

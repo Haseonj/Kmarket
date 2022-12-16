@@ -230,6 +230,22 @@ public class ProductDAO extends DBHelper {
 		}
 		return total;
 	}
+	public int selectadminCountTotal() {
+		int total=0;
+		try {
+			logger.info("selectCountTotal...");
+			conn = getConnection();
+			psmt = conn.prepareStatement(ProductSql.SELECT_ADMIN_COUNT_TOTAL);
+			rs = psmt.executeQuery();
+			if(rs.next()) {
+				total = rs.getInt(1);
+			}
+			close();
+		}catch(Exception e) {
+			logger.error(e.getMessage());
+		}
+		return total;
+	}
 	public List<ProductVO> selectOrderByHighsold(String prodCate1, String prodCate2) {
 		List<ProductVO> products = new ArrayList<>();
 		try {
@@ -622,9 +638,9 @@ public class ProductDAO extends DBHelper {
 		}
 		return result;
 	}
-	
-	
+
 	// admin
+
 	public List<ProductVO> selectadminProducts() {
 		List<ProductVO> adminproducts = new ArrayList<>();
 		try {
@@ -728,6 +744,7 @@ public class ProductDAO extends DBHelper {
 		return searchadpds;
 	}
 	
+
 	// order
 		public int insertOrder(OrderVO vo) {
 			int result = 0;
@@ -876,4 +893,5 @@ public class ProductDAO extends DBHelper {
 			return total;
 		}
 		
+
 }
