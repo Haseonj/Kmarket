@@ -26,8 +26,7 @@
     <!--
     <Manager pathname="" />
     -->
-     <!-- 커넥션 풀 설정 -->
-<Resource
+    <Resource
 	name="dbcp_kmarket"
 	auth="Container"
 	type="javax.sql.DataSource"

@@ -2,10 +2,21 @@
 <%@ taglib prefix="c" uri ="http://java.sun.com/jsp/jstl/core"%>
 <jsp:include page="../_header.jsp"/>
 <jsp:include page="./_${group}.jsp"/>
+<script>
+	$(function(){
+		$('.more').click(function(){
+			console.log("more");
+			
+			$('.more').hide();
+			$('.faq > .list > article > div > ul > li:nth-child(n+4)').show();
+		});
+	});
+</script>
 			<c:if test="${group eq 'qna' or group eq 'notice'}">
                 <table>
                     <tbody>
                         <tr>
+<<<<<<< Updated upstream
                             <td><a href="/Kmarket/cs/board/view.do?group=${group}&cate=${cate}&type=view">[가입] 가입 문의내용</a></td>
                             <td>has*****</td>
                             <td>2022.12.07</td>
@@ -54,6 +65,11 @@
                             <td><a href="./view.html">[탈퇴] 회원정보 문의내용</a></td>
                             <td>has*****</td>
                             <td>2022.12.07</td>
+=======
+                            <td><a href="/Kmarket/cs/board/view.do?group=${group}&cate=${cate}&type=view&no=${articles.no}&pg=${currentPage}">[${articles.cate2}] ${articles.title}</a></td>
+                            <td>${articles.uid.substring(0, 5)}<c:forEach begin="6" end="${articles.uid.length()}" step="1">*</c:forEach></td>
+                            <td>${articles.rdate.substring(2, 10)}</td>
+>>>>>>> Stashed changes
                         </tr>
                     </tbody>
                 </table>
@@ -69,50 +85,19 @@
                 </c:if>
             </c:if>
             <c:if test="${group eq 'faq'}">
+            <c:forEach var="cate2" items="${cate2}">
                 <div>
-                    <h3>가입</h3>
+                    <h3>${cate2.cate2}</h3>
                     <ul>
-                        <li><a href="/Kmarket/cs/board/view.do?group=${group}&cate=${cate}&type=view"><span>Q.</span>개인회원과 법인회원에 차이가 있나요?</a></li>
-                        <li><a href="./view.html"><span>Q.</span>개인회원과 법인회원에 차이가 있나요?</a></li>
-                        <li><a href="./view.html"><span>Q.</span>개인회원과 법인회원에 차이가 있나요?</a></li>
-                        <li><a href="./view.html"><span>Q.</span>개인회원과 법인회원에 차이가 있나요?</a></li>
-                        <li><a href="./view.html"><span>Q.</span>개인회원과 법인회원에 차이가 있나요?</a></li>
-                        <li class="more"><a href="#">더보기</a></li>
+                    <c:forEach var="articles" items="${articles}">
+                    	<c:if test="${cate2.cate2 eq articles.cate2}">
+                        	<li><a href="/Kmarket/cs/board/view.do?group=${group}&cate=${cate}&type=view"><span>Q.</span>${articles.title}</a></li>
+                    	</c:if>
+                    </c:forEach>
+                        <li class="more${cate2.cate2Count}"><a href="#">더보기</a></li>
                     </ul>
                 </div>
-                <div>
-                    <h3>탈퇴</h3>
-                    <ul>
-                        <li><a href="./view.html"><span>Q.</span>회원탈퇴 후 재가입이 가능한가요?</a></li>
-                        <li><a href="./view.html"><span>Q.</span>회원탈퇴 후 재가입이 가능한가요?</a></li>
-                        <li><a href="./view.html"><span>Q.</span>회원탈퇴 후 재가입이 가능한가요?</a></li>
-                        <li><a href="./view.html"><span>Q.</span>회원탈퇴 후 재가입이 가능한가요?</a></li>
-                        <li><a href="./view.html"><span>Q.</span>회원탈퇴 후 재가입이 가능한가요?</a></li>
-                        <li class="more"><a href="#">더보기</a></li>
-                    </ul>
-                </div>
-                <div>
-                    <h3>회원정보</h3>
-                    <ul>
-                        <li><a href="./view.html"><span>Q.</span>회원정보를 수정하고 싶어요.</a></li>
-                        <li><a href="./view.html"><span>Q.</span>회원정보를 수정하고 싶어요.</a></li>
-                        <li><a href="./view.html"><span>Q.</span>회원정보를 수정하고 싶어요.</a></li>
-                        <li><a href="./view.html"><span>Q.</span>회원정보를 수정하고 싶어요.</a></li>
-                        <li><a href="./view.html"><span>Q.</span>회원정보를 수정하고 싶어요.</a></li>
-                        <li class="more"><a href="#">더보기</a></li>
-                    </ul>
-                </div>
-                <div>
-                    <h3>로그인</h3>
-                    <ul>
-                        <li><a href="./view.html"><span>Q.</span>로그인에 문제가 있어요.</a></li>
-                        <li><a href="./view.html"><span>Q.</span>로그인에 문제가 있어요.</a></li>
-                        <li><a href="./view.html"><span>Q.</span>로그인에 문제가 있어요.</a></li>
-                        <li><a href="./view.html"><span>Q.</span>로그인에 문제가 있어요.</a></li>
-                        <li><a href="./view.html"><span>Q.</span>로그인에 문제가 있어요.</a></li>
-                        <li class="more"><a href="#">더보기</a></li>
-                    </ul>
-                </div>
+			</c:forEach>
             </c:if>
             </article>
         </section>

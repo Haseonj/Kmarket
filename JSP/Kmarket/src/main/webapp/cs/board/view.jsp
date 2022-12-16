@@ -7,16 +7,16 @@
                     <c:if test="${group eq 'faq'}">
                     <span>Q.</span>
                     </c:if>
-                    [가입] 가입 문의내용</h2>
+                    [${vo.cate2}] ${vo.title}</h2>
                     <c:if test="${group eq 'qna'}">
-                    <span>has*****</span>
+                    <span>${vo.uid.substring(0, 5)}<c:forEach begin="6" end="${vo.uid.length()}" step="1">*</c:forEach>
+                    </span>
                     </c:if>
-                    <span class="date">2022.12.07</span>
+                    <span class="date">${vo.rdate.substring(2, 10)}</span>
                 </nav>
                 <div class="content">
                     <p>
-                        개인회원에서 법인회원(사업자 회원)으로 전환은 불가하므로
-                        법인회원(사업자 회원) 전환은 신규 가입으로 진행을 해야 합니다.
+                    	${vo.content}
                     </p>
                     <p>
                         ※ 피싱 관련 피해신고

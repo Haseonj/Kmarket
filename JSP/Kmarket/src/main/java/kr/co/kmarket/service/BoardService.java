@@ -18,7 +18,32 @@ public enum BoardService {
 		dao = new BoardDAO();
 	}
 	
+<<<<<<< Updated upstream
 	public List<CateVO> selectCate1() {
+=======
+	public void insertArticle(BoardVO vo) {
+		dao.insertArticle(vo);
+	}
+	
+	public BoardVO selectArticle(String no) {
+		return dao.selectArticle(no);
+	}
+	
+	public List<BoardVO> selectArticles(String group, String cate, int start) {
+		logger.info("selectArticlesService.. cate:" +cate);
+		return dao.selectArticles(group, cate, start);
+	}
+	
+	public List<BoardVO> selectFaqArticles(String group, String cate){
+		return dao.selectFaqArticles(group, cate);
+	}
+	
+	public int selectCountTotal(String cate) {
+		return dao.selectCountTotal(cate);
+	}
+	
+	public List<BoardVO> selectCate1() {
+>>>>>>> Stashed changes
 		return dao.selectCate1();
 	}
 	
