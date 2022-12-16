@@ -623,151 +623,257 @@ public class ProductDAO extends DBHelper {
 		return result;
 	}
 	
+	
+	// admin
+	public List<ProductVO> selectadminProducts() {
+		List<ProductVO> adminproducts = new ArrayList<>();
+		try {
+			logger.info("selectadminProducts...");
+			conn =getConnection();
+			psmt = conn.prepareStatement(ProductSql.SELECT_ADMIN_PRODUCTS);
+			rs = psmt.executeQuery();
+			while(rs.next()) {
+				ProductVO product = new ProductVO();
+				product.setProdNo(rs.getInt(1));
+				product.setProdCate1(rs.getInt(2));
+				product.setProdCate2(rs.getInt(3));
+				product.setProdName(rs.getString(4));
+				product.setDescript(rs.getString(5));
+				product.setCompany(rs.getString(6));
+				product.setSeller(rs.getString(7));
+				product.setPrice(rs.getInt(8));
+				product.setDiscount(rs.getInt(9));
+				product.setPoint(rs.getInt(10));
+				product.setStock(rs.getInt(11));
+				product.setSold(rs.getInt(12));
+				product.setDelivery(rs.getInt(13));
+				product.setHit(rs.getInt(14));
+				product.setScore(rs.getInt(15));
+				product.setReview(rs.getInt(16));
+				product.setThumb1(rs.getString(17));
+				product.setThumb2(rs.getString(18));
+				product.setThumb3(rs.getString(19));
+				product.setDetail(rs.getString(20));
+				product.setStatus(rs.getString(21));
+				product.setDuty(rs.getString(22));
+				product.setReceipt(rs.getString(23));
+				product.setBizType(rs.getString(24));
+				product.setOrigin(rs.getString(25));
+				product.setIp(rs.getString(26));
+				product.setRdate(rs.getString(27));
+				product.setEtc1(rs.getInt(28));
+				product.setEtc2(rs.getInt(29));
+				product.setEtc3(rs.getString(30));
+				product.setEtc4(rs.getString(31));
+				product.setEtc5(rs.getString(32));
+				
+				adminproducts.add(product);
+			}
+			close();
+		}catch(Exception e) {
+			logger.error(e.getMessage());
+		}
+		return adminproducts;
+	}
+	public List<ProductVO> searchadminproducts(String search1,String search2) {
+		List<ProductVO> searchadpds = new ArrayList<>();
+		try {
+			logger.info("selectadminProducts...");
+			conn =getConnection();
+			psmt = conn.prepareStatement(ProductSql.SELECT_SEARCH_ADMIN_PRODUCTS);
+			psmt.setString(1, search1);
+			psmt.setString(2, search2);
+			rs = psmt.executeQuery();
+			while(rs.next()) {
+				ProductVO product = new ProductVO();
+				product.setProdNo(rs.getInt(1));
+				product.setProdCate1(rs.getInt(2));
+				product.setProdCate2(rs.getInt(3));
+				product.setProdName(rs.getString(4));
+				product.setDescript(rs.getString(5));
+				product.setCompany(rs.getString(6));
+				product.setSeller(rs.getString(7));
+				product.setPrice(rs.getInt(8));
+				product.setDiscount(rs.getInt(9));
+				product.setPoint(rs.getInt(10));
+				product.setStock(rs.getInt(11));
+				product.setSold(rs.getInt(12));
+				product.setDelivery(rs.getInt(13));
+				product.setHit(rs.getInt(14));
+				product.setScore(rs.getInt(15));
+				product.setReview(rs.getInt(16));
+				product.setThumb1(rs.getString(17));
+				product.setThumb2(rs.getString(18));
+				product.setThumb3(rs.getString(19));
+				product.setDetail(rs.getString(20));
+				product.setStatus(rs.getString(21));
+				product.setDuty(rs.getString(22));
+				product.setReceipt(rs.getString(23));
+				product.setBizType(rs.getString(24));
+				product.setOrigin(rs.getString(25));
+				product.setIp(rs.getString(26));
+				product.setRdate(rs.getString(27));
+				product.setEtc1(rs.getInt(28));
+				product.setEtc2(rs.getInt(29));
+				product.setEtc3(rs.getString(30));
+				product.setEtc4(rs.getString(31));
+				product.setEtc5(rs.getString(32));
+				
+				searchadpds.add(product);
+			}
+			close();
+		}catch(Exception e) {
+			logger.error(e.getMessage());
+		}
+		return searchadpds;
+	}
+	
 	// order
-	public int insertOrder(OrderVO vo) {
-		int result = 0;
-		try {
-			logger.info("insertOrder...");
-			conn = getConnection();
-			psmt = conn.prepareStatement(ProductSql.INSERT_ORDER);
-			psmt.setString(1, vo.getOrdUid());
-			psmt.setInt(2, vo.getOrdCount());
-			psmt.setInt(3, vo.getOrdPrice());
-			psmt.setInt(4, vo.getOrdDiscount());
-			psmt.setInt(5, vo.getOrdDelivery());
-			psmt.setInt(6, vo.getSavePoint());
-			psmt.setInt(7, vo.getOrdTotPrice());
-			
-			result = psmt.executeUpdate();
-			
-			close();
-		}catch(Exception e) {
-			logger.error(e.getMessage());
-		}
-		return result;
-	}
-	public void insertOrderItem(OrderVO vo, String prodNo) {
-		try {
-			logger.info("insertOrderItem...");
-			conn = getConnection();
-			psmt = conn.prepareStatement(ProductSql.INSERT_ORDER_ITEM);
-			psmt.setInt(1, vo.getOrdNo());
-			psmt.setString(2, prodNo);
-			psmt.setInt(3, vo.getOrdCount());
-			psmt.setInt(4, vo.getOrdPrice());
-			psmt.setInt(5, vo.getOrdDiscount());
-			psmt.setInt(6, vo.getSavePoint());
-			psmt.setInt(7, vo.getOrdDelivery());
-			psmt.setInt(8, vo.getOrdTotPrice());
-			
-			psmt.executeUpdate();
-			
-			close();
-		}catch(Exception e) {
-			logger.error(e.getMessage());
-		}
-	}
-	public OrderVO selectLatestOrder(String uid) {
-		OrderVO order = null;
-		try {
-			logger.info("selectLatestOrder...");
-			conn = getConnection();
-			psmt = conn.prepareStatement(ProductSql.SELECT_LATEST_ORDER);
-			psmt.setString(1, uid);
-			
-			rs = psmt.executeQuery();
-			while(rs.next()) {
-				order = new OrderVO();
-				order.setOrdNo(rs.getInt(1));
-				order.setOrdUid(rs.getString(2));
-				order.setOrdCount(rs.getInt(3));
-				order.setOrdPrice(rs.getInt(4));
-				order.setOrdDiscount(rs.getInt(5));
-				order.setOrdDelivery(rs.getInt(6));
-				order.setSavePoint(rs.getInt(7));
-				order.setOrdTotPrice(rs.getInt(9));
-			}
-			
-			close();
-		}catch(Exception e) {
-			logger.error(e.getMessage());
-		}
-		return order;
-	}
-	public List<OrderVO> selectOrder(int orderNo) {
-		List<OrderVO> orders = new ArrayList<>();
-		try {
-			logger.info("selectOrder...");
-			conn = getConnection();
-			psmt = conn.prepareStatement(ProductSql.SELECT_ORDER);
-			psmt.setInt(1, orderNo);
-			
-			rs = psmt.executeQuery();
-			while(rs.next()) {
-				OrderVO order = new OrderVO();
-				order.setOrdNo(rs.getInt(1));
-				order.setProdNo(rs.getInt(2));
-				order.setCount(rs.getInt(3));
-				order.setPrice(rs.getInt(4));
-				order.setDiscount(rs.getInt(5));
-				order.setPoint(rs.getInt(6));
-				order.setDelivery(rs.getInt(7));
-				order.setTotal(rs.getInt(9));
-				order.setProdName(rs.getString(12));
-				order.setDescript(rs.getString(13));
-				order.setThumb1(rs.getString(25));
+		public int insertOrder(OrderVO vo) {
+			int result = 0;
+			try {
+				logger.info("insertOrder...");
+				conn = getConnection();
+				psmt = conn.prepareStatement(ProductSql.INSERT_ORDER);
+				psmt.setString(1, vo.getOrdUid());
+				psmt.setInt(2, vo.getOrdCount());
+				psmt.setInt(3, vo.getOrdPrice());
+				psmt.setInt(4, vo.getOrdDiscount());
+				psmt.setInt(5, vo.getOrdDelivery());
+				psmt.setInt(6, vo.getSavePoint());
+				psmt.setInt(7, vo.getOrdTotPrice());
 				
-				orders.add(order);
-			}
-			
-			close();
-		}catch(Exception e) {
-			logger.error(e.getMessage());
-		}
-		return orders;
-	}
-	public int selectOrderNo(String uid) {
-		int ordNo = 0;
-		try {
-			logger.info("selectOrder...");
-			conn = getConnection();
-			psmt = conn.prepareStatement(ProductSql.SELECT_ORDER_NO);
-			psmt.setString(1, uid);
-			
-			rs = psmt.executeQuery();
-			while(rs.next()) {
-				ordNo = rs.getInt(1);
-			}
-			
-			close();
-		}catch(Exception e) {
-			logger.error(e.getMessage());
-		}
-		return ordNo;
-	}
-	public List<ProductVO> selectOrderProducts(String prodNo) {
-		List<ProductVO> total = new ArrayList<>();
-		try {
-			logger.info("selectOrderProducts...");
-			conn = getConnection();
-			psmt = conn.prepareStatement(ProductSql.SELECT_ORDER_PRODUCTS);
-			psmt.setString(1, prodNo);
-			
-			rs = psmt.executeQuery();
-			while(rs.next()) {
-				ProductVO order = new ProductVO();
-				order.setPrice(rs.getInt(1));
-				order.setDiscount(rs.getInt(2));
-				order.setPoint(rs.getInt(3));
-				order.setDelivery(rs.getInt(4));
+				result = psmt.executeUpdate();
 				
-				total.add(order);
+				close();
+			}catch(Exception e) {
+				logger.error(e.getMessage());
 			}
-			
-			close();
-		}catch(Exception e) {
-			logger.error(e.getMessage());
+			return result;
 		}
-		return total;
-	}
+		public void insertOrderItem(OrderVO vo, String prodNo) {
+			try {
+				logger.info("insertOrderItem...");
+				conn = getConnection();
+				psmt = conn.prepareStatement(ProductSql.INSERT_ORDER_ITEM);
+				psmt.setInt(1, vo.getOrdNo());
+				psmt.setString(2, prodNo);
+				psmt.setInt(3, vo.getOrdCount());
+				psmt.setInt(4, vo.getOrdPrice());
+				psmt.setInt(5, vo.getOrdDiscount());
+				psmt.setInt(6, vo.getSavePoint());
+				psmt.setInt(7, vo.getOrdDelivery());
+				psmt.setInt(8, vo.getOrdTotPrice());
+				
+				psmt.executeUpdate();
+				
+				close();
+			}catch(Exception e) {
+				logger.error(e.getMessage());
+			}
+		}
+		public OrderVO selectLatestOrder(String uid) {
+			OrderVO order = null;
+			try {
+				logger.info("selectLatestOrder...");
+				conn = getConnection();
+				psmt = conn.prepareStatement(ProductSql.SELECT_LATEST_ORDER);
+				psmt.setString(1, uid);
+				
+				rs = psmt.executeQuery();
+				while(rs.next()) {
+					order = new OrderVO();
+					order.setOrdNo(rs.getInt(1));
+					order.setOrdUid(rs.getString(2));
+					order.setOrdCount(rs.getInt(3));
+					order.setOrdPrice(rs.getInt(4));
+					order.setOrdDiscount(rs.getInt(5));
+					order.setOrdDelivery(rs.getInt(6));
+					order.setSavePoint(rs.getInt(7));
+					order.setOrdTotPrice(rs.getInt(9));
+				}
+				
+				close();
+			}catch(Exception e) {
+				logger.error(e.getMessage());
+			}
+			return order;
+		}
+		public List<OrderVO> selectOrder(int orderNo) {
+			List<OrderVO> orders = new ArrayList<>();
+			try {
+				logger.info("selectOrder...");
+				conn = getConnection();
+				psmt = conn.prepareStatement(ProductSql.SELECT_ORDER);
+				psmt.setInt(1, orderNo);
+				
+				rs = psmt.executeQuery();
+				while(rs.next()) {
+					OrderVO order = new OrderVO();
+					order.setOrdNo(rs.getInt(1));
+					order.setProdNo(rs.getInt(2));
+					order.setCount(rs.getInt(3));
+					order.setPrice(rs.getInt(4));
+					order.setDiscount(rs.getInt(5));
+					order.setPoint(rs.getInt(6));
+					order.setDelivery(rs.getInt(7));
+					order.setTotal(rs.getInt(9));
+					order.setProdName(rs.getString(12));
+					order.setDescript(rs.getString(13));
+					order.setThumb1(rs.getString(25));
+					
+					orders.add(order);
+				}
+				
+				close();
+			}catch(Exception e) {
+				logger.error(e.getMessage());
+			}
+			return orders;
+		}
+		public int selectOrderNo(String uid) {
+			int ordNo = 0;
+			try {
+				logger.info("selectOrder...");
+				conn = getConnection();
+				psmt = conn.prepareStatement(ProductSql.SELECT_ORDER_NO);
+				psmt.setString(1, uid);
+				
+				rs = psmt.executeQuery();
+				while(rs.next()) {
+					ordNo = rs.getInt(1);
+				}
+				
+				close();
+			}catch(Exception e) {
+				logger.error(e.getMessage());
+			}
+			return ordNo;
+		}
+		public List<ProductVO> selectOrderProducts(String prodNo) {
+			List<ProductVO> total = new ArrayList<>();
+			try {
+				logger.info("selectOrderProducts...");
+				conn = getConnection();
+				psmt = conn.prepareStatement(ProductSql.SELECT_ORDER_PRODUCTS);
+				psmt.setString(1, prodNo);
+				
+				rs = psmt.executeQuery();
+				while(rs.next()) {
+					ProductVO order = new ProductVO();
+					order.setPrice(rs.getInt(1));
+					order.setDiscount(rs.getInt(2));
+					order.setPoint(rs.getInt(3));
+					order.setDelivery(rs.getInt(4));
+					
+					total.add(order);
+				}
+				
+				close();
+			}catch(Exception e) {
+				logger.error(e.getMessage());
+			}
+			return total;
+		}
+		
 }
