@@ -35,14 +35,6 @@ public class ProductSql {
 												+ "from `km_product_cart` AS a "
 												+ "JOIN `km_product` AS b ON a.prodNo = b.prodNo "
 												+ "where `uid`=?";
-	public static final String SELECT_TOTAL_CARTS = "SELECT SUM(`count`) AS `totalCount`, "
-													+ "SUM(`price`) AS `totalPrice`, "
-													+ "SUM(FLOOR(`price` * `discount` / 100)) AS `totalDiscount`, "
-													+ "SUM(`delivery`) AS `totalDelivery`, "
-													+ "SUM(`point`) AS `totalPoint`, "
-													+ "SUM(FLOOR(`price` * (1 - `discount` / 100))) AS `totalSalePrice` "
-													+ "from `km_product_cart` "
-													+ "where `uid`=? and `prodNo`=?";
 	public static final String DELETE_CART_LIST = "delete from `km_product_cart` where `uid`=? and `prodNo`=?";
 			
 }

@@ -48,21 +48,65 @@
 			// 상품수 계산
 			var checked  = $(this).is(':checked');
 			let counttotal = Number($('#totalCount').text());
+			let pricetotal = Number($('#totalPrice').text());
+			let discounttotal = Number($('#totalDiscount').text());
+			let deliverytotal = Number($('#totalDelivery').text());
+			let salepricetotal = Number($('#totalSalePrice').text());
+			let pointtotal = Number($('#totalPoint').text());
+			
 			let count  = Number($(this).parents('tr').find('#count').text());			
 			console.log('count : ' + count);
+			let price  = Number($(this).parents('tr').find('#price').text());
+			console.log('price : '+price);
+			let discount  = Number($(this).parents('tr').find('#discount').text());
+			console.log('discount : '+discount);
+			let delivery = $(this).parents('tr').find('#delivery').text();
+			let total = Number($(this).parents('tr').find('#total').text());
+			let point = Number($(this).parents('tr').find('#point').text());
 			
 			if(checked){
 				// 체크했을 때
-				counttotal = counttotal + count;				
+				counttotal = counttotal + count;
+				pricetotal = pricetotal + (price * count);
+				discounttotal = discounttotal + (price * discount * count/100);
 				console.log('1.counttotal : ' + counttotal);
-				$('#totalCount').text(counttotal);
+				
+				if(delivery == '무료배송'){
+					delivery = 0;
+					deliverytotal = deliverytotal + delivery;
+					salepricetotal = salepricetotal + total + deliverytotal;
+				}else{
+					delivery = Number(delivery);
+					console.log('delivery : '+delivery);
+					deliverytotal = deliverytotal + delivery;
+					console.log('deliverytotal : '+deliverytotal);
+					salepricetotal = salepricetotal + total + deliverytotal;
+				}
+				pointtotal = pointtotal + point;
 			}else{
 				// 체크해제 했을때
 				counttotal = counttotal - count;
+				pricetotal = pricetotal - (price * count);
+				discounttotal = discounttotal - (price * discount * count/100);
 				console.log('2.counttotal : ' + counttotal);
-				$('#totalCount').text(counttotal);
+				
+				if(delivery == '무료배송'){
+					delivery = 0;
+					deliverytotal = deliverytotal - delivery;
+					salepricetotal = salepricetotal - total - deliverytotal;
+				}else{
+					delivery = Number(delivery);
+					deliverytotal = deliverytotal - delivery;
+					salepricetotal = salepricetotal - total - deliverytotal;
+				}
+				pointtotal = pointtotal - point;
 			}
-			
+			$('#totalCount').text(counttotal);
+			$('#totalPrice').text(pricetotal);
+			$('#totalDiscount').text(discounttotal);
+			$('#totalDelivery').text(deliverytotal);
+			$('#totalSalePrice').text(salepricetotal);
+			$('#totalPoint').text(pointtotal);
 			
 			// 상품금액 계산
 			// 할인금액 계산
@@ -72,7 +116,24 @@
 			
 		});
 		
-		
+		$('input[name=submitorder]').click(function(){
+			
+			if(confirm('주문페이지로 이동하시겠습니까?')){
+				
+				$.ajax({
+					url:'/Kmarket/product/order.do',
+					method:'post',
+					data:jsonData,
+					dataType:'json',
+					success:function(){
+						
+					}
+				});
+			}else{
+				return;
+			}
+			
+		});
 	});
 </script>
     <!-- 장바구니 페이지 시작 -->
@@ -106,7 +167,7 @@
               <td colspan="7">장바구니에 상품이 없습니다.</td>
             </tr>
             <c:forEach var="cart" items="${carts}">
-            	<tr>
+            	<tr class="notempty">
 	              <td><input type="checkbox" name="cartlist" id="ck" value="${cart.prodNo}"></td>
 	              <td>
 	                <article>
@@ -119,11 +180,11 @@
 	              </td>
 	              <td id="count">${cart.count}</td>
 	              <td id="price">${cart.price}</td>
-	              <td id="discount">${cart.discount}%</td>
+	              <td id="discount">${cart.discount}</td>
 	              <td id="point">${cart.point}</td>
 	              <c:choose>
 	              	 <c:when test="${cart.delivery eq 0}">
-		              	<td>무료배송</td>
+		              	<td id="delivery">무료배송</td>
 		             </c:when>
 		             <c:otherwise>
 		             	<td id="delivery">${cart.delivery}</td>
@@ -154,18 +215,18 @@
             </tr>
             <tr>
               <td>배송비</td>
-              <td>0</td>
+              <td id="totalDelivery">0</td>
             </tr>              
             <tr>
               <td>포인트</td>
-              <td>0</td>
+              <td id="totalPoint">0</td>
             </tr>
             <tr>
               <td>전체주문금액</td>
-              <td>0</td>
+              <td id="totalSalePrice">0</td>
             </tr>
           </table>
-          <input type="submit" name="" value="주문하기">    
+          <input type="submit" name="submitorder" value="주문하기">    
         </div>
 
       </form>
