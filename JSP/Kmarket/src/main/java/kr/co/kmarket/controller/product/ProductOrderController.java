@@ -19,7 +19,7 @@ import kr.co.kmarket.vo.CartVO;
 import kr.co.kmarket.vo.CateVO;
 import kr.co.kmarket.vo.MemberVO;
 
-@WebServlet("/product/cart.do")
+@WebServlet("/product/order.do")
 public class ProductOrderController extends HttpServlet{
 
 	private static final long serialVersionUID = 1L;
