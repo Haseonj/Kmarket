@@ -10,6 +10,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import kr.co.kmarket.service.BoardService;
 import kr.co.kmarket.vo.BoardVO;
 
@@ -18,6 +21,7 @@ public class ListController extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
 	private BoardService service = BoardService.INSTANCE;
+	private Logger logger = LoggerFactory.getLogger(this.getClass());
 	
 	@Override
 	public void init() throws ServletException {
@@ -29,6 +33,12 @@ public class ListController extends HttpServlet {
 		String cate = req.getParameter("cate");
 		String type = req.getParameter("type");
 		String pg = req.getParameter("pg");
+		
+		// 상세 카테고리 조회
+		List<BoardVO> cate2 = service.selectCate2(cate);
+		
+		// faq 더보기에 추가 할 2차 카테고리 count 조회
+		List<BoardVO> cate2Count = service.selectCountCate2(cate);
 		
 		// 현재 페이지 번호
 		int currentPage = service.getCurrentpage(pg);
@@ -49,7 +59,12 @@ public class ListController extends HttpServlet {
 		int start = service.getStartNum(currentPage);
 		
 		// 글 가져오기
-		List<BoardVO> articles = service.selectArticles(cate, start);
+		List<BoardVO> articles = null;
+		if(group.equals("qna")) {
+			articles = service.selectArticles(group, cate, start);
+		}else if(group.equals("faq")) {
+			articles = service.selectFaqArticles(group, cate);
+		}
 		
 		req.setAttribute("articles", articles);
 		req.setAttribute("currentPage", currentPage);
@@ -57,6 +72,7 @@ public class ListController extends HttpServlet {
 		req.setAttribute("pageGroupStart", result[0]);
 		req.setAttribute("pageGroupEnd", result[1]);
 		req.setAttribute("pageStartNum", pageStartNum + 1);
+		req.setAttribute("cate2", cate2);
 		
 		req.setAttribute("group", group);
 		req.setAttribute("cate", cate);

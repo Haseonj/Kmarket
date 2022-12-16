@@ -21,7 +21,7 @@ import kr.co.kmarket.service.ProductService;
 import kr.co.kmarket.vo.MemberVO;
 import kr.co.kmarket.vo.OrderVO;
 
-@WebServlet("/product/order.do")
+@WebServlet("/product/cart.do")
 public class ProductOrderController extends HttpServlet{
 
 	private static final long serialVersionUID = 1L;

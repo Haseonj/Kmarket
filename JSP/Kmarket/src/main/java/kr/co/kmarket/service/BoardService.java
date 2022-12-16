@@ -23,9 +23,17 @@ public enum BoardService {
 		dao.insertArticle(vo);
 	}
 	
-	public List<BoardVO> selectArticles(String cate, int start) {
+	public BoardVO selectArticle(String no) {
+		return dao.selectArticle(no);
+	}
+	
+	public List<BoardVO> selectArticles(String group, String cate, int start) {
 		logger.info("selectArticlesService.. cate:" +cate);
-		return dao.selectArticles(cate, start);
+		return dao.selectArticles(group, cate, start);
+	}
+	
+	public List<BoardVO> selectFaqArticles(String group, String cate){
+		return dao.selectFaqArticles(group, cate);
 	}
 	
 	public int selectCountTotal(String cate) {

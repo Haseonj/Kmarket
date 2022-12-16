@@ -35,14 +35,75 @@ public class BoardDAO extends DBHelper {
 		}
 	}
 	
-	public List<BoardVO> selectArticles(String cate, int start) {
+	public BoardVO selectArticle(String no) {
+		BoardVO vo = null;
+		try {
+			logger.info("selectArticle...");
+			conn = getConnection();
+			psmt = conn.prepareStatement(BoardSql.SELECT_ARTICLE);
+			psmt.setString(1, no);
+			rs = psmt.executeQuery();
+			
+			if(rs.next()) {
+				vo = new BoardVO();
+				vo.setNo(rs.getInt(1));
+				vo.setUid(rs.getString(2));
+				vo.setGroup(rs.getString(3));
+				vo.setC1Name(rs.getString(4));
+				vo.setCate2(rs.getString(5));
+				vo.setTitle(rs.getString(6));
+				vo.setContent(rs.getString(7));
+				vo.setRegip(rs.getString(8));
+				vo.setRdate(rs.getString(9));
+			}
+			
+			close();
+		}catch (Exception e) {
+			logger.error(e.getMessage());
+		}
+		return vo;
+	}
+	
+	public List<BoardVO> selectArticles(String group, String cate, int start) {
 		List<BoardVO> articles = new ArrayList<>();
 		try {
 			logger.info("selectArticles...");
 			conn = getConnection();
 			psmt = conn.prepareStatement(BoardSql.SELECT_ARTICLES);
-			psmt.setString(1, cate);
-			psmt.setInt(2, start);
+			psmt.setString(1, group);
+			psmt.setString(2, cate);
+			psmt.setInt(3, start);
+			rs = psmt.executeQuery();
+			
+			while(rs.next()) {
+				BoardVO vo = new BoardVO();
+				vo.setNo(rs.getInt(1));
+				vo.setUid(rs.getString(2));
+				vo.setGroup(rs.getString(3));
+				vo.setC1Name(rs.getString(4));
+				vo.setCate2(rs.getString(5));
+				vo.setTitle(rs.getString(6));
+				vo.setContent(rs.getString(7));
+				vo.setRegip(rs.getString(8));
+				vo.setRdate(rs.getString(9));
+				articles.add(vo);
+			}
+			close();
+		}catch (Exception e) {
+			logger.error(e.getMessage());
+		}
+		
+		return articles;
+	}
+	
+	public List<BoardVO> selectFaqArticles(String group, String cate){
+		List<BoardVO> articles = new ArrayList<>();
+		try {
+			logger.info("selectFaqArticles...");
+			conn = getConnection();
+			psmt = conn.prepareStatement(BoardSql.SELECT_FAQ_ARTICLES);
+			psmt.setString(1, group);
+			psmt.setString(2, cate);
 			rs = psmt.executeQuery();
 			
 			while(rs.next()) {
