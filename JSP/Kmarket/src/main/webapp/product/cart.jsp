@@ -51,6 +51,8 @@
 			let pricetotal = Number($('#totalPrice').text());
 			let discounttotal = Number($('#totalDiscount').text());
 			let deliverytotal = Number($('#totalDelivery').text());
+			let salepricetotal = Number($('#totalSalePrice').text());
+			let pointtotal = Number($('#totalPoint').text());
 			
 			let count  = Number($(this).parents('tr').find('#count').text());			
 			console.log('count : ' + count);
@@ -59,43 +61,52 @@
 			let discount  = Number($(this).parents('tr').find('#discount').text());
 			console.log('discount : '+discount);
 			let delivery = $(this).parents('tr').find('#delivery').text();
+			let total = Number($(this).parents('tr').find('#total').text());
+			let point = Number($(this).parents('tr').find('#point').text());
 			
 			if(checked){
 				// 체크했을 때
 				counttotal = counttotal + count;
-				pricetotal = pricetotal + price;
-				discounttotal = discounttotal + (price * discount/100);
+				pricetotal = pricetotal + (price * count);
+				discounttotal = discounttotal + (price * discount * count/100);
 				console.log('1.counttotal : ' + counttotal);
 				
 				if(delivery == '무료배송'){
 					delivery = 0;
 					deliverytotal = deliverytotal + delivery;
+					salepricetotal = salepricetotal + total + deliverytotal;
 				}else{
 					delivery = Number(delivery);
 					console.log('delivery : '+delivery);
 					deliverytotal = deliverytotal + delivery;
 					console.log('deliverytotal : '+deliverytotal);
+					salepricetotal = salepricetotal + total + deliverytotal;
 				}
-				
+				pointtotal = pointtotal + point;
 			}else{
 				// 체크해제 했을때
 				counttotal = counttotal - count;
-				pricetotal = pricetotal - price;
-				discounttotal = discounttotal - (price * discount/100);
+				pricetotal = pricetotal - (price * count);
+				discounttotal = discounttotal - (price * discount * count/100);
 				console.log('2.counttotal : ' + counttotal);
 				
 				if(delivery == '무료배송'){
 					delivery = 0;
 					deliverytotal = deliverytotal - delivery;
+					salepricetotal = salepricetotal - total - deliverytotal;
 				}else{
 					delivery = Number(delivery);
 					deliverytotal = deliverytotal - delivery;
+					salepricetotal = salepricetotal - total - deliverytotal;
 				}
+				pointtotal = pointtotal - point;
 			}
 			$('#totalCount').text(counttotal);
 			$('#totalPrice').text(pricetotal);
 			$('#totalDiscount').text(discounttotal);
 			$('#totalDelivery').text(deliverytotal);
+			$('#totalSalePrice').text(salepricetotal);
+			$('#totalPoint').text(pointtotal);
 			
 			// 상품금액 계산
 			// 할인금액 계산
@@ -105,7 +116,24 @@
 			
 		});
 		
-		
+		$('input[name=submitorder]').click(function(){
+			
+			if(confirm('주문페이지로 이동하시겠습니까?')){
+				
+				$.ajax({
+					url:'/Kmarket/product/order.do',
+					method:'post',
+					data:jsonData,
+					dataType:'json',
+					success:function(){
+						
+					}
+				});
+			}else{
+				return;
+			}
+			
+		});
 	});
 </script>
     <!-- 장바구니 페이지 시작 -->
@@ -198,7 +226,7 @@
               <td id="totalSalePrice">0</td>
             </tr>
           </table>
-          <input type="submit" name="" value="주문하기">    
+          <input type="submit" name="submitorder" value="주문하기">    
         </div>
 
       </form>
