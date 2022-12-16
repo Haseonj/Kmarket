@@ -17,6 +17,7 @@ import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 import kr.co.kmarket.dao.ProductDAO;
 import kr.co.kmarket.vo.CartVO;
 import kr.co.kmarket.vo.CateVO;
+import kr.co.kmarket.vo.OrderVO;
 import kr.co.kmarket.vo.ProductVO;
 
 
@@ -89,6 +90,32 @@ public enum ProductService {
 	public int deleteCartList(String uid, String prodNo) {
 		logger.info("ProductService...deleteCartList...");
 		return dao.deleteCartList(uid, prodNo);
+	}
+	
+	// order
+	public int insertOrder(OrderVO vo) {
+		logger.info("ProductService...insertOrder...");
+		return dao.insertOrder(vo);
+	}
+	public void insertOrderItem(OrderVO vo, String prodNo) {
+		logger.info("ProductService...inserOrderItem...");
+		dao.insertOrderItem(vo, prodNo);
+	}
+	public OrderVO selectLatestOrder(String uid) {
+		logger.info("ProductService...selectOrderNo...");
+		return dao.selectLatestOrder(uid);
+	}
+	public List<OrderVO> selectOrder(int orderNo) {
+		logger.info("ProductService...selectOrder...");
+		return dao.selectOrder(orderNo);
+	}
+	public int selectOrderNo(String uid) {
+		logger.info("ProductService...selectOrderNo...");
+		return dao.selectOrderNo(uid);
+	}
+	public List<ProductVO> selectOrderProducts(String prodNo) {
+		logger.info("ProductService...selectOrderProducts...");
+		return dao.selectOrderProducts(prodNo);
 	}
 	
 	// 서비스 로직

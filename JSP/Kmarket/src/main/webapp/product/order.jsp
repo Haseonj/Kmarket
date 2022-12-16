@@ -1,4 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <jsp:include page="./_header.jsp"/>
 
     <!-- 주문 페이지 시작-->
@@ -19,6 +20,7 @@
             <th>상품명</th>
             <th>총수량</th>
             <th>판매가</th>
+            <th>할인</th>
             <th>배송비</th>
             <th>소계</th>
           </tr>
@@ -26,52 +28,31 @@
             <tr class="empty">
               <td colspan="7">장바구니에 상품이 없습니다.</td>
             </tr>
-            <tr>
-              <td>
-                <article>
-                  <a href="#"><img src="https://via.placeholder.com/80x80" alt=""></a>
-                  <div>
-                    <h2><a href="#">상품명</a></h2>
-                    <p>상품설명</p>
-                  </div>
-                </article>
-              </td>
-              <td>1</td>
-              <td>27,000</td>
-              <td>무료배송</td>
-              <td>27,000</td>
-            </tr>
-            <tr>
-              <td>
-                <article>
-                  <a href="#"><img src="https://via.placeholder.com/80x80" alt=""></a>
-                  <div>
-                    <h2><a href="#">상품명</a></h2>
-                    <p>상품설명</p>
-                  </div>
-                </article>
-              </td>
-              <td>1</td>
-              <td>27,000</td>
-              <td>무료배송</td>
-              <td>27,000</td>
-            </tr>
-            <tr>
-              <td>
-                <article>
-                  <a href="#"><img src="https://via.placeholder.com/80x80" alt=""></a>
-                  <div>
-                    <h2><a href="#">상품명</a></h2>
-                    <p>상품설명</p>
-                  </div>
-                </article>
-              </td>
-              <td>1</td>
-              <td>27,000</td>
-              <td>무료배송</td>
-              <td>27,000</td>
-            </tr>                    
-          
+            <c:forEach var="order" items="${orders}">
+            	<tr>
+	              <td>
+	                <article>
+	                  <a href="#"><img src="http://3.39.231.136:8080/Kmarket/file/${order.thumb1}" alt=""></a>
+	                  <div>
+	                    <h2><a href="#">${order.prodName}</a></h2>
+	                    <p>${order.descript}</p>
+	                  </div>
+	                </article>
+	              </td>
+	              <td>${order.count}</td>
+	              <td>${order.price}</td>
+	              <td>${order.discount}%</td>
+	              <c:choose>
+	              	<c:when test="${order.delivery eq 0}">
+	              		<td>무료배송</td>	
+	              	</c:when>
+	              	<c:otherwise>
+	              		<td>${order.delivery}원</td>
+	              	</c:otherwise>
+	              </c:choose>
+	              <td>${order.total}</td>
+	            </tr>
+            </c:forEach>
         </table>                 
         
         <!-- 최종 결제 정보 -->

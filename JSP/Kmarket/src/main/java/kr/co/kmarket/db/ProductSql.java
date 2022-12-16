@@ -37,4 +37,18 @@ public class ProductSql {
 												+ "where `uid`=?";
 	public static final String DELETE_CART_LIST = "delete from `km_product_cart` where `uid`=? and `prodNo`=?";
 			
+	// order
+	public static final String INSERT_ORDER = "insert into `km_product_order` set "
+												+ "`ordUid`=?, `ordCount`=?, `ordPrice`=?, `ordDiscount`=?, `ordDelivery`=?, `savePoint`=?, `ordTotPrice`=?";
+	public static final String SELECT_LATEST_ORDER = "select * from `km_product_order` where `ordUid`=? order by `ordNo` desc limit 1";
+	public static final String SELECT_ORDER = "SELECT a.*, c.* "
+												+ "from `km_product_order_item` AS a "
+												+ "JOIN `km_product` AS c ON a.prodNo = c.prodNo "
+												+ "where `ordNo`=?";
+	public static final String SELECT_ORDER_NO = "SELECT `ordNo` "
+													+ "from `km_product_order` "
+													+ "where `ordUid`=?";
+	public static final String SELECT_ORDER_PRODUCTS = "select `price`, `discount`, `point`, `delivery` from `km_product` where `prodNo`=?";
+	public static final String INSERT_ORDER_ITEM = "insert into `km_product_order_item` set "
+													+"`ordNo`=?, `prodNo`=?, `count`=?, `price`=?, `discount`=?, `point`=?, `delivery`=?, `total`=?";
 }

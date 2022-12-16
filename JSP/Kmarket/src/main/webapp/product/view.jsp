@@ -7,7 +7,15 @@
 		var week = new Array('일', '월', '화', '수', '목', '금', '토');
 	    
 	    var today = new Date().getDay()+3;
+	    console.log('today : ' + today);
+	    
+	    if(today >= 7){
+	    	today = today % 7;
+	    }
+	    
 	    var todayLabel = week[today];
+	    console.log('todayLabel : ' + todayLabel);
+	    
 	    return todayLabel;
 	}
 
@@ -108,11 +116,49 @@
 		$(document).on('click', '.order', function(){
 			console.log('here2');
 			
-			let cate1 = '${vo.cate1}';
-			let cate2 = '${vo.cate2}';
 			let prodNo = '${product.prodNo}';
+			let pricenum = $('input[name=num]').val();
+			let price = '${product.price}';
+			let discount = pricenum * price * '${product.discount}' / 100;
+			let point = '${product.point}';
+			let delivery = '${product.delivery}';
+			let total = pricenum * '${disprice}';
 			
-			location.href = "/Kmarket/product/order.do?cate1="+cate1+"&cate2="+cate2+"&prodNo="+prodNo+"&pricenum="+pricenum;
+			console.log('prodNo : '+ prodNo);
+			console.log('pricenum : '+ pricenum);
+			console.log('price : '+ price);
+			console.log('discount : '+ discount);
+			console.log('point : '+ point);
+			console.log('delivery : '+ delivery);
+			console.log('total : '+ total);
+			
+			let jsonData = {
+					"prodNo":prodNo,
+					"count":pricenum,
+					"price":price,
+					"discount":discount,
+					"point":point,
+					"delivery":delivery,
+					"total":total
+			};
+			console.log('here3 : '+jsonData);
+			
+			$.ajax({
+				url:'/Kmarket/product/goorder.do',
+				method:'post',
+				data:jsonData,
+				dataType:'json',
+				success:function(data){
+					if(data.result > 0){
+						location.href = '/Kmarket/product/order.do';	
+					}else{
+						alert('다시 시도바랍니다.');
+					}
+					
+				}
+			});
+			
+			
 			
 		});
 	});
