@@ -12,16 +12,17 @@ public class BoardVO {
 	private String regip;
 	private String rdate;
 	
-	private int cate2Count;
+	private int cate2No;
 	
-	
-	public int getCate2Count() {
-		return cate2Count;
+	public int getCate2No() {
+		return cate2No;
 	}
-	public void setCate2Count(int cate2Count) {
-		this.cate2Count = cate2Count;
+	public void setCate2No(int cate2No) {
+		this.cate2No = cate2No;
 	}
-	
+	public void setCate2No(String cate2No) {
+		this.cate2No = Integer.parseInt(cate2No);
+	}
 	public int getNo() {
 		return no;
 	}

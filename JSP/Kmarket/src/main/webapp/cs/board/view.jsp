@@ -1,13 +1,16 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri ="http://java.sun.com/jsp/jstl/core"%>
 <jsp:include page="../_header.jsp"/>
-<jsp:include page="./_${group}.jsp"/>
+<jsp:include page="./_${vo.group}.jsp"/>
                 <nav>
                     <h2 class="title">
                     <c:if test="${group eq 'faq'}">
-                    <span>Q.</span>
-                    </c:if>
-                    [${vo.cate2}] ${vo.title}</h2>
+                    <span>Q.</span
+                    ></c:if
+                    ><c:if test="${group eq 'qna'}">
+                    [${vo.cate2}]
+                    </c:if
+                    >${vo.title}</h2>
                     <c:if test="${group eq 'qna'}">
                     <span>${vo.uid.substring(0, 5)}<c:forEach begin="6" end="${vo.uid.length()}" step="1">*</c:forEach>
                     </span>
@@ -32,7 +35,8 @@
                         <br>
                     </p>
                 </div>
-                <a href="/Kmarket/cs/board/list.do?group=${group}&cate=${cate}&type=list" class="btnList">목록보기</a>
+                <a href="/Kmarket/cs/board/list.do?group=${vo.group}&cate=${vo.c1Name}&type=list" class="btnList">목록보기</a>
+                <a href="/Kmarket/cs/board/modify.do?group=${vo.group}&cate=${vo.c1Name}&type=modify&pg=${pg}&no=${vo.no}" class="btnModify">수정하기</a>
             </article>
         </section>
 </section>

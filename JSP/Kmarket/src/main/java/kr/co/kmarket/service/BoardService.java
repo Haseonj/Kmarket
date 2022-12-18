@@ -23,8 +23,8 @@ public enum BoardService {
 		dao.insertArticle(vo);
 	}
 	
-	public BoardVO selectArticle(String no) {
-		return dao.selectArticle(no);
+	public BoardVO selectArticle(String no, String cate) {
+		return dao.selectArticle(no, cate);
 	}
 	
 	public List<BoardVO> selectArticles(String group, String cate, int start) {
@@ -39,6 +39,7 @@ public enum BoardService {
 	public int selectCountTotal(String cate) {
 		return dao.selectCountTotal(cate);
 	}
+	
 	
 	public List<BoardVO> selectCate1() {
 		return dao.selectCate1();

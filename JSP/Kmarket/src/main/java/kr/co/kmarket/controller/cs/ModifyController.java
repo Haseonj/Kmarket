@@ -9,18 +9,14 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import kr.co.kmarket.service.BoardService;
 import kr.co.kmarket.vo.BoardVO;
 
-@WebServlet("/cs/board/view.do")
-public class ViewController extends HttpServlet {
+@WebServlet("/cs/board/modify.do")
+public class ModifyController extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
 	private BoardService service = BoardService.INSTANCE;
-	private Logger logger = LoggerFactory.getLogger(this.getClass());
 	
 	@Override
 	public void init() throws ServletException {
@@ -36,11 +32,11 @@ public class ViewController extends HttpServlet {
 		
 		BoardVO vo = service.selectArticle(no, cate);
 		
-		req.setAttribute("vo", vo);
 		req.setAttribute("type", type);
+		req.setAttribute("vo", vo);
 		req.setAttribute("pg", pg);
 		
-		RequestDispatcher dispatcher = req.getRequestDispatcher("/cs/board/view.jsp");
+		RequestDispatcher dispatcher = req.getRequestDispatcher("/cs/board/modify.jsp");
 		dispatcher.forward(req, resp);
 	}
 	
