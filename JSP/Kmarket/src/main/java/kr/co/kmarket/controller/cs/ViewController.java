@@ -37,6 +37,11 @@ public class ViewController extends HttpServlet {
 		req.setAttribute("group", group);
 		req.setAttribute("cate", cate);
 		req.setAttribute("type", type);
+<<<<<<< Updated upstream
+=======
+		req.setAttribute("pg", pg);
+		req.setAttribute("no", no);
+>>>>>>> Stashed changes
 		
 		RequestDispatcher dispatcher = req.getRequestDispatcher("/cs/board/view.jsp");
 		dispatcher.forward(req, resp);
