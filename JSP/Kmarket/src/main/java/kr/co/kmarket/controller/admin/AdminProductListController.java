@@ -30,19 +30,20 @@ public class AdminProductListController extends HttpServlet{
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		String pg =req.getParameter("pg");
-		
-		String search1var = req.getParameter("search1var");
-		String search2var = req.getParameter("search2var");
-		if(search2var != "") {
+		String search=req.getParameter("search");
+		String search2=req.getParameter("search2");
+	
+	
+	
 			List<ProductVO> adproducts = service.selectadminproducts();
 			req.setAttribute("adpd", adproducts);
-			logger.debug("adpd");	
-		}else {
-			logger.debug("scpdstart");
-			List<ProductVO> searchadpds = service.searchadminproducts(search1var,search2var);
+		
+	
+			if(search2 != null) {
+			List<ProductVO> searchadpds = service.searchadminproducts(search,search2);
 			req.setAttribute("adpd", searchadpds);
-			logger.debug("scpdend");	
-		}
+			}
+	
 		
 		int total = service.selectadminCountTotal();
 		int lastPageNum = service.getLastPageNum(total);

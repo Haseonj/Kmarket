@@ -88,8 +88,8 @@ public enum ProductService {
 	public int selectadminCountTotal() {
 		return dao.selectadminCountTotal();
 	}
-	public List<ProductVO> searchadminproducts(String search1,String search2){
-		return dao.searchadminproducts(search1,search2);
+	public List<ProductVO> searchadminproducts(String search,String search2){
+		return dao.searchadminproducts(search,search2);
 	}
 	// cart 
 	public int insertCart(CartVO vo) {

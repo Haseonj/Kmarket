@@ -756,14 +756,19 @@ public class ProductDAO extends DBHelper {
 		}
 		return adminproducts;
 	}
-	public List<ProductVO> searchadminproducts(String search1,String search2) {
+	public List<ProductVO> searchadminproducts(String search,String search2) {
 		List<ProductVO> searchadpds = new ArrayList<>();
 		try {
 			logger.info("selectadminProducts...");
 			conn =getConnection();
-			psmt = conn.prepareStatement(ProductSql.SELECT_SEARCH_ADMIN_PRODUCTS);
-			psmt.setString(1, search1);
-			psmt.setString(2, search2);
+			switch(search) {
+			
+			case "prodName" : psmt = conn.prepareStatement(ProductSql.SELECT_SEARCH_ADMIN_PRODUCTS_PRODNAME);
+			case "prodNo" : psmt = conn.prepareStatement(ProductSql.SELECT_SEARCH_ADMIN_PRODUCTS_PRODNO); // 현재 prodNo 숫자 부분이 검색시 결과값이 안뜸
+			case "company" : psmt = conn.prepareStatement(ProductSql.SELECT_SEARCH_ADMIN_PRODUCTS_COMPANY);
+			case "seller" : psmt = conn.prepareStatement(ProductSql.SELECT_SEARCH_ADMIN_PRODUCTS_SELLER);
+			}
+			psmt.setString(1, "%"+search2+"%");
 			rs = psmt.executeQuery();
 			while(rs.next()) {
 				ProductVO product = new ProductVO();
