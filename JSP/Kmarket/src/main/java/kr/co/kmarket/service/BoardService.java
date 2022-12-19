@@ -48,6 +48,10 @@ public enum BoardService {
 		return dao.selectCate2(cate1);
 	}
 	
+	public void updateArticle(String no, String title, String content) {
+		dao.updateArticle(no, title, content);
+	}
+	
 	// 현재 페이지 번호
 	public int getCurrentpage(String pg) {
 		int currentPage = 1;

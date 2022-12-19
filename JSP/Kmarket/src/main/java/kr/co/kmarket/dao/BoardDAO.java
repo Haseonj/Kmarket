@@ -192,4 +192,20 @@ public class BoardDAO extends DBHelper {
 		}
 		return cate2;
 	}
+	
+	public void updateArticle(String no, String title, String content) {
+		try {
+			logger.info("updateArticle...");
+			conn = getConnection();
+			psmt = conn.prepareStatement(BoardSql.UPDATE_ARTICLE);
+			psmt.setString(1, title);
+			psmt.setString(2, content);
+			psmt.setString(3, no);
+			psmt.executeUpdate();
+			
+			close();
+		}catch (Exception e) {
+			logger.error(e.getMessage());
+		}
+	}
 }

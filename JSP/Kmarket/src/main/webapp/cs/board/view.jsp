@@ -32,7 +32,14 @@
                         <br>
                     </p>
                 </div>
+<<<<<<< Updated upstream
                 <a href="/Kmarket/cs/board/list.do?group=${group}&cate=${cate}&type=list" class="btnList">목록보기</a>
+=======
+                <a href="/Kmarket/cs/board/list.do?group=${group}&cate=${vo.c1Name}&type=list" class="btnList">목록보기</a>
+                <c:if test="${group eq 'qna'}">
+                <a href="/Kmarket/cs/board/modify.do?group=${group}&cate=${vo.c1Name}&type=modify&pg=${pg}&no=${vo.no}" class="btnModify">수정하기</a>
+                </c:if>
+>>>>>>> Stashed changes
             </article>
         </section>
 </section>

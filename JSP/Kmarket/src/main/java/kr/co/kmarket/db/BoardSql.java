@@ -27,5 +27,7 @@ public class BoardSql {
 	
 	public static final String SELECT_COUNT_CATE2 = "SELECT count('c1Name') FROM `km_cs_cate2` WHERE `c1Name`=?";
 	
+	public static final String UPDATE_ARTICLE = "UPDATE `km_cs_article` SET `title`=?, `content`=? WHERE `no`=?";
+	
 
 }
