@@ -1,7 +1,24 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <jsp:include page="./_header.jsp"/>
-
+<script>
+	$(function(){
+		$('input[name=ordercomplete]').click(function(){
+			
+			let ordCount = $();
+			
+			$.ajax({
+				url:'/Kmarket/product/order.do',
+				method:'post',
+				data:jsonData,
+				dataType:'json',
+				success:function(data){
+					location.href = '/Kmarket/product/complete.do';
+				}
+			});
+		});
+	});
+</script>
     <!-- 주문 페이지 시작-->
     <section class="order">
       
@@ -28,63 +45,63 @@
             <tr class="empty">
               <td colspan="7">장바구니에 상품이 없습니다.</td>
             </tr>
-            <c:forEach var="order" items="${orders}">
-            	<tr>
+			<c:forEach var="product" items="${carts}">
+			 	<tr>
 	              <td>
 	                <article>
-	                  <a href="#"><img src="http://3.39.231.136:8080/Kmarket/file/${order.thumb1}" alt=""></a>
+	                  <a href="#"><img src="http://3.39.231.136:8080/Kmarket/file/${product.thumb1}" alt=""></a>
 	                  <div>
-	                    <h2><a href="#">${order.prodName}</a></h2>
-	                    <p>${order.descript}</p>
+	                    <h2><a href="#">${product.prodName}</a></h2>
+	                    <p>${product.descript}</p>
 	                  </div>
 	                </article>
 	              </td>
-	              <td>${order.count}</td>
-	              <td>${order.price}</td>
-	              <td>${order.discount}%</td>
+	              <td>${product.count}</td>
+	              <td>${product.price}</td>
+	              <td>${product.discount}%</td>
 	              <c:choose>
-	              	<c:when test="${order.delivery eq 0}">
+	              	<c:when test="${product.delivery eq 0}">
 	              		<td>무료배송</td>	
 	              	</c:when>
 	              	<c:otherwise>
-	              		<td>${order.delivery}원</td>
+	              		<td>${product.delivery}원</td>
 	              	</c:otherwise>
 	              </c:choose>
-	              <td>${order.total}</td>
+	              <td>${product.total}</td>
 	            </tr>
-            </c:forEach>
+			</c:forEach>
         </table>                 
         
         <!-- 최종 결제 정보 -->
         <div class="final">
           <h2>최종결제 정보</h2>
-          <table border="0">
-            <tr>
-              <td>총</td>
-              <td>2 건</td>
-            </tr>
-            <tr>
-              <td>상품금액</td>
-              <td>27,000</td>
-            </tr>
-            <tr>
-              <td>할인금액</td>
-              <td>-1,000</td>
-            </tr>
-            <tr>
-              <td>배송비</td>
-              <td>0</td>
-            </tr>
-            <tr>
-              <td>포인트 할인</td>
-              <td>-1000</td>
-            </tr>
-            <tr>
-              <td>전체주문금액</td>
-              <td>25,000</td>
-            </tr>                            
+			<table border="0">
+	            <tr>
+	              <td>총</td>
+	              <td>${totalcount} 건</td>
+	            </tr>
+	            <tr>
+	              <td>상품금액</td>
+	              <td>${totalprice}</td>
+	            </tr>
+	            <tr>
+	              <td>할인금액</td>
+	              <td>-${discount}</td>
+	            </tr>
+	            <tr>
+	              <td>배송비</td>
+	              <td>${delivery}</td>
+	            </tr>
+	            <tr>
+	              <td>포인트 할인</td>
+	              <td>0</td>
+	            </tr>
+	            <tr>
+	              <td>전체주문금액</td>
+	              <td>${productstotalprice}</td>
+	            </tr>                            
           </table>
-          <input type="button" name="" value="결제하기">              
+          <input type="button" name="ordercomplete" value="결제하기">
         </div>
           
         <!-- 배송정보 -->

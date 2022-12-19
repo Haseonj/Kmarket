@@ -56,6 +56,10 @@ public enum ProductService {
 		logger.info("ProductService...selectProduct...");
 		return dao.selectProduct(prodNo);
 	}
+	public CartVO selectProductForOrder(String prodNo) {
+		logger.info("ProductService...selectProductForOrder...");
+		return dao.selectProductForOrder(prodNo);
+	}
 	public int selectCountTotal(String prodCate1, String prodCate2) {
 		return dao.selectCountTotal(prodCate1, prodCate2);
 	}
@@ -96,9 +100,13 @@ public enum ProductService {
 		logger.info("ProductService...selectCarts...");
 		return dao.selectCarts(uid);
 	}
-	public int deleteCartList(String uid, String prodNo) {
+	public CartVO selectCart(String cartNo) {
+		logger.info("ProductService...selectCart...");
+		return dao.selectCart(cartNo);
+	}
+	public int deleteCartList(String uid, String cartNo) {
 		logger.info("ProductService...deleteCartList...");
-		return dao.deleteCartList(uid, prodNo);
+		return dao.deleteCartList(uid, cartNo);
 	}
 	
 	// order

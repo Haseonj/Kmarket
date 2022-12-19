@@ -2,6 +2,7 @@ package kr.co.kmarket.controller.product;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -18,8 +19,8 @@ import org.slf4j.LoggerFactory;
 import com.google.gson.JsonObject;
 
 import kr.co.kmarket.service.ProductService;
-import kr.co.kmarket.vo.MemberVO;
-import kr.co.kmarket.vo.OrderVO;
+import kr.co.kmarket.vo.CartVO;
+import kr.co.kmarket.vo.ProductVO;
 
 @WebServlet("/product/order.do")
 public class ProductOrderController extends HttpServlet{
@@ -38,14 +39,32 @@ public class ProductOrderController extends HttpServlet{
 		logger.info("ProductOrderController...GET");
 		
 		HttpSession sess = req.getSession();
-		MemberVO vo = (MemberVO)sess.getAttribute("sessMember");
+		List<CartVO> carts = (List<CartVO>) sess.getAttribute("sessCarts");
 		
-		String uid = vo.getUid();
+		int price = 0;
+		int discount = 0;
+		int delivery = 0;
+		int point = 0;
 		
-		int orderNo = service.selectOrderNo(uid);
-		List<OrderVO> orders = service.selectOrder(orderNo);
+		for(int i=0; i<carts.size(); i++) { 
+			price += carts.get(i).getPrice() * carts.get(i).getCount();
+			discount += carts.get(i).getDiscount() * carts.get(i).getPrice() * carts.get(i).getCount() / 100;
+			delivery += carts.get(i).getDelivery();
+			point += carts.get(i).getPoint();
+			
+		}
+		int productstotalprice = price - discount + delivery ;
 		
-		req.setAttribute("orders", orders);
+		req.setAttribute("totalprice", price);
+		req.setAttribute("productstotalprice", productstotalprice);
+		req.setAttribute("totalcount", carts.size());
+		req.setAttribute("discount", discount);
+		req.setAttribute("delivery", delivery);
+		req.setAttribute("discount", discount);
+		req.setAttribute("point", point);
+		
+		req.setAttribute("carts", carts);
+		
 		
 		RequestDispatcher dispatcher = req.getRequestDispatcher("/product/order.jsp");
 		dispatcher.forward(req, resp);
@@ -56,54 +75,7 @@ public class ProductOrderController extends HttpServlet{
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		logger.info("ProductOrderController...POST");
 		
-		HttpSession sess = req.getSession();
-		MemberVO member = (MemberVO)sess.getAttribute("sessMember");
 		
-		String[] prodNums = req.getParameterValues("checkBoxArr");
-		String[] count = req.getParameterValues("count");
-		String uid = member.getUid();
-		
-		//logger.debug("prodNums : " + prodNums.length);
-		//logger.debug("count : " + count.length);
-		
-		
-		int price = 0;
-		int discount = 0;
-		int delivery = 0;
-		int point = 0;
-		
-		/*
-		List<ProductVO> total = new ArrayList<>();
-		
-		for(int i=0; i<prodNums.length; i++) {
-			total = service.selectOrderProducts(prodNums[i]);
-			price += total.get(i).getPrice() * Integer.parseInt(count[i]);
-			discount += total.get(i).getDiscount() * price / 100 * Integer.parseInt(count[i]);
-			delivery += total.get(i).getDelivery();
-			point += total.get(i).getPoint();
-		}
-		int totalprice = price - discount + delivery ;
-		
-		OrderVO vo = new OrderVO();
-		vo.setOrdPrice(price);
-		vo.setOrdCount(count.length);
-		vo.setDelivery(delivery);
-		vo.setSavePoint(point);
-		vo.setOrdTotPrice(totalprice);
-		
-		int result = service.insertOrder(vo);
-		OrderVO order = service.selectLatestOrder(uid);
-		
-		for(int k=0; k<prodNums.length; k++) {
-			service.insertOrderItem(order, prodNums[k]);
-		}
-		*/
-		
-		JsonObject json = new JsonObject();
-		json.addProperty("result", 1);
-		
-		PrintWriter writer = resp.getWriter();
-		writer.print(json.toString());
 		
 	}
 	
