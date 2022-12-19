@@ -10,6 +10,7 @@ public class ProductSql {
 												+ "`thumb2`=?,`thumb3`=?, `detail`=?, "
 												+ "`ip`=?, `rdate`=NOW()";
 	public static final String SELECT_PRODUCT = "select * from `km_product` where `prodNo`=?";
+	public static final String SELECT_PRODUCT_FOR_ORDER = "select * from `km_product` where `prodNo`=?";
 	public static final String SELECT_PRODUCTS = "SELECT "
 												+ "	a.*, "
 												+ "	FLOOR(`price` * (1 - `discount` / 100)) AS `salePrice` "
@@ -38,7 +39,13 @@ public class ProductSql {
 												+ "from `km_product_cart` AS a "
 												+ "JOIN `km_product` AS b ON a.prodNo = b.prodNo "
 												+ "where `uid`=?";
-	public static final String DELETE_CART_LIST = "delete from `km_product_cart` where `uid`=? and `prodNo`=?";
+	
+	public static final String SELECT_CART = "SELECT * FROM `km_product_cart` AS a "
+												+ "JOIN `km_product` AS b "
+												+ "ON a.prodNo = b.prodNo "
+												+ "WHERE `cartNo`=?";
+	
+	public static final String DELETE_CART_LIST = "delete from `km_product_cart` where `uid`=? and `cartNo`=?";
 			
 	// order
 	public static final String INSERT_ORDER = "insert into `km_product_order` set "
