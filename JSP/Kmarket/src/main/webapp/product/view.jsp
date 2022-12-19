@@ -116,50 +116,38 @@
 		$(document).on('click', '.order', function(){
 			console.log('here2');
 			
+			let uid = '${sessMember.uid}';
+			
 			let prodNo = '${product.prodNo}';
 			let pricenum = $('input[name=num]').val();
-			let price = '${product.price}';
-			let discount = pricenum * price * '${product.discount}' / 100;
-			let point = '${product.point}';
-			let delivery = '${product.delivery}';
-			let total = pricenum * '${disprice}';
 			
 			console.log('prodNo : '+ prodNo);
 			console.log('pricenum : '+ pricenum);
-			console.log('price : '+ price);
-			console.log('discount : '+ discount);
-			console.log('point : '+ point);
-			console.log('delivery : '+ delivery);
-			console.log('total : '+ total);
 			
-			let jsonData = {
-					"prodNo":prodNo,
-					"count":pricenum,
-					"price":price,
-					"discount":discount,
-					"point":point,
-					"delivery":delivery,
-					"total":total
-			};
-			console.log('here3 : '+jsonData);
-			
-			$.ajax({
-				url:'/Kmarket/product/goorder.do',
-				method:'post',
-				data:jsonData,
-				dataType:'json',
-				success:function(data){
-					if(data.result > 0){
-						location.href = '/Kmarket/product/order.do';	
-					}else{
-						alert('다시 시도바랍니다.');
+			if(uid == ''){
+				alert('로그인 후 이용 가능합니다.');
+			}else{				
+				//location.href = '/Kmarket/product/order.do?prodNo='+prodNo+'&count='+pricenum;
+				
+				
+				$.ajax({
+					url:'/Kmarket/product/view.do',
+					method:'POST',
+					data: {"prodNo": prodNo, "count": pricenum},
+					dataType:'json',
+					success:function(data){
+												
+						console.log('here5');
+						
+						if(data.result > 0){
+							console.log('here6');
+							location.href = '/Kmarket/product/order.do';	
+						}
+						
 					}
-					
-				}
-			});
-			
-			
-			
+				});
+				
+			}
 		});
 	});
 </script>

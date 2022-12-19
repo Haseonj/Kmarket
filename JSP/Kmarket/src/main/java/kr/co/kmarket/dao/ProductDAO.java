@@ -103,7 +103,7 @@ public class ProductDAO extends DBHelper {
 	public ProductVO selectProduct(String prodNo) {
 		ProductVO product = null;
 		try {
-			logger.info("selectProducts...");
+			logger.info("selectProduct...");
 			conn =getConnection();
 			psmt = conn.prepareStatement(ProductSql.SELECT_PRODUCT);
 			psmt.setString(1, prodNo);
@@ -142,6 +142,35 @@ public class ProductDAO extends DBHelper {
 				product.setEtc3(rs.getString(30));
 				product.setEtc4(rs.getString(31));
 				product.setEtc5(rs.getString(32));
+			}
+			close();
+		}catch(Exception e) {
+			logger.error(e.getMessage());
+		}
+		return product;
+	}
+	public CartVO selectProductForOrder(String prodNo) {
+		CartVO product = null;
+		try {
+			logger.info("selectProduct...");
+			conn =getConnection();
+			psmt = conn.prepareStatement(ProductSql.SELECT_PRODUCT);
+			psmt.setString(1, prodNo);
+			rs = psmt.executeQuery();
+			while(rs.next()) {
+				product = new CartVO();
+				product.setProdNo(rs.getInt(1));
+				product.setProdName(rs.getString(4));
+				product.setDescript(rs.getString(5));
+				product.setCompany(rs.getString(6));
+				product.setSeller(rs.getString(7));
+				product.setPrice(rs.getInt(8));
+				product.setDiscount(rs.getInt(9));
+				product.setPoint(rs.getInt(10));
+				product.setDelivery(rs.getInt(13));
+				product.setThumb1(rs.getString(17));
+				product.setRdate(rs.getString(27));
+				
 			}
 			close();
 		}catch(Exception e) {
@@ -584,6 +613,7 @@ public class ProductDAO extends DBHelper {
 		}
 		return result;
 	}
+	
 	public List<CartVO> selectCarts(String uid) {
 		List<CartVO> carts = new ArrayList<>();
 		try {
@@ -621,14 +651,49 @@ public class ProductDAO extends DBHelper {
 		return carts;
 	}
 	
-	public int deleteCartList(String uid, String prodNo) {
+	public CartVO selectCart(String cartNo) {
+		
+		CartVO cart = null;
+		
+		try {
+			logger.info("selectCart...");
+			conn = getConnection();
+			psmt = conn.prepareStatement(ProductSql.SELECT_CART);
+			psmt.setString(1, cartNo);
+			
+			rs = psmt.executeQuery();
+			if(rs.next()) {
+				cart = new CartVO();
+				cart.setCartNo(rs.getInt(1));
+				cart.setUid(rs.getString(2));
+				cart.setProdNo(rs.getInt(3));
+				cart.setCount(rs.getInt(4));
+				cart.setPrice(rs.getInt(5));
+				cart.setDiscount(rs.getInt(6));
+				cart.setPoint(rs.getInt(7));
+				cart.setDelivery(rs.getInt(8));
+				cart.setTotal(rs.getInt(9));
+				cart.setRdate(rs.getString(10));
+				cart.setProdName(rs.getString(14));
+				cart.setDescript(rs.getString(15));
+				cart.setThumb1(rs.getString(27));
+			}
+			
+			close();
+		}catch(Exception e) {
+			logger.error(e.getMessage());
+		}
+		return cart;
+	}
+	
+	public int deleteCartList(String uid, String cartNo) {
 		int result = 0;
 		try {
 			logger.info("deleteCartList...");
 			conn = getConnection();
 			psmt = conn.prepareStatement(ProductSql.DELETE_CART_LIST);
 			psmt.setString(1, uid);
-			psmt.setString(2, prodNo);
+			psmt.setString(2, cartNo);
 			
 			result = psmt.executeUpdate();
 			
@@ -834,7 +899,7 @@ public class ProductDAO extends DBHelper {
 					order.setDiscount(rs.getInt(5));
 					order.setPoint(rs.getInt(6));
 					order.setDelivery(rs.getInt(7));
-					order.setTotal(rs.getInt(9));
+					order.setTotal(rs.getInt(8));
 					order.setProdName(rs.getString(12));
 					order.setDescript(rs.getString(13));
 					order.setThumb1(rs.getString(25));

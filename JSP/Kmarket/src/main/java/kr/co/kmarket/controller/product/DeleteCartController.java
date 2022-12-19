@@ -40,16 +40,16 @@ public class DeleteCartController extends HttpServlet{
 		MemberVO member = (MemberVO) sess.getAttribute("sessMember");
 		
 		logger.info("DeleteCartController...1");
-		String[] prodNo = req.getParameterValues("checkBoxArr");
+		String[] cartNo = req.getParameterValues("checkBoxArr");
 		String uid = member.getUid();
 		
 		logger.info("DeleteCartController...2"+uid);
-		int result[] = new int [prodNo.length];
+		int result[] = new int [cartNo.length];
 		JsonObject json = new JsonObject();
 		
-		for(int i=0; i<prodNo.length; i++) {
-			logger.info("DeleteCartController...3"+prodNo[i]);
-			result[i] = service.deleteCartList(uid, prodNo[i]);
+		for(int i=0; i<cartNo.length; i++) {
+			logger.info("DeleteCartController...3"+cartNo[i]);
+			result[i] = service.deleteCartList(uid, cartNo[i]);
 			
 			logger.info("DeleteCartController...4"+result[i]);
 			json.addProperty("result["+i+"]", result[i]);
