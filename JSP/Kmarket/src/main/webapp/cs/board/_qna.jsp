@@ -18,6 +18,9 @@
         <c:if test="${type eq 'view'}">
         	<section class="view">
         </c:if>
+        <c:if test="${type eq 'modify'}">
+        	<section class="modify">
+        </c:if>
             <aside>
                 <h2>문의하기</h2>
                 <ul>

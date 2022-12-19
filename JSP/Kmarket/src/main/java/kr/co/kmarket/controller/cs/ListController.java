@@ -37,8 +37,6 @@ public class ListController extends HttpServlet {
 		// 상세 카테고리 조회
 		List<BoardVO> cate2 = service.selectCate2(cate);
 		
-		// faq 더보기에 추가 할 2차 카테고리 count 조회
-		List<BoardVO> cate2Count = service.selectCountCate2(cate);
 		
 		// 현재 페이지 번호
 		int currentPage = service.getCurrentpage(pg);

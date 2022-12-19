@@ -1,5 +1,6 @@
 package kr.co.kmarket.dao;
 
+import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -35,13 +36,14 @@ public class BoardDAO extends DBHelper {
 		}
 	}
 	
-	public BoardVO selectArticle(String no) {
+	public BoardVO selectArticle(String no, String cate) {
 		BoardVO vo = null;
 		try {
 			logger.info("selectArticle...");
 			conn = getConnection();
 			psmt = conn.prepareStatement(BoardSql.SELECT_ARTICLE);
 			psmt.setString(1, no);
+			psmt.setString(2, cate);
 			rs = psmt.executeQuery();
 			
 			if(rs.next()) {
@@ -55,6 +57,7 @@ public class BoardDAO extends DBHelper {
 				vo.setContent(rs.getString(7));
 				vo.setRegip(rs.getString(8));
 				vo.setRdate(rs.getString(9));
+				vo.setCate1(rs.getString(10));
 			}
 			
 			close();
@@ -101,11 +104,14 @@ public class BoardDAO extends DBHelper {
 		try {
 			logger.info("selectFaqArticles...");
 			conn = getConnection();
+			conn.setAutoCommit(false);
+			
 			psmt = conn.prepareStatement(BoardSql.SELECT_FAQ_ARTICLES);
 			psmt.setString(1, group);
 			psmt.setString(2, cate);
 			rs = psmt.executeQuery();
 			
+			conn.commit();
 			while(rs.next()) {
 				BoardVO vo = new BoardVO();
 				vo.setNo(rs.getInt(1));
@@ -119,6 +125,7 @@ public class BoardDAO extends DBHelper {
 				vo.setRdate(rs.getString(9));
 				articles.add(vo);
 			}
+			
 			close();
 		}catch (Exception e) {
 			logger.error(e.getMessage());
@@ -147,6 +154,7 @@ public class BoardDAO extends DBHelper {
 		}
 		return total;
 	}
+	
 	
 	public List<BoardVO> selectCate1() {
 		List<BoardVO> cate1 = new ArrayList<>();
@@ -184,6 +192,7 @@ public class BoardDAO extends DBHelper {
 				vo.setC1Name(rs.getString(1));
 				vo.setCate1(rs.getString(2));
 				vo.setCate2(rs.getString(3));
+				vo.setCate2No(rs.getInt(4));
 				cate2.add(vo);
 			}
 			close();
