@@ -412,6 +412,11 @@
     text-align: center;
   }
   
+  main > section > section > article .thumb > img {
+  	width: 230px;
+  	height: 230px;
+  }
+  
   main > section > section > article h2 {
     font-size: 15px;
     font-weight: bold;
