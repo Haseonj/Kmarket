@@ -5,7 +5,44 @@
 	$(function(){
 		$('input[name=ordercomplete]').click(function(){
 			
-			let ordCount = $();
+			let ordCount = '${totalcount}';
+			let ordPrice = $('#ordPrice').text();
+			let ordDiscount = '${discount}';
+			let ordDelivery = $('#ordDelivery').text();
+			let savePoint = '${point}';
+			let usedPoint = $('input[name=point]').val();
+			let ordTotPrice = $('#ordTotPrice').text();
+			let recipName = $('input[name=orderer]').val();
+			let recipHp = $('input[name=hp]').val();
+			let recipZip = $('input[name=zip]').val();
+			let recipAddr1 = $('input[name=addr1]').val();
+			let recipAddr2 = $('input[name=addr2]').val();
+			let ordPayment = $('input[name=payment]').val();
+			let ordComplete = 0;
+			
+			
+			if(ordPayment == 4){
+				ordComplete = 2;
+			}else{
+				ordComplete = 1;
+			}
+
+			let jsonData = {
+					"ordCount":ordCount,
+					"ordPrice":ordPrice,
+					"ordDiscount":ordDiscount,
+					"ordDelivery":ordDelivery,
+					"savePoint":savePoint,
+					"usedPoint":usedPoint,
+					"ordTotPrice":ordTotPrice,
+					"recipName":recipName,
+					"recipHp":recipHp,
+					"recipZip":recipZip,
+					"recipAddr1":recipAddr1,
+					"recipAddr2":recipAddr2,
+					"ordPayment":ordPayment,
+					"ordComplete":ordComplete
+			};
 			
 			$.ajax({
 				url:'/Kmarket/product/order.do',
@@ -78,27 +115,27 @@
 			<table border="0">
 	            <tr>
 	              <td>총</td>
-	              <td>${totalcount} 건</td>
+	              <td id="ordCount">${totalcount} 건</td>
 	            </tr>
 	            <tr>
 	              <td>상품금액</td>
-	              <td>${totalprice}</td>
+	              <td id="ordPrice">${totalprice}</td>
 	            </tr>
 	            <tr>
 	              <td>할인금액</td>
-	              <td>-${discount}</td>
+	              <td id="ordDiscount">-${discount}</td>
 	            </tr>
 	            <tr>
 	              <td>배송비</td>
-	              <td>${delivery}</td>
+	              <td id="ordDelivery">${delivery}</td>
 	            </tr>
 	            <tr>
 	              <td>포인트 할인</td>
-	              <td>0</td>
+	              <td>-0</td>
 	            </tr>
 	            <tr>
 	              <td>전체주문금액</td>
-	              <td>${productstotalprice}</td>
+	              <td id="ordTotPrice">${productstotalprice}</td>
 	            </tr>                            
           </table>
           <input type="button" name="ordercomplete" value="결제하기">
@@ -161,23 +198,23 @@
             <div>
                 <span>신용카드</span>
                 <p>
-                    <label><input type="radio" name="payment" value="type1"/>신용카드 결제</label>
-                    <label><input type="radio" name="payment" value="type2"/>체크카드 결제</label>                                
+                    <label><input type="radio" name="payment" value="1"/>신용카드 결제</label>
+                    <label><input type="radio" name="payment" value="2"/>체크카드 결제</label>                                
                 </p>
             </div>
             <div>
                 <span>계좌이체</span>
                 <p>
-                    <label><input type="radio" name="payment" value="type3"/>실시간 계좌이체</label>
-                    <label><input type="radio" name="payment" value="type4"/>무통장 입금</label>                                
+                    <label><input type="radio" name="payment" value="3"/>실시간 계좌이체</label>
+                    <label><input type="radio" name="payment" value="4"/>무통장 입금</label>                                
                 </p>
             </div>
             <div>
                 <span>기타</span>
                 <p>
-                    <label><input type="radio" name="payment" value="type3"/>휴대폰결제</label>
+                    <label><input type="radio" name="payment" value="5"/>휴대폰결제</label>
                     <label>
-                        <input type="radio" name="payment" value="type4"/>카카오페이
+                        <input type="radio" name="payment" value="6"/>카카오페이
                         <img src="../img/ico_kakaopay.gif" alt="카카오페이"/>
                     </label>                                
                 </p>

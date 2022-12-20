@@ -823,7 +823,15 @@ public class ProductDAO extends DBHelper {
 				psmt.setInt(4, vo.getOrdDiscount());
 				psmt.setInt(5, vo.getOrdDelivery());
 				psmt.setInt(6, vo.getSavePoint());
-				psmt.setInt(7, vo.getOrdTotPrice());
+				psmt.setInt(7, vo.getUsedPoint());
+				psmt.setInt(8, vo.getOrdTotPrice());
+				psmt.setString(9, vo.getRecipName());
+				psmt.setString(10, vo.getRecipHp());
+				psmt.setString(11, vo.getRecipZip());
+				psmt.setString(12, vo.getRecipAddr1());
+				psmt.setString(13, vo.getRecipAddr2());
+				psmt.setInt(14, vo.getOrdPayment());
+				psmt.setInt(15, vo.getOrdComplete());
 				
 				result = psmt.executeUpdate();
 				
