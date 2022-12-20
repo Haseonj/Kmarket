@@ -413,3 +413,118 @@ button[type=submit] {
     font-weight: bold;
 }
 
+/* 게시판 리스트 */
+main > #admin-cs-list {
+    border-left: 1px solid #d9d9d9;
+}
+main > #admin-cs-list > article {
+    position: relative;
+}
+
+main > #admin-cs-list > article > select {
+    margin-bottom: 10px;
+}
+
+main > #admin-cs-list > article > table {
+    margin-bottom: 35px;
+}
+
+main > #admin-cs-list > article > table > tbody > tr:first-child {
+    margin-top: 10px;
+    border-top: 2px solid #bebebe;
+    box-sizing: border-box;
+}
+
+main > #admin-cs-list > article > table > tbody > tr > th {
+    padding: 15px 0;
+    box-sizing: border-box;
+}
+
+main > #admin-cs-list > article > table > tbody > tr > td:nth-child(1) {
+    width: 50px;
+    background-color: #fff;
+}
+main > #admin-cs-list > article > table > tbody > tr > td {
+    text-align: center;
+}
+
+main > #admin-cs-list > article > table > tbody > tr > td:nth-child(4) {
+    text-align: left;
+}
+
+main > #admin-cs-list > article > table > tbody > tr > td > a:hover {
+    color: #fe434c;
+}
+
+main > #admin-cs-list > article > .delete {
+    padding: 10px 30px;
+    background: #bfbfbf;
+    color: #fff;
+}
+
+main > #admin-cs-list > article > .write {
+    padding: 10px 30px;
+    background: #8eb4e3;
+    position: absolute;
+    right: 0;
+    bottom: 17px;
+    color: #fff;
+}
+main > #admin-cs-list > article > div {
+    text-align: center;
+}
+main > #admin-cs-list > article > div > a {
+    padding: 5px;
+    font-size: 20px;
+}
+main > #admin-cs-list > article > div > a:hover {
+    text-decoration: underline;
+}
+main > #admin-cs-list > article > div > .on {
+    text-decoration: underline;
+}
+
+/* 공지사항 보기 */
+main > #admin-cs-write {
+    border-left: 1px solid #d9d9d9;
+    position: relative;
+}
+
+main > #admin-cs-write > nav {
+    margin-bottom: 20px;
+}
+main > #admin-cs-write > article > table {
+    margin: 40px 0;
+    border-top: 2px solid #000;
+}
+
+main > #admin-cs-write > article > table > tbody > tr > td {
+    padding: 17px 20px;
+}
+
+main > #admin-cs-write > article > table > tbody > tr > td:nth-child(1) {
+    background: #fff;
+    font-size: 17px;
+    font-weight: bold;
+}
+main > #admin-cs-write > article > table > tbody > tr > td:nth-child(2) {
+    font-size: 17px;
+}
+main > #admin-cs-write > article > table > tbody > tr > td:nth-child(2) > p {
+    height: auto;
+    font-size: 17px;
+}
+main > #admin-cs-write > article > div {
+    position: absolute;
+    right: 20px;
+}
+main > #admin-cs-write > article > div > a {
+    padding: 10px 30px;
+    color: #fff;
+    font-size: 15px;
+    margin-left: 5px;
+}
+
+main > #admin-cs-write > article > div > a:nth-child(1) {background: #bfbfbf;}
+main > #admin-cs-write > article > div > a:nth-child(2) {background: #bfbfbf;}
+main > #admin-cs-write > article > div > a:nth-child(3) {background: #8eb4e3;}
