@@ -17,7 +17,7 @@ public class OrderVO {
 	private String recipAddr2;
 	private int ordPayment;
 	private int ordComplete;
-	private int ordDate;
+	private String ordDate;
 	private int prodNo;
 	private String prodName;
 	private String descript;
@@ -142,10 +142,10 @@ public class OrderVO {
 	public void setOrdComplete(String ordComplete) {
 		this.ordComplete = Integer.parseInt(ordComplete);
 	}
-	public int getOrdDate() {
+	public String getOrdDate() {
 		return ordDate;
 	}
-	public void setOrdDate(int ordDate) {
+	public void setOrdDate(String ordDate) {
 		this.ordDate = ordDate;
 	}
 	public int getOrdDelivery() {

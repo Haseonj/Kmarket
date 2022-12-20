@@ -3,21 +3,44 @@
 <jsp:include page="./_header.jsp"/>
 <script>
 	$(function(){
+		let recentpoint = '${recentpoint}';
+		if(recentpoint < 5000){
+			$('input[name=usingpoint]').attr("disabled",true);
+			$('#ordPoint').append("0");
+		}else{
+			$(document).on('click', 'input[name=usingpoint]', function(){
+				let usedPoint = $('input[name=point]').val();
+				
+				$('#ordPoint').append("-"+usedPoint);
+				
+				let ordTotPrice = Number($('#ordTotPrice').text()) - usedPoint;
+				
+				$('#ordTotPrice').empty();
+				$('#ordTotPrice').append(ordTotPrice);
+			});
+		}
+		
 		$('input[name=ordercomplete]').click(function(){
+			
+			let today = new Date();
+			let year = today.getFullYear();
+			let month = ('0' + (today.getMonth() + 1)).slice(-2);
+			let day = ('0' + today.getDate()).slice(-2);
+			let dateString = year + month + day;
 			
 			let ordCount = '${totalcount}';
 			let ordPrice = $('#ordPrice').text();
 			let ordDiscount = '${discount}';
 			let ordDelivery = $('#ordDelivery').text();
 			let savePoint = '${point}';
-			let usedPoint = $('input[name=point]').val();
+			let usedPoint = $('#ordPoint').text();
 			let ordTotPrice = $('#ordTotPrice').text();
 			let recipName = $('input[name=orderer]').val();
 			let recipHp = $('input[name=hp]').val();
 			let recipZip = $('input[name=zip]').val();
 			let recipAddr1 = $('input[name=addr1]').val();
 			let recipAddr2 = $('input[name=addr2]').val();
-			let ordPayment = $('input[name=payment]').val();
+			let ordPayment = $('input[name=payment]:checked').val();
 			let ordComplete = 0;
 			
 			
@@ -54,6 +77,7 @@
 				}
 			});
 		});
+		
 	});
 </script>
     <!-- 주문 페이지 시작-->
@@ -131,7 +155,7 @@
 	            </tr>
 	            <tr>
 	              <td>포인트 할인</td>
-	              <td>-0</td>
+	              <td id="ordPoint"></td>
 	            </tr>
 	            <tr>
 	              <td>전체주문금액</td>
@@ -183,10 +207,10 @@
           <h1>할인정보</h1>
 
           <div>
-            <p>현재 포인트 : <span>7200</span>점</p>
+            <p>현재 포인트 : <span>${recentpoint}</span>점</p>
             <label>
                 <input type="text" name="point" />점
-                <input type="button" value="적용"/>
+                <input type="button" name="usingpoint" value="적용"/>
             </label>
             <span>포인트 5,000점 이상이면 현금처럼 사용 가능합니다.</span>
           </div>
