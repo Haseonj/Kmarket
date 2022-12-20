@@ -2,7 +2,10 @@ package kr.co.kmarket.controller.product;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.List;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -17,47 +20,37 @@ import com.google.gson.JsonObject;
 
 import kr.co.kmarket.service.ProductService;
 import kr.co.kmarket.vo.MemberVO;
+import kr.co.kmarket.vo.OrderVO;
+import kr.co.kmarket.vo.ProductVO;
 
-@WebServlet("/product/deletecart.do")
-public class DeleteCartController extends HttpServlet{
+@WebServlet("/product/goorder.do")
+public class ProductGoOrderController extends HttpServlet{
 
 	private static final long serialVersionUID = 1L;
 	private ProductService service = ProductService.INSTANCE;
-	Logger logger = LoggerFactory.getLogger(this.getClass());
-	
+	private Logger logger = LoggerFactory.getLogger(this.getClass());
+
 	@Override
 	public void init() throws ServletException {
-		
+	
 	}
+	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
 	}
+	
+	
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		logger.info("DeleteCartController...0");
-		HttpSession sess = req.getSession();
-		MemberVO member = (MemberVO) sess.getAttribute("sessMember");
+		logger.info("ProductOrderController...POST");
 		
-		logger.info("DeleteCartController...1");
-		String[] cartNo = req.getParameterValues("checkBoxArr");
-		String uid = member.getUid();
-		
-		logger.info("DeleteCartController...2"+uid);
-		int result[] = new int [cartNo.length];
 		JsonObject json = new JsonObject();
+		json.addProperty("result", 1);
 		
-		for(int i=0; i<cartNo.length; i++) {
-			logger.info("DeleteCartController...3"+cartNo[i]);
-			result[i] = service.deleteCartList(uid, cartNo[i]);
-			
-			logger.info("DeleteCartController...4"+result[i]);
-			json.addProperty("result["+i+"]", result[i]);
-			
-		}
-		logger.info("DeleteCartController...5");
 		PrintWriter writer = resp.getWriter();
 		writer.print(json.toString());
+		
 	}
 	
 }

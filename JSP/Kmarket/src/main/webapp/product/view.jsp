@@ -7,7 +7,15 @@
 		var week = new Array('일', '월', '화', '수', '목', '금', '토');
 	    
 	    var today = new Date().getDay()+3;
+	    console.log('today : ' + today);
+	    
+	    if(today >= 7){
+	    	today = today % 7;
+	    }
+	    
 	    var todayLabel = week[today];
+	    console.log('todayLabel : ' + todayLabel);
+	    
 	    return todayLabel;
 	}
 
@@ -108,12 +116,38 @@
 		$(document).on('click', '.order', function(){
 			console.log('here2');
 			
-			let cate1 = '${vo.cate1}';
-			let cate2 = '${vo.cate2}';
+			let uid = '${sessMember.uid}';
+			
 			let prodNo = '${product.prodNo}';
+			let pricenum = $('input[name=num]').val();
 			
-			location.href = "/Kmarket/product/order.do?cate1="+cate1+"&cate2="+cate2+"&prodNo="+prodNo+"&pricenum="+pricenum;
+			console.log('prodNo : '+ prodNo);
+			console.log('pricenum : '+ pricenum);
 			
+			if(uid == ''){
+				alert('로그인 후 이용 가능합니다.');
+			}else{				
+				//location.href = '/Kmarket/product/order.do?prodNo='+prodNo+'&count='+pricenum;
+				
+				
+				$.ajax({
+					url:'/Kmarket/product/view.do',
+					method:'POST',
+					data: {"prodNo": prodNo, "count": pricenum},
+					dataType:'json',
+					success:function(data){
+												
+						console.log('here5');
+						
+						if(data.result > 0){
+							console.log('here6');
+							location.href = '/Kmarket/product/order.do';	
+						}
+						
+					}
+				});
+				
+			}
 		});
 	});
 </script>

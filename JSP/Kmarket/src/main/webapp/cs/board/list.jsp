@@ -4,12 +4,18 @@
 <jsp:include page="./_${group}.jsp"/>
 <script>
 	$(function(){
-		$('.more').click(function(){
-			console.log("more");
-			
-			$('.more').hide();
-			$('.faq > .list > article > div > ul > li:nth-child(n+4)').show();
-		});
+		for(let i = 1; i < 8; i++){
+			$('.more'+i+'').click(function(){
+				$('.more'+i+'').hide();
+				$('.simple'+i+'').show();
+				$('#cs > .faq > .list > article > div > div > .ul'+i+'').css('height','auto');
+			});
+			$('.simple'+i+'').click(function(){
+				$('.simple'+i+'').hide();
+				$('.more'+i+'').show();
+				$('#cs > .faq > .list > article > div > div > .ul'+i+'').css('height','171px');
+			});
+		}
 	});
 </script>
 			<c:if test="${group eq 'qna' or group eq 'notice'}">
@@ -50,14 +56,17 @@
             <c:forEach var="cate2" items="${cate2}">
                 <div>
                     <h3>${cate2.cate2}</h3>
-                    <ul>
-                    <c:forEach var="articles" items="${articles}">
-                    	<c:if test="${cate2.cate2 eq articles.cate2}">
-                        	<li><a href="/Kmarket/cs/board/view.do?group=${group}&cate=${cate}&type=view"><span>Q.</span>${articles.title}</a></li>
-                    	</c:if>
-                    </c:forEach>
-                        <li class="more${cate2.cate2Count}"><a href="#">더보기</a></li>
-                    </ul>
+                    <div>
+	                    <ul class="ul${cate2.cate2No}">
+		                    <c:forEach var="articles" items="${articles}">
+		                    	<c:if test="${cate2.cate2 eq articles.cate2}">
+		                        	<li><a href="/Kmarket/cs/board/view.do?group=${group}&cate=${cate}&type=view&no=${articles.no}"><span>Q.</span>${articles.title}</a></li>
+		                    	</c:if>
+		                    </c:forEach>
+	                    </ul>
+	                    <button class="more${cate2.cate2No}">더보기</button>
+	                    <button class="simple${cate2.cate2No}">간단히보기</button>
+                    </div>
                 </div>
 			</c:forEach>
             </c:if>

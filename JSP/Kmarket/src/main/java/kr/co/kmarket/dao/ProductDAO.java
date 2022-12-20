@@ -10,6 +10,7 @@ import kr.co.kmarket.db.DBHelper;
 import kr.co.kmarket.db.ProductSql;
 import kr.co.kmarket.vo.CartVO;
 import kr.co.kmarket.vo.CateVO;
+import kr.co.kmarket.vo.OrderVO;
 import kr.co.kmarket.vo.ProductVO;
 
 public class ProductDAO extends DBHelper {
@@ -102,7 +103,7 @@ public class ProductDAO extends DBHelper {
 	public ProductVO selectProduct(String prodNo) {
 		ProductVO product = null;
 		try {
-			logger.info("selectProducts...");
+			logger.info("selectProduct...");
 			conn =getConnection();
 			psmt = conn.prepareStatement(ProductSql.SELECT_PRODUCT);
 			psmt.setString(1, prodNo);
@@ -141,6 +142,35 @@ public class ProductDAO extends DBHelper {
 				product.setEtc3(rs.getString(30));
 				product.setEtc4(rs.getString(31));
 				product.setEtc5(rs.getString(32));
+			}
+			close();
+		}catch(Exception e) {
+			logger.error(e.getMessage());
+		}
+		return product;
+	}
+	public CartVO selectProductForOrder(String prodNo) {
+		CartVO product = null;
+		try {
+			logger.info("selectProduct...");
+			conn =getConnection();
+			psmt = conn.prepareStatement(ProductSql.SELECT_PRODUCT);
+			psmt.setString(1, prodNo);
+			rs = psmt.executeQuery();
+			while(rs.next()) {
+				product = new CartVO();
+				product.setProdNo(rs.getInt(1));
+				product.setProdName(rs.getString(4));
+				product.setDescript(rs.getString(5));
+				product.setCompany(rs.getString(6));
+				product.setSeller(rs.getString(7));
+				product.setPrice(rs.getInt(8));
+				product.setDiscount(rs.getInt(9));
+				product.setPoint(rs.getInt(10));
+				product.setDelivery(rs.getInt(13));
+				product.setThumb1(rs.getString(17));
+				product.setRdate(rs.getString(27));
+				
 			}
 			close();
 		}catch(Exception e) {
@@ -583,6 +613,7 @@ public class ProductDAO extends DBHelper {
 		}
 		return result;
 	}
+	
 	public List<CartVO> selectCarts(String uid) {
 		List<CartVO> carts = new ArrayList<>();
 		try {
@@ -620,14 +651,49 @@ public class ProductDAO extends DBHelper {
 		return carts;
 	}
 	
-	public int deleteCartList(String uid, String prodNo) {
+	public CartVO selectCart(String cartNo) {
+		
+		CartVO cart = null;
+		
+		try {
+			logger.info("selectCart...");
+			conn = getConnection();
+			psmt = conn.prepareStatement(ProductSql.SELECT_CART);
+			psmt.setString(1, cartNo);
+			
+			rs = psmt.executeQuery();
+			if(rs.next()) {
+				cart = new CartVO();
+				cart.setCartNo(rs.getInt(1));
+				cart.setUid(rs.getString(2));
+				cart.setProdNo(rs.getInt(3));
+				cart.setCount(rs.getInt(4));
+				cart.setPrice(rs.getInt(5));
+				cart.setDiscount(rs.getInt(6));
+				cart.setPoint(rs.getInt(7));
+				cart.setDelivery(rs.getInt(8));
+				cart.setTotal(rs.getInt(9));
+				cart.setRdate(rs.getString(10));
+				cart.setProdName(rs.getString(14));
+				cart.setDescript(rs.getString(15));
+				cart.setThumb1(rs.getString(27));
+			}
+			
+			close();
+		}catch(Exception e) {
+			logger.error(e.getMessage());
+		}
+		return cart;
+	}
+	
+	public int deleteCartList(String uid, String cartNo) {
 		int result = 0;
 		try {
 			logger.info("deleteCartList...");
 			conn = getConnection();
 			psmt = conn.prepareStatement(ProductSql.DELETE_CART_LIST);
 			psmt.setString(1, uid);
-			psmt.setString(2, prodNo);
+			psmt.setString(2, cartNo);
 			
 			result = psmt.executeUpdate();
 			
@@ -637,6 +703,9 @@ public class ProductDAO extends DBHelper {
 		}
 		return result;
 	}
+
+	// admin
+
 	public List<ProductVO> selectadminProducts() {
 		List<ProductVO> adminproducts = new ArrayList<>();
 		try {
@@ -687,14 +756,19 @@ public class ProductDAO extends DBHelper {
 		}
 		return adminproducts;
 	}
-	public List<ProductVO> searchadminproducts(String search1,String search2) {
+	public List<ProductVO> searchadminproducts(String search,String search2) {
 		List<ProductVO> searchadpds = new ArrayList<>();
 		try {
 			logger.info("selectadminProducts...");
 			conn =getConnection();
-			psmt = conn.prepareStatement(ProductSql.SELECT_SEARCH_ADMIN_PRODUCTS);
-			psmt.setString(1, search1);
-			psmt.setString(2, search2);
+			switch(search) {
+			
+			case "prodName" : psmt = conn.prepareStatement(ProductSql.SELECT_SEARCH_ADMIN_PRODUCTS_PRODNAME);
+			case "prodNo" : psmt = conn.prepareStatement(ProductSql.SELECT_SEARCH_ADMIN_PRODUCTS_PRODNO); // 현재 prodNo 숫자 부분이 검색시 결과값이 안뜸
+			case "company" : psmt = conn.prepareStatement(ProductSql.SELECT_SEARCH_ADMIN_PRODUCTS_COMPANY);
+			case "seller" : psmt = conn.prepareStatement(ProductSql.SELECT_SEARCH_ADMIN_PRODUCTS_SELLER);
+			}
+			psmt.setString(1, "%"+search2+"%");
 			rs = psmt.executeQuery();
 			while(rs.next()) {
 				ProductVO product = new ProductVO();
@@ -740,4 +814,162 @@ public class ProductDAO extends DBHelper {
 		return searchadpds;
 	}
 	
+
+	// order
+		public int insertOrder(OrderVO vo) {
+			int result = 0;
+			try {
+				logger.info("insertOrder...");
+				conn = getConnection();
+				psmt = conn.prepareStatement(ProductSql.INSERT_ORDER);
+				psmt.setString(1, vo.getOrdUid());
+				psmt.setInt(2, vo.getOrdCount());
+				psmt.setInt(3, vo.getOrdPrice());
+				psmt.setInt(4, vo.getOrdDiscount());
+				psmt.setInt(5, vo.getOrdDelivery());
+				psmt.setInt(6, vo.getSavePoint());
+				psmt.setInt(7, vo.getUsedPoint());
+				psmt.setInt(8, vo.getOrdTotPrice());
+				psmt.setString(9, vo.getRecipName());
+				psmt.setString(10, vo.getRecipHp());
+				psmt.setString(11, vo.getRecipZip());
+				psmt.setString(12, vo.getRecipAddr1());
+				psmt.setString(13, vo.getRecipAddr2());
+				psmt.setInt(14, vo.getOrdPayment());
+				psmt.setInt(15, vo.getOrdComplete());
+				
+				result = psmt.executeUpdate();
+				
+				close();
+			}catch(Exception e) {
+				logger.error(e.getMessage());
+			}
+			return result;
+		}
+		public void insertOrderItem(OrderVO vo, String prodNo) {
+			try {
+				logger.info("insertOrderItem...");
+				conn = getConnection();
+				psmt = conn.prepareStatement(ProductSql.INSERT_ORDER_ITEM);
+				psmt.setInt(1, vo.getOrdNo());
+				psmt.setString(2, prodNo);
+				psmt.setInt(3, vo.getOrdCount());
+				psmt.setInt(4, vo.getOrdPrice());
+				psmt.setInt(5, vo.getOrdDiscount());
+				psmt.setInt(6, vo.getSavePoint());
+				psmt.setInt(7, vo.getOrdDelivery());
+				psmt.setInt(8, vo.getOrdTotPrice());
+				
+				psmt.executeUpdate();
+				
+				close();
+			}catch(Exception e) {
+				logger.error(e.getMessage());
+			}
+		}
+		public OrderVO selectLatestOrder(String uid) {
+			OrderVO order = null;
+			try {
+				logger.info("selectLatestOrder...");
+				conn = getConnection();
+				psmt = conn.prepareStatement(ProductSql.SELECT_LATEST_ORDER);
+				psmt.setString(1, uid);
+				
+				rs = psmt.executeQuery();
+				while(rs.next()) {
+					order = new OrderVO();
+					order.setOrdNo(rs.getInt(1));
+					order.setOrdUid(rs.getString(2));
+					order.setOrdCount(rs.getInt(3));
+					order.setOrdPrice(rs.getInt(4));
+					order.setOrdDiscount(rs.getInt(5));
+					order.setOrdDelivery(rs.getInt(6));
+					order.setSavePoint(rs.getInt(7));
+					order.setOrdTotPrice(rs.getInt(9));
+				}
+				
+				close();
+			}catch(Exception e) {
+				logger.error(e.getMessage());
+			}
+			return order;
+		}
+		public List<OrderVO> selectOrder(int orderNo) {
+			List<OrderVO> orders = new ArrayList<>();
+			try {
+				logger.info("selectOrder...");
+				conn = getConnection();
+				psmt = conn.prepareStatement(ProductSql.SELECT_ORDER);
+				psmt.setInt(1, orderNo);
+				
+				rs = psmt.executeQuery();
+				while(rs.next()) {
+					OrderVO order = new OrderVO();
+					order.setOrdNo(rs.getInt(1));
+					order.setProdNo(rs.getInt(2));
+					order.setCount(rs.getInt(3));
+					order.setPrice(rs.getInt(4));
+					order.setDiscount(rs.getInt(5));
+					order.setPoint(rs.getInt(6));
+					order.setDelivery(rs.getInt(7));
+					order.setTotal(rs.getInt(8));
+					order.setProdName(rs.getString(12));
+					order.setDescript(rs.getString(13));
+					order.setThumb1(rs.getString(25));
+					
+					orders.add(order);
+				}
+				
+				close();
+			}catch(Exception e) {
+				logger.error(e.getMessage());
+			}
+			return orders;
+		}
+		public int selectOrderNo(String uid) {
+			int ordNo = 0;
+			try {
+				logger.info("selectOrder...");
+				conn = getConnection();
+				psmt = conn.prepareStatement(ProductSql.SELECT_ORDER_NO);
+				psmt.setString(1, uid);
+				
+				rs = psmt.executeQuery();
+				while(rs.next()) {
+					ordNo = rs.getInt(1);
+				}
+				
+				close();
+			}catch(Exception e) {
+				logger.error(e.getMessage());
+			}
+			return ordNo;
+		}
+		public List<ProductVO> selectOrderProducts(String prodNo) {
+			List<ProductVO> total = new ArrayList<>();
+			try {
+				logger.info("selectOrderProducts...");
+				conn = getConnection();
+				psmt = conn.prepareStatement(ProductSql.SELECT_ORDER_PRODUCTS);
+				psmt.setString(1, prodNo);
+				
+				rs = psmt.executeQuery();
+				while(rs.next()) {
+					ProductVO order = new ProductVO();
+					order.setPrice(rs.getInt(1));
+					order.setDiscount(rs.getInt(2));
+					order.setPoint(rs.getInt(3));
+					order.setDelivery(rs.getInt(4));
+					
+					total.add(order);
+				}
+				
+				close();
+			}catch(Exception e) {
+				logger.error(e.getMessage());
+			}
+			return total;
+		}
+		
+
 }

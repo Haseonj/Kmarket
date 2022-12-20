@@ -17,6 +17,7 @@ import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 import kr.co.kmarket.dao.ProductDAO;
 import kr.co.kmarket.vo.CartVO;
 import kr.co.kmarket.vo.CateVO;
+import kr.co.kmarket.vo.OrderVO;
 import kr.co.kmarket.vo.ProductVO;
 
 
@@ -55,6 +56,10 @@ public enum ProductService {
 		logger.info("ProductService...selectProduct...");
 		return dao.selectProduct(prodNo);
 	}
+	public CartVO selectProductForOrder(String prodNo) {
+		logger.info("ProductService...selectProductForOrder...");
+		return dao.selectProductForOrder(prodNo);
+	}
 	public int selectCountTotal(String prodCate1, String prodCate2) {
 		return dao.selectCountTotal(prodCate1, prodCate2);
 	}
@@ -83,8 +88,8 @@ public enum ProductService {
 	public int selectadminCountTotal() {
 		return dao.selectadminCountTotal();
 	}
-	public List<ProductVO> searchadminproducts(String search1,String search2){
-		return dao.searchadminproducts(search1,search2);
+	public List<ProductVO> searchadminproducts(String search,String search2){
+		return dao.searchadminproducts(search,search2);
 	}
 	// cart 
 	public int insertCart(CartVO vo) {
@@ -95,9 +100,39 @@ public enum ProductService {
 		logger.info("ProductService...selectCarts...");
 		return dao.selectCarts(uid);
 	}
-	public int deleteCartList(String uid, String prodNo) {
+	public CartVO selectCart(String cartNo) {
+		logger.info("ProductService...selectCart...");
+		return dao.selectCart(cartNo);
+	}
+	public int deleteCartList(String uid, String cartNo) {
 		logger.info("ProductService...deleteCartList...");
-		return dao.deleteCartList(uid, prodNo);
+		return dao.deleteCartList(uid, cartNo);
+	}
+	
+	// order
+	public int insertOrder(OrderVO vo) {
+		logger.info("ProductService...insertOrder...");
+		return dao.insertOrder(vo);
+	}
+	public void insertOrderItem(OrderVO vo, String prodNo) {
+		logger.info("ProductService...inserOrderItem...");
+		dao.insertOrderItem(vo, prodNo);
+	}
+	public OrderVO selectLatestOrder(String uid) {
+		logger.info("ProductService...selectOrderNo...");
+		return dao.selectLatestOrder(uid);
+	}
+	public List<OrderVO> selectOrder(int orderNo) {
+		logger.info("ProductService...selectOrder...");
+		return dao.selectOrder(orderNo);
+	}
+	public int selectOrderNo(String uid) {
+		logger.info("ProductService...selectOrderNo...");
+		return dao.selectOrderNo(uid);
+	}
+	public List<ProductVO> selectOrderProducts(String prodNo) {
+		logger.info("ProductService...selectOrderProducts...");
+		return dao.selectOrderProducts(prodNo);
 	}
 	
 	// 서비스 로직

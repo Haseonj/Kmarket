@@ -6,6 +6,7 @@ public class OrderVO {
 	private int ordCount;
 	private int ordPrice;
 	private int ordDiscount;
+	private int ordDelivery;
 	private int savePoint;
 	private int usedPoint;
 	private int ordTotPrice;
@@ -17,6 +18,16 @@ public class OrderVO {
 	private int ordPayment;
 	private int ordComplete;
 	private int ordDate;
+	private int prodNo;
+	private String prodName;
+	private String descript;
+	private String thumb1;
+	private int count;
+	private int price;
+	private int discount;
+	private int point;
+	private int delivery;
+	private int total;
 	public int getOrdNo() {
 		return ordNo;
 	}
@@ -35,11 +46,17 @@ public class OrderVO {
 	public void setOrdCount(int ordCount) {
 		this.ordCount = ordCount;
 	}
+	public void setOrdCount(String ordCount) {
+		this.ordCount = Integer.parseInt(ordCount);
+	}
 	public int getOrdPrice() {
 		return ordPrice;
 	}
 	public void setOrdPrice(int ordPrice) {
 		this.ordPrice = ordPrice;
+	}
+	public void setOrdPrice(String ordPrice) {
+		this.ordPrice = Integer.parseInt(ordPrice);
 	}
 	public int getOrdDiscount() {
 		return ordDiscount;
@@ -47,11 +64,17 @@ public class OrderVO {
 	public void setOrdDiscount(int ordDiscount) {
 		this.ordDiscount = ordDiscount;
 	}
+	public void setOrdDiscount(String ordDiscount) {
+		this.ordDiscount = Integer.parseInt(ordDiscount);
+	}
 	public int getSavePoint() {
 		return savePoint;
 	}
 	public void setSavePoint(int savePoint) {
 		this.savePoint = savePoint;
+	}
+	public void setSavePoint(String savePoint) {
+		this.savePoint = Integer.parseInt(savePoint);
 	}
 	public int getUsedPoint() {
 		return usedPoint;
@@ -59,11 +82,17 @@ public class OrderVO {
 	public void setUsedPoint(int usedPoint) {
 		this.usedPoint = usedPoint;
 	}
+	public void setUsedPoint(String usedPoint) {
+		this.usedPoint = Integer.parseInt(usedPoint);
+	}
 	public int getOrdTotPrice() {
 		return ordTotPrice;
 	}
 	public void setOrdTotPrice(int ordTotPrice) {
 		this.ordTotPrice = ordTotPrice;
+	}
+	public void setOrdTotPrice(String ordTotPrice) {
+		this.ordTotPrice = Integer.parseInt(ordTotPrice);
 	}
 	public String getRecipName() {
 		return recipName;
@@ -101,17 +130,92 @@ public class OrderVO {
 	public void setOrdPayment(int ordPayment) {
 		this.ordPayment = ordPayment;
 	}
+	public void setOrdPayment(String ordPayment) {
+		this.ordPayment = Integer.parseInt(ordPayment);
+	}
 	public int getOrdComplete() {
 		return ordComplete;
 	}
 	public void setOrdComplete(int ordComplete) {
 		this.ordComplete = ordComplete;
 	}
+	public void setOrdComplete(String ordComplete) {
+		this.ordComplete = Integer.parseInt(ordComplete);
+	}
 	public int getOrdDate() {
 		return ordDate;
 	}
 	public void setOrdDate(int ordDate) {
 		this.ordDate = ordDate;
+	}
+	public int getOrdDelivery() {
+		return ordDelivery;
+	}
+	public void setOrdDelivery(int ordDelivery) {
+		this.ordDelivery = ordDelivery;
+	}
+	public void setOrdDelivery(String ordDelivery) {
+		this.ordDelivery = Integer.parseInt(ordDelivery);
+	}
+	public int getProdNo() {
+		return prodNo;
+	}
+	public void setProdNo(int prodNo) {
+		this.prodNo = prodNo;
+	}
+	public String getProdName() {
+		return prodName;
+	}
+	public void setProdName(String prodName) {
+		this.prodName = prodName;
+	}
+	public String getDescript() {
+		return descript;
+	}
+	public void setDescript(String descript) {
+		this.descript = descript;
+	}
+	public String getThumb1() {
+		return thumb1;
+	}
+	public void setThumb1(String thumb1) {
+		this.thumb1 = thumb1;
+	}
+	public int getCount() {
+		return count;
+	}
+	public void setCount(int count) {
+		this.count = count;
+	}
+	public int getPrice() {
+		return price;
+	}
+	public void setPrice(int price) {
+		this.price = price;
+	}
+	public int getDiscount() {
+		return discount;
+	}
+	public void setDiscount(int discount) {
+		this.discount = discount;
+	}
+	public int getPoint() {
+		return point;
+	}
+	public void setPoint(int point) {
+		this.point = point;
+	}
+	public int getDelivery() {
+		return delivery;
+	}
+	public void setDelivery(int delivery) {
+		this.delivery = delivery;
+	}
+	public int getTotal() {
+		return total;
+	}
+	public void setTotal(int total) {
+		this.total = total;
 	}
 	
 	

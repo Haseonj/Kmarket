@@ -1,6 +1,61 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <jsp:include page="./_header.jsp"/>
+<script>
+	$(function(){
+		$('input[name=ordercomplete]').click(function(){
+			
+			let ordCount = '${totalcount}';
+			let ordPrice = $('#ordPrice').text();
+			let ordDiscount = '${discount}';
+			let ordDelivery = $('#ordDelivery').text();
+			let savePoint = '${point}';
+			let usedPoint = $('input[name=point]').val();
+			let ordTotPrice = $('#ordTotPrice').text();
+			let recipName = $('input[name=orderer]').val();
+			let recipHp = $('input[name=hp]').val();
+			let recipZip = $('input[name=zip]').val();
+			let recipAddr1 = $('input[name=addr1]').val();
+			let recipAddr2 = $('input[name=addr2]').val();
+			let ordPayment = $('input[name=payment]').val();
+			let ordComplete = 0;
+			
+			
+			if(ordPayment == 4){
+				ordComplete = 2;
+			}else{
+				ordComplete = 1;
+			}
 
+			let jsonData = {
+					"ordCount":ordCount,
+					"ordPrice":ordPrice,
+					"ordDiscount":ordDiscount,
+					"ordDelivery":ordDelivery,
+					"savePoint":savePoint,
+					"usedPoint":usedPoint,
+					"ordTotPrice":ordTotPrice,
+					"recipName":recipName,
+					"recipHp":recipHp,
+					"recipZip":recipZip,
+					"recipAddr1":recipAddr1,
+					"recipAddr2":recipAddr2,
+					"ordPayment":ordPayment,
+					"ordComplete":ordComplete
+			};
+			
+			$.ajax({
+				url:'/Kmarket/product/order.do',
+				method:'post',
+				data:jsonData,
+				dataType:'json',
+				success:function(data){
+					location.href = '/Kmarket/product/complete.do';
+				}
+			});
+		});
+	});
+</script>
     <!-- 주문 페이지 시작-->
     <section class="order">
       
@@ -19,6 +74,7 @@
             <th>상품명</th>
             <th>총수량</th>
             <th>판매가</th>
+            <th>할인</th>
             <th>배송비</th>
             <th>소계</th>
           </tr>
@@ -26,84 +82,63 @@
             <tr class="empty">
               <td colspan="7">장바구니에 상품이 없습니다.</td>
             </tr>
-            <tr>
-              <td>
-                <article>
-                  <a href="#"><img src="https://via.placeholder.com/80x80" alt=""></a>
-                  <div>
-                    <h2><a href="#">상품명</a></h2>
-                    <p>상품설명</p>
-                  </div>
-                </article>
-              </td>
-              <td>1</td>
-              <td>27,000</td>
-              <td>무료배송</td>
-              <td>27,000</td>
-            </tr>
-            <tr>
-              <td>
-                <article>
-                  <a href="#"><img src="https://via.placeholder.com/80x80" alt=""></a>
-                  <div>
-                    <h2><a href="#">상품명</a></h2>
-                    <p>상품설명</p>
-                  </div>
-                </article>
-              </td>
-              <td>1</td>
-              <td>27,000</td>
-              <td>무료배송</td>
-              <td>27,000</td>
-            </tr>
-            <tr>
-              <td>
-                <article>
-                  <a href="#"><img src="https://via.placeholder.com/80x80" alt=""></a>
-                  <div>
-                    <h2><a href="#">상품명</a></h2>
-                    <p>상품설명</p>
-                  </div>
-                </article>
-              </td>
-              <td>1</td>
-              <td>27,000</td>
-              <td>무료배송</td>
-              <td>27,000</td>
-            </tr>                    
-          
+			<c:forEach var="product" items="${carts}">
+			 	<tr>
+	              <td>
+	                <article>
+	                  <a href="#"><img src="http://3.39.231.136:8080/Kmarket/file/${product.thumb1}" alt=""></a>
+	                  <div>
+	                    <h2><a href="#">${product.prodName}</a></h2>
+	                    <p>${product.descript}</p>
+	                  </div>
+	                </article>
+	              </td>
+	              <td>${product.count}</td>
+	              <td>${product.price}</td>
+	              <td>${product.discount}%</td>
+	              <c:choose>
+	              	<c:when test="${product.delivery eq 0}">
+	              		<td>무료배송</td>	
+	              	</c:when>
+	              	<c:otherwise>
+	              		<td>${product.delivery}원</td>
+	              	</c:otherwise>
+	              </c:choose>
+	              <td>${product.total}</td>
+	            </tr>
+			</c:forEach>
         </table>                 
         
         <!-- 최종 결제 정보 -->
         <div class="final">
           <h2>최종결제 정보</h2>
-          <table border="0">
-            <tr>
-              <td>총</td>
-              <td>2 건</td>
-            </tr>
-            <tr>
-              <td>상품금액</td>
-              <td>27,000</td>
-            </tr>
-            <tr>
-              <td>할인금액</td>
-              <td>-1,000</td>
-            </tr>
-            <tr>
-              <td>배송비</td>
-              <td>0</td>
-            </tr>
-            <tr>
-              <td>포인트 할인</td>
-              <td>-1000</td>
-            </tr>
-            <tr>
-              <td>전체주문금액</td>
-              <td>25,000</td>
-            </tr>                            
+			<table border="0">
+	            <tr>
+	              <td>총</td>
+	              <td id="ordCount">${totalcount} 건</td>
+	            </tr>
+	            <tr>
+	              <td>상품금액</td>
+	              <td id="ordPrice">${totalprice}</td>
+	            </tr>
+	            <tr>
+	              <td>할인금액</td>
+	              <td id="ordDiscount">-${discount}</td>
+	            </tr>
+	            <tr>
+	              <td>배송비</td>
+	              <td id="ordDelivery">${delivery}</td>
+	            </tr>
+	            <tr>
+	              <td>포인트 할인</td>
+	              <td>-0</td>
+	            </tr>
+	            <tr>
+	              <td>전체주문금액</td>
+	              <td id="ordTotPrice">${productstotalprice}</td>
+	            </tr>                            
           </table>
-          <input type="button" name="" value="결제하기">              
+          <input type="button" name="ordercomplete" value="결제하기">
         </div>
           
         <!-- 배송정보 -->
@@ -163,23 +198,23 @@
             <div>
                 <span>신용카드</span>
                 <p>
-                    <label><input type="radio" name="payment" value="type1"/>신용카드 결제</label>
-                    <label><input type="radio" name="payment" value="type2"/>체크카드 결제</label>                                
+                    <label><input type="radio" name="payment" value="1"/>신용카드 결제</label>
+                    <label><input type="radio" name="payment" value="2"/>체크카드 결제</label>                                
                 </p>
             </div>
             <div>
                 <span>계좌이체</span>
                 <p>
-                    <label><input type="radio" name="payment" value="type3"/>실시간 계좌이체</label>
-                    <label><input type="radio" name="payment" value="type4"/>무통장 입금</label>                                
+                    <label><input type="radio" name="payment" value="3"/>실시간 계좌이체</label>
+                    <label><input type="radio" name="payment" value="4"/>무통장 입금</label>                                
                 </p>
             </div>
             <div>
                 <span>기타</span>
                 <p>
-                    <label><input type="radio" name="payment" value="type3"/>휴대폰결제</label>
+                    <label><input type="radio" name="payment" value="5"/>휴대폰결제</label>
                     <label>
-                        <input type="radio" name="payment" value="type4"/>카카오페이
+                        <input type="radio" name="payment" value="6"/>카카오페이
                         <img src="../img/ico_kakaopay.gif" alt="카카오페이"/>
                     </label>                                
                 </p>

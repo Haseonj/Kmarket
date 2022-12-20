@@ -1,6 +1,9 @@
 package kr.co.kmarket.controller.product;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -10,7 +13,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.google.gson.JsonObject;
+
 import kr.co.kmarket.service.ProductService;
+import kr.co.kmarket.vo.CartVO;
 import kr.co.kmarket.vo.CateVO;
 import kr.co.kmarket.vo.ProductVO;
 
@@ -50,6 +56,26 @@ public class ProductViewController extends HttpServlet{
 	}
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		String prodNo = req.getParameter("prodNo");
+		String count = req.getParameter("count");
+		
+		CartVO product = service.selectProductForOrder(prodNo);
+		product.setCount(count);
+	
+		List<CartVO> prods = new ArrayList<>();
+		prods.add(product);
+		
+		HttpSession sess = req.getSession();
+		sess.setAttribute("sessCarts", prods);
+		
+		
+		// 제이슨 출력
+		JsonObject json = new JsonObject();
+		json.addProperty("result", 1);
+		
+		PrintWriter writer = resp.getWriter();
+		writer.print(json.toString());
+		
 		
 	}
 	

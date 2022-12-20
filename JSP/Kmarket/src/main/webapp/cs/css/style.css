@@ -155,7 +155,7 @@ header > .logo a {
 #cs > .main > .faq > ol > li {
     float: left;
     width: 14.28%;
-    height: 128px;
+    height: 135px;
     text-align: center;
 }
 #cs > .main > .faq > ol > li > a {
@@ -333,6 +333,22 @@ footer p > strong {
     box-sizing: border-box;
 }
 .btnSubmit:hover {background: #0954f6;}
+
+.btnModify { 
+    display: inline-block;
+    width: 200px;
+    height: 60px;
+    margin: 40px auto 0;
+    background-color: #067dfd;
+    border: 1px solid #0063ce;
+    border-radius: 34px;
+    font-size: 16px;
+    color: #fff;
+    line-height: 58px;
+    text-align: center;
+    box-sizing: border-box;
+}
+.btnModify:hover {background: #0954f6;}
 /* notice 전체 */
 #cs > .notice {}
 
@@ -595,40 +611,74 @@ footer p > strong {
     font-weight: bold;
     margin-bottom: 6px;
 }
-#cs > .faq > .list > article > div > ul {
-    width: 100%;
-    height: auto;
-    border: 1px solid #ccc;
-    border-radius: 6px;
+#cs > .faq > .list > article > div > div {
+	border: 1px solid #ccc;
+	border-radius: 5px;
+	box-sizing: border-box;
 }
-#cs > .faq > .list > article > div > ul > li {
+#cs > .faq > .list > article > div > div > .ul1, .ul2, .ul3, .ul4, .ul5, .ul6, .ul7 {
+    width: 100%;
+    height: 171px;
+    overflow: hidden;
+}
+#cs > .faq > .list > article > div > div > ul > li {
     width: 100%;
     height: auto;
     border-bottom: 1px solid #ccc;
 }
-#cs > .faq > .list > article > div > ul > li:nth-child(n+4) {display: none;}
-#cs > .faq > .list > article > div > ul a {
+
+#cs > .faq > .list > article > div > div > ul a {
     display: block;
     width: 100%;
     height: 100%;
     padding: 16px;
     font-size: 16px;
-    border-radius: 6px;
     box-sizing: border-box;
 }
-#cs > .faq > .list > article > div > ul a:hover {background: #f7f7f7;}
-#cs > .faq > .list > article > div > ul span {
+#cs > .faq > .list > article > div > div > ul a:hover {
+	border-radius: 5px;
+	background: #f7f7f7;
+}
+#cs > .faq > .list > article > div > div > ul span {
     font-family: sans-serif;
     font-size: 18px;
     font-weight: bold;
     color: #006cff;
     margin-right: 6px;
 }
-#cs > .faq > .list > article > div > ul > .more1 {
-    display: block !important;
-    border-bottom: none;
+
+/* 더보기 */
+#cs > .faq > .list > article > div > div > .more1, .more2, .more3, .more4, .more5, .more6, .more7 {
+    display: block;
+    width: 100%;
+    height: auto;
+    padding: 15px;
+    border: none;
+    border-radius: 5px;
+    font-size: 15px;
+    color: #666;
     text-align: center;
+    box-sizing: border-box;
+    background: #fff;
 }
+#cs > .faq > .list > article > div > div > .more1:hover, .more2:hover, .more3:hover, .more4:hover, .more5:hover, .more6:hover, .more7:hover  {background: #f7f7f7;}
+
+/* 간단히 보기 */
+#cs > .faq > .list > article > div > div > .simple1, .simple2, .simple3, .simple4, .simple5, .simple6, .simple7  {
+    display: none;
+    width: 100%;
+    height: auto;
+    padding: 15px;
+    border: none;
+    border-radius: 5px;
+    font-size: 15px;
+    color: #666;
+    text-align: center;
+    box-sizing: border-box;
+    background: #fff;
+}
+
+#cs > .faq > .list > article > div > div > .simple1:hover, .simple2:hover, .simple3:hover, .simple4:hover, .simple5:hover, .simple6:hover, .simple7:hover {background: #f7f7f7;}
 
 /* faq - 뷰 영역 */
 #cs > .faq > .view {}
@@ -877,6 +927,14 @@ footer p > strong {
     font-size: 16px;
     box-sizing: border-box;
 }
+
+#cs > .qna > .write > article table > tr:nth-first-child > input {
+    width: 200px;
+    height: 40px;
+    font-size: 16px;
+    box-sizing: border-box;
+}
+
 #cs > .qna > .write > article table select * {
     font-size: inherit;
 }
@@ -889,6 +947,59 @@ footer p > strong {
     padding: 10px;
     box-sizing: border-box;
 }
+
+/* qna - 글수정 */
+#cs > .qna > .modify > article table {
+    width: 100%;
+    border-collapse: collapse;
+    border-top: 2px solid #111;
+}
+#cs > .qna > .modify > article table tr {
+    width: 100%;
+    height: 26px;
+}
+#cs > .qna > .modify > article table td {
+    padding: 16px;
+    border-bottom: 1px solid #ccc;
+    font-size: 16px;
+}
+#cs > .qna > .modify > article table td:first-child {width: 100px;}
+
+#cs > .qna > .modify > article table input {
+    width: 100%;
+    height: 40px;
+    font-size: 16px;
+    box-sizing: border-box;
+    text-indent: 10px;
+}
+
+#cs > .qna > .modify > article table select {
+    width: 200px;
+    height: 40px;
+    font-size: 16px;
+    box-sizing: border-box;
+}
+
+#cs > .qna > .modify > article table .type input {
+    width: 200px;
+    height: 40px;
+    font-size: 16px;
+    box-sizing: border-box;
+}
+
+#cs > .qna > .modify > article table select * {
+    font-size: inherit;
+}
+
+#cs > .qna > .modify > article table textarea {
+    width: 100%;
+    height: 360px;
+    resize: none;
+    font-size: 16px;
+    padding: 10px;
+    box-sizing: border-box;
+}
+
 
 /* notice - 글쓰기 */
 #cs > .notice > .write > article table {

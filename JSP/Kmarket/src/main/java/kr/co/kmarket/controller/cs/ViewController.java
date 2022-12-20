@@ -9,6 +9,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import kr.co.kmarket.service.BoardService;
 import kr.co.kmarket.vo.BoardVO;
 
@@ -17,6 +20,7 @@ public class ViewController extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
 	private BoardService service = BoardService.INSTANCE;
+	private Logger logger = LoggerFactory.getLogger(this.getClass());
 	
 	@Override
 	public void init() throws ServletException {
@@ -30,8 +34,12 @@ public class ViewController extends HttpServlet {
 		String no = req.getParameter("no");
 		String pg = req.getParameter("pg");
 		
+<<<<<<< HEAD
 <<<<<<< Updated upstream
 		BoardVO vo = service.selectArticle(no);
+=======
+		BoardVO vo = service.selectArticle(no, cate);
+>>>>>>> a333535e2f7e736b0222c1a114019abe151fa49c
 		
 		req.setAttribute("group", group);
 =======
@@ -45,14 +53,17 @@ public class ViewController extends HttpServlet {
 		req.setAttribute("cate", cate);
 >>>>>>> Stashed changes
 		req.setAttribute("vo", vo);
-		req.setAttribute("group", group);
-		req.setAttribute("cate", cate);
 		req.setAttribute("type", type);
+<<<<<<< HEAD
 <<<<<<< Updated upstream
 =======
 		req.setAttribute("pg", pg);
 		req.setAttribute("no", no);
 >>>>>>> Stashed changes
+=======
+		req.setAttribute("pg", pg);
+		req.setAttribute("no", no);
+>>>>>>> a333535e2f7e736b0222c1a114019abe151fa49c
 		
 		RequestDispatcher dispatcher = req.getRequestDispatcher("/cs/board/view.jsp");
 		dispatcher.forward(req, resp);

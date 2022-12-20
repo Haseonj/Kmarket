@@ -35,7 +35,7 @@
 				success:function(data){
 					console.log('here2');
 					alert('장바구니에서 상품이 삭제되었습니다');
-					location.href = '/Kmarket/product/cart.do?cate1=10&cate2=10';
+					location.href = '/Kmarket/product/cart.do';
 				}
 			});
 		});
@@ -116,19 +116,43 @@
 			
 		});
 		
-		$('input[name=submitorder]').click(function(){
-			
+		$('input[name=submitorder]').click(function(e){
+			e.preventDefault();
 			if(confirm('주문페이지로 이동하시겠습니까?')){
 				
+				let checkBoxArr = [];
+				console.log('here1');
+				
+				$('input:checkbox[name=cartlist]:checked').each(function(){
+					
+					console.log('here2');
+					checkBoxArr.push($(this).val());
+				}); 
+				
+				console.log('here3 : '+ checkBoxArr.length);
+			
+				let jsonData = {"checkBoxArr":checkBoxArr};
+				
+				console.log('here4');
+				
 				$.ajax({
-					url:'/Kmarket/product/order.do',
-					method:'post',
-					data:jsonData,
+					url:'/Kmarket/product/cart.do',
+					method:'POST',
+					traditional: true,
+					data: jsonData,
 					dataType:'json',
-					success:function(){
+					success:function(data){
+												
+						console.log('here5');
+						
+						if(data.result > 0){
+							console.log('here6');
+							location.href = '/Kmarket/product/order.do';	
+						}
 						
 					}
 				});
+				
 			}else{
 				return;
 			}
@@ -168,7 +192,7 @@
             </tr>
             <c:forEach var="cart" items="${carts}">
             	<tr class="notempty">
-	              <td><input type="checkbox" name="cartlist" id="ck" value="${cart.prodNo}"></td>
+	              <td><input type="checkbox" name="cartlist" id="ck" value="${cart.cartNo}"></td>
 	              <td>
 	                <article>
 	                  <a href="#"><img src="http://3.39.231.136:8080/Kmarket/file/${cart.thumb1}" alt=""></a>

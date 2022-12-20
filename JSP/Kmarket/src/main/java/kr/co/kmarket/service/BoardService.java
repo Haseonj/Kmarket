@@ -23,8 +23,8 @@ public enum BoardService {
 		dao.insertArticle(vo);
 	}
 	
-	public BoardVO selectArticle(String no) {
-		return dao.selectArticle(no);
+	public BoardVO selectArticle(String no, String cate) {
+		return dao.selectArticle(no, cate);
 	}
 	
 	public BoardVO selectArticle(String no) {
@@ -66,6 +66,7 @@ public enum BoardService {
 		return dao.selectCountTotal(cate);
 	}
 	
+<<<<<<< HEAD
 <<<<<<< Updated upstream
 =======
 	/*
@@ -75,6 +76,9 @@ public enum BoardService {
 	*/
 	
 >>>>>>> Stashed changes
+=======
+	
+>>>>>>> a333535e2f7e736b0222c1a114019abe151fa49c
 	public List<BoardVO> selectCate1() {
 		return dao.selectCate1();
 	}
