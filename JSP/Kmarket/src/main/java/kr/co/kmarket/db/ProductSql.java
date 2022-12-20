@@ -16,7 +16,10 @@ public class ProductSql {
 												+ "	FLOOR(`price` * (1 - `discount` / 100)) AS `salePrice` "
 												+ "from `km_product` AS a where `prodCate1`=? and `prodCate2`=? limit 10;";
 	public static final String SELECT_ADMIN_PRODUCTS ="SELECT * FROM `km_product`";
-	public static final String SELECT_SEARCH_ADMIN_PRODUCTS ="SELECT * FROM `km_product` where `?` like '%?%'";
+	public static final String SELECT_SEARCH_ADMIN_PRODUCTS_PRODNAME ="SELECT * FROM `km_product` where `prodName` like ?";
+	public static final String SELECT_SEARCH_ADMIN_PRODUCTS_PRODNO ="SELECT * FROM `km_product` where `prodNo` like ?";
+	public static final String SELECT_SEARCH_ADMIN_PRODUCTS_COMPANY ="SELECT * FROM `km_product` where `company` like ?";
+	public static final String SELECT_SEARCH_ADMIN_PRODUCTS_SELLER ="SELECT * FROM `km_product` where `seller` like ?";
 	public static final String SELECT_ADMIN_COUNT_TOTAL = "select count(`prodNo`) from `km_product`";
 	public static final String SELECT_PRODCATE1 = "select * from `km_product_cate1`";
 	public static final String SELECT_PRODCATE2 = "select * from `km_product_cate2` where `cate1`=?";

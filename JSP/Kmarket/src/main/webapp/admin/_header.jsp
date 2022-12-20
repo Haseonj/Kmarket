@@ -21,9 +21,9 @@
             <div>
                 <a href="./index.html" class="logo"><img src="/Kmarket/admin/img/admin_logo.png" alt="admin_logo"></a>
                 <p>
-                    <span>홍길동님 반갑습니다.</span>
-                    <a href="#">HOME |</a>
-                    <a href="#">로그아웃 |</a>
+                    <span>${sessMember.name}님 반갑습니다.</span>
+                    <a href="/Kmarket/index.do">HOME |</a>
+                    <a href="/Kmarket/member/logout.do">로그아웃 |</a>
                     <a href="#">고객센터</a>
                 </p>
             </div>
@@ -57,8 +57,8 @@
             <li>
                 <a href="#"><i class="fas fa-box-open"></i>상품관리</a>
                 <ol>
-                    <li><a href="#">상품현황</a></li>
-                    <li><a href="#">상품등록</a></li>
+                    <li><a href="/Kmarket/admin/product/list.do">상품목록</a></li>
+                    <li><a href="/Kmarket/admin/product/register.do">상품등록</a></li>
                     <li><a href="#">재고관리</a></li>
                 </ol>
             </li>

@@ -2,46 +2,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <jsp:include page="../_header.jsp"/>
-<script>
-	$(function() {
-		$('#sch').click(function() {
-					
-			let search1var = $('select[value=search1]').var();
-			let search2var = $('input[name=search2]').var();
-			
-			switch(search1var){
-			case "상품명" :
-				search1var = "prodName";
-			break
-			case "상품코드" :
-				search1var = "prodNo";
-			break
-			case "제조사" :
-				search1var = "company";
-			break
-			//case "판매자" :
-				//let search1var = "판매자";
-			//break
-			};
-			let jsonData = {
-					"search1var":search1var,
-					"search2var":search2var
-					};
-			$.ajax({
-				url: '/Kmarket/admin/list.do',
-				method: 'get',
-				data: jsonData,
-				dataType: 'json',
-				success:function(data){
-					document.location.href = document.location.href;
-				}
-			});
-			
-			
-		});
-		
-	});
-</script>
     <section id="admin-product-list">
         <nav>
             <h3>상품목록</h3>
@@ -52,14 +12,16 @@
         <!-- 상품목록 컨텐츠 시작 -->
         <section>
             <div>
+            <form>
                 <select name="search">
-                    <option value="search1">상품명</option>
-                    <option value="search1">상품코드</option>
-                    <option value="search1">제조사</option>
-                    <option value="search1">판매자</option>
+                    <option value="prodName">상품명</option>
+                    <option value="prodNo">상품코드</option>
+                    <option value="company">제조사</option>
+                    <option value="seller">판매자</option>
                 </select>
                 <input type="text" name="search2">
-                <button type="button" id="sch">검색</button>
+                <input type="submit" value="검색">
+                </form>
             </div>
             <table>
                 <tbody>
@@ -86,7 +48,7 @@
                         <td>${prod.discount}</td>
                         <td>${prod.point}</td>
                         <td>${prod.stock}</td>
-                        <td>홍길동</td>
+                        <td>${prod.seller}</td>
                         <td>${prod.hit}</td>
                         <td>
                             <a href="#">[삭제]</a>
