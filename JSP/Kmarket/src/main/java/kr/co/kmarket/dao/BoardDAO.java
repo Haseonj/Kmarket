@@ -36,16 +36,8 @@ public class BoardDAO extends DBHelper {
 		}
 	}
 	
-<<<<<<< HEAD
-<<<<<<< Updated upstream
-	public BoardVO selectArticle(String no) {
-=======
 	// 글수정
 	public BoardVO selectArticle(String no, String cate) {
->>>>>>> Stashed changes
-=======
-	public BoardVO selectArticle(String no, String cate) {
->>>>>>> a333535e2f7e736b0222c1a114019abe151fa49c
 		BoardVO vo = null;
 		try {
 			logger.info("selectArticle...");
@@ -198,40 +190,6 @@ public class BoardDAO extends DBHelper {
 		
 		return notice;
 	}
-	/*
-	public List<BoardVO> selectNoticeList(String group, String cate, int start) {
-		List<BoardVO> articles = new ArrayList<>();
-		try {
-			logger.info("selectNoticeList...");
-			conn = getConnection();
-			psmt = conn.prepareStatement(BoardSql.SELECT_ARTICLES);
-			psmt.setString(1, group);
-			psmt.setString(2, cate);
-			psmt.setInt(3, start);
-			rs = psmt.executeQuery();
-			
-			while(rs.next()) {
-				BoardVO vo = new BoardVO();
-				vo.setNo(rs.getInt(1));
-				vo.setUid(rs.getString(2));
-				vo.setGroup(rs.getString(3));
-				vo.setC1Name(rs.getString(4));
-				vo.setCate2(rs.getString(5));
-				vo.setTitle(rs.getString(6));
-				vo.setContent(rs.getString(7));
-				vo.setRegip(rs.getString(8));
-				vo.setRdate(rs.getString(9));
-				articles.add(vo);
-			}
-			close();
-		}catch (Exception e) {
-			logger.error(e.getMessage());
-		}
-		
-		return articles;
-	}
-	
-	*/
 	
 	public List<BoardVO> selectQnaArticles() {
 		List<BoardVO> qna = new ArrayList<>();
@@ -319,9 +277,6 @@ public class BoardDAO extends DBHelper {
 		return total;
 	}
 	
-<<<<<<< HEAD
-<<<<<<< Updated upstream
-=======
 	public int selectCountTotal(String cate) {
 		int total = 0;
 		
@@ -344,33 +299,6 @@ public class BoardDAO extends DBHelper {
 		return total;
 	}
 	
-	/*
-	public int selectCountTotalA(String group) {
-		int total = 0;
-		
-		try {
-			logger.info("selectCountTotal...");
-			conn = getConnection();
-			psmt = conn.prepareStatement(BoardSql.SELECT_COUNT_TOTAL_NOTI_ALL);
-			psmt.setString(1, group);
-			rs = psmt.executeQuery();
-			
-			if(rs.next()) {
-				total = rs.getInt(1);
-			}
-			
-			close();
-		}catch (Exception e) {
-			logger.error(e.getMessage());
-		}
-		return total;
-	}
-	*/
-	
->>>>>>> Stashed changes
-=======
-	
->>>>>>> a333535e2f7e736b0222c1a114019abe151fa49c
 	public List<BoardVO> selectCate1() {
 		List<BoardVO> cate1 = new ArrayList<>();
 		try {

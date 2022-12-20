@@ -44,12 +44,6 @@ public enum BoardService {
 		return dao.selectNoticeArticles();
 	}
 	
-	/*
-	public List<BoardVO> selectNoticeList(){
-		return dao.selectNoticeList();
-	}
-	*/
-	
 	public List<BoardVO> selectQnaArticles() {
 		return dao.selectQnaArticles();
 	}
@@ -66,19 +60,6 @@ public enum BoardService {
 		return dao.selectCountTotal(cate);
 	}
 	
-<<<<<<< HEAD
-<<<<<<< Updated upstream
-=======
-	/*
-	public int selectCountTotal(String group) {
-		return dao.selectCountTotal(group);
-	}
-	*/
-	
->>>>>>> Stashed changes
-=======
-	
->>>>>>> a333535e2f7e736b0222c1a114019abe151fa49c
 	public List<BoardVO> selectCate1() {
 		return dao.selectCate1();
 	}

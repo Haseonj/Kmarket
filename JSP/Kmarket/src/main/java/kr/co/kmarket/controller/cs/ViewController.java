@@ -34,15 +34,8 @@ public class ViewController extends HttpServlet {
 		String no = req.getParameter("no");
 		String pg = req.getParameter("pg");
 		
-<<<<<<< HEAD
-<<<<<<< Updated upstream
-		BoardVO vo = service.selectArticle(no);
-=======
-		BoardVO vo = service.selectArticle(no, cate);
->>>>>>> a333535e2f7e736b0222c1a114019abe151fa49c
 		
 		req.setAttribute("group", group);
-=======
 		BoardVO vo = null; 
 		if(type.equals("modify")) {
 			vo = service.selectArticle(no, cate);	
@@ -51,19 +44,10 @@ public class ViewController extends HttpServlet {
 		}
 		req.setAttribute("group", group);
 		req.setAttribute("cate", cate);
->>>>>>> Stashed changes
 		req.setAttribute("vo", vo);
 		req.setAttribute("type", type);
-<<<<<<< HEAD
-<<<<<<< Updated upstream
-=======
 		req.setAttribute("pg", pg);
 		req.setAttribute("no", no);
->>>>>>> Stashed changes
-=======
-		req.setAttribute("pg", pg);
-		req.setAttribute("no", no);
->>>>>>> a333535e2f7e736b0222c1a114019abe151fa49c
 		
 		RequestDispatcher dispatcher = req.getRequestDispatcher("/cs/board/view.jsp");
 		dispatcher.forward(req, resp);
