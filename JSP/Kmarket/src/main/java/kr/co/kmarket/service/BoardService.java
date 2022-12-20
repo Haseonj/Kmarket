@@ -27,19 +27,38 @@ public enum BoardService {
 		return dao.selectArticle(no, cate);
 	}
 	
+	public BoardVO selectArticle(String no) {
+		return dao.selectArticle(no);
+	}
+	
 	public List<BoardVO> selectArticles(String group, String cate, int start) {
 		logger.info("selectArticlesService.. cate:" +cate);
 		return dao.selectArticles(group, cate, start);
+	}
+	
+	public List<BoardVO> selectAllArticles(String group, int start) {
+		return dao.selectAllArticles(group, start);
+	}
+	
+	public List<BoardVO> selectNoticeArticles() {
+		return dao.selectNoticeArticles();
+	}
+	
+	public List<BoardVO> selectQnaArticles() {
+		return dao.selectQnaArticles();
 	}
 	
 	public List<BoardVO> selectFaqArticles(String group, String cate){
 		return dao.selectFaqArticles(group, cate);
 	}
 	
+	public int selectCountTotal(String cate, String group) {
+		return dao.selectCountTotal(cate, group);
+	}
+	
 	public int selectCountTotal(String cate) {
 		return dao.selectCountTotal(cate);
 	}
-	
 	
 	public List<BoardVO> selectCate1() {
 		return dao.selectCate1();
@@ -47,6 +66,10 @@ public enum BoardService {
 	
 	public List<BoardVO> selectCate2(String cate1) {
 		return dao.selectCate2(cate1);
+	}
+	
+	public void updateArticle(String no, String title, String content) {
+		dao.updateArticle(no, title, content);
 	}
 	
 	// 현재 페이지 번호

@@ -42,7 +42,18 @@ public class ListController extends HttpServlet {
 		int currentPage = service.getCurrentpage(pg);
 		
 		// 전체 페이지 갯수
-		int total = service.selectCountTotal(cate);
+		int total = 0;
+		if(group.equals("qna") || cate.equals("safe")) {
+			total = service.selectCountTotal(cate, group);
+		}else {
+			if(!cate.equals("all")) {
+				total = service.selectCountTotal(cate);
+			}else {
+				total = service.selectCountTotal(group);
+			}
+		}
+		
+		logger.info("total .. : " + total);
 		
 		// 마지막 페이지 번호
 		int lastPageNum = service.getLastPageNum(total);
@@ -58,8 +69,12 @@ public class ListController extends HttpServlet {
 		
 		// 글 가져오기
 		List<BoardVO> articles = null;
-		if(group.equals("qna")) {
-			articles = service.selectArticles(group, cate, start);
+		if(group.equals("qna") || group.equals("notice")) {
+			if(!cate.equals("all")) {
+				articles = service.selectArticles(group, cate, start);
+			}else {
+				articles = service.selectAllArticles(group, start);
+			}
 		}else if(group.equals("faq")) {
 			articles = service.selectFaqArticles(group, cate);
 		}
@@ -69,7 +84,6 @@ public class ListController extends HttpServlet {
 		req.setAttribute("lastPageNum", lastPageNum);
 		req.setAttribute("pageGroupStart", result[0]);
 		req.setAttribute("pageGroupEnd", result[1]);
-		req.setAttribute("pageStartNum", pageStartNum + 1);
 		req.setAttribute("cate2", cate2);
 		
 		req.setAttribute("group", group);

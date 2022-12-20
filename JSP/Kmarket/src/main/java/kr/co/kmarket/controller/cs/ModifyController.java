@@ -42,6 +42,17 @@ public class ModifyController extends HttpServlet {
 	
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		String group = req.getParameter("group");
+		String cate = req.getParameter("cate");
+		String type = req.getParameter("type");
+		String no = req.getParameter("no");
+		String pg = req.getParameter("pg");
+		String title = req.getParameter("title");
+		String content = req.getParameter("content");
+		
+		service.updateArticle(no, title, content);
+		
+		resp.sendRedirect("Kmarket/cs/board/view.do?group="+group+"&cate="+cate+"&type="+type+"&no="+no+"&pg="+pg);
 	}
 
 }

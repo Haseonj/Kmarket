@@ -34,8 +34,16 @@ public class ViewController extends HttpServlet {
 		String no = req.getParameter("no");
 		String pg = req.getParameter("pg");
 		
-		BoardVO vo = service.selectArticle(no, cate);
 		
+		req.setAttribute("group", group);
+		BoardVO vo = null; 
+		if(type.equals("modify")) {
+			vo = service.selectArticle(no, cate);	
+		}else {
+			vo = service.selectArticle(no);
+		}
+		req.setAttribute("group", group);
+		req.setAttribute("cate", cate);
 		req.setAttribute("vo", vo);
 		req.setAttribute("type", type);
 		req.setAttribute("pg", pg);
