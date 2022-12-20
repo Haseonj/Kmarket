@@ -3,16 +3,13 @@
 <jsp:include page="../_header.jsp"/>
 <jsp:include page="./_${vo.group}.jsp"/>
 <script></script>
-<<<<<<< HEAD
                 <form action="/Kmarket/cs/board/modify.do" method="post">
                 <input type="hidden" name="uid" value="${sessMember.uid}">
+                <input type="hidden" name="cate" value="${cate}">
                 <input type="hidden" name="group" value="qna">
                 <input type="hidden" name="type" value="${type}">
-=======
-                <form action="/Kmarket/cs/board/write.do" method="post">
-                <input type="hidden" name="uid" value="${sessMember.uid}">
-                <input type="hidden" name="group" value="qna">
->>>>>>> a333535e2f7e736b0222c1a114019abe151fa49c
+                <input type="hidden" name="no" value="${vo.no}">
+                <input type="hidden" name="pg" value="${pg}">
                     <table>
                         <tbody>
                             <tr class="type">

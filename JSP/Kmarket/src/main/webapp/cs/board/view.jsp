@@ -37,26 +37,10 @@
                         <br>
                     </p>
                 </div>
-<<<<<<< HEAD
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-                <a href="/Kmarket/cs/board/list.do?group=${group}&cate=${cate}&type=list" class="btnList">목록보기</a>
-=======
-                <a href="/Kmarket/cs/board/list.do?group=${group}&cate=${vo.c1Name}&type=list" class="btnList">목록보기</a>
-                <c:if test="${group eq 'qna'}">
-                <a href="/Kmarket/cs/board/modify.do?group=${group}&cate=${vo.c1Name}&type=modify&pg=${pg}&no=${vo.no}" class="btnModify">수정하기</a>
-                </c:if>
->>>>>>> Stashed changes
-=======
                 <a href="/Kmarket/cs/board/list.do?group=${vo.group}&cate=${cate}&type=list" class="btnList">목록보기</a>
                 <c:if test="${group eq 'qna'}">
                 <a href="/Kmarket/cs/board/modify.do?group=${vo.group}&cate=${vo.c1Name}&type=modify&pg=${pg}&no=${vo.no}" class="btnModify">수정하기</a>
                 </c:if>
->>>>>>> Stashed changes
-=======
-                <a href="/Kmarket/cs/board/list.do?group=${vo.group}&cate=${vo.c1Name}&type=list" class="btnList">목록보기</a>
-                <a href="/Kmarket/cs/board/modify.do?group=${vo.group}&cate=${vo.c1Name}&type=modify&pg=${pg}&no=${vo.no}" class="btnModify">수정하기</a>
->>>>>>> a333535e2f7e736b0222c1a114019abe151fa49c
             </article>
         </section>
 </section>
