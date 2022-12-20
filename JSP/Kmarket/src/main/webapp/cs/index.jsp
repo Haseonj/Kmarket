@@ -1,4 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri ="http://java.sun.com/jsp/jstl/core"%>
 <jsp:include page="./_header.jsp"/>
         <section id="cs">
             <div class="main">
@@ -11,26 +12,12 @@
                         <a href="/Kmarket/cs/board/list.do?group=notice&cate=all&type=list">전체보기</a>
                     </h1>
                     <ul>
+                    <c:forEach var="notice" items="${notice}">
                         <li>
-                            <a href="#" class="title">[안내] 해외결제 사칭 문자 주의</a>
-                            <span class="date">22.10.31</span>
+                            <a href="/Kmarket/cs/board/view.do?group=${notice.group}&cate=${notice.c1Name}&type=view&no=${notice.no}" class="title">${notice.title}</a>
+                            <span class="date">${notice.rdate.substring(2, 10)}</span>
                         </li>
-                        <li>
-                            <a href="#" class="title">[안내] 해외결제 사칭 문자 주의</a>
-                            <span class="date">22.10.31</span>
-                        </li>
-                        <li>
-                            <a href="#" class="title">[안내] 해외결제 사칭 문자 주의</a>
-                            <span class="date">22.10.31</span>
-                        </li>
-                        <li>
-                            <a href="#" class="title">[안내] 해외결제 사칭 문자 주의</a>
-                            <span class="date">22.10.31</span>
-                        </li>
-                        <li>
-                            <a href="#" class="title">[안내] 해외결제 사칭 문자 주의</a>
-                            <span class="date">22.10.31</span>
-                        </li>
+                    </c:forEach>
                     </ul>
                 </section>
                 <section class="faq">
@@ -54,41 +41,17 @@
                         <a href="/Kmarket/cs/board/list.do?group=qna&cate=user&type=list">전체보기</a>
                     </h1>
                     <ul>
+                    <c:forEach var="qna" items="${qna}">
                         <li>
-                            <a href="#" class="title">[회원] 개인회원과 법인회원에 차이가 있나요?</a>
+                            <a href="/Kmarket/cs/board/view.do?group=qna&cate=${qna.c1Name}&type=view&no=${qna.no}" class="title">[${qna.cate2}] ${qna.title}</a>
                             <p>
-                                <span class="uid">hasj****</span>
-                                <span class="date">22.12.07</span>
+                                <span class="uid">
+                                	${qna.uid.substring(0,5)}<c:forEach begin="6" end="${qna.uid.length()}" step="1">*</c:forEach>
+                                </span>
+                                <span class="date">${qna.rdate.substring(2, 10)}</span>
                             </p>
                         </li>
-                        <li>
-                            <a href="#" class="title">[쿠폰/이벤트] 스마일포인트는 어디에 사용하나요?</a>
-                            <p>
-                                <span class="uid">hasj****</span>
-                                <span class="date">22.12.07</span>
-                            </p>
-                        </li>
-                        <li>
-                            <a href="#" class="title">[주문/결제] 신용카드 결제 중 오류가 난 경우 어떻게 하나요?</a>
-                            <p>
-                                <span class="uid">hasj****</span>
-                                <span class="date">22.12.07</span>
-                            </p>
-                        </li>
-                        <li>
-                            <a href="#" class="title">[배송] 주문한 상품은 언제 배송되나요?</a>
-                            <p>
-                                <span class="uid">hasj****</span>
-                                <span class="date">22.12.07</span>
-                            </p>
-                        </li>
-                        <li>
-                            <a href="#" class="title">[취소/반품/교환] 주문을 취소하고 싶어요.</a>
-                            <p>
-                                <span class="uid">hasj****</span>
-                                <span class="date">22.12.07</span>
-                            </p>
-                        </li>
+                    </c:forEach>
                     </ul>
                     <a href="/Kmarket/cs/board/write.do?group=qna&cate=user&type=write" class="ask">문의글 작성 ></a>
                 </section>

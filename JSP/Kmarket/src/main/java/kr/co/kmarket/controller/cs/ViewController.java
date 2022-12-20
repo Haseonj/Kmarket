@@ -30,9 +30,20 @@ public class ViewController extends HttpServlet {
 		String no = req.getParameter("no");
 		String pg = req.getParameter("pg");
 		
+<<<<<<< Updated upstream
 		BoardVO vo = service.selectArticle(no);
 		
 		req.setAttribute("group", group);
+=======
+		BoardVO vo = null; 
+		if(type.equals("modify")) {
+			vo = service.selectArticle(no, cate);	
+		}else {
+			vo = service.selectArticle(no);
+		}
+		req.setAttribute("group", group);
+		req.setAttribute("cate", cate);
+>>>>>>> Stashed changes
 		req.setAttribute("vo", vo);
 		req.setAttribute("group", group);
 		req.setAttribute("cate", cate);

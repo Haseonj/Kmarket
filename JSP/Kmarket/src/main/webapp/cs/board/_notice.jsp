@@ -25,7 +25,7 @@
                     <li class="${cate eq 'service' ? 'on' : 'off'}"><a href="/Kmarket/cs/board/list.do?group=notice&cate=service&type=list">고객서비스</a></li>
                     <li class="${cate eq 'safe' ? 'on' : 'off'}"><a href="/Kmarket/cs/board/list.do?group=notice&cate=safe&type=list">안전거래</a></li>
                     <li class="${cate eq 'danger' ? 'on' : 'off'}"><a href="/Kmarket/cs/board/list.do?group=notice&cate=danger&type=list">위해상품</a></li>
-                    <li class="${cate eq 'event' ? 'on' : 'off'}"><a href="/Kmarket/cs/board/list.do?group=notice&cate=event&type=list">이벤트당첨</a></li>
+                    <li class="${cate eq 'prize' ? 'on' : 'off'}"><a href="/Kmarket/cs/board/list.do?group=notice&cate=prize&type=list">이벤트당첨</a></li>
                 </ul>
             </aside>
             <article>
@@ -47,7 +47,7 @@
                     <h1>위해상품</h1>
                     <h2>공지사항 위해상품 내용입니다.</h2>
                 </c:if>
-                <c:if test="${cate eq 'event'}">
+                <c:if test="${cate eq 'prize'}">
                     <h1>이벤트당첨</h1>
                     <h2>공지사항 이벤트당첨 내용입니다.</h2>
                 </c:if>
