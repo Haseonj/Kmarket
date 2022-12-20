@@ -32,6 +32,7 @@ public class ModifyController extends HttpServlet {
 		
 		BoardVO vo = service.selectArticle(no, cate);
 		
+		req.setAttribute("cate", cate);
 		req.setAttribute("type", type);
 		req.setAttribute("vo", vo);
 		req.setAttribute("pg", pg);
@@ -52,7 +53,7 @@ public class ModifyController extends HttpServlet {
 		
 		service.updateArticle(no, title, content);
 		
-		resp.sendRedirect("Kmarket/cs/board/view.do?group="+group+"&cate="+cate+"&type="+type+"&no="+no+"&pg="+pg);
+		resp.sendRedirect("/Kmarket/cs/board/view.do?group="+group+"&cate="+cate+"&type=view&no="+no+"&pg="+pg);
 	}
 
 }
