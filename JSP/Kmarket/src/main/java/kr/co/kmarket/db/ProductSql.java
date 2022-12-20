@@ -52,17 +52,19 @@ public class ProductSql {
 			
 	// order
 	public static final String INSERT_ORDER = "insert into `km_product_order` set "
-												+ "`ordUid`=?, `ordCount`=?, `ordPrice`=?, `ordDiscount`=?, `ordDelivery`=?, `savePoint`=?, `usedPoint`=?, `ordTotPrice`=?"
+												+ "`ordUid`=?, `ordCount`=?, `ordPrice`=?, `ordDiscount`=?, `ordDelivery`=?, `savePoint`=?, `usedPoint`=?, `ordTotPrice`=?, "
 												+ "`recipName`=?, `recipHp`=?, `recipZip`=?, `recipAddr1`=?, `recipAddr2`=?, `ordPayment`=?, `ordComplete`=?, `ordDate`=NOW()";
-	public static final String SELECT_LATEST_ORDER = "select * from `km_product_order` where `ordUid`=? order by `ordNo` desc limit 1";
-	public static final String SELECT_ORDER = "SELECT a.*, c.* "
-												+ "from `km_product_order_item` AS a "
-												+ "JOIN `km_product` AS c ON a.prodNo = c.prodNo "
-												+ "where `ordNo`=?";
+	public static final String SELECT_LATEST_ORDER = "select `ordNo` from `km_product_order` where `ordUid`=? order by `ordNo` desc limit 1";
+	public static final String SELECT_ORDER = "SELECT * "
+												+ "from `km_product_order` "
+												+ "where `ordUid`=? order by `ordNo` desc limit 1";
 	public static final String SELECT_ORDER_NO = "SELECT `ordNo` "
 													+ "from `km_product_order` "
 													+ "where `ordUid`=?";
 	public static final String SELECT_ORDER_PRODUCTS = "select `price`, `discount`, `point`, `delivery` from `km_product` where `prodNo`=?";
 	public static final String INSERT_ORDER_ITEM = "insert into `km_product_order_item` set "
 													+"`ordNo`=?, `prodNo`=?, `count`=?, `price`=?, `discount`=?, `point`=?, `delivery`=?, `total`=?";
+	public static final String INSERT_MEMBER_POINT = "insert into `km_member_point` set `uid`=?, `ordNo`=?, `point`=?, `pointDate`=NOW()";
+	public static final String SELECT_MEMBER_POINT = "SELECT `point` FROM `km_member` WHERE `uid`=?";
+	public static final String UPDATE_SAVE_MEMBER_POINT = "update `km_member` set `point`=`point`+?-? WHERE `uid`=?";
 }

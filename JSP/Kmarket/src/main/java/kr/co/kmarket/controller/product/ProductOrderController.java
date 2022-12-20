@@ -2,7 +2,6 @@ package kr.co.kmarket.controller.product;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -22,7 +21,6 @@ import kr.co.kmarket.service.ProductService;
 import kr.co.kmarket.vo.CartVO;
 import kr.co.kmarket.vo.MemberVO;
 import kr.co.kmarket.vo.OrderVO;
-import kr.co.kmarket.vo.ProductVO;
 
 @WebServlet("/product/order.do")
 public class ProductOrderController extends HttpServlet{
@@ -42,6 +40,7 @@ public class ProductOrderController extends HttpServlet{
 		
 		HttpSession sess = req.getSession();
 		List<CartVO> carts = (List<CartVO>) sess.getAttribute("sessCarts");
+		MemberVO member = (MemberVO) sess.getAttribute("sessMember");
 		
 		int price = 0;
 		int discount = 0;
@@ -57,14 +56,15 @@ public class ProductOrderController extends HttpServlet{
 		}
 		int productstotalprice = price - discount + delivery ;
 		
+		int recentpoint = service.selectMemberPoint(member.getUid());
+		
 		req.setAttribute("totalprice", price);
 		req.setAttribute("productstotalprice", productstotalprice);
 		req.setAttribute("totalcount", carts.size());
 		req.setAttribute("discount", discount);
 		req.setAttribute("delivery", delivery);
-		req.setAttribute("discount", discount);
 		req.setAttribute("point", point);
-		
+		req.setAttribute("recentpoint", recentpoint);
 		req.setAttribute("carts", carts);
 		
 		
@@ -79,6 +79,7 @@ public class ProductOrderController extends HttpServlet{
 		
 		HttpSession sess = req.getSession();
 		MemberVO member = (MemberVO) sess.getAttribute("sessMember");
+		List<CartVO> carts = (List<CartVO>) sess.getAttribute("sessCarts");
 		
 		String ordCount = req.getParameter("ordCount");
 		String ordPrice = req.getParameter("ordPrice");
@@ -95,6 +96,8 @@ public class ProductOrderController extends HttpServlet{
 		String ordPayment = req.getParameter("ordPayment");
 		String ordComplete = req.getParameter("ordComplete");
 		String uid = member.getUid();
+		int totalSavePoint = Integer.parseInt(savePoint);
+		int totalUsedPoint = Integer.parseInt(usedPoint);
 		
 		OrderVO vo = new OrderVO();
 		vo.setOrdUid(uid);
@@ -114,6 +117,14 @@ public class ProductOrderController extends HttpServlet{
 		vo.setOrdComplete(ordComplete);
 		
 		int result = service.insertOrder(vo);
+		int ordNo = service.selectLatestOrder(uid);
+		for(CartVO cart : carts) {
+			service.insertOrderItem(cart, ordNo);
+		}
+		service.insertMemberPoint(uid, ordNo, savePoint);
+		
+		// 적립포인트 업데이트(member 테이블)
+		service.updateSaveMemberPoint(totalSavePoint, totalUsedPoint, uid);
 		
 		JsonObject json = new JsonObject();
 		json.addProperty("result", result);

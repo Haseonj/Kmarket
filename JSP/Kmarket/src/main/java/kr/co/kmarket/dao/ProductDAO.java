@@ -703,6 +703,21 @@ public class ProductDAO extends DBHelper {
 		}
 		return result;
 	}
+	public void deleteCartList(String uid, int cartNo) {
+		try {
+			logger.info("deleteCartList...");
+			conn = getConnection();
+			psmt = conn.prepareStatement(ProductSql.DELETE_CART_LIST);
+			psmt.setString(1, uid);
+			psmt.setInt(2, cartNo);
+			
+			psmt.executeUpdate();
+			
+			close();
+		}catch(Exception e) {
+			logger.error(e.getMessage());
+		}
+	}
 
 	// admin
 
@@ -846,19 +861,19 @@ public class ProductDAO extends DBHelper {
 			}
 			return result;
 		}
-		public void insertOrderItem(OrderVO vo, String prodNo) {
+		public void insertOrderItem(CartVO vo, int ordNo) {
 			try {
 				logger.info("insertOrderItem...");
 				conn = getConnection();
 				psmt = conn.prepareStatement(ProductSql.INSERT_ORDER_ITEM);
-				psmt.setInt(1, vo.getOrdNo());
-				psmt.setString(2, prodNo);
-				psmt.setInt(3, vo.getOrdCount());
-				psmt.setInt(4, vo.getOrdPrice());
-				psmt.setInt(5, vo.getOrdDiscount());
-				psmt.setInt(6, vo.getSavePoint());
-				psmt.setInt(7, vo.getOrdDelivery());
-				psmt.setInt(8, vo.getOrdTotPrice());
+				psmt.setInt(1, ordNo);
+				psmt.setInt(2, vo.getProdNo());
+				psmt.setInt(3, vo.getCount());
+				psmt.setInt(4, vo.getPrice());
+				psmt.setInt(5, vo.getDiscount());
+				psmt.setInt(6, vo.getPoint());
+				psmt.setInt(7, vo.getDelivery());
+				psmt.setInt(8, vo.getTotal());
 				
 				psmt.executeUpdate();
 				
@@ -867,12 +882,47 @@ public class ProductDAO extends DBHelper {
 				logger.error(e.getMessage());
 			}
 		}
-		public OrderVO selectLatestOrder(String uid) {
-			OrderVO order = null;
+		public void insertMemberPoint(String uid, int ordNo, String point) {
+			try {
+				logger.info("insertMemberPoint...");
+				conn = getConnection();
+				psmt = conn.prepareStatement(ProductSql.INSERT_MEMBER_POINT);
+				psmt.setString(1, uid);
+				psmt.setInt(2, ordNo);
+				psmt.setString(3, point);
+				
+				psmt.executeUpdate();
+				
+				close();
+			}catch(Exception e) {
+				logger.error(e.getMessage());
+			}
+		}
+		public int selectLatestOrder(String uid) {
+			int ordNo = 0;
 			try {
 				logger.info("selectLatestOrder...");
 				conn = getConnection();
 				psmt = conn.prepareStatement(ProductSql.SELECT_LATEST_ORDER);
+				psmt.setString(1, uid);
+				
+				rs = psmt.executeQuery();
+				while(rs.next()) {
+					ordNo = rs.getInt(1);
+				}
+				
+				close();
+			}catch(Exception e) {
+				logger.error(e.getMessage());
+			}
+			return ordNo;
+		}
+		public OrderVO selectOrder(String uid) {
+			OrderVO order = null;
+			try {
+				logger.info("selectOrder...");
+				conn = getConnection();
+				psmt = conn.prepareStatement(ProductSql.SELECT_ORDER);
 				psmt.setString(1, uid);
 				
 				rs = psmt.executeQuery();
@@ -885,7 +935,17 @@ public class ProductDAO extends DBHelper {
 					order.setOrdDiscount(rs.getInt(5));
 					order.setOrdDelivery(rs.getInt(6));
 					order.setSavePoint(rs.getInt(7));
+					order.setUsedPoint(rs.getInt(8));
 					order.setOrdTotPrice(rs.getInt(9));
+					order.setRecipName(rs.getString(10));
+					order.setRecipHp(rs.getString(11));
+					order.setRecipZip(rs.getString(12));
+					order.setRecipAddr1(rs.getString(13));
+					order.setRecipAddr2(rs.getString(14));
+					order.setOrdPayment(rs.getString(15));
+					order.setOrdComplete(rs.getString(16));
+					order.setOrdDate(rs.getString(17));
+					
 				}
 				
 				close();
@@ -893,38 +953,6 @@ public class ProductDAO extends DBHelper {
 				logger.error(e.getMessage());
 			}
 			return order;
-		}
-		public List<OrderVO> selectOrder(int orderNo) {
-			List<OrderVO> orders = new ArrayList<>();
-			try {
-				logger.info("selectOrder...");
-				conn = getConnection();
-				psmt = conn.prepareStatement(ProductSql.SELECT_ORDER);
-				psmt.setInt(1, orderNo);
-				
-				rs = psmt.executeQuery();
-				while(rs.next()) {
-					OrderVO order = new OrderVO();
-					order.setOrdNo(rs.getInt(1));
-					order.setProdNo(rs.getInt(2));
-					order.setCount(rs.getInt(3));
-					order.setPrice(rs.getInt(4));
-					order.setDiscount(rs.getInt(5));
-					order.setPoint(rs.getInt(6));
-					order.setDelivery(rs.getInt(7));
-					order.setTotal(rs.getInt(8));
-					order.setProdName(rs.getString(12));
-					order.setDescript(rs.getString(13));
-					order.setThumb1(rs.getString(25));
-					
-					orders.add(order);
-				}
-				
-				close();
-			}catch(Exception e) {
-				logger.error(e.getMessage());
-			}
-			return orders;
 		}
 		public int selectOrderNo(String uid) {
 			int ordNo = 0;
@@ -969,6 +997,43 @@ public class ProductDAO extends DBHelper {
 				logger.error(e.getMessage());
 			}
 			return total;
+		}
+		public int selectMemberPoint(String uid) {
+			int point = 0;
+			try {
+				logger.info("selectMemberPoint...");
+				conn = getConnection();
+				psmt = conn.prepareStatement(ProductSql.SELECT_MEMBER_POINT);
+				psmt.setString(1, uid);
+				
+				rs = psmt.executeQuery();
+				if(rs.next()) {
+					point = rs.getInt(1);
+				}
+				
+				close();
+			}catch(Exception e) {
+				logger.error(e.getMessage());
+			}
+			return point;
+		}
+		public void updateSaveMemberPoint(int totalsavepoint, int totalusedpoint, String uid) {
+			
+			try {
+				logger.info("updateMemberPoint...");
+				conn = getConnection();
+				psmt = conn.prepareStatement(ProductSql.UPDATE_SAVE_MEMBER_POINT);
+				psmt.setInt(1, totalsavepoint);
+				psmt.setInt(2, totalusedpoint);
+				psmt.setString(3, uid);
+				
+				psmt.executeUpdate();
+				
+				close();
+			}catch(Exception e) {
+				logger.error(e.getMessage());
+			}
+		
 		}
 		
 

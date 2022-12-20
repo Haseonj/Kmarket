@@ -108,23 +108,31 @@ public enum ProductService {
 		logger.info("ProductService...deleteCartList...");
 		return dao.deleteCartList(uid, cartNo);
 	}
+	public void deleteCartList(String uid, int cartNo) {
+		logger.info("ProductService...deleteCartList...");
+		dao.deleteCartList(uid, cartNo);
+	}
 	
 	// order
 	public int insertOrder(OrderVO vo) {
 		logger.info("ProductService...insertOrder...");
 		return dao.insertOrder(vo);
 	}
-	public void insertOrderItem(OrderVO vo, String prodNo) {
+	public void insertOrderItem(CartVO cart, int ordNo) {
 		logger.info("ProductService...inserOrderItem...");
-		dao.insertOrderItem(vo, prodNo);
+		dao.insertOrderItem(cart, ordNo);
 	}
-	public OrderVO selectLatestOrder(String uid) {
+	public void insertMemberPoint(String uid, int ordNo, String point) {
+		logger.info("ProductService...insertMemberPoint...");
+		dao.insertMemberPoint(uid, ordNo, point);
+	}
+	public int selectLatestOrder(String uid) {
 		logger.info("ProductService...selectOrderNo...");
 		return dao.selectLatestOrder(uid);
 	}
-	public List<OrderVO> selectOrder(int orderNo) {
+	public OrderVO selectOrder(String uid) {
 		logger.info("ProductService...selectOrder...");
-		return dao.selectOrder(orderNo);
+		return dao.selectOrder(uid);
 	}
 	public int selectOrderNo(String uid) {
 		logger.info("ProductService...selectOrderNo...");
@@ -133,6 +141,14 @@ public enum ProductService {
 	public List<ProductVO> selectOrderProducts(String prodNo) {
 		logger.info("ProductService...selectOrderProducts...");
 		return dao.selectOrderProducts(prodNo);
+	}
+	public int selectMemberPoint(String uid) {
+		logger.info("ProductService...selectMemberPoint...");
+		return dao.selectMemberPoint(uid);
+	}
+	public void updateSaveMemberPoint(int totalsavepoint, int totalusedpoint, String uid) {
+		logger.info("ProductService...updateSaveMemberPoint...");
+		dao.updateSaveMemberPoint(totalsavepoint, totalusedpoint, uid);
 	}
 	
 	// 서비스 로직
