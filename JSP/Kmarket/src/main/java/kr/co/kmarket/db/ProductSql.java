@@ -49,7 +49,8 @@ public class ProductSql {
 			
 	// order
 	public static final String INSERT_ORDER = "insert into `km_product_order` set "
-												+ "`ordUid`=?, `ordCount`=?, `ordPrice`=?, `ordDiscount`=?, `ordDelivery`=?, `savePoint`=?, `ordTotPrice`=?";
+												+ "`ordUid`=?, `ordCount`=?, `ordPrice`=?, `ordDiscount`=?, `ordDelivery`=?, `savePoint`=?, `usedPoint`=?, `ordTotPrice`=?"
+												+ "`recipName`=?, `recipHp`=?, `recipZip`=?, `recipAddr1`=?, `recipAddr2`=?, `ordPayment`=?, `ordComplete`=?, `ordDate`=NOW()";
 	public static final String SELECT_LATEST_ORDER = "select * from `km_product_order` where `ordUid`=? order by `ordNo` desc limit 1";
 	public static final String SELECT_ORDER = "SELECT a.*, c.* "
 												+ "from `km_product_order_item` AS a "

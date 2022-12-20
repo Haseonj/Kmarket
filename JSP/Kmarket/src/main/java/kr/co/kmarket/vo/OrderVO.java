@@ -82,6 +82,9 @@ public class OrderVO {
 	public void setUsedPoint(int usedPoint) {
 		this.usedPoint = usedPoint;
 	}
+	public void setUsedPoint(String usedPoint) {
+		this.usedPoint = Integer.parseInt(usedPoint);
+	}
 	public int getOrdTotPrice() {
 		return ordTotPrice;
 	}
@@ -127,11 +130,17 @@ public class OrderVO {
 	public void setOrdPayment(int ordPayment) {
 		this.ordPayment = ordPayment;
 	}
+	public void setOrdPayment(String ordPayment) {
+		this.ordPayment = Integer.parseInt(ordPayment);
+	}
 	public int getOrdComplete() {
 		return ordComplete;
 	}
 	public void setOrdComplete(int ordComplete) {
 		this.ordComplete = ordComplete;
+	}
+	public void setOrdComplete(String ordComplete) {
+		this.ordComplete = Integer.parseInt(ordComplete);
 	}
 	public int getOrdDate() {
 		return ordDate;

@@ -20,6 +20,8 @@ import com.google.gson.JsonObject;
 
 import kr.co.kmarket.service.ProductService;
 import kr.co.kmarket.vo.CartVO;
+import kr.co.kmarket.vo.MemberVO;
+import kr.co.kmarket.vo.OrderVO;
 import kr.co.kmarket.vo.ProductVO;
 
 @WebServlet("/product/order.do")
@@ -75,7 +77,49 @@ public class ProductOrderController extends HttpServlet{
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		logger.info("ProductOrderController...POST");
 		
+		HttpSession sess = req.getSession();
+		MemberVO member = (MemberVO) sess.getAttribute("sessMember");
 		
+		String ordCount = req.getParameter("ordCount");
+		String ordPrice = req.getParameter("ordPrice");
+		String ordDiscount = req.getParameter("ordDiscount");
+		String ordDelivery = req.getParameter("ordDelivery");
+		String savePoint = req.getParameter("savePoint");
+		String usedPoint = req.getParameter("usedPoint");
+		String ordTotPrice = req.getParameter("ordTotPrice");
+		String recipName = req.getParameter("recipName");
+		String recipHp = req.getParameter("recipHp");
+		String recipZip = req.getParameter("recipZip");
+		String recipAddr1 = req.getParameter("recipAddr1");
+		String recipAddr2 = req.getParameter("recipAddr2");
+		String ordPayment = req.getParameter("ordPayment");
+		String ordComplete = req.getParameter("ordComplete");
+		String uid = member.getUid();
+		
+		OrderVO vo = new OrderVO();
+		vo.setOrdUid(uid);
+		vo.setOrdCount(ordCount);
+		vo.setOrdPrice(ordPrice);
+		vo.setOrdDiscount(ordDiscount);
+		vo.setOrdDelivery(ordDelivery);
+		vo.setSavePoint(savePoint);
+		vo.setUsedPoint(usedPoint);
+		vo.setOrdTotPrice(ordTotPrice);
+		vo.setRecipName(recipName);
+		vo.setRecipHp(recipHp);
+		vo.setRecipZip(recipZip);
+		vo.setRecipAddr1(recipAddr1);
+		vo.setRecipAddr2(recipAddr2);
+		vo.setOrdPayment(ordPayment);
+		vo.setOrdComplete(ordComplete);
+		
+		int result = service.insertOrder(vo);
+		
+		JsonObject json = new JsonObject();
+		json.addProperty("result", result);
+		
+		PrintWriter writer = resp.getWriter();
+		writer.print(json.toString());
 		
 	}
 	
