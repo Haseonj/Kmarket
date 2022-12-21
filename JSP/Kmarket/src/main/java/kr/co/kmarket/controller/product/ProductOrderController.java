@@ -86,7 +86,8 @@ public class ProductOrderController extends HttpServlet{
 		Date nowDate = new Date();
 		SimpleDateFormat newname = new SimpleDateFormat("yyyyMMdd");
 		String today = newname.format(nowDate);
-		int seq = Unit.getSeq();
+		Unit u1 = new Unit();
+		int seq = u1.getSeq();
 		
 		String todaydate = today + seq;
 		
