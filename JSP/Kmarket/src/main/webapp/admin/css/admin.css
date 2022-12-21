@@ -413,3 +413,176 @@ button[type=submit] {
     font-weight: bold;
 }
 
+/* 게시판 리스트 */
+main > #admin-cs-list {
+    border-left: 1px solid #d9d9d9;
+}
+main > #admin-cs-list > article {
+    position: relative;
+}
+
+main > #admin-cs-list > article > select {
+    margin-bottom: 10px;
+}
+
+main > #admin-cs-list > article > table {
+    margin-bottom: 35px;
+}
+
+main > #admin-cs-list > article > table > tbody > tr:first-child {
+    margin-top: 10px;
+    border-top: 2px solid #bebebe;
+    box-sizing: border-box;
+}
+
+main > #admin-cs-list > article > table > tbody > tr > th {
+    padding: 15px 0;
+    box-sizing: border-box;
+}
+
+main > #admin-cs-list > article > table > tbody > tr > td:nth-child(1) {
+    width: 50px;
+    background-color: #fff;
+}
+main > #admin-cs-list > article > table > tbody > tr > td {
+    text-align: center;
+}
+
+main > #admin-cs-list > article > table > tbody > tr > td:nth-child(4) {
+    text-align: left;
+}
+
+main > #admin-cs-list > article > table > tbody > tr > td > a:hover {
+    color: #fe434c;
+}
+
+main > #admin-cs-list > article > .delete {
+    padding: 10px 30px;
+    background: #bfbfbf;
+    color: #fff;
+}
+
+main > #admin-cs-list > article > .write {
+    padding: 10px 30px;
+    background: #8eb4e3;
+    position: absolute;
+    right: 0;
+    bottom: 17px;
+    color: #fff;
+}
+main > #admin-cs-list > article > div {
+    text-align: center;
+}
+main > #admin-cs-list > article > div > a {
+    padding: 5px;
+    font-size: 20px;
+}
+main > #admin-cs-list > article > div > a:hover {
+    text-decoration: underline;
+}
+main > #admin-cs-list > article > div > .on {
+    text-decoration: underline;
+}
+
+/* 공지사항 보기 */
+main > #admin-cs-view {
+    border-left: 1px solid #d9d9d9;
+    position: relative;
+}
+main > #admin-cs-view > nav {
+    margin-bottom: 20px;
+}
+main > #admin-cs-view > article {
+    height: 683px;
+}
+main > #admin-cs-view > article > table {
+    margin: 40px 0;
+    border-top: 2px solid #000;
+}
+
+main > #admin-cs-view > article > table > tbody > tr > td {
+    padding: 14px 10px;
+}
+
+main > #admin-cs-view > article > table > tbody > tr > td:nth-child(1) {
+    background: #fff;
+    font-size: 17px;
+    font-weight: bold;
+}
+main > #admin-cs-view > article > table > tbody > tr > td:nth-child(2) {
+    font-size: 17px;
+}
+main > #admin-cs-view > article > table > tbody > tr > td:nth-child(2) > p {
+    height: 300px;
+    font-size: 17px;
+}
+main > #admin-cs-view > article > div {
+    position: absolute;
+    right: 20px;
+}
+main > #admin-cs-view > article > div > a {
+    padding: 10px 30px;
+    color: #fff;
+    font-size: 15px;
+    margin-left: 5px;
+}
+
+main > #admin-cs-view > article > div > a:nth-child(1) {background: #bfbfbf;}
+main > #admin-cs-view > article > div > a:nth-child(2) {background: #bfbfbf;}
+main > #admin-cs-view > article > div > a:nth-child(3) {background: #8eb4e3;}
+
+
+/* 공지사항 작성 */
+#admin-cs-write {
+    border-left: 1px solid #d9d9d9;
+}
+#admin-cs-write > nav {
+    margin-bottom: 20px;
+}
+#admin-cs-write > article {
+    height: 583px;
+    margin: 60px 0;
+    overflow: unset;
+}
+#admin-cs-write > article > form {
+    position: relative;
+}
+#admin-cs-write > article > form > table {
+    border-top: 2px solid #111;
+}
+
+#admin-cs-write > article > form > table > tbody > tr > td:nth-child(1) {
+    background: #fff;
+    font-size: 17px;
+    font-weight: bold;
+
+}
+#admin-cs-write > article > form > table > tbody > tr > td > input {
+    width: 70%;
+}
+#admin-cs-write > article > form > table > tbody > tr > td > textarea {
+    width: 70%;
+    height: 300px;
+    background: #fff;
+}
+
+#admin-cs-write > article > form > div {
+}
+
+#admin-cs-write > article > form > div > a {
+    position: absolute;
+    background: #bfbfbf;
+    padding: 11px 21px;
+    right: 100px;
+    bottom: -70px;
+}
+#admin-cs-write > article > form > div > input {
+    position: absolute;
+    width: 90px;
+    height: 38px;
+    right: 0;
+    bottom: -70px;
+    background: #8eb4e3;
+    border: none;
+}
+
