@@ -2,6 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <jsp:include page="../_header.jsp"/>
+<script src="/Kmarket/admin/js/checkbox.js"></script>
     <section id="admin-product-list">
         <nav>
             <h3>상품목록</h3>
@@ -40,7 +41,7 @@
                     </tr>
                     <c:forEach items="${adpd}" var="prod" begin="${start}" end="${start+9}">
                     <tr>
-                        <td><input type="checkbox" name="상품코드"></td>
+                        <td><input type="checkbox" name="RowCheck" value="${prod.prodNo}"></td>
                         <td><img src="http://3.39.231.136:8080/Kmarket/file/${prod.thumb1}" alt="상품이미지"></td>
                         <td>${prod.prodNo}</td>
                         <td>${prod.prodName}</td>
@@ -58,7 +59,7 @@
                     </c:forEach>
                 </tbody>
             </table>
-            <input type="button" value="선택삭제">
+            <input type="button" value="선택삭제" name="selectdelete">
              <div class="paging">
         	<c:if test="${pageGroupStart gt 1}">
         		<span class="prev"><a href="/Kmarket/admin/product/list.do?pg=${pageGroupStart - 1}">이전</a></span>
