@@ -34,6 +34,9 @@ public class OrderVO {
 	public void setOrdNo(int ordNo) {
 		this.ordNo = ordNo;
 	}
+	public void setOrdNo(String ordNo) {
+		this.ordNo = Integer.parseInt(ordNo);
+	}
 	public String getOrdUid() {
 		return ordUid;
 	}

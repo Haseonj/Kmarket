@@ -837,21 +837,23 @@ public class ProductDAO extends DBHelper {
 				logger.info("insertOrder...");
 				conn = getConnection();
 				psmt = conn.prepareStatement(ProductSql.INSERT_ORDER);
-				psmt.setString(1, vo.getOrdUid());
-				psmt.setInt(2, vo.getOrdCount());
-				psmt.setInt(3, vo.getOrdPrice());
-				psmt.setInt(4, vo.getOrdDiscount());
-				psmt.setInt(5, vo.getOrdDelivery());
-				psmt.setInt(6, vo.getSavePoint());
-				psmt.setInt(7, vo.getUsedPoint());
-				psmt.setInt(8, vo.getOrdTotPrice());
-				psmt.setString(9, vo.getRecipName());
-				psmt.setString(10, vo.getRecipHp());
-				psmt.setString(11, vo.getRecipZip());
-				psmt.setString(12, vo.getRecipAddr1());
-				psmt.setString(13, vo.getRecipAddr2());
-				psmt.setInt(14, vo.getOrdPayment());
-				psmt.setInt(15, vo.getOrdComplete());
+				psmt.setInt(1, vo.getOrdNo());
+				psmt.setString(2, vo.getOrdUid());
+				psmt.setInt(3, vo.getOrdCount());
+				psmt.setInt(4, vo.getOrdPrice());
+				psmt.setInt(5, vo.getOrdDiscount());
+				psmt.setInt(6, vo.getOrdDelivery());
+				psmt.setInt(7, vo.getSavePoint());
+				psmt.setInt(8, vo.getUsedPoint());
+				psmt.setInt(9, vo.getOrdTotPrice());
+				psmt.setString(10, vo.getRecipName());
+				psmt.setString(11, vo.getRecipHp());
+				psmt.setString(12, vo.getRecipZip());
+				psmt.setString(13, vo.getRecipAddr1());
+				psmt.setString(14, vo.getRecipAddr2());
+				psmt.setInt(15, vo.getOrdPayment());
+				psmt.setInt(16, vo.getOrdComplete());
+				
 				
 				result = psmt.executeUpdate();
 				
@@ -1017,15 +1019,14 @@ public class ProductDAO extends DBHelper {
 			}
 			return point;
 		}
-		public void updateSaveMemberPoint(int totalsavepoint, int totalusedpoint, String uid) {
+		public void updateSaveMemberPoint(int totalsavepoint, String uid) {
 			
 			try {
 				logger.info("updateMemberPoint...");
 				conn = getConnection();
 				psmt = conn.prepareStatement(ProductSql.UPDATE_SAVE_MEMBER_POINT);
 				psmt.setInt(1, totalsavepoint);
-				psmt.setInt(2, totalusedpoint);
-				psmt.setString(3, uid);
+				psmt.setString(2, uid);
 				
 				psmt.executeUpdate();
 				
@@ -1034,6 +1035,23 @@ public class ProductDAO extends DBHelper {
 				logger.error(e.getMessage());
 			}
 		
+		}
+		public void updateUsedMemberPoint(int totalusedpoint, String uid) {
+			
+			try {
+				logger.info("updateUsedMemberPoint...");
+				conn = getConnection();
+				psmt = conn.prepareStatement(ProductSql.UPDATE_USED_MEMBER_POINT);
+				psmt.setInt(1, totalusedpoint);
+				psmt.setString(2, uid);
+				
+				psmt.executeUpdate();
+				
+				close();
+			}catch(Exception e) {
+				logger.error(e.getMessage());
+			}
+			
 		}
 		
 

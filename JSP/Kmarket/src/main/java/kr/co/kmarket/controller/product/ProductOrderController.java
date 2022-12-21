@@ -2,6 +2,8 @@ package kr.co.kmarket.controller.product;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -81,6 +83,17 @@ public class ProductOrderController extends HttpServlet{
 		MemberVO member = (MemberVO) sess.getAttribute("sessMember");
 		List<CartVO> carts = (List<CartVO>) sess.getAttribute("sessCarts");
 		
+		Date nowDate = new Date();
+		SimpleDateFormat newname = new SimpleDateFormat("yyyyMMdd");
+		String today = newname.format(nowDate);
+		int seq = Unit.getSeq();
+		
+		String todaydate = today + seq;
+		
+		int ordNo = Integer.parseInt(todaydate);
+		
+		logger.debug(todaydate);
+		
 		String ordCount = req.getParameter("ordCount");
 		String ordPrice = req.getParameter("ordPrice");
 		String ordDiscount = req.getParameter("ordDiscount");
@@ -100,6 +113,7 @@ public class ProductOrderController extends HttpServlet{
 		int totalUsedPoint = Integer.parseInt(usedPoint);
 		
 		OrderVO vo = new OrderVO();
+		vo.setOrdNo(ordNo);
 		vo.setOrdUid(uid);
 		vo.setOrdCount(ordCount);
 		vo.setOrdPrice(ordPrice);
@@ -117,14 +131,18 @@ public class ProductOrderController extends HttpServlet{
 		vo.setOrdComplete(ordComplete);
 		
 		int result = service.insertOrder(vo);
-		int ordNo = service.selectLatestOrder(uid);
+		//int ordNo = service.selectLatestOrder(uid);
 		for(CartVO cart : carts) {
 			service.insertOrderItem(cart, ordNo);
 		}
 		service.insertMemberPoint(uid, ordNo, savePoint);
 		
 		// 적립포인트 업데이트(member 테이블)
-		service.updateSaveMemberPoint(totalSavePoint, totalUsedPoint, uid);
+		logger.debug("updateSavememberpoint");
+		service.updateSaveMemberPoint(totalSavePoint, uid);
+		logger.debug("updateUsedmemberpoint");
+		service.updateUsedMemberPoint(totalUsedPoint, uid);
+		
 		
 		JsonObject json = new JsonObject();
 		json.addProperty("result", result);
