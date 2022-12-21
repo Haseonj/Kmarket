@@ -19,7 +19,7 @@
         
         <header>
             <div>
-                <a href="./index.html" class="logo"><img src="/Kmarket/admin/img/admin_logo.png" alt="admin_logo"></a>
+                <a href="/Kmarket/admin/index.do" class="logo"><img src="/Kmarket/admin/img/admin_logo.png" alt="admin_logo"></a>
                 <p>
                     <span>${sessMember.name}님 반갑습니다.</span>
                     <a href="/Kmarket/index.do">HOME |</a>
@@ -72,10 +72,11 @@
                 </ol>
             </li>
             <li>
-                <a href="#"><i class="fa fa-pencil-square-o"></i>게시판관리</a>
+                <a href="#"><i class="fa fa-pencil-square-o"></i>고객센터</a>
                 <ol>
-                    <li><a href="#">게시판현황</a></li>
-                    <li><a href="#">고객문의</a></li>
+                    <li><a href="/Kmarket/admin/cs/list.do?group=notice">공지사항</a></li>
+                    <li><a href="/Kmarket/admin/cs/list.do?group=faq">자주묻는질문</a></li>
+                    <li><a href="/Kmarket/admin/cs/list.do?group=qna">고객문의</a></li>
                 </ol>
             </li>
         </ul>
