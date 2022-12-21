@@ -4,13 +4,13 @@
 <script>
 	
 	$(function(){
-		$('input[name=allCk]').click(function(){
-			var checked = $('input[name=allCk]').is(':checked');
+		$('input[name=allCk]').change(function(){
+			var checked = $(this).is(':checked');
 			
 			if(checked){
-				$('input:checkbox').prop('checked',true);
+				$('input[name=cartlist]').prop('checked', true).change();
 			}else{
-				$('input:checkbox').prop('checked',false);
+				$('input:checkbox').prop('checked', false).change();				
 			}
 				
 		});
@@ -40,7 +40,7 @@
 			});
 		});
 		
-		$(document).on('click', 'input[name=cartlist]', function(){
+		$(document).on('change', 'input[name=cartlist]', function(){
 			////////////////////////
 			// 전체합계 집계
 			////////////////////////
