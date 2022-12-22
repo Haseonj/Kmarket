@@ -255,6 +255,39 @@ public class BoardDAO extends DBHelper {
 		return articles;
 	}
 	
+	public List<BoardVO> selectAdminArticle(String group, int start) {
+		List<BoardVO> articles = new ArrayList<>();
+		try {
+			logger.info("selectAdminArticle...");
+			conn = getConnection();
+			psmt = conn.prepareStatement(BoardSql.SELECT_ADMIN_ARTICLE);
+			psmt.setString(1, group);
+			psmt.setInt(2, start);
+			rs = psmt.executeQuery();
+			
+			while(rs.next()) {
+				BoardVO vo = new BoardVO();
+				vo.setNo(rs.getInt(1));
+				vo.setUid(rs.getString(2));
+				vo.setGroup(rs.getString(3));
+				vo.setC1Name(rs.getString(4));
+				vo.setCate2(rs.getString(5));
+				vo.setTitle(rs.getString(6));
+				vo.setContent(rs.getString(7));
+				vo.setComment(rs.getInt(8));
+				vo.setHit(rs.getInt(9));
+				vo.setRegip(rs.getString(10));
+				vo.setRdate(rs.getString(11));
+				articles.add(vo);
+			}
+			
+			close();
+		}catch (Exception e) {
+			logger.error(e.getMessage());
+		}
+		return articles;
+	}
+	
 	public int selectCountTotal(String cate, String group) {
 		int total = 0;
 		

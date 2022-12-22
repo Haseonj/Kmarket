@@ -36,6 +36,11 @@ public class BoardSql {
 													+ "WHERE `group`=? and `c1Name`=? "
 													+ "ORDER BY `no` DESC";
 	
+	public static final String SELECT_ADMIN_ARTICLE = "SELECT a.*, b.cate1 FROM `km_cs_article` AS a "
+													+ "JOIN `km_cs_cate1` AS b ON a.c1Name = b.c1Name "
+													+ "WHERE a.group = ? ORDER BY `no` DESC "
+													+ "LIMIT ?, 10"; 
+	
 	public static final String SELECT_COUNT_TOTAL = "SELECT COUNT(`no`) FROM `km_cs_article` WHERE `c1Name`=? or `group`=?";
 	
 	public static final String SELECT_COUNT_TOTAL1 = "SELECT COUNT(`no`) FROM `km_cs_article` WHERE `c1Name`=? and `group`=?";

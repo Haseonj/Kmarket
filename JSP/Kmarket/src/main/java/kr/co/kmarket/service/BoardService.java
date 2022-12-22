@@ -52,6 +52,10 @@ public enum BoardService {
 		return dao.selectFaqArticles(group, cate);
 	}
 	
+	public List<BoardVO> selectAdminArticle(String group, int start) {
+		return dao.selectAdminArticle(group, start);
+	}
+	
 	public int selectCountTotal(String cate, String group) {
 		return dao.selectCountTotal(cate, group);
 	}
