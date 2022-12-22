@@ -41,6 +41,11 @@ public class BoardSql {
 													+ "WHERE a.group = ? ORDER BY `no` DESC "
 													+ "LIMIT ?, 10"; 
 	
+	public static final String SELECT_ADMIN_ARTICLE1 = "SELECT a.*, b.cate1 FROM `km_cs_article` AS a "
+													+ "JOIN `km_cs_cate1` AS b ON a.c1Name = b.c1Name "
+													+ "WHERE a.group = ? and a.c1Name = ? ORDER BY `no` DESC "
+													+ "LIMIT ?, 10"; 
+	
 	public static final String SELECT_COUNT_TOTAL = "SELECT COUNT(`no`) FROM `km_cs_article` WHERE `c1Name`=? or `group`=?";
 	
 	public static final String SELECT_COUNT_TOTAL1 = "SELECT COUNT(`no`) FROM `km_cs_article` WHERE `c1Name`=? and `group`=?";
@@ -52,6 +57,8 @@ public class BoardSql {
 	public static final String SELECT_COUNT_CATE2 = "SELECT `cate2No` FROM `km_cs_cate2` WHERE `c1Name`=?";
 	
 	public static final String UPDATE_ARTICLE = "UPDATE `km_cs_article` SET `title`=?, `content`=? WHERE `no`=?";
+	
+	public static final String DELETE_ARTICLE = "DELETE FROM `km_cs_article` WHERE `no`=?";
 	
 
 }

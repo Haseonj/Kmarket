@@ -55,6 +55,9 @@ public enum BoardService {
 	public List<BoardVO> selectAdminArticle(String group, int start) {
 		return dao.selectAdminArticle(group, start);
 	}
+	public List<BoardVO> selectAdminArticle(String group, int start, String cate) {
+		return dao.selectAdminArticle(group, start, cate);
+	}
 	
 	public int selectCountTotal(String cate, String group) {
 		return dao.selectCountTotal(cate, group);
@@ -74,6 +77,10 @@ public enum BoardService {
 	
 	public void updateArticle(String no, String title, String content) {
 		dao.updateArticle(no, title, content);
+	}
+	
+	public void deleteArticle(String no) {
+		dao.deleteArticle(no);
 	}
 	
 	// 현재 페이지 번호
