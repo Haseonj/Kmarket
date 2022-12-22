@@ -204,7 +204,7 @@
 	              </td>
 	              <td id="count">${cart.count}</td>
 	              <td id="price">${cart.price}</td>
-	              <td id="discount">${cart.discount}</td>
+	              <td><span id="discount">${cart.discount}</span>%</td>
 	              <td id="point">${cart.point}</td>
 	              <c:choose>
 	              	 <c:when test="${cart.delivery eq 0}">
