@@ -18,7 +18,7 @@ $(function(){
 			}
 		});
 	});
-	$('input[name=selectdelete]').click(function deleteProd(){
+	$('input[name=selectdelete]').click(function(){
 		var valueArr = [];
 		var list = $('input[name=RowCheck]');
 		console.log('here 0: '+list);

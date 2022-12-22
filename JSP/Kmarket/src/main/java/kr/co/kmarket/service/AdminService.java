@@ -14,8 +14,8 @@ public enum AdminService {
 	private AdminService() {
 		dao = new AdminDAO();
 	}
-	public int admindeleteproduct(String ajaxMsg) {
-		return dao.admindeleteproduct(ajaxMsg);
+	public int admindeleteproduct(String prodNo) {
+		return dao.admindeleteproduct(prodNo);
 	}
 	
 }

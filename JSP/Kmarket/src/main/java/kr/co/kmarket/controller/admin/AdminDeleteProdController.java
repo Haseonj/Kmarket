@@ -35,13 +35,13 @@ public class AdminDeleteProdController extends HttpServlet{
 	
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		String[] ajaxMsg =req.getParameterValues("valueArr");
-		logger.info(ajaxMsg[0]);
-		int result[] = new int [ajaxMsg.length];
+		String[] prodNo =req.getParameterValues("checkBoxArr");
+		logger.info(prodNo[0]);
+		int result[] = new int [prodNo.length];
 		JsonObject json = new JsonObject();
-		for(int i=0; i<=ajaxMsg.length; i++) {
-			result[i] = service.admindeleteproduct(ajaxMsg[i]);
-			
+		
+		for(int i=0; i<prodNo.length; i++) {
+			result[i] = service.admindeleteproduct(prodNo[i]);
 			json.addProperty("result["+i+"]", result[i]);
 		}
 		PrintWriter writer = resp.getWriter();

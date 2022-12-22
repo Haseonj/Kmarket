@@ -2,7 +2,45 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <jsp:include page="../_header.jsp"/>
-<script src="/Kmarket/admin/js/checkbox.js"></script>
+<script>
+$(function(){
+	$('input[name=allCk]').click(function(){
+		var checked = $('input[name=allCk]').is(':checked');
+		
+		if(checked){
+			$('input:checkbox').prop('checked',true);
+		}else{
+			$('input:checkbox').prop('checked',false);
+		}
+			
+	});
+	
+	$('input[name=del]').click(function(){
+		var checkBoxArr = [];
+		
+		$('input:checkbox[name=prodlist]:checked').each(function(){
+			checkBoxArr.push($(this).val());
+			console.log(checkBoxArr);
+		}); 			
+		
+		let jsonData = {"checkBoxArr":checkBoxArr};
+		console.log('here1 : '+jsonData);
+		
+		$.ajax({
+			url:'/Kmarket/admin/delete.do',
+			method:'post',
+			traditional: true,
+			data:jsonData,				
+			dataType:'json',
+			success:function(data){
+				console.log('here2');
+				alert('장바구니에서 상품이 삭제되었습니다');
+				location.href = '/Kmarket/admin/product/list.do';
+			}
+		});
+	});
+});
+</script>
     <section id="admin-product-list">
         <nav>
             <h3>상품목록</h3>
@@ -27,7 +65,7 @@
             <table>
                 <tbody>
                     <tr>
-                        <th><input type="checkbox" name="all"></th>
+                        <th><input type="checkbox" name="allCk"></th>
                         <th>이미지</th>
                         <th>상품코드</th>
                         <th>상품명</th>
@@ -41,7 +79,7 @@
                     </tr>
                     <c:forEach items="${adpd}" var="prod" begin="${start}" end="${start+9}">
                     <tr>
-                        <td><input type="checkbox" name="RowCheck" value="${prod.prodNo}"></td>
+                        <td><input type="checkbox" name="prodlist" value="${prod.prodNo}"></td>
                         <td><img src="http://3.39.231.136:8080/Kmarket/file/${prod.thumb1}" alt="상품이미지"></td>
                         <td>${prod.prodNo}</td>
                         <td>${prod.prodName}</td>
@@ -59,7 +97,7 @@
                     </c:forEach>
                 </tbody>
             </table>
-            <input type="button" value="선택삭제" name="selectdelete">
+            <input type="button" value="선택삭제" name="del">
              <div class="paging">
         	<c:if test="${pageGroupStart gt 1}">
         		<span class="prev"><a href="/Kmarket/admin/product/list.do?pg=${pageGroupStart - 1}">이전</a></span>
