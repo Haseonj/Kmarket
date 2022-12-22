@@ -27,9 +27,10 @@
                     	<a href="/Kmarket/member/join.do">회원가입</a>
                     </c:when>
                     <c:when test="${not empty sessMember.uid}">
+                    	<span>${sessMember.name}님 반갑습니다.</span>
                     	<a href="/Kmarket/member/logout.do">로그아웃</a>
                     	<a href="#">마이페이지</a>
-                    	<a href="#"><i class="fa fa-shopping-cart" aria-hidden="true"></i>&nbsp;장바구니</a>
+                    	<a href="/Kmarket/product/cart.do"><i class="fa fa-shopping-cart" aria-hidden="true"></i>&nbsp;장바구니</a>
                     </c:when>
                 </c:choose>
                    

@@ -26,7 +26,7 @@
                     <span>${sessMember.name}님 반갑습니다.</span>
                     <a href="/Kmarket/index.do">HOME |</a>
                     <a href="/Kmarket/member/logout.do">로그아웃 |</a>
-                    <a href="#">고객센터</a>
+                    <a href="/Kmarket/cs/index.do">고객센터</a>
                 </p>
             </div>
         </header>
@@ -76,6 +76,7 @@
             <li>
                 <a href="#"><i class="fa fa-pencil-square-o"></i>고객센터</a>
                 <ol>
+                    <li><a href="/Kmarket/cs/index.do">고객문의</a></li>
                     <li><a href="/Kmarket/admin/cs/list.do?group=notice&cate=0&type=list">공지사항</a></li>
                     <li><a href="/Kmarket/admin/cs/list.do?group=faq">자주묻는질문</a></li>
                     <li><a href="/Kmarket/admin/cs/list.do?group=qna">고객문의</a></li>
