@@ -3,36 +3,15 @@
 <jsp:include page="./_header.jsp"/>
 <script>
 	$(function(){
-		let recentpoint = '${recentpoint}';
-		if(recentpoint < 5000){
-			$('input[name=usingpoint]').attr("disabled",true);
-			$('#ordPoint').append("0");
-		}else{
-			$(document).on('click', 'input[name=usingpoint]', function(){
-				let usedPoint = $('input[name=point]').val();
-				
-				$('#ordPoint').append("-"+usedPoint);
-				
-				let ordTotPrice = Number($('#ordTotPrice').text()) - usedPoint;
-				
-				$('#ordTotPrice').empty();
-				$('#ordTotPrice').append(ordTotPrice);
-			});
-		}
 		
+		/*
 		$('input[name=ordercomplete]').click(function(){
 			
-			let today = new Date();
-			let year = today.getFullYear();
-			let month = ('0' + (today.getMonth() + 1)).slice(-2);
-			let day = ('0' + today.getDate()).slice(-2);
-			let dateString = year + month + day;
-			
-			let ordCount = '${totalcount}';
+			let ordCount = $('#ordCount').text();
 			let ordPrice = $('#ordPrice').text();
-			let ordDiscount = '${discount}';
+			let ordDiscount = $('#ordDiscount').text();
 			let ordDelivery = $('#ordDelivery').text();
-			let savePoint = '${point}';
+			let savePoint = $('input[name=point]').val();
 			let usedPoint = $('#ordPoint').text();
 			let ordTotPrice = $('#ordTotPrice').text();
 			let recipName = $('input[name=orderer]').val();
@@ -68,7 +47,7 @@
 			};
 			
 			$.ajax({
-				url:'/Kmarket/product/order.do',
+				url:'/Kmarket/product/test.do',
 				method:'post',
 				data:jsonData,
 				dataType:'json',
@@ -77,7 +56,102 @@
 				}
 			});
 		});
+		*/
 		
+		let sessOrder = JSON.parse(sessionStorage.getItem("sessOrder"));
+		let sessCartNo = JSON.parse(sessionStorage.getItem("sessCartNo"));
+		console.log(sessOrder);
+		
+		let ordCount = Object.keys(sessOrder).length;
+		let ordPrice = 0;
+		let ordDiscount = 0;
+		let ordDelivery = 0;
+		let ordPoint = 0;
+		
+		for(let order of sessOrder){
+			
+			let tr = "<tr>"
+			    tr += "<td><article><a href='#'><img src='http://3.39.231.136:8080/Kmarket/file/"+order.thumb1+"'></a>";
+				tr += "<div><h2><a href='#'>"+order.prodName+"</a></h2>"
+				tr += "<p>"+order.descript+"</p></div></article></td>"
+				tr += "<td>"+order.count+"</td>"
+				tr += "<td>"+order.price+"</td>"
+				tr += "<td>"+order.discount+"%</td>"
+				tr += "<td>"+order.delivery+"</td>"
+				tr += "<td>"+order.total+"</td>"
+				tr += "</tr>"
+			
+			$('.productlist').append(tr);	
+				
+			let count = Number(order.count);
+			let price = Number(order.price) * count;
+			let discount = Number(order.discount);
+			let discountprice = discount * price / 100;
+			let delivery = 0;
+			if(order.delivery == '무료배송'){
+				delivery = 0;	
+			}else{
+				delivery = Number(order.delivery);
+			}
+			
+			ordPrice += price;
+			ordDiscount += discountprice;
+			ordDelivery += delivery;
+		}
+		let ordTotal = ordPrice - ordDiscount + ordDelivery;
+		
+		console.log(ordPrice);
+		console.log(ordDiscount);
+		console.log(ordDelivery);
+		console.log(ordTotal);
+		
+		$('#ordCount').append(ordCount+"건");
+		$('#ordPrice').append(ordPrice+"원");
+		$('#ordDiscount').append("-"+ordDiscount+"원");
+		$('#ordDelivery').append(ordDelivery+"원");
+		$('#ordTotPrice').append(ordTotal+"원");
+		$('input[name=point]').val(ordPoint);
+		
+		$('input[name=ordCount]').val(ordCount);
+		$('input[name=ordPrice]').val(ordPrice);
+		$('input[name=ordDiscount]').val(ordDiscount);
+		$('input[name=ordDelivery]').val(ordDelivery);
+		$('input[name=ordTotPrice]').val(ordTotal);
+		$('input[name=savePoint]').val(ordPoint);
+		
+		for(let cart of sessCartNo){
+			$('input[name=cartNo]').val(cart.cartNo);
+			console.log(cart);
+		}
+		
+		
+		
+		
+		$(document).on('click', 'input[name=usingpoint]', function(){
+			
+			
+			let recentpoint = '${recentpoint}';
+			
+			if(recentpoint < 5000){
+				$('input[name=usingpoint]').attr("disabled",true);
+				$('#ordPoint').append("0");
+			}else{
+				let usedPoint = Number($('input[name=point]').val());
+				
+				console.log('usedPoint : ' + usedPoint);
+				
+				$('#ordPoint').append("-"+usedPoint);
+				
+				let ordTotPrice = ordTotal - usedPoint;
+				console.log('ordTotPrice2 : ' + ordTotPrice);
+				
+								
+				$('#ordTotPrice').empty();
+				$('#ordTotPrice').append(ordTotPrice+"원");
+			}
+			
+			
+		});
 	});
 </script>
     <!-- 주문 페이지 시작-->
@@ -91,9 +165,17 @@
         </p>
       </nav>
 
-      <form action="#">
+      <form action="/Kmarket/product/test.do" method="post">
+	      <input type="hidden" name="ordPrice" value="">
+	      <input type="hidden" name="ordCount" value="">
+	      <input type="hidden" name="ordDiscount" value="">
+	      <input type="hidden" name="ordDelivery" value="">
+	      <input type="hidden" name="savePoint" value="">
+	      <input type="hidden" name="ordTotPrice" value="">
+	      <input type="hidden" name="cartNo" value="">
+      
         <!-- 주문 상품 목록 -->                  
-        <table>
+        <table class="productlist">
           <tr>
             <th>상품명</th>
             <th>총수량</th>
@@ -106,6 +188,7 @@
             <tr class="empty">
               <td colspan="7">장바구니에 상품이 없습니다.</td>
             </tr>
+            
 			<c:forEach var="product" items="${carts}">
 			 	<tr>
 	              <td>
@@ -139,19 +222,19 @@
 			<table border="0">
 	            <tr>
 	              <td>총</td>
-	              <td id="ordCount">${totalcount} 건</td>
+	              <td id="ordCount"></td>
 	            </tr>
 	            <tr>
 	              <td>상품금액</td>
-	              <td id="ordPrice">${totalprice}</td>
+	              <td id="ordPrice"></td>
 	            </tr>
 	            <tr>
 	              <td>할인금액</td>
-	              <td id="ordDiscount">-${discount}</td>
+	              <td id="ordDiscount"></td>
 	            </tr>
 	            <tr>
 	              <td>배송비</td>
-	              <td id="ordDelivery">${delivery}</td>
+	              <td id="ordDelivery"></td>
 	            </tr>
 	            <tr>
 	              <td>포인트 할인</td>
@@ -159,10 +242,10 @@
 	            </tr>
 	            <tr>
 	              <td>전체주문금액</td>
-	              <td id="ordTotPrice">${productstotalprice}</td>
+	              <td id="ordTotPrice"></td>
 	            </tr>                            
           </table>
-          <input type="button" name="ordercomplete" value="결제하기">
+          <input type="submit" name="ordercomplete" value="결제하기">
         </div>
           
         <!-- 배송정보 -->

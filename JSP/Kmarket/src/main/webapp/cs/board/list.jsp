@@ -53,7 +53,7 @@
                 </c:if>
             </c:if>
             <c:if test="${group eq 'faq'}">
-            <c:forEach var="cate2" items="${cate2}">
+            <c:forEach var="cate2" items="${cate2}" varStatus="i">
                 <div>
                     <h3>${cate2.cate2}</h3>
                     <div>

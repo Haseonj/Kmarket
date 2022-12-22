@@ -52,7 +52,7 @@ public class ProductSql {
 			
 	// order
 	public static final String INSERT_ORDER = "insert into `km_product_order` set "
-												+ "`ordUid`=?, `ordCount`=?, `ordPrice`=?, `ordDiscount`=?, `ordDelivery`=?, `savePoint`=?, `usedPoint`=?, `ordTotPrice`=?, "
+												+ "`ordNo`=?, `ordUid`=?, `ordCount`=?, `ordPrice`=?, `ordDiscount`=?, `ordDelivery`=?, `savePoint`=?, `usedPoint`=?, `ordTotPrice`=?, "
 												+ "`recipName`=?, `recipHp`=?, `recipZip`=?, `recipAddr1`=?, `recipAddr2`=?, `ordPayment`=?, `ordComplete`=?, `ordDate`=NOW()";
 	public static final String SELECT_LATEST_ORDER = "select `ordNo` from `km_product_order` where `ordUid`=? order by `ordNo` desc limit 1";
 	public static final String SELECT_ORDER = "SELECT * "
@@ -66,5 +66,6 @@ public class ProductSql {
 													+"`ordNo`=?, `prodNo`=?, `count`=?, `price`=?, `discount`=?, `point`=?, `delivery`=?, `total`=?";
 	public static final String INSERT_MEMBER_POINT = "insert into `km_member_point` set `uid`=?, `ordNo`=?, `point`=?, `pointDate`=NOW()";
 	public static final String SELECT_MEMBER_POINT = "SELECT `point` FROM `km_member` WHERE `uid`=?";
-	public static final String UPDATE_SAVE_MEMBER_POINT = "update `km_member` set `point`=`point`+?-? WHERE `uid`=?";
+	public static final String UPDATE_SAVE_MEMBER_POINT = "update `km_member` set `point`=`point`+? WHERE `uid`=?";
+	public static final String UPDATE_USED_MEMBER_POINT = "update `km_member` set `point`=`point`-? WHERE `uid`=?";
 }

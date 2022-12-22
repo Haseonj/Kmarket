@@ -11,8 +11,29 @@ public class BoardVO {
 	private String content;
 	private String regip;
 	private String rdate;
-	
 	private int cate2No;
+	private int hit;
+	private int comment;
+	
+	public int getComment() {
+		return comment;
+	}
+	public void setComment(int comment) {
+		this.comment = comment;
+	}
+	public void setComment(String comment) {
+		this.comment = Integer.parseInt(comment);
+	}
+	
+	public int getHit() {
+		return hit;
+	}
+	public void setHit(int hit) {
+		this.hit = hit;
+	}
+	public void setHit(String hit) {
+		this.hit = Integer.parseInt(hit);
+	}
 	
 	public int getCate2No() {
 		return cate2No;

@@ -1,9 +1,6 @@
 package kr.co.kmarket.controller.product;
 
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -16,15 +13,12 @@ import javax.servlet.http.HttpSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.google.gson.JsonObject;
-
 import kr.co.kmarket.service.ProductService;
 import kr.co.kmarket.vo.MemberVO;
 import kr.co.kmarket.vo.OrderVO;
-import kr.co.kmarket.vo.ProductVO;
 
-@WebServlet("/product/goorder.do")
-public class ProductGoOrderController extends HttpServlet{
+@WebServlet("/product/testcomplete.do")
+public class ProductTestCompleteController extends HttpServlet{
 
 	private static final long serialVersionUID = 1L;
 	private ProductService service = ProductService.INSTANCE;
@@ -37,19 +31,24 @@ public class ProductGoOrderController extends HttpServlet{
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		logger.info("ProductCompleteController...");
 		
+		HttpSession sess = req.getSession();
+		MemberVO member = (MemberVO) sess.getAttribute("sessMember");
+		
+		OrderVO order = service.selectOrder(member.getUid());
+		
+		req.setAttribute("order", order);
+		
+		
+		RequestDispatcher dispatcher = req.getRequestDispatcher("/product/complete.jsp");
+		dispatcher.forward(req, resp);
 	}
 	
 	
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		logger.info("ProductOrderController...POST");
-		
-		JsonObject json = new JsonObject();
-		json.addProperty("result", 1);
-		
-		PrintWriter writer = resp.getWriter();
-		writer.print(json.toString());
+	
 		
 	}
 	
