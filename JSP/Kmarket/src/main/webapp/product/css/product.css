@@ -780,7 +780,7 @@
     color: #555;
    }
    #product > .order > form > .final > table td:last-child{text-align: center;}
-   #product > .order > form > .final > input[type=button]{
+   #product > .order > form > .final > input[type=submit]{
     width: 100%;
     height: 56px;
     font-size: 26px;
