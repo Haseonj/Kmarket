@@ -8,6 +8,12 @@ public class BoardSql {
 												+ "`title`=?, `content`=?, "
 												+ "`regip`=?, `rdate`=NOW()";
 	
+	public static final String INSERT_NOTICE_ARTICLE = "INSERT INTO `km_cs_article` set "
+													+ "`uid`=?, `group`=?, "
+													+ "`c1Name`=?, "
+													+ "`title`=?, `content`=?, "
+													+ "`regip`=?, `rdate`=NOW()";
+	
 	public static final String SELECT_ARTICLE = "SELECT a.*, b.cate1 FROM `km_cs_article` AS a "
 												+ "JOIN `km_cs_cate1` AS b "
 												+ "ON a.c1Name = b.c1Name "

@@ -457,7 +457,7 @@ main > #admin-cs-list > article > table > tbody > tr > td > a:hover {
     color: #fe434c;
 }
 
-main > #admin-cs-list > article > .delete {
+main > #admin-cs-list > article > .chkDelete {
     padding: 10px 30px;
     background: #bfbfbf;
     color: #fff;

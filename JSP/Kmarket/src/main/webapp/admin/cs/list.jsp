@@ -34,7 +34,7 @@
 		});
 		
 		// 선택삭제
-		$('article > .delete').click(function(e){
+		$('article > .chkDelete').click(function(e){
 			e.preventDefault();
 			// 체크박스 선택유무
 			if(!$('input[name=chk]').is(':checked')){
@@ -44,21 +44,53 @@
 				
 				// 삭제의사 재확인
 				if(isDelete){
+					let cate = $('select[name=cate1] > option:selected').val();
+					let group = $('input[name=group]').val();
+					let type = $('input[name=type]').val();
+					let checked = [];
+					// 체크박스 정보 삽입
 					$('input[name=chk]:checked').each(function(){
-						let checked = $(this).val();
-						$.ajax({
-							url: '/Kmarket/admin/cs/delete.do',
-							method: 'get',
-							data: {'checked':checked},
-							dataType: 'json',
-							success: function(){
-								
-							}
-						});
+						checked.push($(this).val());
+					});
+					
+					$.ajax({
+						url: '/Kmarket/admin/cs/delete.do',
+						method: 'post',
+						traditional: true,
+						data: {'checked' : checked},
+						dataType: 'json',
+						success: function(data){
+							alert('삭제되었습니다.');
+							location.href = '/Kmarket/admin/cs/list.do?group='+group+'&cate='+cate+'&type='+type;
+						}
 					});
 				}else{
 					return false;
 				}
+			}
+		});
+		
+		$('td > .delete').click(function(){
+			let isDelete = confirm('정말 삭제 하시겠습니까?');
+			if(isDelete){
+				let no = $(this).parent().parent().children(1).children(1).val();
+				let cate = $('select[name=cate1] > option:selected').val();
+				let group = $('input[name=group]').val();
+				let type = $('input[name=type]').val();
+				
+				$.ajax({
+					url: '/Kmarket/admin/cs/delete.do',
+					method: 'post',
+					data: {'no' : no},
+					dataType: 'json',
+					success: function(data){
+						alert('삭제되었습니다.');
+						location.href = '/Kmarket/admin/cs/list.do?group='+group+'&cate='+cate+'&type='+type;
+					}
+				});
+				
+			}else{
+				return false
 			}
 		});
 	});
@@ -88,18 +120,18 @@
 	                            <td><input type="checkbox" name="chk" value="${article.no}"></td>
 	                            <td>${pageStartNum = pageStartNum - 1}</td>
 	                            <td>${article.cate1}</td>
-	                            <td><a href="#">${article.title}</a></td>
+	                            <td><a href="/Kmarket/admin/cs/view.do?group=${group}&cate=${cate}&type=view&no=${article.no}&pg=${pg}">${article.title}</a></td>
 	                            <td>${article.hit}</td>
 	                            <td>${article.rdate.substring(2, 10)}</td>
 	                            <td>
-	                                <a href="#">[삭제]</a><br/>
+	                                <a href="#" class="delete">[삭제]</a><br/>
 	                                <a href="#">[수정]</a>
 	                            </td>
 	                        </tr>
                         </c:forEach>
                     </table>
-                    <a href="#" class="delete">선택삭제</a>
-                    <a href="/Kmarket/admin/cs/write.do" class="write">작성하기</a>
+                    <a href="#" class="chkDelete">선택삭제</a>
+                    <a href="/Kmarket/admin/cs/write.do?group=${group}&cate=${cate}&type=write" class="write">작성하기</a>
                     <div>
                     <c:if test="${pageGroupStart > 1}">
                         <a href="/Kmarket/admin/cs/list.do?group=${group}&cate=${cate}&type=list&pg=${pageGroupStart - 1}" class="prev">이전</a>
