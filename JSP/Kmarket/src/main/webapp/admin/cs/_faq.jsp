@@ -2,7 +2,7 @@
 <%@ taglib prefix="c" uri ="http://java.sun.com/jsp/jstl/core"%>
 <section id="admin-cs-list">
                 <nav>
-                    <h3>공지사항 목록</h3>
+                    <h3>자주묻는질문 목록</h3>
                     <p>
                         HOME > 고객센터 > <strong>자주묻는질문</strong>
                     </p>

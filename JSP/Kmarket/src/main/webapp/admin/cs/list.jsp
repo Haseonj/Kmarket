@@ -1,4 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri ="http://java.sun.com/jsp/jstl/core"%>
 <jsp:include page="../_header.jsp"/>
 <jsp:include page="./_${group}.jsp"/>
 <script>
@@ -36,126 +37,20 @@
                             <th>날짜</th>
                             <th>관리</th>
                         </tr>
-                        <tr>
-                            <td><input type="checkbox" name="chk"></td>
-                            <td>1</td>
-                            <td>고객서비스</td>
-                            <td><a href="#">[안내] 해외결제 사칭 문자 주의</a></td>
-                            <td>120</td>
-                            <td>00.00.00</td>
-                            <td>
-                                <a href="#">[삭제]</a><br/>
-                                <a href="#">[수정]</a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td><input type="checkbox" name="chk"></td>
-                            <td>1</td>
-                            <td>고객서비스</td>
-                            <td><a href="#">[안내] 해외결제 사칭 문자 주의</a></td>
-                            <td>120</td>
-                            <td>00.00.00</td>
-                            <td>
-                                <a href="#">[삭제]</a><br/>
-                                <a href="#">[수정]</a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td><input type="checkbox" name="chk"></td>
-                            <td>1</td>
-                            <td>고객서비스</td>
-                            <td><a href="#">[안내] 해외결제 사칭 문자 주의</a></td>
-                            <td>120</td>
-                            <td>00.00.00</td>
-                            <td>
-                                <a href="#">[삭제]</a><br/>
-                                <a href="#">[수정]</a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td><input type="checkbox" name="chk"></td>
-                            <td>1</td>
-                            <td>고객서비스</td>
-                            <td><a href="#">[안내] 해외결제 사칭 문자 주의</a></td>
-                            <td>120</td>
-                            <td>00.00.00</td>
-                            <td>
-                                <a href="#">[삭제]</a><br/>
-                                <a href="#">[수정]</a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td><input type="checkbox" name="chk"></td>
-                            <td>1</td>
-                            <td>고객서비스</td>
-                            <td><a href="#">[안내] 해외결제 사칭 문자 주의</a></td>
-                            <td>120</td>
-                            <td>00.00.00</td>
-                            <td>
-                                <a href="#">[삭제]</a><br/>
-                                <a href="#">[수정]</a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td><input type="checkbox" name="chk"></td>
-                            <td>1</td>
-                            <td>고객서비스</td>
-                            <td><a href="#">[안내] 해외결제 사칭 문자 주의</a></td>
-                            <td>120</td>
-                            <td>00.00.00</td>
-                            <td>
-                                <a href="#">[삭제]</a><br/>
-                                <a href="#">[수정]</a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td><input type="checkbox" name="chk"></td>
-                            <td>1</td>
-                            <td>고객서비스</td>
-                            <td><a href="#">[안내] 해외결제 사칭 문자 주의</a></td>
-                            <td>120</td>
-                            <td>00.00.00</td>
-                            <td>
-                                <a href="#">[삭제]</a><br/>
-                                <a href="#">[수정]</a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td><input type="checkbox" name="chk"></td>
-                            <td>1</td>
-                            <td>고객서비스</td>
-                            <td><a href="#">[안내] 해외결제 사칭 문자 주의</a></td>
-                            <td>120</td>
-                            <td>00.00.00</td>
-                            <td>
-                                <a href="#">[삭제]</a><br/>
-                                <a href="#">[수정]</a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td><input type="checkbox" name="chk"></td>
-                            <td>1</td>
-                            <td>고객서비스</td>
-                            <td><a href="#">[안내] 해외결제 사칭 문자 주의</a></td>
-                            <td>120</td>
-                            <td>00.00.00</td>
-                            <td>
-                                <a href="#">[삭제]</a><br/>
-                                <a href="#">[수정]</a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td><input type="checkbox" name="chk"></td>
-                            <td>1</td>
-                            <td>고객서비스</td>
-                            <td><a href="#">[안내] 해외결제 사칭 문자 주의</a></td>
-                            <td>120</td>
-                            <td>00.00.00</td>
-                            <td>
-                                <a href="#">[삭제]</a><br/>
-                                <a href="#">[수정]</a>
-                            </td>
-                        </tr>
+                        <c:forEach var="article" items="${articles}">
+	                        <tr>
+	                            <td><input type="checkbox" name="chk"></td>
+	                            <td>${pageStartNum = pageStartNum - 1}</td>
+	                            <td>고객서비스</td>
+	                            <td><a href="#">${article.title}</a></td>
+	                            <td>120</td>
+	                            <td>${article.rdate.substring(2, 10)}</td>
+	                            <td>
+	                                <a href="#">[삭제]</a><br/>
+	                                <a href="#">[수정]</a>
+	                            </td>
+	                        </tr>
+                        </c:forEach>
                     </table>
                     <a href="#" class="delete">선택삭제</a>
                     <a href="#" class="write">작성하기</a>
