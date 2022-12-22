@@ -80,17 +80,23 @@
         <header>
             <div class="top">
                 <div>
-                     <c:choose>
-                	<c:when test="${empty sessMember.uid}">
-                		<a href="/Kmarket/member/login.do">로그인</a>
-                    	<a href="/Kmarket/member/join.do">회원가입</a>
-                    </c:when>
-                    <c:when test="${not empty sessMember.uid}">
-                    	<a href="/Kmarket/member/logout.do">로그아웃</a>
-                    	<a href="#">마이페이지</a>
-                    	<a href="/Kmarket/product/cart.do"><i class="fa fa-shopping-cart" aria-hidden="true"></i>&nbsp;장바구니</a>
-                    </c:when>
-                </c:choose>
+			       <c:choose>
+			       		<c:when test="${empty sessMember.uid}">
+			       			<a href="/Kmarket/member/login.do">로그인</a>
+			           		<a href="/Kmarket/member/join.do">회원가입</a>
+			           </c:when>
+			           <c:when test="${not empty sessMember.uid}">
+			           		<span>${sessMember.name}님 반갑습니다.</span>
+			           		<c:choose>
+			           		<c:when test="${sessMember.level ge 5}">
+			           		<a href="/Kmarket/admin/index.do">관리자</a>
+			           		</c:when>
+			           		</c:choose>
+			           		<a href="/Kmarket/member/logout.do">로그아웃</a>
+			          	 	<a href="#">마이페이지</a>
+			          	 	<a href="/Kmarket/product/cart.do"><i class="fa fa-shopping-cart" aria-hidden="true"></i>&nbsp;장바구니</a>
+			           </c:when>
+			       </c:choose>
                 </div>
             </div>
             <div class="logo">

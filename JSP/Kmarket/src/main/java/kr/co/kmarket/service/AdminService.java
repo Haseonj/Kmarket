@@ -4,7 +4,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import kr.co.kmarket.dao.AdminDAO;
-import kr.co.kmarket.dao.BoardDAO;
 
 public enum AdminService {
 	instance;

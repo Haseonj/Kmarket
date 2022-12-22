@@ -59,7 +59,7 @@ $(function(){
                     <option value="seller">판매자</option>
                 </select>
                 <input type="text" name="search2">
-                <input type="submit" value="검색">
+                <input type="submit" value="검색" name="searchbtn">
                 </form>
             </div>
             <table>

@@ -21,12 +21,12 @@
         
         <header>
             <div>
-                <a href="./index.html" class="logo"><img src="/Kmarket/admin/img/admin_logo.png" alt="admin_logo"></a>
+                <a href="/Kmarket/admin/index.do" class="logo"><img src="/Kmarket/admin/img/admin_logo.png" alt="admin_logo"></a>
                 <p>
                     <span>${sessMember.name}님 반갑습니다.</span>
                     <a href="/Kmarket/index.do">HOME |</a>
                     <a href="/Kmarket/member/logout.do">로그아웃 |</a>
-                    <a href="#">고객센터</a>
+                    <a href="/Kmarket/cs/index.do">고객센터</a>
                 </p>
             </div>
         </header>
@@ -77,7 +77,7 @@
                 <a href="#"><i class="fa fa-pencil-square-o"></i>게시판관리</a>
                 <ol>
                     <li><a href="#">게시판현황</a></li>
-                    <li><a href="#">고객문의</a></li>
+                    <li><a href="/Kmarket/cs/index.do">고객문의</a></li>
                 </ol>
             </li>
         </ul>
