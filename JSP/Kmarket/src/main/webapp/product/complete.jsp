@@ -1,6 +1,59 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <jsp:include page="./_header.jsp"/>
+<script>
+	let sessOrder = JSON.parse(sessionStorage.getItem("sessOrder"));
+	let sessCartNo = JSON.parse(sessionStorage.getItem("sessCartNo"));
+	console.log(sessOrder);
+	
+	let ordCount = Object.keys(sessOrder).length;
+	let ordPrice = 0;
+	let ordDiscount = 0;
+	let ordDelivery = 0;
+	let ordPoint = 0;
+	
+	for(let order of sessOrder){
+		
+		let tr = "<tr>"
+		    tr += "<td><article><a href='#'><img src='http://3.39.231.136:8080/Kmarket/file/"+order.thumb1+"'></a>";
+			tr += "<div><h2><a href='#'>"+order.prodName+"</a></h2>"
+			tr += "<p>"+order.descript+"</p></div></article></td>"
+			tr += "<td>"+order.count+"</td>"
+			tr += "<td>"+order.price+"</td>"
+			tr += "<td>"+order.discount+"%</td>"
+			tr += "<td>"+order.delivery+"</td>"
+			tr += "<td>"+order.total+"</td>"
+			tr += "</tr>"
+		
+		$('.productlist').append(tr);	
+			
+		let count = Number(order.count);
+		let price = Number(order.price) * count;
+		let discount = Number(order.discount);
+		let discountprice = discount * price / 100;
+		let delivery = 0;
+		if(order.delivery == '무료배송'){
+			delivery = 0;	
+		}else{
+			delivery = Number(order.delivery);
+		}
+		
+		ordPrice += price;
+		ordDiscount += discountprice;
+		ordDelivery += delivery;
+	}
+	let ordTotal = ordPrice - ordDiscount + ordDelivery;
+	
+	console.log(ordPrice);
+	console.log(ordDiscount);
+	console.log(ordDelivery);
+	console.log(ordTotal);
+	
+	$('#ordPrice').append(ordPrice);
+	$('#ordDiscount').append(ordDiscount);
+	$('#ordDelivery').append(ordDelivery);
+	$('.ordTotPrice').append(ordTotal);
+</script>
     <!-- 결제완료 페이지 시작 -->
     <section class="complete">
       
@@ -23,7 +76,7 @@
       <!-- 상품정보 -->
       <article class="info">
         <h1>상품정보</h1>
-        <table border="0">
+        <table border="0" class="productlist">
           <tr>
             <th>상품명</th>
             <th>상품금액</th>
@@ -55,19 +108,19 @@
               <table border="0">
                 <tr>
                   <td>총 상품금액</td>
-                  <td><span>${totalprice}</span>원</td>
+                  <td><span id="ordPrice"></span>원</td>
                 </tr>
                 <tr>
                   <td>총 할인금액</td>
-                  <td><span>-${discount}</span>원</td>
+                  <td>-<span id="ordDiscount"></span>원</td>
                 </tr>
                 <tr>
                   <td>배송비</td>
-                  <td><span>${delivery}</span>원</td>
+                  <td><span id="ordDelivery"></span>원</td>
                 </tr>
                 <tr>
                   <td>총 결제금액</td>
-                  <td><span>${productstotalprice}</span>원</td>
+                  <td><span class="ordTotPrice"></span>원</td>
                 </tr>
               </table>                      
             </td>
@@ -83,7 +136,7 @@
             <td>주문번호</td>
             <td>${order.ordNo}</td>
             <td rowspan="3">총 결제금액</td>
-            <td rowspan="3"><span>${productstotalprice}</span>원</td>
+            <td rowspan="3"><span class="ordTotPrice"></span>원</td>
           </tr>
           <tr>
             <td>결제방법</td>

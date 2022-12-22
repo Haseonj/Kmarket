@@ -1,4 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -22,15 +23,22 @@
         <header>
             <div class="top">
                 <div>
-                    <a href="/Kmarket/member/login.do">로그인</a>
-                    <a href="#">회원가입</a>
-                    <a href="#">마이페이지</a>
-                    <a href="/Kmarket/product/cart.do"><i class="fa fa-shopping-cart" aria-hidden="true"></i>&nbsp;장바구니</a>
+                    <c:choose>
+                	<c:when test="${empty sessMember.uid}">
+                		<a href="/Kmarket/member/login.do">로그인</a>
+                    	<a href="/Kmarket/member/join.do">회원가입</a>
+                    </c:when>
+                    <c:when test="${not empty sessMember.uid}">
+                    	<a href="/Kmarket/member/logout.do">로그아웃</a>
+                    	<a href="#">마이페이지</a>
+                    	<a href="/Kmarket/product/cart.do"><i class="fa fa-shopping-cart" aria-hidden="true"></i>&nbsp;장바구니</a>
+                    </c:when>
+                </c:choose>
                 </div>
             </div>
             <div class="logo">
                 <div>
-                    <a href="#"><img src="./img/header_logo.png" alt="로고"></a>
+                    <a href="/Kmarket/index.do"><img src="./img/header_logo.png" alt="로고"></a>
                     <form action="#">
                         <input type="text" name="keyword">
                         <button><i class="fa fa-search"></i></button>
@@ -50,7 +58,7 @@
                         <li><a href="#">쿠폰존</a></li>
                         <li><a href="#">사용후기</a></li>
                         <li><a href="#">개인결제</a></li>
-                        <li><a href="#">고객센터</a></li>
+                        <li><a href="/Kmarket/cs/index.do">고객센터</a></li>
                         <li><a href="#">FAQ</a></li>
                     </ul>
                 </div>
