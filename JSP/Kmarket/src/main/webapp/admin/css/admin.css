@@ -416,6 +416,7 @@ button[type=submit] {
 /* 게시판 리스트 */
 main > #admin-cs-list {
     border-left: 1px solid #d9d9d9;
+    height: 789px;
 }
 main > #admin-cs-list > article {
     position: relative;

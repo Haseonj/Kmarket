@@ -10,6 +10,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import com.google.gson.Gson;
+
 import kr.co.kmarket.service.BoardService;
 import kr.co.kmarket.vo.BoardVO;
 
@@ -18,6 +23,7 @@ public class AdminCsListController extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
 	private BoardService service = BoardService.INSTANCE;
+	Logger logger = LoggerFactory.getLogger(this.getClass());
 	
 	@Override
 	public void init() throws ServletException {
@@ -28,13 +34,18 @@ public class AdminCsListController extends HttpServlet {
 		String group = req.getParameter("group");
 		String type = req.getParameter("type");
 		String pg = req.getParameter("pg");
+		String cate = req.getParameter("cate");
 		
 		// 현재 페이지 번호
 		int currentPage = service.getCurrentpage(pg);
 		
 		// 전체 페이지 갯수
 		int total = 0;
-		total = service.selectCountTotal(group);
+		if(cate.equals("0")) {
+			total = service.selectCountTotal(group);
+		}else {
+			total = service.selectCountTotal(cate, group);
+		}
 		
 		// 마지막 페이지 번호
 		int lastPageNum = service.getLastPageNum(total);
@@ -50,7 +61,12 @@ public class AdminCsListController extends HttpServlet {
 		
 		// 글 가져오기
 		List<BoardVO> articles = null;
-		articles = service.selectAdminArticle(group, start);
+		if(cate.equals("0")) {
+			articles = service.selectAdminArticle(group, start);
+		}else {
+			articles = service.selectAdminArticle(group, start, cate);
+		}
+		
 		
 		req.setAttribute("articles", articles);
 		req.setAttribute("currentPage", currentPage);
@@ -62,6 +78,7 @@ public class AdminCsListController extends HttpServlet {
 		req.setAttribute("type", type);
 		req.setAttribute("pg", pg);
 		req.setAttribute("group", group);
+		req.setAttribute("cate", cate);
 		
 		RequestDispatcher dispatcher = req.getRequestDispatcher("/admin/cs/list.jsp");
 		dispatcher.forward(req, resp);

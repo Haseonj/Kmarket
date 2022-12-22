@@ -76,7 +76,7 @@
             <li>
                 <a href="#"><i class="fa fa-pencil-square-o"></i>고객센터</a>
                 <ol>
-                    <li><a href="/Kmarket/admin/cs/list.do?group=notice">공지사항</a></li>
+                    <li><a href="/Kmarket/admin/cs/list.do?group=notice&cate=0&type=list">공지사항</a></li>
                     <li><a href="/Kmarket/admin/cs/list.do?group=faq">자주묻는질문</a></li>
                     <li><a href="/Kmarket/admin/cs/list.do?group=qna">고객문의</a></li>
                 </ol>
