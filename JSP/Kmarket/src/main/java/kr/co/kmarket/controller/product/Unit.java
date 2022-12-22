@@ -2,11 +2,19 @@ package kr.co.kmarket.controller.product;
 
 public class Unit {
 	
-	private static int seq;
+	static int last_seq;
+
+    int seq;
 	
+	 public Unit(){
+
+	        last_seq++;
+
+	        seq = last_seq;
+
+	 }
 	
-    public static synchronized int getSeq(){
-    	seq++;
+    public synchronized int getSeq(){
     	
     	/*
     	String zerofill = "";

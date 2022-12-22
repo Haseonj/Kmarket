@@ -43,7 +43,7 @@
 	              </article>
 	            </td>
 	            <td>${product.price}원</td>
-	            <td>${product.price - product.total}원</td>
+	            <td>${product.price*product.count - product.total}원</td>
 	            <td>${product.count}</td>
 	            <td>${product.total}원</td>
 	          </tr>
