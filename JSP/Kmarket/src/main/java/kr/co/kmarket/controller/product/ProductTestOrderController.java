@@ -1,10 +1,6 @@
 package kr.co.kmarket.controller.product;
 
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -17,7 +13,6 @@ import javax.servlet.http.HttpSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.google.gson.JsonObject;
 
 import kr.co.kmarket.service.ProductService;
 import kr.co.kmarket.vo.CartVO;
@@ -58,19 +53,6 @@ public class ProductTestOrderController extends HttpServlet{
 		
 		HttpSession sess = req.getSession();
 		MemberVO member = (MemberVO) sess.getAttribute("sessMember");
-		List<CartVO> carts = (List<CartVO>) sess.getAttribute("sessCarts");
-		
-		Date nowDate = new Date();
-		SimpleDateFormat newname = new SimpleDateFormat("yyyyMMdd");
-		String today = newname.format(nowDate);
-		Unit u1 = new Unit();
-		int seq = u1.getSeq();
-		
-		String todaydate = today + seq;
-		
-		int ordNo = Integer.parseInt(todaydate);
-		
-		logger.debug(todaydate);
 		
 		String ordCount = req.getParameter("ordCount");
 		String ordPrice = req.getParameter("ordPrice");
@@ -79,11 +61,11 @@ public class ProductTestOrderController extends HttpServlet{
 		String savePoint = req.getParameter("savePoint");
 		String usedPoint = req.getParameter("point");
 		String ordTotPrice = req.getParameter("ordTotPrice");
-		String recipName = req.getParameter("recipName");
-		String recipHp = req.getParameter("recipHp");
-		String recipZip = req.getParameter("recipZip");
-		String recipAddr1 = req.getParameter("recipAddr1");
-		String recipAddr2 = req.getParameter("recipAddr2");
+		String recipName = req.getParameter("orderer");
+		String recipHp = req.getParameter("hp");
+		String recipZip = req.getParameter("zip");
+		String recipAddr1 = req.getParameter("addr1");
+		String recipAddr2 = req.getParameter("addr2");
 		String payment = req.getParameter("payment");
 		int paymentvalue = Integer.parseInt(payment);
 		
@@ -103,7 +85,6 @@ public class ProductTestOrderController extends HttpServlet{
 		String[] cartNos = req.getParameterValues("cartNo"); 
 		
 		OrderVO vo = new OrderVO();
-		vo.setOrdNo(ordNo);
 		vo.setOrdUid(uid);
 		vo.setOrdCount(ordCount);
 		vo.setOrdPrice(ordPrice);
@@ -121,9 +102,12 @@ public class ProductTestOrderController extends HttpServlet{
 		vo.setOrdComplete(ordComplete);
 		
 		int result = service.insertOrder(vo);
-		
+		int ordNo = 0;
 		for(String cartNo : cartNos) {
+			logger.debug("cartNo"+cartNo);
 			CartVO cart = service.selectCart(cartNo);
+			logger.debug("ProductTestOrderController...selectCart"+cart);
+			ordNo = service.selectLatestOrder(uid);
 			service.insertOrderItem(cart, ordNo);
 		}
 		service.insertMemberPoint(uid, ordNo, savePoint);
