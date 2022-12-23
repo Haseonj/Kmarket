@@ -9,17 +9,11 @@
 <c:if test="${type eq 'view'}">
 <section id="admin-cs-view">
 </c:if>
+<c:if test="${type eq 'modify'}">
+<section id="admin-cs-modify">
+</c:if>
                 <nav>
-                    <h3>
-                    <c:if test="${group eq 'notice'}">
-                    	공지사항
-                   	</c:if>
-                    <c:if test="${group eq 'faq'}">
-                    	자주묻는질문
-                   	</c:if>
-                    <c:if test="${group eq 'qna'}">
-                    	고객문의
-                   	</c:if>
+                    <h3>공지사항
                     <c:if test="${type eq 'list'}"> 
                     	목록
                     </c:if>
@@ -29,17 +23,11 @@
                     <c:if test="${type eq 'view'}"> 
                     	보기
                     </c:if>
+                    <c:if test="${type eq 'modify'}"> 
+                    	수정
+                    </c:if>
                     </h3>
                     <p>
-                        HOME > 고객센터 >
-                        <c:if test="${group eq 'notice'}">
-                        	<strong>공지사항</strong>
-                        </c:if>
-                        <c:if test="${group eq 'faq'}">
-                        	<strong>자주묻는질문</strong>
-                        </c:if>
-                        <c:if test="${group eq 'qna'}">
-                        	<strong>고객문의</strong>
-                        </c:if>
+                        HOME > 고객센터 > <strong>공지사항</strong>
                     </p>
                 </nav>

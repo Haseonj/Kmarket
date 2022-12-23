@@ -4,6 +4,7 @@
 <jsp:include page="./_${group}.jsp"/>
 <script>
 	$(function(){
+		let isGroup;
 		// 체크박스
 		$('.all').click(function(){
 			if($('.all').is(':checked')){
@@ -23,15 +24,51 @@
 			}
 		});
 		
-		// notice 카테고리별 조회
+		// 1차유형으로 2차유형 조회
 		$('select[name=cate1]').change(function(){
-			let cate1 = $('select[name=cate1] > option:selected').val();
-			let group = $('input[name=group]').val();
-			let type = $('input[name=type]').val();
 			
-			location.href = "/Kmarket/admin/cs/list.do?group="+group+"&cate="+cate1+"&type="+type;
+			let cate1 = $('select[name=cate1] > option:selected').val();
+			let cate2;
+			
+			$.ajax({
+				url: '/Kmarket/cs/board/category.do',
+				method: 'get',
+				data: {'cate1': cate1},
+				dataType: 'json',
+				success: function(data){
+					$('select[name=cate2]').empty();
+					let html;
+					
+					if(data == ""){
+						html = $("<option value="+0+">상세유형 선택</option>");
+						$('select[name=cate2]').append(html);
+					}
 
+					for(cate2 of data){
+						html = $("<option>"+cate2.cate2+"</option>");
+						$('select[name=cate2]').append(html);
+					}
+					
+					cate2 = $('select[name=type2] > option:selected').val();
+					
+				}
+				
+				
+			});
+			
 		});
+		
+		if(isGroup == 'notice'){
+			// notice 카테고리별 조회
+			$('select[name=cate1]').change(function(){
+				let cate1 = $('select[name=cate1] > option:selected').val();
+				let group = $('input[name=group]').val();
+				let type = $('input[name=type]').val();
+				
+				location.href = "/Kmarket/admin/cs/list.do?group="+group+"&cate="+cate1+"&type="+type;
+	
+			});
+		}
 		
 		// 선택삭제
 		$('article > .chkDelete').click(function(e){
@@ -47,6 +84,7 @@
 					let cate = $('select[name=cate1] > option:selected').val();
 					let group = $('input[name=group]').val();
 					let type = $('input[name=type]').val();
+					let pg = '${pg}';
 					let checked = [];
 					// 체크박스 정보 삽입
 					$('input[name=chk]:checked').each(function(){
@@ -61,7 +99,7 @@
 						dataType: 'json',
 						success: function(data){
 							alert('삭제되었습니다.');
-							location.href = '/Kmarket/admin/cs/list.do?group='+group+'&cate='+cate+'&type='+type;
+							location.href = '/Kmarket/admin/cs/list.do?group='+group+'&cate='+cate+'&type=list&pg='+pg;
 						}
 					});
 				}else{
@@ -77,6 +115,7 @@
 				let cate = $('select[name=cate1] > option:selected').val();
 				let group = $('input[name=group]').val();
 				let type = $('input[name=type]').val();
+				let pg = '${pg}';
 				
 				$.ajax({
 					url: '/Kmarket/admin/cs/delete.do',
@@ -85,7 +124,7 @@
 					dataType: 'json',
 					success: function(data){
 						alert('삭제되었습니다.');
-						location.href = '/Kmarket/admin/cs/list.do?group='+group+'&cate='+cate+'&type='+type;
+						location.href = '/Kmarket/admin/cs/list.do?group='+group+'&cate='+cate+'&type=list&pg='+pg;
 					}
 				});
 				
@@ -98,12 +137,28 @@
                 <article>
                 	<input type="hidden" name="group" value="${group}">
                 	<input type="hidden" name="type" value="${type}">
+                	
                     <select name="cate1" id="cate1">
+                    <c:if test="${group eq 'notice'}">
                         <option value="0">전체</option>
                         <option value="service" ${cate eq 'service' ? 'selected' : ''}>고객서비스</option>
                         <option value="safe" ${cate eq 'safe' ? 'selected' : ''}>안전거래</option>
                         <option value="danger" ${cate eq 'danger' ? 'selected' : ''}>유해상품</option>
                         <option value="prize" ${cate eq 'prize' ? 'selected' : ''}>이벤트당첨</option>
+                    </c:if>
+                    <c:if test="${group eq 'faq' or group eq 'qna'}">
+                    	<option value="0">1차선택</option>
+                    	<option value="user" ${cate eq 'user' ? 'selected' : ''}>회원</option>
+                    	<option value="event" ${cate eq 'event' ? 'selected' : ''}>쿠폰/이벤트</option>
+                    	<option value="order" ${cate eq 'order' ? 'selected' : ''}>주문/결제</option>
+                    	<option value="shipping" ${cate eq 'shipping' ? 'selected' : ''}>배송</option>
+                    	<option value="cancel" ${cate eq 'cancel' ? 'selected' : ''}>취소/반품/교한</option>
+                    	<option value="travel" ${cate eq 'travel' ? 'selected' : ''}>여행/숙박/항공</option>
+                    	<option value="safe" ${cate eq 'safe' ? 'selected' : ''}>안전거래</option>
+                    </c:if>
+                    </select>
+                    <select name="cate2" id="cate2">
+                    	<option value="0">2차선택</option>
                     </select>
                     <table>
                         <tr>
@@ -125,7 +180,7 @@
 	                            <td>${article.rdate.substring(2, 10)}</td>
 	                            <td>
 	                                <a href="#" class="delete">[삭제]</a><br/>
-	                                <a href="#">[수정]</a>
+	                                <a href="/Kmarket/admin/cs/modify.do?group=${group}&cate=${article.c1Name}&type=modify&no=${article.no}">[수정]</a>
 	                            </td>
 	                        </tr>
                         </c:forEach>

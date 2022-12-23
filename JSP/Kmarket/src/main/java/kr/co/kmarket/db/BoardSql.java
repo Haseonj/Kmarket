@@ -64,6 +64,8 @@ public class BoardSql {
 	
 	public static final String UPDATE_ARTICLE = "UPDATE `km_cs_article` SET `title`=?, `content`=? WHERE `no`=?";
 	
+	public static final String UPDATE_NOTICE_ARTICLE = "UPDATE `km_cs_article` SET `c1Name`=?, `title`=?, `content`=? , `rdate`=NOW() WHERE `no`=?";
+	
 	public static final String DELETE_ARTICLE = "DELETE FROM `km_cs_article` WHERE `no`=?";
 	
 
