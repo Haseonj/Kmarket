@@ -23,6 +23,10 @@ public enum BoardService {
 		dao.insertArticle(vo);
 	}
 	
+	public void insertNoticeArticle(BoardVO vo) {
+		dao.insertNoticeArticle(vo);
+	}
+	
 	public BoardVO selectArticle(String no, String cate) {
 		return dao.selectArticle(no, cate);
 	}
@@ -79,8 +83,8 @@ public enum BoardService {
 		dao.updateArticle(no, title, content);
 	}
 	
-	public void deleteArticle(String no) {
-		dao.deleteArticle(no);
+	public int deleteArticle(String no) {
+		return dao.deleteArticle(no);
 	}
 	
 	// 현재 페이지 번호

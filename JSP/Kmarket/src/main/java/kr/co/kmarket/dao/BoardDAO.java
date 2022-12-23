@@ -1,6 +1,5 @@
 package kr.co.kmarket.dao;
 
-import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,7 +9,6 @@ import org.slf4j.LoggerFactory;
 import kr.co.kmarket.db.BoardSql;
 import kr.co.kmarket.db.DBHelper;
 import kr.co.kmarket.vo.BoardVO;
-import kr.co.kmarket.vo.CateVO;
 
 public class BoardDAO extends DBHelper {
 
@@ -28,6 +26,25 @@ public class BoardDAO extends DBHelper {
 			psmt.setString(5, vo.getTitle());
 			psmt.setString(6, vo.getContent());
 			psmt.setString(7, vo.getRegip());
+			psmt.executeUpdate();
+			
+			close();
+		}catch (Exception e) {
+			logger.error(e.getMessage());
+		}
+	}
+	
+	public void insertNoticeArticle(BoardVO vo) {
+		try {
+			logger.info("insertNoticeArticle...");
+			conn = getConnection();
+			psmt = conn.prepareStatement(BoardSql.INSERT_NOTICE_ARTICLE);
+			psmt.setString(1, vo.getUid());
+			psmt.setString(2, vo.getGroup());
+			psmt.setString(3, vo.getC1Name());
+			psmt.setString(4, vo.getTitle());
+			psmt.setString(5, vo.getContent());
+			psmt.setString(6, vo.getRegip());
 			psmt.executeUpdate();
 			
 			close();
@@ -445,17 +462,19 @@ public class BoardDAO extends DBHelper {
 		}
 	}
 	
-	public void deleteArticle(String no) {
+	public int deleteArticle(String no) {
+		int result = 0;
 		try {
 			logger.info("deleteArticle...");
 			conn = getConnection();
 			psmt = conn.prepareStatement(BoardSql.DELETE_ARTICLE);
 			psmt.setString(1, no);
-			psmt.executeUpdate();
+			result = psmt.executeUpdate();
 			
 			close();
 		}catch (Exception e) {
 			logger.error(e.getMessage());
 		}
+		return result;
 	}
 }

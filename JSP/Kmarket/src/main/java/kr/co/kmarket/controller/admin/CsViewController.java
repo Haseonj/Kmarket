@@ -1,8 +1,8 @@
 package kr.co.kmarket.controller.admin;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -12,17 +12,15 @@ import javax.servlet.http.HttpServletResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.google.gson.JsonObject;
-
 import kr.co.kmarket.service.BoardService;
+import kr.co.kmarket.vo.BoardVO;
 
-
-@WebServlet("/admin/cs/delete.do")
-public class CsDeleteController extends HttpServlet {
+@WebServlet("/admin/cs/view.do")
+public class CsViewController extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
 	private BoardService service = BoardService.INSTANCE;
-	Logger logger = LoggerFactory.getLogger(this.getClass());
+	private Logger logger = LoggerFactory.getLogger(this.getClass());
 	
 	@Override
 	public void init() throws ServletException {
@@ -30,29 +28,27 @@ public class CsDeleteController extends HttpServlet {
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		String group = req.getParameter("group");
+		String cate = req.getParameter("cate");
+		String type = req.getParameter("type");
+		String no = req.getParameter("no");
+		String pg = req.getParameter("pg");
 		
+		BoardVO vo = service.selectArticle(no);
+		
+		req.setAttribute("vo", vo);
+		
+		req.setAttribute("group", group);
+		req.setAttribute("cate", cate);
+		req.setAttribute("type", type);
+		req.setAttribute("pg", pg);
+		
+		RequestDispatcher dispatcher = req.getRequestDispatcher("/admin/cs/view.jsp");
+		dispatcher.forward(req, resp);
 	}
 	
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		String[] no = req.getParameterValues("checked");
-		String articleNo = req.getParameter("no");
-		
-		JsonObject json = new JsonObject();
-		if(articleNo == "") {
-			int result[] = new int [no.length];
-			
-			for(int i = 0; i < no.length; i++) {
-				result[i] = service.deleteArticle(no[i]);
-				json.addProperty("result["+i+"]", result[i]);
-			}
-		}else {
-			int rs = service.deleteArticle(articleNo);
-			json.addProperty("rs", rs);
-		}
-		
-		PrintWriter writer = resp.getWriter();
-		writer.print(json.toString());
-		
 	}
+
 }
