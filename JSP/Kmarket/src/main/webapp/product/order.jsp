@@ -61,6 +61,7 @@
 		let sessOrder = JSON.parse(sessionStorage.getItem("sessOrder"));
 		let sessCartNo = JSON.parse(sessionStorage.getItem("sessCartNo"));
 		console.log(sessOrder);
+		console.log(sessCartNo);
 		
 		let ordCount = Object.keys(sessOrder).length;
 		let ordPrice = 0;
@@ -120,7 +121,7 @@
 		$('input[name=savePoint]').val(ordPoint);
 		
 		for(let cart of sessCartNo){
-			$('input[name=cartNo]').val(cart.cartNo);
+			$('input[name=cartNo]').val(cart);
 			console.log(cart);
 		}
 		
@@ -148,6 +149,7 @@
 								
 				$('#ordTotPrice').empty();
 				$('#ordTotPrice').append(ordTotPrice+"원");
+				$('input[name=ordTotPrice]').val(ordTotPrice);
 			}
 			
 			

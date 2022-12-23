@@ -40,7 +40,6 @@ public class ProductTestCompleteController extends HttpServlet{
 		
 		req.setAttribute("order", order);
 		
-		
 		RequestDispatcher dispatcher = req.getRequestDispatcher("/product/complete.jsp");
 		dispatcher.forward(req, resp);
 	}

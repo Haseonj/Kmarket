@@ -160,6 +160,7 @@
 				
 				console.log('here3 : ' + checkBoxArr.length);
 				console.log('here4 : ' + JSON.stringify(checkBoxArr));
+				console.log('here4 : ' + JSON.stringify(cartNos));
 				
 				sessionStorage.setItem("sessOrder", JSON.stringify(checkBoxArr));
 				sessionStorage.setItem("sessCartNo", JSON.stringify(cartNos));
