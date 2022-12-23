@@ -10,7 +10,7 @@
 			if(checked){
 				$('input[name=cartlist]').prop('checked', true).change();
 			}else{
-				$('input:checkbox').prop('checked', false).change();				
+				$('input[name=cartlist]').prop('checked', false).change();				
 			}
 				
 		});
@@ -148,7 +148,7 @@
 					let discount = tr.find('.discount').text();
 					let point = tr.find('.point').text();
 					let delivery = tr.find('.delivery').text();
-					let pricetotal = tr.find('.total').text();
+					let pricetotal = tr.find('.pricetotal').text();
 					
 					let jsonData = {
 							"thumb1": thumb1,

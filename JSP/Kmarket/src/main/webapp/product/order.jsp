@@ -54,11 +54,13 @@
 		console.log(ordDelivery);
 		console.log(ordTotal);
 		
+		
+		
 		$('#ordCount').append(ordCount+"건");
-		$('#ordPrice').append(ordPrice+"원");
-		$('#ordDiscount').append("-"+ordDiscount+"원");
-		$('#ordDelivery').append(ordDelivery+"원");
-		$('#ordTotPrice').append(ordTotal+"원");
+		$('#ordPrice').append(ordPrice.toLocaleString("ko-KR")+"원");
+		$('#ordDiscount').append("-"+ordDiscount.toLocaleString("ko-KR")+"원");
+		$('#ordDelivery').append(ordDelivery.toLocaleString("ko-KR")+"원");
+		$('#ordTotPrice').append(ordTotal.toLocaleString("ko-KR")+"원");
 		
 		$('input[name=ordCount]').val(ordCount);
 		$('input[name=ordPrice]').val(ordPrice);

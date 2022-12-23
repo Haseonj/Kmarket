@@ -59,6 +59,8 @@
 		$('#ordDiscount').append("-"+ordDiscount+"원");
 		$('#ordDelivery').append(ordDelivery);
 		$('.ordTotPrice').append(ordTotal);
+		
+		
 	});
 </script>
     <!-- 결제완료 페이지 시작 -->

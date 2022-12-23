@@ -1017,33 +1017,26 @@ public class ProductDAO extends DBHelper {
 			}
 			return point;
 		}
-		public void updateSaveMemberPoint(int totalsavepoint, String uid) {
+		
+		public void updateMemberPoint(int totalsavepoint,  int totalusedpoint, String uid) {
 			
 			try {
 				logger.info("updateMemberPoint...");
 				conn = getConnection();
+				
+				conn.setAutoCommit(false);
 				psmt = conn.prepareStatement(ProductSql.UPDATE_SAVE_MEMBER_POINT);
+				psmt1 = conn.prepareStatement(ProductSql.UPDATE_USED_MEMBER_POINT);
 				psmt.setInt(1, totalsavepoint);
 				psmt.setString(2, uid);
 				
-				psmt.executeUpdate();
-				
-				close();
-			}catch(Exception e) {
-				logger.error(e.getMessage());
-			}
-		
-		}
-		public void updateUsedMemberPoint(int totalusedpoint, String uid) {
-			
-			try {
-				logger.info("updateUsedMemberPoint...");
-				conn = getConnection();
-				psmt = conn.prepareStatement(ProductSql.UPDATE_USED_MEMBER_POINT);
-				psmt.setInt(1, totalusedpoint);
-				psmt.setString(2, uid);
+				psmt1.setInt(1, totalusedpoint);
+				psmt1.setString(2, uid);
 				
 				psmt.executeUpdate();
+				psmt.executeUpdate();
+				
+				conn.commit();
 				
 				close();
 			}catch(Exception e) {

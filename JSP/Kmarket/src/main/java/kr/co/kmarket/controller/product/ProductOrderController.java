@@ -139,9 +139,8 @@ public class ProductOrderController extends HttpServlet{
 		logger.debug("here5");
 		// 적립포인트 업데이트(member 테이블)
 		logger.debug("updateSavememberpoint");
-		service.updateSaveMemberPoint(totalSavePoint, uid);
-		logger.debug("updateUsedmemberpoint");
-		service.updateUsedMemberPoint(totalUsedPoint, uid);
+		service.updateMemberPoint(totalSavePoint, totalUsedPoint, uid);
+		
 		
 		resp.sendRedirect("/Kmarket/product/complete.do");
 	}
