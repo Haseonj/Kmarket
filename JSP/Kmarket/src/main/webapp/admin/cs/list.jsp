@@ -4,7 +4,7 @@
 <jsp:include page="./_${group}.jsp"/>
 <script>
 	$(function(){
-		let isGroup;
+		let isGroup = '${group}';
 		// 체크박스
 		$('.all').click(function(){
 			if($('.all').is(':checked')){
@@ -45,7 +45,7 @@
 					}
 
 					for(cate2 of data){
-						html = $("<option>"+cate2.cate2+"</option>");
+						html = $("<option ${cate2 eq '"+cate2.cate2+"' ? 'selected' : ''}>"+cate2.cate2+"</option>");
 						$('select[name=cate2]').append(html);
 					}
 					
@@ -67,6 +67,15 @@
 				
 				location.href = "/Kmarket/admin/cs/list.do?group="+group+"&cate="+cate1+"&type="+type;
 	
+			});
+		}else{
+			$('select[name=cate2]').change(function(){
+				let cate1 = $('select[name=cate1] > option:selected').val();
+				let cate2 = $('select[name=cate2] > option:selected').val();
+				let group = $('input[name=group]').val();
+				let type = $('input[name=type]').val();
+				
+				location.href = "/Kmarket/admin/cs/list.do?group="+group+"&cate="+cate1+"&cate2="+cate2+"&type=list";
 			});
 		}
 		
@@ -164,7 +173,13 @@
                         <tr>
                             <th><input type="checkbox" class="all"></th>
                             <th>번호</th>
+                            <c:if test="${group eq 'notice'}">
                             <th>유형</th>
+                            </c:if>
+                            <c:if test="${group eq 'faq' or group eq 'qna'}">
+                            <th>1차 유형</th>
+                            <th>2차 유형</th>
+                            </c:if>
                             <th>제목</th>
                             <th>조회</th>
                             <th>날짜</th>
@@ -175,7 +190,10 @@
 	                            <td><input type="checkbox" name="chk" value="${article.no}"></td>
 	                            <td>${pageStartNum = pageStartNum - 1}</td>
 	                            <td>${article.cate1}</td>
-	                            <td><a href="/Kmarket/admin/cs/view.do?group=${group}&cate=${cate}&type=view&no=${article.no}&pg=${pg}">${article.title}</a></td>
+	                            <c:if test="${group eq 'faq' or group eq 'qna'}">
+	                            <td>${article.cate2}</td>
+	                            </c:if>
+	                            <td class="title"><a href="/Kmarket/admin/cs/view.do?group=${group}&cate=${cate}&type=view&no=${article.no}&pg=${pg}">${article.title}</a></td>
 	                            <td>${article.hit}</td>
 	                            <td>${article.rdate.substring(2, 10)}</td>
 	                            <td>

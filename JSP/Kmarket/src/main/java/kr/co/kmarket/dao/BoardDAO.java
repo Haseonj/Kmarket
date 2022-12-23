@@ -320,7 +320,7 @@ public class BoardDAO extends DBHelper {
 		return articles;
 	}
 	
-	public List<BoardVO> selectAdminArticle(String group, int start, String cate) {
+	public List<BoardVO> selectAdminArticle(String group, int start, String cate, String cate2) {
 		List<BoardVO> articles = new ArrayList<>();
 		try {
 			logger.info("selectAdminArticle...");
@@ -328,7 +328,8 @@ public class BoardDAO extends DBHelper {
 			psmt = conn.prepareStatement(BoardSql.SELECT_ADMIN_ARTICLE1);
 			psmt.setString(1, group);
 			psmt.setString(2, cate);
-			psmt.setInt(3, start);
+			psmt.setString(3, cate2);
+			psmt.setInt(4, start);
 			
 			rs = psmt.executeQuery();
 			

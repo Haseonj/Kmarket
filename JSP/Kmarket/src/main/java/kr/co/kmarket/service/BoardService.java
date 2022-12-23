@@ -59,8 +59,8 @@ public enum BoardService {
 	public List<BoardVO> selectAdminArticle(String group, int start) {
 		return dao.selectAdminArticle(group, start);
 	}
-	public List<BoardVO> selectAdminArticle(String group, int start, String cate) {
-		return dao.selectAdminArticle(group, start, cate);
+	public List<BoardVO> selectAdminArticle(String group, int start, String cate, String cate2) {
+		return dao.selectAdminArticle(group, start, cate, cate2);
 	}
 	
 	public int selectCountTotal(String cate, String group) {

@@ -19,7 +19,7 @@ import kr.co.kmarket.service.BoardService;
 import kr.co.kmarket.vo.BoardVO;
 
 @WebServlet("/admin/cs/list.do")
-public class AdminCsListController extends HttpServlet {
+public class CsListController extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
 	private BoardService service = BoardService.INSTANCE;
@@ -35,6 +35,7 @@ public class AdminCsListController extends HttpServlet {
 		String type = req.getParameter("type");
 		String pg = req.getParameter("pg");
 		String cate = req.getParameter("cate");
+		String cate2 = req.getParameter("cate2");
 		
 		// 현재 페이지 번호
 		int currentPage = service.getCurrentpage(pg);
@@ -64,7 +65,7 @@ public class AdminCsListController extends HttpServlet {
 		if(cate.equals("0")) {
 			articles = service.selectAdminArticle(group, start);
 		}else {
-			articles = service.selectAdminArticle(group, start, cate);
+			articles = service.selectAdminArticle(group, start, cate, cate2);
 		}
 		
 		

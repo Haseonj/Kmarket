@@ -449,7 +449,7 @@ main > #admin-cs-list > article > table > tbody > tr > td {
     text-align: center;
 }
 
-main > #admin-cs-list > article > table > tbody > tr > td:nth-child(4) {
+main > #admin-cs-list > article > table > tbody > tr > .title {
     text-align: left;
 }
 
