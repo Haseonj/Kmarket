@@ -587,3 +587,58 @@ main > #admin-cs-view > article > div > a:nth-child(3) {background: #8eb4e3;}
     border: none;
 }
 
+
+/* 공지사항 수정 */
+#admin-cs-modify {
+    border-left: 1px solid #d9d9d9;
+}
+#admin-cs-modify > nav {
+    margin-bottom: 20px;
+}
+#admin-cs-modify > article {
+    height: 583px;
+    margin: 60px 0;
+    overflow: unset;
+}
+#admin-cs-modify > article > form {
+    position: relative;
+}
+#admin-cs-modify > article > form > table {
+    border-top: 2px solid #111;
+}
+
+#admin-cs-modify > article > form > table > tbody > tr > td:nth-child(1) {
+    background: #fff;
+    font-size: 17px;
+    font-weight: bold;
+
+}
+#admin-cs-modify > article > form > table > tbody > tr > td > input {
+    width: 70%;
+}
+#admin-cs-modify > article > form > table > tbody > tr > td > textarea {
+    width: 70%;
+    height: 300px;
+    background: #fff;
+}
+
+#admin-cs-modify > article > form > div {
+}
+
+#admin-cs-modify > article > form > div > a {
+    position: absolute;
+    background: #bfbfbf;
+    padding: 11px 21px;
+    right: 100px;
+    bottom: -70px;
+}
+#admin-cs-modify > article > form > div > input {
+    position: absolute;
+    width: 90px;
+    height: 38px;
+    right: 0;
+    bottom: -70px;
+    background: #8eb4e3;
+    border: none;
+}
+

@@ -82,6 +82,9 @@ public enum BoardService {
 	public void updateArticle(String no, String title, String content) {
 		dao.updateArticle(no, title, content);
 	}
+	public void updateArticle(String cate, String title, String content, String no) {
+		dao.updateArticle(cate, title, content, no);
+	}
 	
 	public int deleteArticle(String no) {
 		return dao.deleteArticle(no);

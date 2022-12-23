@@ -462,6 +462,23 @@ public class BoardDAO extends DBHelper {
 		}
 	}
 	
+	public void updateArticle(String cate, String title, String content, String no) {
+		try {
+			logger.info("updateArticle...");
+			conn = getConnection();
+			psmt = conn.prepareStatement(BoardSql.UPDATE_NOTICE_ARTICLE);
+			psmt.setString(1, cate);
+			psmt.setString(2, title);
+			psmt.setString(3, content);
+			psmt.setString(4, no);
+			psmt.executeUpdate();
+			
+			close();
+		}catch (Exception e) {
+			logger.error(e.getMessage());
+		}
+	}
+	
 	public int deleteArticle(String no) {
 		int result = 0;
 		try {

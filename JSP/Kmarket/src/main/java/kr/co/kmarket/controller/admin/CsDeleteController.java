@@ -38,6 +38,7 @@ public class CsDeleteController extends HttpServlet {
 		String[] no = req.getParameterValues("checked");
 		String articleNo = req.getParameter("no");
 		
+		
 		JsonObject json = new JsonObject();
 		if(articleNo == "") {
 			int result[] = new int [no.length];
@@ -53,6 +54,5 @@ public class CsDeleteController extends HttpServlet {
 		
 		PrintWriter writer = resp.getWriter();
 		writer.print(json.toString());
-		
 	}
 }
