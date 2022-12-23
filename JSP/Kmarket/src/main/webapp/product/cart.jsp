@@ -61,7 +61,7 @@
 			let discount  = Number($(this).parents('tr').find('.discount').text());
 			console.log('discount : '+discount);
 			let delivery = $(this).parents('tr').find('.delivery').text();
-			let total = Number($(this).parents('tr').find('.total').text());
+			let total = Number($(this).parents('tr').find('.pricetotal').text());
 			let point = Number($(this).parents('tr').find('.point').text());
 			
 			if(checked){
@@ -69,18 +69,23 @@
 				counttotal = counttotal + count;
 				pricetotal = pricetotal + (price * count);
 				discounttotal = discounttotal + (price * discount * count/100);
+				
 				console.log('1.counttotal : ' + counttotal);
+				console.log('1.pricetotal : ' + pricetotal);
+				console.log('1.discounttotal : ' + discounttotal);
 				
 				if(delivery == '무료배송'){
 					delivery = 0;
 					deliverytotal = deliverytotal + delivery;
 					salepricetotal = salepricetotal + total + deliverytotal;
+					console.log('1.salepricetotal : '+salepricetotal);
 				}else{
 					delivery = Number(delivery);
-					console.log('delivery : '+delivery);
+					console.log('1.delivery : '+delivery);
 					deliverytotal = deliverytotal + delivery;
-					console.log('deliverytotal : '+deliverytotal);
+					console.log('1.deliverytotal : '+deliverytotal);
 					salepricetotal = salepricetotal + total + deliverytotal;
+					console.log('1.salepricetotal : '+salepricetotal);
 				}
 				pointtotal = pointtotal + point;
 			}else{
@@ -88,16 +93,21 @@
 				counttotal = counttotal - count;
 				pricetotal = pricetotal - (price * count);
 				discounttotal = discounttotal - (price * discount * count/100);
+				
 				console.log('2.counttotal : ' + counttotal);
+				console.log('2.pricetotal : ' + pricetotal);
+				console.log('2.discounttotal : ' + discounttotal);
 				
 				if(delivery == '무료배송'){
 					delivery = 0;
 					deliverytotal = deliverytotal - delivery;
 					salepricetotal = salepricetotal - total - deliverytotal;
+					console.log('2.salepricetotal : '+salepricetotal);
 				}else{
 					delivery = Number(delivery);
 					deliverytotal = deliverytotal - delivery;
 					salepricetotal = salepricetotal - total - deliverytotal;
+					console.log('2.salepricetotal : '+salepricetotal);
 				}
 				pointtotal = pointtotal - point;
 			}
@@ -127,8 +137,7 @@
 				
 				$('input:checkbox[name=cartlist]:checked').each(function(){
 					console.log('here2');
-				
-					//checkBoxArr.push($(this).val());					
+								
 					let tr = $(this).parents('tr');
 					let cartNo = $(this).val();
 					let thumb1 = tr.find('.thumb1 > img').attr('alt');
@@ -139,7 +148,7 @@
 					let discount = tr.find('.discount').text();
 					let point = tr.find('.point').text();
 					let delivery = tr.find('.delivery').text();
-					let total = tr.find('.total').text();
+					let pricetotal = tr.find('.total').text();
 					
 					let jsonData = {
 							"thumb1": thumb1,
@@ -150,7 +159,7 @@
 							"discount":discount,
 							"point":point,
 							"delivery":delivery,
-							"total":total
+							"pricetotal":pricetotal
 					};
 					
 					
@@ -164,33 +173,10 @@
 				
 				sessionStorage.setItem("sessOrder", JSON.stringify(checkBoxArr));
 				sessionStorage.setItem("sessCartNo", JSON.stringify(cartNos));
-				location.href = '/Kmarket/product/test.do';
-				
-				//let jsonData = {"checkBoxArr":checkBoxArr};
+				location.href = '/Kmarket/product/order.do';
 				
 				console.log('here5');
 				
-				
-				
-				/*
-				$.ajax({
-					url:'/Kmarket/product/cart.do',
-					method:'POST',
-					traditional: true,
-					data: jsonData,
-					dataType:'json',
-					success:function(data){
-												
-						console.log('here5');
-						
-						if(data.result > 0){
-							console.log('here6');
-							location.href = '/Kmarket/product/order.do';	
-						}
-						
-					}
-				});
-				*/
 			}else{
 				return;
 			}
@@ -252,7 +238,7 @@
 		             	<td class="delivery">${cart.delivery}</td>
 		             </c:otherwise>  
 	              </c:choose>
-	              <td class="total">${cart.total}</td>
+	              <td class="pricetotal">${cart.total}</td>
 	            </tr>
             </c:forEach>
           </tbody>

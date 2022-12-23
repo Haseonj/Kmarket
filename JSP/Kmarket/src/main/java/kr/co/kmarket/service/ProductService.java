@@ -114,15 +114,15 @@ public enum ProductService {
 	}
 	
 	// order
-	public int insertOrder(OrderVO vo) {
+	public void insertOrder(OrderVO vo) {
 		logger.info("ProductService...insertOrder...");
-		return dao.insertOrder(vo);
+		dao.insertOrder(vo);
 	}
-	public void insertOrderItem(CartVO cart, int ordNo) {
+	public void insertOrderItem(CartVO cart, String ordNo) {
 		logger.info("ProductService...inserOrderItem...");
 		dao.insertOrderItem(cart, ordNo);
 	}
-	public void insertMemberPoint(String uid, int ordNo, String point) {
+	public void insertMemberPoint(String uid, String ordNo, String point) {
 		logger.info("ProductService...insertMemberPoint...");
 		dao.insertMemberPoint(uid, ordNo, point);
 	}

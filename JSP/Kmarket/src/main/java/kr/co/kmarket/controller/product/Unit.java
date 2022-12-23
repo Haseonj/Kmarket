@@ -2,21 +2,14 @@ package kr.co.kmarket.controller.product;
 
 public class Unit {
 	
-	static int last_seq;
+	//static int last_seq;
 
-    int seq;
+	private static int seq = 1;
 	
-	 public Unit(){
-
-	        last_seq++;
-
-	        seq = last_seq;
-
-	 }
+	 
 	
-    public synchronized int getSeq(){
+    public static synchronized String getSeq(){
     	
-    	/*
     	String zerofill = "";
     	
     	if(seq >= 100 && seq < 1000) {
@@ -26,8 +19,9 @@ public class Unit {
     	}else if(seq < 10) {
     		zerofill = "000"+seq;
     	}
-    	*/
     	
-        return seq;
+    	seq++;
+    	
+        return zerofill;
     }
 }

@@ -1,7 +1,6 @@
 package kr.co.kmarket.controller.product;
 
 import java.io.IOException;
-import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -15,7 +14,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import kr.co.kmarket.service.ProductService;
-import kr.co.kmarket.vo.CartVO;
 import kr.co.kmarket.vo.MemberVO;
 import kr.co.kmarket.vo.OrderVO;
 
@@ -36,34 +34,11 @@ public class ProductCompleteController extends HttpServlet{
 		logger.info("ProductCompleteController...");
 		
 		HttpSession sess = req.getSession();
-		List<CartVO> carts = (List<CartVO>) sess.getAttribute("sessCarts");
 		MemberVO member = (MemberVO) sess.getAttribute("sessMember");
 		
 		OrderVO order = service.selectOrder(member.getUid());
 		
-		int price = 0;
-		int discount = 0;
-		int delivery = 0;
-		int point = 0;
-		
-		for(int i=0; i<carts.size(); i++) { 
-			price += carts.get(i).getPrice() * carts.get(i).getCount();
-			discount += carts.get(i).getDiscount() * carts.get(i).getPrice() * carts.get(i).getCount() / 100;
-			delivery += carts.get(i).getDelivery();
-			point += carts.get(i).getPoint();
-			service.deleteCartList(member.getUid(), carts.get(i).getCartNo());
-		}
-		int productstotalprice = price - discount + delivery;
-		
-		
-		req.setAttribute("totalprice", price);
-		req.setAttribute("productstotalprice", productstotalprice);
-		req.setAttribute("totalcount", carts.size());
-		req.setAttribute("discount", discount);
-		req.setAttribute("delivery", delivery);
-		req.setAttribute("point", point);
 		req.setAttribute("order", order);
-		req.setAttribute("carts", carts);
 		
 		RequestDispatcher dispatcher = req.getRequestDispatcher("/product/complete.jsp");
 		dispatcher.forward(req, resp);

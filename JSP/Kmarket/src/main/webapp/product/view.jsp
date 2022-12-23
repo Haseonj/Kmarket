@@ -21,22 +21,39 @@
 
 	$(function(){
 		
-		let pricenum = Number($('input[name=num]').val());
+		let num = $('input[name=num]').val();
+		
+		console.log("num : " + num);
+		
+		let pricenum = Number(num);
+		
+		console.log("pricenum : " + pricenum);
 		
 		$('.decrease').click(function(){
-			$('.total > span').empty();
+			$('.pricetotal').empty();
 			pricenum = Number($('input[name=num]').val()) - 1;
+			
+			console.log("pricenum : " + pricenum);
+			
 			$('input[name=num]').attr("value", pricenum);
 			let price = pricenum * '${disprice}';
-			$('.total > span').append(price);
+			
+			console.log("price : " + price);
+			
+			$('.pricetotal').append(price);
 		});
 		$('.increase').click(function(){
-			$('.total > span').empty();
+			$('.pricetotal').empty();
 			pricenum = Number($('input[name=num]').val()) + 1;
-			$('input[name=num]').attr("value", pricenum);
 			
+			console.log("pricenum : " + pricenum);
+			
+			$('input[name=num]').attr("value", pricenum);
 			let price = pricenum * '${disprice}';
-			$('.total > span').append(price);
+			
+			console.log("price : " + price);
+			
+			$('.pricetotal').append(price);
 		});
 		
 		const date = new Date();
@@ -100,7 +117,7 @@
 							
 							if (confirm("장바구니로 이동하시겠습니까?")){
 								console.log('here7');
-								location.href = '/Kmarket/product/cart.do?cate1='+cate1+'&cate2='+cate2;
+								location.href = '/Kmarket/product/cart.do';
 							}
 							else{
 								console.log('here8');
@@ -114,40 +131,62 @@
 			
 		});
 		$(document).on('click', '.order', function(){
-			console.log('here2');
+			console.log('here1');
 			
-			let uid = '${sessMember.uid}';
-			
-			let prodNo = '${product.prodNo}';
-			let pricenum = $('input[name=num]').val();
-			
-			console.log('prodNo : '+ prodNo);
-			console.log('pricenum : '+ pricenum);
-			
-			if(uid == ''){
-				alert('로그인 후 이용 가능합니다.');
-			}else{				
-				//location.href = '/Kmarket/product/order.do?prodNo='+prodNo+'&count='+pricenum;
+			if(confirm('주문페이지로 이동하시겠습니까?')){
 				
+				let uid = '${sessMember.uid}';
 				
-				$.ajax({
-					url:'/Kmarket/product/view.do',
-					method:'POST',
-					data: {"prodNo": prodNo, "count": pricenum},
-					dataType:'json',
-					success:function(data){
-												
-						console.log('here5');
-						
-						if(data.result > 0){
-							console.log('here6');
-							location.href = '/Kmarket/product/order.do';	
-						}
-						
-					}
-				});
+				if(uid == ''){
+					alert('로그인 후 이용 가능합니다.');
+				}else{			
+					
+					let checkBoxArr = [];
+					
+					console.log('here2');
 				
+					let thumb1 = $('.thumb1').attr('alt');
+					let prodNo = $('.prodNo').text();
+					let prodName = $('.prodName').text();
+					let descript = $('.descript').text();
+					let count = $('input[name=num]').val();
+					let price = $('.price').text();
+					let discount = $('input[name=discount]').val();
+					let point = $('input[name=point]').val();
+					let delivery = $('.delivery').text();
+					let pricetotal = $('.pricetotal').text();
+					
+					let jsonData = {
+							"thumb1": thumb1,
+							"prodName": prodName,
+							"descript":descript,
+							"count":count,
+							"price":price,
+							"discount":discount,
+							"point":point,
+							"delivery":delivery,
+							"pricetotal":pricetotal
+					};
+					
+					
+					checkBoxArr.push(jsonData);					
+					
+					console.log('here3 : ' + checkBoxArr.length);
+					console.log('here4 : ' + JSON.stringify(checkBoxArr));
+					
+					
+					sessionStorage.setItem("sessOrder", JSON.stringify(checkBoxArr));
+					location.href = '/Kmarket/product/order.do';
+					
+					console.log('here5');
+					
+				}
+				
+			}else{
+				return;
 			}
+			
+			
 		});
 	});
 </script>
@@ -170,8 +209,8 @@
                     <h2>상품번호&nbsp;:&nbsp;<span>${product.prodNo}</span></h2>
                 </nav>
                 <nav>
-                    <h3>상품명</h3>
-                    <p>${product.descript}</p>
+                    <h3 class="prodName">${product.prodName}</h3>
+                    <p class="descript">${product.descript}</p>
                     <c:choose>
                     	<c:when test="${product.score eq 1}">
                     		<h5 class="rating star1"><a href="#">상품평보기</a></h5>
@@ -193,8 +232,9 @@
                 <nav>
                 	<c:choose>
                     	<c:when test="${product.discount gt 0}">
+                    		<input type="hidden" name="discount" value="${product.discount}"/>
 		                    <div class="org_price">
-		                        <del>${product.price}</del>
+		                        <del class="price">${product.price}</del>
 		                        <span>${product.discount}%</span>
 		                    </div>
 		                    <div class="dis_price">
@@ -202,8 +242,9 @@
 		                    </div>
 	                    </c:when>
                    		<c:otherwise>
+                   			<input type="hidden" name="discount" value="0"/>
                             <div class="dis_price">
-                           		<ins>${product.price}</ins> 
+                           		<ins class="price">${product.price}</ins> 
                             </div>
                    		</c:otherwise>
                    	</c:choose>
@@ -235,8 +276,10 @@
                     <button class="increase">+</button>
                 </div>
                 
+                <input type="hidden" name="point" value="${product.point}">
+                
                 <div class="total">
-                    <span>${disprice}</span>
+                    <span class="pricetotal">${disprice}</span>
                     <em>총 상품금액 </em>
                 </div>
 
@@ -253,7 +296,7 @@
                 <h1>상품정보</h1>
             </nav>
             <!-- 상품상세페이지 이미지 -->
-            <img src="http://3.39.231.136:8080/Kmarket/file/${product.detail}" alt="상세페이지1">
+            <img class="thumb1" src="http://3.39.231.136:8080/Kmarket/file/${product.detail}" alt="${product.thumb1}">
         </article>
         <!-- 상품 정보 제공 고시 내용 -->
         <article class="notice">
@@ -264,7 +307,7 @@
             <table border="0">
                 <tr>
                     <td>상품번호</td>
-                    <td>${product.prodNo}</td>
+                    <td class="prodNo">${product.prodNo}</td>
                 </tr>
                 <tr>
                     <td>상품상태</td>

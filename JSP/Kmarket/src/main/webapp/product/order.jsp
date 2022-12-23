@@ -4,60 +4,6 @@
 <script>
 	$(function(){
 		
-		/*
-		$('input[name=ordercomplete]').click(function(){
-			
-			let ordCount = $('#ordCount').text();
-			let ordPrice = $('#ordPrice').text();
-			let ordDiscount = $('#ordDiscount').text();
-			let ordDelivery = $('#ordDelivery').text();
-			let savePoint = $('input[name=point]').val();
-			let usedPoint = $('#ordPoint').text();
-			let ordTotPrice = $('#ordTotPrice').text();
-			let recipName = $('input[name=orderer]').val();
-			let recipHp = $('input[name=hp]').val();
-			let recipZip = $('input[name=zip]').val();
-			let recipAddr1 = $('input[name=addr1]').val();
-			let recipAddr2 = $('input[name=addr2]').val();
-			let ordPayment = $('input[name=payment]:checked').val();
-			let ordComplete = 0;
-			
-			
-			if(ordPayment == 4){
-				ordComplete = 2;
-			}else{
-				ordComplete = 1;
-			}
-
-			let jsonData = {
-					"ordCount":ordCount,
-					"ordPrice":ordPrice,
-					"ordDiscount":ordDiscount,
-					"ordDelivery":ordDelivery,
-					"savePoint":savePoint,
-					"usedPoint":usedPoint,
-					"ordTotPrice":ordTotPrice,
-					"recipName":recipName,
-					"recipHp":recipHp,
-					"recipZip":recipZip,
-					"recipAddr1":recipAddr1,
-					"recipAddr2":recipAddr2,
-					"ordPayment":ordPayment,
-					"ordComplete":ordComplete
-			};
-			
-			$.ajax({
-				url:'/Kmarket/product/test.do',
-				method:'post',
-				data:jsonData,
-				dataType:'json',
-				success:function(data){
-					location.href = '/Kmarket/product/complete.do';
-				}
-			});
-		});
-		*/
-		
 		let sessOrder = JSON.parse(sessionStorage.getItem("sessOrder"));
 		let sessCartNo = JSON.parse(sessionStorage.getItem("sessCartNo"));
 		console.log(sessOrder);
@@ -79,7 +25,7 @@
 				tr += "<td>"+order.price+"</td>"
 				tr += "<td>"+order.discount+"%</td>"
 				tr += "<td>"+order.delivery+"</td>"
-				tr += "<td>"+order.total+"</td>"
+				tr += "<td>"+order.pricetotal+"</td>"
 				tr += "</tr>"
 			
 			$('.productlist').append(tr);	
@@ -94,10 +40,12 @@
 			}else{
 				delivery = Number(order.delivery);
 			}
+			let point = Number(order.point);
 			
 			ordPrice += price;
 			ordDiscount += discountprice;
 			ordDelivery += delivery;
+			ordPoint += point;
 		}
 		let ordTotal = ordPrice - ordDiscount + ordDelivery;
 		
@@ -111,7 +59,6 @@
 		$('#ordDiscount').append("-"+ordDiscount+"원");
 		$('#ordDelivery').append(ordDelivery+"원");
 		$('#ordTotPrice').append(ordTotal+"원");
-		$('input[name=point]').val(ordPoint);
 		
 		$('input[name=ordCount]').val(ordCount);
 		$('input[name=ordPrice]').val(ordPrice);
@@ -121,7 +68,9 @@
 		$('input[name=savePoint]').val(ordPoint);
 		
 		for(let cart of sessCartNo){
-			$('input[name=cartNo]').val(cart);
+			let input = "<input type='hidden' name='cartNo' value='"+cart+"'>";
+			
+			$('input[name=ordTotPrice]').after(input);
 			console.log(cart);
 		}
 		
@@ -135,12 +84,12 @@
 			
 			if(recentpoint < 5000){
 				$('input[name=usingpoint]').attr("disabled",true);
-				$('#ordPoint').append("0");
 			}else{
 				let usedPoint = Number($('input[name=point]').val());
 				
 				console.log('usedPoint : ' + usedPoint);
 				
+				$('#ordPoint').empty();
 				$('#ordPoint').append("-"+usedPoint);
 				
 				let ordTotPrice = ordTotal - usedPoint;
@@ -167,14 +116,14 @@
         </p>
       </nav>
 
-      <form action="/Kmarket/product/test.do" method="post">
+      <form action="/Kmarket/product/order.do" method="post">
 	      <input type="hidden" name="ordPrice" value="">
 	      <input type="hidden" name="ordCount" value="">
 	      <input type="hidden" name="ordDiscount" value="">
 	      <input type="hidden" name="ordDelivery" value="">
 	      <input type="hidden" name="savePoint" value="">
 	      <input type="hidden" name="ordTotPrice" value="">
-	      <input type="hidden" name="cartNo" value="">
+	      
       
         <!-- 주문 상품 목록 -->                  
         <table class="productlist">
@@ -240,7 +189,7 @@
 	            </tr>
 	            <tr>
 	              <td>포인트 할인</td>
-	              <td id="ordPoint"></td>
+	              <td id="ordPoint">0</td>
 	            </tr>
 	            <tr>
 	              <td>전체주문금액</td>
