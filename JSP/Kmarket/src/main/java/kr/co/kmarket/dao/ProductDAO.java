@@ -831,13 +831,12 @@ public class ProductDAO extends DBHelper {
 	
 
 	// order
-		public int insertOrder(OrderVO vo) {
-			int result = 0;
+		public void insertOrder(OrderVO vo) {
 			try {
 				logger.info("insertOrder...");
 				conn = getConnection();
 				psmt = conn.prepareStatement(ProductSql.INSERT_ORDER);
-				psmt.setInt(1, vo.getOrdNo());
+				psmt.setString(1, vo.getOrdNo());
 				psmt.setString(2, vo.getOrdUid());
 				psmt.setInt(3, vo.getOrdCount());
 				psmt.setInt(4, vo.getOrdPrice());
@@ -855,20 +854,19 @@ public class ProductDAO extends DBHelper {
 				psmt.setInt(16, vo.getOrdComplete());
 				
 				
-				result = psmt.executeUpdate();
+				psmt.executeUpdate();
 				
 				close();
 			}catch(Exception e) {
 				logger.error(e.getMessage());
 			}
-			return result;
 		}
-		public void insertOrderItem(CartVO vo, int ordNo) {
+		public void insertOrderItem(CartVO vo, String ordNo) {
 			try {
 				logger.info("insertOrderItem...");
 				conn = getConnection();
 				psmt = conn.prepareStatement(ProductSql.INSERT_ORDER_ITEM);
-				psmt.setInt(1, ordNo);
+				psmt.setString(1, ordNo);
 				psmt.setInt(2, vo.getProdNo());
 				psmt.setInt(3, vo.getCount());
 				psmt.setInt(4, vo.getPrice());
@@ -884,13 +882,13 @@ public class ProductDAO extends DBHelper {
 				logger.error(e.getMessage());
 			}
 		}
-		public void insertMemberPoint(String uid, int ordNo, String point) {
+		public void insertMemberPoint(String uid, String ordNo, String point) {
 			try {
 				logger.info("insertMemberPoint...");
 				conn = getConnection();
 				psmt = conn.prepareStatement(ProductSql.INSERT_MEMBER_POINT);
 				psmt.setString(1, uid);
-				psmt.setInt(2, ordNo);
+				psmt.setString(2, ordNo);
 				psmt.setString(3, point);
 				
 				psmt.executeUpdate();
@@ -930,7 +928,7 @@ public class ProductDAO extends DBHelper {
 				rs = psmt.executeQuery();
 				while(rs.next()) {
 					order = new OrderVO();
-					order.setOrdNo(rs.getInt(1));
+					order.setOrdNo(rs.getString(1));
 					order.setOrdUid(rs.getString(2));
 					order.setOrdCount(rs.getInt(3));
 					order.setOrdPrice(rs.getInt(4));

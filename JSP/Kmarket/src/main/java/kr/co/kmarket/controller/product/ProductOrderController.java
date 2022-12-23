@@ -1,10 +1,8 @@
 package kr.co.kmarket.controller.product;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -17,7 +15,6 @@ import javax.servlet.http.HttpSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.google.gson.JsonObject;
 
 import kr.co.kmarket.service.ProductService;
 import kr.co.kmarket.vo.CartVO;
@@ -41,34 +38,11 @@ public class ProductOrderController extends HttpServlet{
 		logger.info("ProductOrderController...GET");
 		
 		HttpSession sess = req.getSession();
-		List<CartVO> carts = (List<CartVO>) sess.getAttribute("sessCarts");
 		MemberVO member = (MemberVO) sess.getAttribute("sessMember");
-		
-		int price = 0;
-		int discount = 0;
-		int delivery = 0;
-		int point = 0;
-		
-		for(int i=0; i<carts.size(); i++) { 
-			price += carts.get(i).getPrice() * carts.get(i).getCount();
-			discount += carts.get(i).getDiscount() * carts.get(i).getPrice() * carts.get(i).getCount() / 100;
-			delivery += carts.get(i).getDelivery();
-			point += carts.get(i).getPoint();
-			
-		}
-		int productstotalprice = price - discount + delivery ;
 		
 		int recentpoint = service.selectMemberPoint(member.getUid());
 		
-		req.setAttribute("totalprice", price);
-		req.setAttribute("productstotalprice", productstotalprice);
-		req.setAttribute("totalcount", carts.size());
-		req.setAttribute("discount", discount);
-		req.setAttribute("delivery", delivery);
-		req.setAttribute("point", point);
 		req.setAttribute("recentpoint", recentpoint);
-		req.setAttribute("carts", carts);
-		
 		
 		RequestDispatcher dispatcher = req.getRequestDispatcher("/product/order.jsp");
 		dispatcher.forward(req, resp);
@@ -81,37 +55,51 @@ public class ProductOrderController extends HttpServlet{
 		
 		HttpSession sess = req.getSession();
 		MemberVO member = (MemberVO) sess.getAttribute("sessMember");
-		List<CartVO> carts = (List<CartVO>) sess.getAttribute("sessCarts");
 		
 		Date nowDate = new Date();
 		SimpleDateFormat newname = new SimpleDateFormat("yyyyMMdd");
 		String today = newname.format(nowDate);
-		Unit u1 = new Unit();
-		int seq = u1.getSeq();
 		
-		String todaydate = today + seq;
+		String seq = Unit.getSeq();
+		logger.debug("seq : " + seq);
 		
-		int ordNo = Integer.parseInt(todaydate);
-		
-		logger.debug(todaydate);
+		String ordNo = today + seq;
+		logger.debug("ordNo : "+ordNo);
 		
 		String ordCount = req.getParameter("ordCount");
 		String ordPrice = req.getParameter("ordPrice");
 		String ordDiscount = req.getParameter("ordDiscount");
 		String ordDelivery = req.getParameter("ordDelivery");
 		String savePoint = req.getParameter("savePoint");
-		String usedPoint = req.getParameter("usedPoint");
+		String usedPoint = req.getParameter("point");
 		String ordTotPrice = req.getParameter("ordTotPrice");
-		String recipName = req.getParameter("recipName");
-		String recipHp = req.getParameter("recipHp");
-		String recipZip = req.getParameter("recipZip");
-		String recipAddr1 = req.getParameter("recipAddr1");
-		String recipAddr2 = req.getParameter("recipAddr2");
-		String ordPayment = req.getParameter("ordPayment");
-		String ordComplete = req.getParameter("ordComplete");
+		String recipName = req.getParameter("orderer");
+		String recipHp = req.getParameter("hp");
+		String recipZip = req.getParameter("zip");
+		String recipAddr1 = req.getParameter("addr1");
+		String recipAddr2 = req.getParameter("addr2");
+		String payment = req.getParameter("payment");
+		int paymentvalue = Integer.parseInt(payment);
+		
+		int ordComplete = 0;
+		
+		if(paymentvalue == 4){
+			ordComplete = 2;
+		}else{
+			ordComplete = 1;
+		}
+		
+		
 		String uid = member.getUid();
 		int totalSavePoint = Integer.parseInt(savePoint);
 		int totalUsedPoint = Integer.parseInt(usedPoint);
+		
+		logger.debug("savePoint : "+savePoint);
+		logger.debug("usedPoint : "+usedPoint);
+		
+		String[] cartNos = req.getParameterValues("cartNo"); 
+		
+		logger.debug("here1");
 		
 		OrderVO vo = new OrderVO();
 		vo.setOrdNo(ordNo);
@@ -128,29 +116,34 @@ public class ProductOrderController extends HttpServlet{
 		vo.setRecipZip(recipZip);
 		vo.setRecipAddr1(recipAddr1);
 		vo.setRecipAddr2(recipAddr2);
-		vo.setOrdPayment(ordPayment);
+		vo.setOrdPayment(payment);
 		vo.setOrdComplete(ordComplete);
 		
-		int result = service.insertOrder(vo);
-		//int ordNo = service.selectLatestOrder(uid);
-		for(CartVO cart : carts) {
-			service.insertOrderItem(cart, ordNo);
-		}
-		service.insertMemberPoint(uid, ordNo, savePoint);
+		service.insertOrder(vo);
 		
+		logger.debug("here2");
+		
+		for(String cartNo : cartNos) {
+			logger.debug("cartNo"+cartNo);
+			
+			CartVO cart = service.selectCart(cartNo);
+			logger.debug("ProductTestOrderController...selectCart"+cart);
+			
+			service.insertOrderItem(cart, ordNo);
+			service.deleteCartList(uid, cartNo);
+			logger.debug("here3");
+		}
+		
+		logger.debug("here4");
+		service.insertMemberPoint(uid, ordNo, savePoint);
+		logger.debug("here5");
 		// 적립포인트 업데이트(member 테이블)
 		logger.debug("updateSavememberpoint");
 		service.updateSaveMemberPoint(totalSavePoint, uid);
 		logger.debug("updateUsedmemberpoint");
 		service.updateUsedMemberPoint(totalUsedPoint, uid);
 		
-		
-		JsonObject json = new JsonObject();
-		json.addProperty("result", result);
-		
-		PrintWriter writer = resp.getWriter();
-		writer.print(json.toString());
-		
+		resp.sendRedirect("/Kmarket/product/complete.do");
 	}
 	
 }
