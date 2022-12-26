@@ -9,8 +9,8 @@
     <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"/>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.css">
-    <link rel="stylesheet" href="../css/common.css"/>
-    <link rel="stylesheet" href="./css/member.css"/>
+    <link rel="stylesheet" href="/Kmarket/css/common.css"/>
+    <link rel="stylesheet" href="/Kmarket/member/css/member.css"/>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
     <script src="https://kit.fontawesome.com/20962f3e4b.js" crossorigin="anonymous"></script>
@@ -27,7 +27,6 @@
                     	<a href="/Kmarket/member/join.do">회원가입</a>
                     </c:when>
                     <c:when test="${not empty sessMember.uid}">
-                    	<span>${sessMember.name}님 반갑습니다.</span>
                     	<a href="/Kmarket/member/logout.do">로그아웃</a>
                     	<a href="#">마이페이지</a>
                     	<a href="/Kmarket/product/cart.do"><i class="fa fa-shopping-cart" aria-hidden="true"></i>&nbsp;장바구니</a>
