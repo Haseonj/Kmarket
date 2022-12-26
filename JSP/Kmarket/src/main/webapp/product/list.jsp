@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <jsp:include page="./_header.jsp"/>
 <script src="/Kmarket/product/js/navigation.js"></script>
     <section class="list">
@@ -32,15 +33,15 @@
                     <ul>
                     	<c:choose>
                     		<c:when test="${product.discount gt 0}">
-                   				<li><ins class="dis-price">${product.saleprice}</ins></li>
+                   				<li><ins class="dis-price"><fmt:formatNumber value="${product.saleprice}" pattern="#,###"/></ins></li>
 		                        <li>
-		                            <del class="org-price">${product.price}</del>
+		                            <del class="org-price"><fmt:formatNumber value="${product.price}" pattern="#,###"/></del>
 		                            <span class="discount">${product.discount}%</span>
 		                        </li>
                     		</c:when>
                     		<c:otherwise>
 		                        <li>
-		                            <del class="dis-price">${product.price}</del>
+		                            <del class="dis-price"><fmt:formatNumber value="${product.price}" pattern="#,###"/></del>
 		                        </li>
                     		</c:otherwise>
                     	</c:choose>
@@ -50,7 +51,7 @@
 	                        	<li><span class="free-delivery">무료배송</span></li>
 	                        </c:when>
 	                        <c:otherwise>
-	                        	<li><span>배송비 ${product.delivery}</span></li>
+	                        	<li><span>배송비 <fmt:formatNumber value="${product.delivery}" pattern="#,###"/></span></li>
 	                        </c:otherwise>
                         </c:choose>
                     </ul>

@@ -10,7 +10,7 @@
 			if(checked){
 				$('input[name=cartlist]').prop('checked', true).change();
 			}else{
-				$('input:checkbox').prop('checked', false).change();				
+				$('input[name=cartlist]').prop('checked', false).change();				
 			}
 				
 		});
@@ -112,11 +112,11 @@
 				pointtotal = pointtotal - point;
 			}
 			$('#totalCount').text(counttotal);
-			$('#totalPrice').text(pricetotal);
-			$('#totalDiscount').text(discounttotal);
-			$('#totalDelivery').text(deliverytotal);
-			$('#totalSalePrice').text(salepricetotal);
-			$('#totalPoint').text(pointtotal);
+			$('#totalPrice').text(pricetotal.toLocaleString("ko-KR"));
+			$('#totalDiscount').text(discounttotal.toLocaleString("ko-KR"));
+			$('#totalDelivery').text(deliverytotal.toLocaleString("ko-KR"));
+			$('#totalSalePrice').text(salepricetotal.toLocaleString("ko-KR"));
+			$('#totalPoint').text(pointtotal.toLocaleString("ko-KR"));
 			
 			// 상품금액 계산
 			// 할인금액 계산
@@ -148,7 +148,7 @@
 					let discount = tr.find('.discount').text();
 					let point = tr.find('.point').text();
 					let delivery = tr.find('.delivery').text();
-					let pricetotal = tr.find('.total').text();
+					let pricetotal = tr.find('.pricetotal').text();
 					
 					let jsonData = {
 							"thumb1": thumb1,

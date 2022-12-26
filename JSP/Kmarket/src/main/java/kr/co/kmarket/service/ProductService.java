@@ -146,14 +146,11 @@ public enum ProductService {
 		logger.info("ProductService...selectMemberPoint...");
 		return dao.selectMemberPoint(uid);
 	}
-	public void updateSaveMemberPoint(int totalsavepoint, String uid) {
+	public void updateMemberPoint(int totalsavepoint, int totalusedpoint, String uid) {
 		logger.info("ProductService...updateSaveMemberPoint...");
-		dao.updateSaveMemberPoint(totalsavepoint, uid);
+		dao.updateMemberPoint(totalsavepoint, totalusedpoint, uid);
 	}
-	public void updateUsedMemberPoint(int totalusedpoint, String uid) {
-		logger.info("ProductService...updateUsedMemberPoint...");
-		dao.updateSaveMemberPoint(totalusedpoint, uid);
-	}
+	
 	
 	// 서비스 로직
 	public String getSavePath(HttpServletRequest req) {

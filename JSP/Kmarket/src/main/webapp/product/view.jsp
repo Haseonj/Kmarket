@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <jsp:include page="./_header.jsp"/>
 <script>
 	function getTodayLabel() {
@@ -40,7 +41,7 @@
 			
 			console.log("price : " + price);
 			
-			$('.pricetotal').append(price);
+			$('.pricetotal').append(price.toLocaleString("ko-KR"));
 		});
 		$('.increase').click(function(){
 			$('.pricetotal').empty();
@@ -53,7 +54,7 @@
 			
 			console.log("price : " + price);
 			
-			$('.pricetotal').append(price);
+			$('.pricetotal').append(price.toLocaleString("ko-KR"));
 		});
 		
 		const date = new Date();
@@ -106,7 +107,7 @@
 				
 				
 				$.ajax({
-					url:'/Kmarket/product/gocart.do',
+					url:'/Kmarket/product/cart.do',
 					method:'post',
 					data:jsonData,
 					dataType:'json',
@@ -234,17 +235,17 @@
                     	<c:when test="${product.discount gt 0}">
                     		<input type="hidden" name="discount" value="${product.discount}"/>
 		                    <div class="org_price">
-		                        <del class="price">${product.price}</del>
+		                        <del class="price"><fmt:formatNumber value="${product.price}" pattern="#,###"/></del>
 		                        <span>${product.discount}%</span>
 		                    </div>
 		                    <div class="dis_price">
-		                        <ins>${disprice}</ins>
+		                        <ins><fmt:formatNumber value="${disprice}" pattern="#,###"/></ins>
 		                    </div>
 	                    </c:when>
                    		<c:otherwise>
                    			<input type="hidden" name="discount" value="0"/>
                             <div class="dis_price">
-                           		<ins class="price">${product.price}</ins> 
+                           		<ins class="price"><fmt:formatNumber value="${product.price}" pattern="#,###"/></ins> 
                             </div>
                    		</c:otherwise>
                    	</c:choose>
@@ -255,7 +256,7 @@
 	                		<span class="delivery">무료배송</span>	
 	                	</c:when>
 	                	<c:otherwise>
-	                		<span class="delivery">${product.delivery}원</span>	
+	                		<span class="delivery"><fmt:formatNumber value="${product.delivery}" pattern="#,###"/>원</span>	
 	                	</c:otherwise>
 	                </c:choose>
                     <span class="arrival"></span>
@@ -279,7 +280,7 @@
                 <input type="hidden" name="point" value="${product.point}">
                 
                 <div class="total">
-                    <span class="pricetotal">${disprice}</span>
+                    <span class="pricetotal"><fmt:formatNumber value="${disprice}" pattern="#,###"/></span>
                     <em>총 상품금액 </em>
                 </div>
 
