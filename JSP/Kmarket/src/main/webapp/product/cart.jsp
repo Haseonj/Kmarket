@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <jsp:include page="./_header.jsp"/>
 <script>
 	
@@ -48,21 +49,21 @@
 			// 상품수 계산
 			var checked  = $(this).is(':checked');
 			let counttotal = Number($('#totalCount').text());
-			let pricetotal = Number($('#totalPrice').text());
-			let discounttotal = Number($('#totalDiscount').text());
-			let deliverytotal = Number($('#totalDelivery').text());
-			let salepricetotal = Number($('#totalSalePrice').text());
-			let pointtotal = Number($('#totalPoint').text());
+			let pricetotal = Number($('#totalPrice').text().replace(/,/g, ""));
+			let discounttotal = Number($('#totalDiscount').text().replace(/,/g, ""));
+			let deliverytotal = Number($('#totalDelivery').text().replace(/,/g, ""));
+			let salepricetotal = Number($('#totalSalePrice').text().replace(/,/g, ""));
+			let pointtotal = Number($('#totalPoint').text().replace(/,/g, ""));
 			
 			let count  = Number($(this).parents('tr').find('.count').text());			
 			console.log('count : ' + count);
-			let price  = Number($(this).parents('tr').find('.price').text());
+			let price  = Number($(this).parents('tr').find('.price').text().replace(/,/g, ""));
 			console.log('price : '+price);
-			let discount  = Number($(this).parents('tr').find('.discount').text());
+			let discount  = Number($(this).parents('tr').find('.discount').text().replace(/,/g, ""));
 			console.log('discount : '+discount);
 			let delivery = $(this).parents('tr').find('.delivery').text();
-			let total = Number($(this).parents('tr').find('.pricetotal').text());
-			let point = Number($(this).parents('tr').find('.point').text());
+			let total = Number($(this).parents('tr').find('.pricetotal').text().replace(/,/g, ""));
+			let point = Number($(this).parents('tr').find('.point').text().replace(/,/g, ""));
 			
 			if(checked){
 				// 체크했을 때
@@ -80,7 +81,7 @@
 					salepricetotal = salepricetotal + total + deliverytotal;
 					console.log('1.salepricetotal : '+salepricetotal);
 				}else{
-					delivery = Number(delivery);
+					delivery = Number(delivery.replace(/,/g, ""));
 					console.log('1.delivery : '+delivery);
 					deliverytotal = deliverytotal + delivery;
 					console.log('1.deliverytotal : '+deliverytotal);
@@ -104,7 +105,7 @@
 					salepricetotal = salepricetotal - total - deliverytotal;
 					console.log('2.salepricetotal : '+salepricetotal);
 				}else{
-					delivery = Number(delivery);
+					delivery = Number(delivery.replace(/,/g, ""));
 					deliverytotal = deliverytotal - delivery;
 					salepricetotal = salepricetotal - total - deliverytotal;
 					console.log('2.salepricetotal : '+salepricetotal);
@@ -227,18 +228,18 @@
 	                </article>
 	              </td>
 	              <td class="count">${cart.count}</td>
-	              <td class="price">${cart.price}</td>
+	              <td class="price"><fmt:formatNumber value="${cart.price}" pattern="#,###"/></td>
 	              <td><span class="discount">${cart.discount}</span>%</td>
-	              <td class="point">${cart.point}</td>
+	              <td class="point"><fmt:formatNumber value="${cart.point}" pattern="#,###"/></td>
 	              <c:choose>
 	              	 <c:when test="${cart.delivery eq 0}">
 		              	<td class="delivery">무료배송</td>
 		             </c:when>
 		             <c:otherwise>
-		             	<td class="delivery">${cart.delivery}</td>
+		             	<td class="delivery"><fmt:formatNumber value="${cart.delivery}" pattern="#,###"/></td>
 		             </c:otherwise>  
 	              </c:choose>
-	              <td class="pricetotal">${cart.total}</td>
+	              <td class="pricetotal"><fmt:formatNumber value="${cart.total}" pattern="#,###"/></td>
 	            </tr>
             </c:forEach>
           </tbody>

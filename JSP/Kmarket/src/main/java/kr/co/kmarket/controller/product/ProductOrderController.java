@@ -89,6 +89,8 @@ public class ProductOrderController extends HttpServlet{
 			ordComplete = 1;
 		}
 		
+		logger.debug(savePoint);
+		logger.debug(usedPoint);
 		
 		String uid = member.getUid();
 		int totalSavePoint = Integer.parseInt(savePoint);
