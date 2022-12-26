@@ -30,6 +30,7 @@ public class CsViewController extends HttpServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		String group = req.getParameter("group");
 		String cate = req.getParameter("cate");
+		String cate2 = req.getParameter("cate2");
 		String type = req.getParameter("type");
 		String no = req.getParameter("no");
 		String pg = req.getParameter("pg");
@@ -40,6 +41,7 @@ public class CsViewController extends HttpServlet {
 		
 		req.setAttribute("group", group);
 		req.setAttribute("cate", cate);
+		req.setAttribute("cate2", cate2);
 		req.setAttribute("type", type);
 		req.setAttribute("pg", pg);
 		

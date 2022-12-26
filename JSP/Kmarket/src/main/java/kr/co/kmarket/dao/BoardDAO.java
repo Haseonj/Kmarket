@@ -53,6 +53,26 @@ public class BoardDAO extends DBHelper {
 		}
 	}
 	
+	public void insertFaqArticle(BoardVO vo) {
+		try {
+			logger.info("insertNoticeArticle...");
+			conn = getConnection();
+			psmt = conn.prepareStatement(BoardSql.INSERT_FAQ_ARTICLE);
+			psmt.setString(1, vo.getUid());
+			psmt.setString(2, vo.getGroup());
+			psmt.setString(3, vo.getC1Name());
+			psmt.setString(4, vo.getCate2());
+			psmt.setString(5, vo.getTitle());
+			psmt.setString(6, vo.getContent());
+			psmt.setString(7, vo.getRegip());
+			psmt.executeUpdate();
+			
+			close();
+		}catch (Exception e) {
+			logger.error(e.getMessage());
+		}
+	}
+	
 	// 글수정
 	public BoardVO selectArticle(String no, String cate) {
 		BoardVO vo = null;
@@ -320,12 +340,48 @@ public class BoardDAO extends DBHelper {
 		return articles;
 	}
 	
-	public List<BoardVO> selectAdminArticle(String group, int start, String cate, String cate2) {
+	public List<BoardVO> selectAdminArticle(String group, int start, String cate) {
 		List<BoardVO> articles = new ArrayList<>();
 		try {
 			logger.info("selectAdminArticle...");
 			conn = getConnection();
 			psmt = conn.prepareStatement(BoardSql.SELECT_ADMIN_ARTICLE1);
+			psmt.setString(1, group);
+			psmt.setString(2, cate);
+			psmt.setInt(3, start);
+			
+			rs = psmt.executeQuery();
+			
+			while(rs.next()) {
+				BoardVO vo = new BoardVO();
+				vo.setNo(rs.getInt(1));
+				vo.setUid(rs.getString(2));
+				vo.setGroup(rs.getString(3));
+				vo.setC1Name(rs.getString(4));
+				vo.setCate2(rs.getString(5));
+				vo.setTitle(rs.getString(6));
+				vo.setContent(rs.getString(7));
+				vo.setComment(rs.getInt(8));
+				vo.setHit(rs.getInt(9));
+				vo.setRegip(rs.getString(10));
+				vo.setRdate(rs.getString(11));
+				vo.setCate1(rs.getString(12));
+				articles.add(vo);
+			}
+			
+			close();
+		}catch (Exception e) {
+			logger.error(e.getMessage());
+		}
+		return articles;
+	}
+	
+	public List<BoardVO> selectAdminArticle(String group, int start, String cate, String cate2) {
+		List<BoardVO> articles = new ArrayList<>();
+		try {
+			logger.info("selectAdminArticle...");
+			conn = getConnection();
+			psmt = conn.prepareStatement(BoardSql.SELECT_ADMIN_ARTICLE2);
 			psmt.setString(1, group);
 			psmt.setString(2, cate);
 			psmt.setString(3, cate2);
@@ -379,15 +435,37 @@ public class BoardDAO extends DBHelper {
 		return total;
 	}
 	
-	public int selectCountTotal(String cate) {
+	public int selectCountTotal(String cate, String cate2, String group) {
+		int total = 0;
+		
+		try {
+			logger.info("selectCountTotal...");
+			conn = getConnection();
+			psmt = conn.prepareStatement(BoardSql.SELECT_COUNT_TOTAL2);
+			psmt.setString(1, cate);
+			psmt.setString(2, cate2);
+			psmt.setString(3, group);
+			rs = psmt.executeQuery();
+			
+			if(rs.next()) {
+				total = rs.getInt(1);
+			}
+			
+			close();
+		}catch (Exception e) {
+			logger.error(e.getMessage());
+		}
+		return total;
+	}
+	
+	public int selectCountTotal(String group) {
 		int total = 0;
 		
 		try {
 			logger.info("selectCountTotal...");
 			conn = getConnection();
 			psmt = conn.prepareStatement(BoardSql.SELECT_COUNT_TOTAL);
-			psmt.setString(1, cate);
-			psmt.setString(2, cate);
+			psmt.setString(1, group);
 			rs = psmt.executeQuery();
 			
 			if(rs.next()) {
@@ -472,6 +550,24 @@ public class BoardDAO extends DBHelper {
 			psmt.setString(2, title);
 			psmt.setString(3, content);
 			psmt.setString(4, no);
+			psmt.executeUpdate();
+			
+			close();
+		}catch (Exception e) {
+			logger.error(e.getMessage());
+		}
+	}
+	
+	public void updateArticle(String cate, String cate2, String title, String content, String no) {
+		try {
+			logger.info("updateArticle...");
+			conn = getConnection();
+			psmt = conn.prepareStatement(BoardSql.UPDATE_FAQ_ARTICLE);
+			psmt.setString(1, cate);
+			psmt.setString(2, cate2);
+			psmt.setString(3, title);
+			psmt.setString(4, content);
+			psmt.setString(5, no);
 			psmt.executeUpdate();
 			
 			close();

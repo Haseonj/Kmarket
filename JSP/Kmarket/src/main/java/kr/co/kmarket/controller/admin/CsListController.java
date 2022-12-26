@@ -13,7 +13,6 @@ import javax.servlet.http.HttpServletResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.google.gson.Gson;
 
 import kr.co.kmarket.service.BoardService;
 import kr.co.kmarket.vo.BoardVO;
@@ -44,8 +43,10 @@ public class CsListController extends HttpServlet {
 		int total = 0;
 		if(cate.equals("0")) {
 			total = service.selectCountTotal(group);
-		}else {
+		}else if(cate2.equals("0")) {
 			total = service.selectCountTotal(cate, group);
+		}else {
+			total = service.selectCountTotal(cate, cate2, group);
 		}
 		
 		// 마지막 페이지 번호
@@ -64,6 +65,8 @@ public class CsListController extends HttpServlet {
 		List<BoardVO> articles = null;
 		if(cate.equals("0")) {
 			articles = service.selectAdminArticle(group, start);
+		}else if(cate2.equals("0")) {
+			articles = service.selectAdminArticle(group, start, cate);
 		}else {
 			articles = service.selectAdminArticle(group, start, cate, cate2);
 		}
@@ -80,6 +83,8 @@ public class CsListController extends HttpServlet {
 		req.setAttribute("pg", pg);
 		req.setAttribute("group", group);
 		req.setAttribute("cate", cate);
+		req.setAttribute("cate2", cate2);
+
 		
 		RequestDispatcher dispatcher = req.getRequestDispatcher("/admin/cs/list.jsp");
 		dispatcher.forward(req, resp);

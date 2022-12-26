@@ -430,6 +430,10 @@ main > #admin-cs-list > article > table {
     margin-bottom: 35px;
 }
 
+main > #admin-cs-list > article > table > tbody > tr {
+	height: 50px;
+}
+	
 main > #admin-cs-list > article > table > tbody > tr:first-child {
     margin-top: 10px;
     border-top: 2px solid #bebebe;

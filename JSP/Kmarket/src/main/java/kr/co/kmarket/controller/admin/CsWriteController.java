@@ -30,6 +30,7 @@ public class CsWriteController extends HttpServlet{
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		String group = req.getParameter("group");
 		String cate = req.getParameter("cate");
+		String cate2 = req.getParameter("cate2");
 		String type = req.getParameter("type");
 		
 		
@@ -45,6 +46,7 @@ public class CsWriteController extends HttpServlet{
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		String group = req.getParameter("group");
 		String cate = req.getParameter("cate1");
+		String cate2 = req.getParameter("cate2");
 		String uid = req.getParameter("uid");
 		String title = req.getParameter("title");
 		String content = req.getParameter("content");
@@ -52,6 +54,7 @@ public class CsWriteController extends HttpServlet{
 		
 		logger.debug("write parameter : " +group);
 		logger.debug("write parameter : " +cate);
+		logger.debug("write parameter : " +cate2);
 		logger.debug("write parameter : " +uid);
 		logger.debug("write parameter : " +title);
 		logger.debug("write parameter : " +content);
@@ -60,13 +63,20 @@ public class CsWriteController extends HttpServlet{
 		vo.setUid(uid);
 		vo.setGroup(group);
 		vo.setC1Name(cate);
+		vo.setCate2(cate2);
 		vo.setTitle(title);
 		vo.setContent(content);
 		vo.setRegip(regip);
 		
-		service.insertNoticeArticle(vo);
+		if(group.equals("notice")) {
+			logger.debug("do notice insert ...");
+			service.insertNoticeArticle(vo);
+		}else {
+			logger.debug("do faq insert ...");
+			service.insertFaqArticle(vo);
+		}
 		
-		resp.sendRedirect("/Kmarket/admin/cs/list.do?group="+group+"&cate="+cate+"&type=list");
+		resp.sendRedirect("/Kmarket/admin/cs/list.do?group="+group+"&cate="+cate+"&cate2="+cate2+"&type=list&pg=1");
 		
 	}
 }

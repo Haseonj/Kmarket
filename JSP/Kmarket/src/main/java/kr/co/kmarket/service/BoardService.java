@@ -26,6 +26,9 @@ public enum BoardService {
 	public void insertNoticeArticle(BoardVO vo) {
 		dao.insertNoticeArticle(vo);
 	}
+	public void insertFaqArticle(BoardVO vo) {
+		dao.insertFaqArticle(vo);
+	}
 	
 	public BoardVO selectArticle(String no, String cate) {
 		return dao.selectArticle(no, cate);
@@ -59,16 +62,21 @@ public enum BoardService {
 	public List<BoardVO> selectAdminArticle(String group, int start) {
 		return dao.selectAdminArticle(group, start);
 	}
+	public List<BoardVO> selectAdminArticle(String group, int start, String cate) {
+		return dao.selectAdminArticle(group, start, cate);
+	}
 	public List<BoardVO> selectAdminArticle(String group, int start, String cate, String cate2) {
 		return dao.selectAdminArticle(group, start, cate, cate2);
 	}
 	
+	public int selectCountTotal(String group) {
+		return dao.selectCountTotal(group);
+	}
 	public int selectCountTotal(String cate, String group) {
 		return dao.selectCountTotal(cate, group);
 	}
-	
-	public int selectCountTotal(String cate) {
-		return dao.selectCountTotal(cate);
+	public int selectCountTotal(String cate, String cate2, String group) {
+		return dao.selectCountTotal(cate, cate2, group);
 	}
 	
 	public List<BoardVO> selectCate1() {
@@ -84,6 +92,9 @@ public enum BoardService {
 	}
 	public void updateArticle(String cate, String title, String content, String no) {
 		dao.updateArticle(cate, title, content, no);
+	}
+	public void updateArticle(String cate, String cate2, String title, String content, String no) {
+		dao.updateArticle(cate, cate2, title, content, no);
 	}
 	
 	public int deleteArticle(String no) {
