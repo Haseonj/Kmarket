@@ -31,14 +31,14 @@
 			$('.productlist').append(tr);	
 				
 			let count = Number(order.count);
-			let price = Number(order.price) * count;
+			let price = Number(order.price.replace(/,/g, "")) * count;
 			let discount = Number(order.discount);
 			let discountprice = discount * price / 100;
 			let delivery = 0;
 			if(order.delivery == '무료배송'){
 				delivery = 0;	
 			}else{
-				delivery = Number(order.delivery);
+				delivery = Number(order.delivery.replace(/,/g, ""));
 			}
 			let point = Number(order.point);
 			
