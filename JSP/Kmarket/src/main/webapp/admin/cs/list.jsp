@@ -154,7 +154,7 @@
                     	<option ${cate2 eq '영수증/증빙' ? 'selected' : ''}>영수증/증빙</option>
                     	</c:if>
                     	<c:if test="${cate eq 'shipping'}">
-                    	<option ${cate2 eq '배송상태/시간' ? 'selected' : ''}>배송상태/시간</option>
+                    	<option ${cate2 eq '배송상태/기간' ? 'selected' : ''}>배송상태/기간</option>
                     	<option ${cate2 eq '배송정보확인/변경' ? 'selected' : ''}>배송정보확인/변경</option>
                     	<option ${cate2 eq '해외배송' ? 'selected' : ''}>해외배송</option>
                     	<option ${cate2 eq '당일배송' ? 'selected' : ''}>당일배송</option>
@@ -212,7 +212,7 @@
 	                            <c:if test="${group eq 'faq' or group eq 'qna'}">
 	                            <td>${article.cate2}</td>
 	                            </c:if>
-	                            <td class="title"><a href="/Kmarket/admin/cs/view.do?group=${group}&cate=${cate}&cate2=${cate2}&type=view&no=${article.no}&pg=${pg}">${article.title}</a></td>
+	                            <td class="title"><a href="/Kmarket/admin/cs/view.do?group=${group}&cate=${article.c1Name}&cate2=${cate2}&type=view&no=${article.no}&pg=${pg}">${article.title}</a></td>
 	                            <td>${article.hit}</td>
 	                            <td>${article.rdate.substring(2, 10)}</td>
 	                            <td>
@@ -221,20 +221,23 @@
 	                                <a href="/Kmarket/admin/cs/modify.do?group=${group}&cate=${article.c1Name}&cate2=${article.cate2}&type=modify&no=${article.no}">[수정]</a>
                                 </c:if>
                                 <c:if test="${group eq 'qna'}">
-                                	<c:if test="${group eq 'qna'}">
-                                	검토중
-                                	</c:if>
-                                	<br>
-                                	<c:if test="${group eq 'notice'}">
-                                	답변완료
-                                	</c:if>
+                                <c:choose>
+                                <c:when test="${article.comment == 0}">
+                                	<p>검토중</p>
+                               	</c:when>
+                               	<c:otherwise>
+                                	<p class="answer">답변완료</p>
+                               	</c:otherwise>
+                               	</c:choose>
                                 </c:if>
 	                            </td>
 	                        </tr>
                         </c:forEach>
                     </table>
                     <a href="#" class="chkDelete">선택삭제</a>
+                    <c:if test="${group eq 'notice' or group eq 'faq'}">
                     <a href="/Kmarket/admin/cs/write.do?group=${group}&cate=0&cate2=0&type=write" class="write">작성하기</a>
+                    </c:if>
                     <div>
                     <c:if test="${pageGroupStart > 1}">
                         <a href="/Kmarket/admin/cs/list.do?group=${group}&cate=${cate}&cate2=${cate2}&type=list&pg=${pageGroupStart - 1}" class="prev">이전</a>

@@ -1,8 +1,8 @@
 package kr.co.kmarket.controller.admin;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -12,11 +12,13 @@ import javax.servlet.http.HttpServletResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.google.gson.JsonObject;
+
 import kr.co.kmarket.service.BoardService;
 import kr.co.kmarket.vo.BoardVO;
 
-@WebServlet("/admin/cs/view.do")
-public class CsViewController extends HttpServlet {
+@WebServlet("/admin/cs/insertAnswer.do")
+public class CsInsertAnswerController extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
 	private BoardService service = BoardService.INSTANCE;
@@ -28,27 +30,24 @@ public class CsViewController extends HttpServlet {
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		String group = req.getParameter("group");
-		String cate = req.getParameter("cate");
-		String cate2 = req.getParameter("cate2");
-		String type = req.getParameter("type");
-		String no = req.getParameter("no");
-		String pg = req.getParameter("pg");
+		String uid = req.getParameter("uid");
+		String parent = req.getParameter("parent");
+		String content = req.getParameter("answer");
+		String regip = req.getRemoteAddr();
 		
-		BoardVO vo = service.selectArticle(no);
-		BoardVO answer = service.selectAnswer(no);
+		BoardVO vo = new BoardVO();
+		vo.setUid(uid);
+		vo.setParent(parent);
+		vo.setContent(content);
+		vo.setRegip(regip);
+		 
+		int result = service.insertAnswer(vo);
 		
-		req.setAttribute("vo", vo);
-		req.setAttribute("answer", answer);
+		JsonObject json = new JsonObject();
+		json.addProperty("result", result);
+		PrintWriter writer = resp.getWriter();
+		writer.print(json.toString());
 		
-		req.setAttribute("group", group);
-		req.setAttribute("cate", cate);
-		req.setAttribute("cate2", cate2);
-		req.setAttribute("type", type);
-		req.setAttribute("pg", pg);
-		
-		RequestDispatcher dispatcher = req.getRequestDispatcher("/admin/cs/view.jsp");
-		dispatcher.forward(req, resp);
 	}
 	
 	@Override

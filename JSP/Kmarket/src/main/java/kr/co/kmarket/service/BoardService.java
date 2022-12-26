@@ -30,12 +30,20 @@ public enum BoardService {
 		dao.insertFaqArticle(vo);
 	}
 	
+	public int insertAnswer(BoardVO vo) {
+		return dao.insertAnswer(vo);
+	}
+	
 	public BoardVO selectArticle(String no, String cate) {
 		return dao.selectArticle(no, cate);
 	}
 	
 	public BoardVO selectArticle(String no) {
 		return dao.selectArticle(no);
+	}
+	
+	public BoardVO selectAnswer(String no) {
+		return dao.selectAnswer(no);
 	}
 	
 	public List<BoardVO> selectArticles(String group, String cate, int start) {

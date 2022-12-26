@@ -453,6 +453,10 @@ main > #admin-cs-list > article > table > tbody > tr > td {
     text-align: center;
 }
 
+main > #admin-cs-list > article > table > tbody > tr > td > .answer {
+	color: #4cafe2;
+}
+
 main > #admin-cs-list > article > table > tbody > tr > .title {
     text-align: left;
 }
@@ -518,8 +522,12 @@ main > #admin-cs-view > article > table > tbody > tr > td:nth-child(2) {
     font-size: 17px;
 }
 main > #admin-cs-view > article > table > tbody > tr > td:nth-child(2) > p {
-    height: 300px;
     font-size: 17px;
+}
+#admin-cs-view > article > table > tbody > tr > td > textarea {
+    width: 70%;
+    height: 150px;
+    background: #fff;
 }
 main > #admin-cs-view > article > div {
     position: absolute;
@@ -533,8 +541,20 @@ main > #admin-cs-view > article > div > a {
 }
 
 main > #admin-cs-view > article > div > a:nth-child(1) {background: #bfbfbf;}
-main > #admin-cs-view > article > div > a:nth-child(2) {background: #bfbfbf;}
 main > #admin-cs-view > article > div > a:nth-child(3) {background: #8eb4e3;}
+
+main > #admin-cs-view > article > div > .list {
+	background: #8eb4e3;
+}
+
+main > #admin-cs-view > article > div > .modify {
+	background: #bfbfbf;
+}
+
+main > #admin-cs-view > article > div > .answer {
+	padding: 10px 15px;
+	background: #8eb4e3;
+}
 
 
 /* 공지사항 작성 */

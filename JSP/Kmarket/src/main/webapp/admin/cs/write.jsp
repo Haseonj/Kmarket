@@ -5,9 +5,9 @@
 <script>
 	$(function(){
 		
-		$('select[name=cate1]').change(function(){
+		$('select[name=type1]').change(function(){
 			
-			let cate1 = $('select[name=cate1] > option:selected').val();
+			let cate1 = $('select[name=type1] > option:selected').val();
 			let cate2;
 			
 			$.ajax({
@@ -16,20 +16,22 @@
 				data: {'cate1': cate1},
 				dataType: 'json',
 				success: function(data){
-					$('select[name=cate2]').empty();
+					$('select[name=type2]').empty();
 					let html;
 					
 					if(data == ""){
 						html = $("<option value="+0+">2차선택</option>");
-						$('select[name=cate2]').append(html);
+						$('select[name=type2]').append(html);
 					}
 
 					for(cate2 of data){
 						html = $("<option>"+cate2.cate2+"</option>");
-						$('select[name=cate2]').append(html);
+						$('select[name=type2]').append(html);
 					}
 					
-					cate2 = $('select[name=cate2] > option:selected').val();
+					cate2 = $('select[name=type2] > option:selected').val();
+					
+					console.log(cate2);
 					
 				}
 				
@@ -37,9 +39,14 @@
 			});
 		});
 		
+		$('select[name=type2]').change(function(){
+			let cate2 = $('select[name=type2] > option:selected').val();
+			console.log(cate2);
+		});
+		
 		$('article > form').submit(function(){
 			let group = '${group}';
-			let cate = $('select[name=cate1] > option:selected').val();
+			let cate = $('select[name=type1] > option:selected').val();
 			let title = $('input[name=title]').val();
 			let content = $('textarea[name=content]').val();
 			
@@ -82,7 +89,7 @@
                             <tr>
                                 <td>유형</td>
                                 <td>
-                                 	<select name="cate1" id="cate1">
+                                 	<select name="type1">
 				                   	<c:if test="${group eq 'notice'}">
 				                       <option value="0">전체</option>
 				                       <option value="service">고객서비스</option>
@@ -102,9 +109,9 @@
 				                   	</c:if>
 				                   	</select>
 				                   	<c:if test="${group eq 'faq' or group eq 'qna'}">
-				                   	<select name="cate2" id="cate2">
+				                   	<select name="type2">
 				                   		<option>2차선택</option>
-                  					</select>
+				                   	</select>
 				                   	</c:if>
                                 </td>
                             </tr>

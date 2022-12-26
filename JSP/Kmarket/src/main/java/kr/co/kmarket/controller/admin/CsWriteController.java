@@ -1,6 +1,7 @@
 package kr.co.kmarket.controller.admin;
 
 import java.io.IOException;
+import java.net.URLEncoder;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -43,8 +44,8 @@ public class CsWriteController extends HttpServlet{
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		String group = req.getParameter("group");
-		String cate = req.getParameter("cate1");
-		String cate2 = req.getParameter("cate2");
+		String cate = req.getParameter("type1");
+		String cate2 = req.getParameter("type2");
 		String uid = req.getParameter("uid");
 		String title = req.getParameter("title");
 		String content = req.getParameter("content");
@@ -73,6 +74,8 @@ public class CsWriteController extends HttpServlet{
 			logger.debug("do faq insert ...");
 			service.insertFaqArticle(vo);
 		}
+		
+		cate2 = URLEncoder.encode(cate2, "UTF-8");
 		
 		resp.sendRedirect("/Kmarket/admin/cs/list.do?group="+group+"&cate="+cate+"&cate2="+cate2+"&type=list&pg=1");
 		

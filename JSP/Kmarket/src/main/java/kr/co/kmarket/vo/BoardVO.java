@@ -14,6 +14,17 @@ public class BoardVO {
 	private int cate2No;
 	private int hit;
 	private int comment;
+	private int parent;
+	
+	public int getParent() {
+		return parent;
+	}
+	public void setParent(int parent) {
+		this.parent = parent;
+	}
+	public void setParent(String parent) {
+		this.parent = Integer.parseInt(parent);
+	}
 	
 	public int getComment() {
 		return comment;
