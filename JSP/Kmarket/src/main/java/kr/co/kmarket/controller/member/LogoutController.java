@@ -27,11 +27,11 @@ public class LogoutController extends HttpServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
 		HttpSession sess = req.getSession();
-		MemberVO sessUser = (MemberVO)sess.getAttribute("sessUser");
-		String uid = sessUser.getUid();
+		MemberVO sessMember = (MemberVO)sess.getAttribute("sessMember");
+		String uid = sessMember.getUid();
 		
 		// 세션 해제
-		sess.removeAttribute("sessUser");
+		sess.removeAttribute("sessMember");
 		sess.invalidate();
 
 		/*// 쿠키 삭제
@@ -43,7 +43,7 @@ public class LogoutController extends HttpServlet {
 		// 데이터베이스 사용자 sessId update
 		service.updateUserForSessionOut(uid);
 		
-		resp.sendRedirect("/Kmarket/member/index.do");
+		resp.sendRedirect("/Kmarket/index.do");
 	}
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
