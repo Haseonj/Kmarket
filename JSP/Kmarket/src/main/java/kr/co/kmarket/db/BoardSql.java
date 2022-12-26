@@ -20,6 +20,11 @@ public class BoardSql {
 													+ "`title`=?, `content`=?, "
 													+ "`regip`=?, `rdate`=NOW()";
 	
+	public static final String INSERT_ANSWER = "INSERT INTO `km_cs_article` set "
+												+ "`uid`=?, `group`=null, `title`=null, "
+												+ "`content`=?, `regip`=?, "
+												+ "`rdate`=NOW(), `parent`=?";
+	
 	public static final String SELECT_ARTICLE = "SELECT a.*, b.cate1 FROM `km_cs_article` AS a "
 												+ "JOIN `km_cs_cate1` AS b "
 												+ "ON a.c1Name = b.c1Name "
@@ -29,6 +34,8 @@ public class BoardSql {
 												+ "JOIN `km_cs_cate1` AS b "
 												+ "ON a.c1Name = b.c1Name "
 												+ "WHERE `no`=?";
+	
+	public static final String SELECT_ANSWER = "SELECT * FROM `km_cs_article` WHERE `parent`=?";
 	
 	public static final String SELECT_ARTICLES = "SELECT * FROM `km_cs_article` "
 												+ "where `group`=? and `c1Name`=? "
@@ -80,6 +87,8 @@ public class BoardSql {
 	public static final String UPDATE_NOTICE_ARTICLE = "UPDATE `km_cs_article` SET `c1Name`=?, `title`=?, `content`=? , `rdate`=NOW() WHERE `no`=?";
 	
 	public static final String UPDATE_FAQ_ARTICLE = "UPDATE `km_cs_article` SET `c1Name`=?, `cate2`=?, `title`=?, `content`=? , `rdate`=NOW() WHERE `no`=?";
+	
+	public static final String UPDATE_ARTICLE_COMMENT_PLUS = "UPDATE `km_cs_article` SET `comment` = `comment` + 1 WHERE `no`=?";
 	
 	public static final String DELETE_ARTICLE = "DELETE FROM `km_cs_article` WHERE `no`=?";
 	

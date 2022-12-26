@@ -73,6 +73,33 @@ public class BoardDAO extends DBHelper {
 		}
 	}
 	
+	public int insertAnswer(BoardVO vo) {
+		int result = 0;
+		try {
+			logger.info("insertAnswer...");
+			conn = getConnection();
+			conn.setAutoCommit(false);
+			
+			psmt1 = conn.prepareStatement(BoardSql.INSERT_ANSWER);
+			psmt2 = conn.prepareStatement(BoardSql.UPDATE_ARTICLE_COMMENT_PLUS);
+			psmt1.setString(1, vo.getUid());
+			psmt1.setString(2, vo.getContent());
+			psmt1.setString(3, vo.getRegip());
+			psmt1.setInt(4, vo.getParent());
+			psmt2.setInt(1, vo.getParent());
+			
+			psmt1.executeUpdate();
+			result = psmt2.executeUpdate();
+			
+			conn.commit();
+			
+			close();
+		}catch (Exception e) {
+			logger.error(e.getMessage());
+		}
+		return result;
+	}
+	
 	// 글수정
 	public BoardVO selectArticle(String no, String cate) {
 		BoardVO vo = null;
@@ -97,7 +124,7 @@ public class BoardDAO extends DBHelper {
 				vo.setHit(rs.getInt(9));
 				vo.setRegip(rs.getString(10));
 				vo.setRdate(rs.getString(11));
-				vo.setCate1(rs.getString(12));
+				vo.setCate1(rs.getString(13));
 			}
 			
 			close();
@@ -130,7 +157,7 @@ public class BoardDAO extends DBHelper {
 				vo.setHit(rs.getInt(9));
 				vo.setRegip(rs.getString(10));
 				vo.setRdate(rs.getString(11));
-				vo.setCate1(rs.getString(12));
+				vo.setCate1(rs.getString(13));
 			}
 			
 			close();
@@ -138,6 +165,28 @@ public class BoardDAO extends DBHelper {
 			logger.error(e.getMessage());
 		}
 		return vo;
+	}
+	
+	public BoardVO selectAnswer(String no) {
+		BoardVO answer = null;
+		try {
+			logger.info("selectAnswer...");
+			conn = getConnection();
+			psmt = conn.prepareStatement(BoardSql.SELECT_ANSWER);
+			psmt.setString(1, no);
+			rs = psmt.executeQuery();
+			
+			if(rs.next()) {
+				answer = new BoardVO();
+				answer.setContent(rs.getString(7));
+				answer.setComment(rs.getInt(8));
+			}
+			
+			close();
+		}catch (Exception e) {
+			logger.error(e.getMessage());
+		}
+		return answer;
 	}
 	
 	public List<BoardVO> selectArticles(String group, String cate, int start) {
@@ -329,7 +378,7 @@ public class BoardDAO extends DBHelper {
 				vo.setHit(rs.getInt(9));
 				vo.setRegip(rs.getString(10));
 				vo.setRdate(rs.getString(11));
-				vo.setCate1(rs.getString(12));
+				vo.setCate1(rs.getString(13));
 				articles.add(vo);
 			}
 			
@@ -365,7 +414,7 @@ public class BoardDAO extends DBHelper {
 				vo.setHit(rs.getInt(9));
 				vo.setRegip(rs.getString(10));
 				vo.setRdate(rs.getString(11));
-				vo.setCate1(rs.getString(12));
+				vo.setCate1(rs.getString(13));
 				articles.add(vo);
 			}
 			
@@ -402,7 +451,7 @@ public class BoardDAO extends DBHelper {
 				vo.setHit(rs.getInt(9));
 				vo.setRegip(rs.getString(10));
 				vo.setRdate(rs.getString(11));
-				vo.setCate1(rs.getString(12));
+				vo.setCate1(rs.getString(13));
 				articles.add(vo);
 			}
 			
