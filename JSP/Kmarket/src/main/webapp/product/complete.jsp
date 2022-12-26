@@ -4,7 +4,7 @@
 <script>
 	$(function(){
 		let sessOrder = JSON.parse(sessionStorage.getItem("sessOrder"));
-		let sessCartNo = JSON.parse(sessionStorage.getItem("sessCartNo"));
+		
 		console.log(sessOrder);
 		
 		let ordCount = Object.keys(sessOrder).length;
@@ -22,20 +22,20 @@
 				tr += "<td>"+order.price+"</td>"
 				tr += "<td>"+order.discount+"%</td>"
 				tr += "<td>"+order.count+"</td>"
-				tr += "<td>"+order.total+"</td>"
+				tr += "<td>"+order.pricetotal+"</td>"
 				tr += "</tr>"
 			
 			$('.productlist').after(tr);	
 				
 			let count = Number(order.count);
-			let price = Number(order.price) * count;
+			let price = Number(order.price.replace(/,/g, "")) * count;
 			let discount = Number(order.discount);
 			let discountprice = discount * price / 100;
 			let delivery = 0;
 			if(order.delivery == '무료배송'){
 				delivery = 0;	
 			}else{
-				delivery = Number(order.delivery);
+				delivery = Number(order.delivery.replace(/,/g, ""));
 			}
 			
 			ordPrice += price;
@@ -55,10 +55,10 @@
 		console.log("ordDelivery : "+ordDelivery);
 		console.log("ordTotal : "+ordTotal);
 		
-		$('#ordPrice').append(ordPrice);
-		$('#ordDiscount').append("-"+ordDiscount+"원");
-		$('#ordDelivery').append(ordDelivery);
-		$('.ordTotPrice').append(ordTotal);
+		$('#ordPrice').append(ordPrice.toLocaleString("ko-KR"));
+		$('#ordDiscount').append("-"+ordDiscount.toLocaleString("ko-KR")+"원");
+		$('#ordDelivery').append(ordDelivery.toLocaleString("ko-KR"));
+		$('.ordTotPrice').append(ordTotal.toLocaleString("ko-KR"));
 		
 		
 	});
