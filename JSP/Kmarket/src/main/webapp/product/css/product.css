@@ -923,7 +923,6 @@
   #product > .complete > .info > table tr > td:last-child{
     color: #ff006c;
     font-weight: bold;
-    text-align: right;
   }
   #product > .complete > .info > table tr > td > article{
     overflow: hidden;
