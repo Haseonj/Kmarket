@@ -4,7 +4,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import kr.co.kmarket.dao.MemberDAO;
-import kr.co.kmarket.dao.UserDAO;
 import kr.co.kmarket.vo.MemberVO;
 import kr.co.kmarket.vo.TermsVO;
 
