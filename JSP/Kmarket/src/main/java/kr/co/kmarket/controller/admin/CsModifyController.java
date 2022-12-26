@@ -1,6 +1,7 @@
 package kr.co.kmarket.controller.admin;
 
 import java.io.IOException;
+import java.net.URLEncoder;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -30,6 +31,7 @@ public class CsModifyController extends HttpServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		String group = req.getParameter("group");
 		String cate = req.getParameter("cate");
+		String cate2 = req.getParameter("cate2");
 		String type = req.getParameter("type");
 		String no = req.getParameter("no");
 		String pg = req.getParameter("pg");
@@ -40,6 +42,7 @@ public class CsModifyController extends HttpServlet {
 		
 		req.setAttribute("group", group);
 		req.setAttribute("cate", cate);
+		req.setAttribute("cate2", cate2);
 		req.setAttribute("type", type);
 		req.setAttribute("pg", pg);
 		
@@ -51,13 +54,20 @@ public class CsModifyController extends HttpServlet {
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		String group = req.getParameter("group");
 		String cate = req.getParameter("cate1");
+		String cate2 = req.getParameter("cate2");
 		String no = req.getParameter("no");
+		String pg = req.getParameter("pg");
 		String content = req.getParameter("content");
 		String title = req.getParameter("title");
 		
-		service.updateArticle(cate, title, content, no);
+		if(cate2.equals("0")) {
+			service.updateArticle(cate, title, content, no);
+		}else {
+			service.updateArticle(cate,  cate2, title, content, no);
+		}
+		cate2 = URLEncoder.encode(cate2, "UTF-8");
 		
-		resp.sendRedirect("/Kmarket/admin/cs/list.do?group="+group+"&cate="+cate+"&type=list");
+		resp.sendRedirect("/Kmarket/admin/cs/view.do?group="+group+"&cate="+cate+"&cate2="+cate2+"&type=view&no="+no+"&pg="+pg);
 	}
 
 }
