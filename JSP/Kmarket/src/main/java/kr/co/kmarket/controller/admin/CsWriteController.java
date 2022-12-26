@@ -30,9 +30,7 @@ public class CsWriteController extends HttpServlet{
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		String group = req.getParameter("group");
 		String cate = req.getParameter("cate");
-		String cate2 = req.getParameter("cate2");
 		String type = req.getParameter("type");
-		
 		
 		req.setAttribute("group", group);
 		req.setAttribute("cate", cate);

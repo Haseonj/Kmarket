@@ -234,7 +234,7 @@
                         </c:forEach>
                     </table>
                     <a href="#" class="chkDelete">선택삭제</a>
-                    <a href="/Kmarket/admin/cs/write.do?group=${group}&cate=${cate}&cate2=${cate2}&type=write" class="write">작성하기</a>
+                    <a href="/Kmarket/admin/cs/write.do?group=${group}&cate=0&cate2=0&type=write" class="write">작성하기</a>
                     <div>
                     <c:if test="${pageGroupStart > 1}">
                         <a href="/Kmarket/admin/cs/list.do?group=${group}&cate=${cate}&cate2=${cate2}&type=list&pg=${pageGroupStart - 1}" class="prev">이전</a>

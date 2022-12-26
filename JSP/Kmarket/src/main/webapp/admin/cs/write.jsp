@@ -4,7 +4,7 @@
 <jsp:include page="./_${group}.jsp"/>
 <script>
 	$(function(){
-		/*
+		
 		$('select[name=cate1]').change(function(){
 			
 			let cate1 = $('select[name=cate1] > option:selected').val();
@@ -37,56 +37,11 @@
 			});
 		});
 		
-		$('#admin-cs-write > article > form').submit(function(){
-			let group = '${group}';
-			let cate = $('select[name=cate1] > option:selected').val();
-			let cate2 = $('select[name=cate2] > option:selected').val();
-			let title = $('input[name=title]').val();
-			let content = $('textarea[name=content]').val();
-			
-			console.log(cate);
-			console.log(cate2);
-			console.log(cate3);
-			
-			if(group.eqauls('notice')){
-				if(cate == '0'){
-					alert('유형을 선택해 주십시오.');
-					return false;
-				}else if(title == ''){
-					alert('제목을 입력해 주십시오.');
-					return false;
-				}else if(content == ''){
-					alert('내용을 입력해 주십시오.');
-					return false;
-				}
-			}else{
-				if(cate == '0'){
-					alert('유형을 선택해 주십시오.');
-					return false;
-				}else if(cate2 == '0'){
-					alert('상세유형을 선택해 주십시오.');
-					return false;
-				}else if(title == ''){
-					alert('제목을 입력해 주십시오.');
-					return false;
-				}else if(content == ''){
-					alert('내용을 입력해 주십시오.');
-					return false;
-				}
-			}
-		});
-		*/
-		
 		$('article > form').submit(function(){
 			let group = '${group}';
 			let cate = $('select[name=cate1] > option:selected').val();
-			let cate2 = $('select[name=cate2] > option:selected').val();
 			let title = $('input[name=title]').val();
 			let content = $('textarea[name=content]').val();
-			
-			console.log(cate);
-			console.log(cate2);
-			console.log(cate3);
 			
 			if(group == 'notice'){
 				if(cate == '0'){
@@ -114,8 +69,8 @@
 					return false;
 				}
 			}
+			return true;
 		});
-		
 	});
 </script>
                 <article>
