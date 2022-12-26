@@ -37,6 +37,7 @@
 					console.log('here2');
 					alert('장바구니에서 상품이 삭제되었습니다');
 					location.href = '/Kmarket/product/cart.do';
+					
 				}
 			});
 		});
@@ -112,6 +113,8 @@
 				}
 				pointtotal = pointtotal - point;
 			}
+			
+			
 			$('#totalCount').text(counttotal);
 			$('#totalPrice').text(pricetotal.toLocaleString("ko-KR"));
 			$('#totalDiscount').text(discounttotal.toLocaleString("ko-KR"));
@@ -124,6 +127,8 @@
 			// 배송비 계산
 			// 포인트 계산
 			// 전체주문금액 계산
+			
+			
 			
 		});
 		
@@ -183,6 +188,11 @@
 			}
 			
 		});
+		
+		if($('input[name=cartlist]').length == false){
+			$('.empty').show();
+			$('.total').hide();
+		}
 	});
 </script>
     <!-- 장바구니 페이지 시작 -->
@@ -192,7 +202,7 @@
       <nav>
         <h1>장바구니</h1>
         <p>
-          HOME > <span>${sessMember.uid}</span> > <strong>장바구니</strong>
+          HOME > <strong>장바구니</strong>
         </p>
       </nav>
                     

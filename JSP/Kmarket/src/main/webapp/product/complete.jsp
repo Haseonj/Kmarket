@@ -93,23 +93,6 @@
             <th>수량</th>
             <th>주문금액</th>
           </tr>
-          <c:forEach var="product" items="${carts}">
-          	<tr>
-	            <td>
-	              <article>
-	                <img src="http://3.39.231.136:8080/Kmarket/file/${product.thumb1}" alt="">
-	                <div>
-	                  <h2><a href="#">${product.prodName}</a></h2>
-	                  <p>${product.descript}</p>
-	                </div>
-	              </article>
-	            </td>
-	            <td></td>
-	            <td></td>
-	            <td></td>
-	            <td></td>
-	          </tr>
-          </c:forEach>
           
           <tr class="total">
             <td colspan="4"></td>
