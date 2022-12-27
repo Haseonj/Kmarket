@@ -8,6 +8,12 @@ public class BoardSql {
 												+ "`title`=?, `content`=?, "
 												+ "`regip`=?, `rdate`=NOW()";
 	
+	public static final String INSERT_QNA_ARTICLE = "INSERT INTO `km_cs_qna` set "
+												+ "`uid`=?, "
+												+ "`cate1`=?, `cate2`=?, "
+												+ "`title`=?, `content`=?, "
+												+ "`regip`=?, `rdate`=NOW()";
+	
 	public static final String INSERT_NOTICE_ARTICLE = "INSERT INTO `km_cs_article` set "
 													+ "`uid`=?, `group`=?, "
 													+ "`c1Name`=?, "
@@ -30,6 +36,8 @@ public class BoardSql {
 												+ "ON a.c1Name = b.c1Name "
 												+ "WHERE `no`=? AND a.c1Name=?";
 	
+	public static final String SELECT_QNA_ARTICLE = "SELECT * FROM `km_cs_qna` WHERE `no`=?";
+	
 	public static final String SELECT_VIEW_ARTICLE = "SELECT a.*, b.cate1 FROM `km_cs_article` AS a "
 												+ "JOIN `km_cs_cate1` AS b "
 												+ "ON a.c1Name = b.c1Name "
@@ -47,9 +55,11 @@ public class BoardSql {
 													+ "ORDER BY `no` DESC "
 													+ "LIMIT ?, 10";
 	
-	public static final String SELECT_QNA_ARTICLES = "SELECT * FROM `km_cs_article` WHERE `group`='qna' ORDER BY `rdate` DESC LIMIT 5";
+	public static final String SELECT_QNA_ARTICLES = "SELECT * FROM `km_cs_qna` WHERE `cate1`=? ORDER BY `rdate` DESC LIMIT ?, 10";
 	
-	public static final String SELECT_NOTICE_ARTICLES = "SELECT * FROM `km_cs_article` WHERE `group`='notice' ORDER BY `rdate` DESC LIMIT 5";
+	/*public static final String SELECT_NOTICE_ARTICLES = "SELECT * FROM `km_cs_article` WHERE `group`='notice' ORDER BY `rdate` DESC LIMIT 5";*/
+	
+	public static final String SELECT_NOTICE_ARTICLES = "SELECT * FROM `km_cs_notice` WHERE `cate1`=? ORDER BY `no` DESC LIMIT ?, 10";
 	
 	public static final String SELECT_FAQ_ARTICLES = "SELECT * FROM `km_cs_article` "
 													+ "WHERE `group`=? and `c1Name`=? "
@@ -71,6 +81,8 @@ public class BoardSql {
 													+ "LIMIT ?, 10"; 
 	
 	public static final String SELECT_COUNT_TOTAL = "SELECT COUNT(`no`) FROM `km_cs_article` WHERE `group`=?";
+	
+	public static final String SELECT_QNA_COUNT_TOTAL = "SELECT COUNT(`no`) FROM `km_cs_qna` WHERE `cate1`=?";
 	
 	public static final String SELECT_COUNT_TOTAL1 = "SELECT COUNT(`no`) FROM `km_cs_article` WHERE `c1Name`=? and `group`=?";
 	

@@ -9,9 +9,9 @@
 		let isContent = false;
 		let isCategory2 = false;
 		
-		$('select[name=cate1]').change(function(){
+		$('select[name=type1]').change(function(){
 			
-			let cate1 = $('select[name=cate1] > option:selected').val();
+			let cate1 = $('select[name=type1] > option:selected').val();
 			let cate2;
 			
 			$.ajax({
@@ -20,20 +20,20 @@
 				data: {'cate1': cate1},
 				dataType: 'json',
 				success: function(data){
-					$('select[name=cate2]').empty();
+					$('select[name=type2]').empty();
 					let html;
 					
 					if(data == ""){
 						html = $("<option value="+0+">2차선택</option>");
-						$('select[name=cate2]').append(html);
+						$('select[name=type2]').append(html);
 					}
 
 					for(cate2 of data){
 						html = $("<option>"+cate2.cate2+"</option>");
-						$('select[name=cate2]').append(html);
+						$('select[name=type2]').append(html);
 					}
 					
-					cate2 = $('select[name=cate2] > option:selected').val();
+					cate2 = $('select[name=type2] > option:selected').val();
 					
 				}
 				
@@ -45,8 +45,8 @@
 			let group = '${group}';
 			
 			// 수정된 정보
-			let changedCate = $('select[name=cate1] > option:selected').val();
-			let changedCate2 = $('select[name=cate2] > option:selected').val();
+			let changedCate = $('select[name=type1] > option:selected').val();
+			let changedCate2 = $('select[name=type2] > option:selected').val();
 			let changedTitle = $('input[name=title]').val();
 			let changedContent = $('textarea[name=content]').val();
 			
@@ -55,7 +55,6 @@
 			let selectedCate2 ='${vo.cate2}';
 			let selectedTitle = '${vo.title}';
 			let selectedContent = $('input[name=selectedContent]').val();
-			
 			
 			
 			// 카테고리 변경유무
@@ -135,7 +134,7 @@
                             <tr>
                                 <td>유형</td>
                                 <td>
-                                   <select name="cate1" id="cate1">
+                                   <select name="type1">
 				                   <c:if test="${group eq 'notice'}">
 				                       <option value="0">전체</option>
 				                       <option value="service" ${cate eq 'service' ? 'selected' : ''}>고객서비스</option>
@@ -155,7 +154,7 @@
 				                   </c:if>
 				                   </select>
 				                   <c:if test="${group eq 'faq' or group eq 'qna'}">
-				                   <select name="cate2" id="cate2">
+				                   <select name="type2">
 					                   	<option value="0">2차선택</option>
 					                 	<c:if test="${cate eq 'user'}">
 					                 	<option ${cate2 eq '가입' ? 'selected' : ''}>가입</option>

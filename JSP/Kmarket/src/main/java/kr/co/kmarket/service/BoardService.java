@@ -19,6 +19,7 @@ public enum BoardService {
 		dao = new BoardDAO();
 	}
 	
+	// 1.0v
 	public void insertArticle(BoardVO vo) {
 		dao.insertArticle(vo);
 	}
@@ -47,7 +48,6 @@ public enum BoardService {
 	}
 	
 	public List<BoardVO> selectArticles(String group, String cate, int start) {
-		logger.info("selectArticlesService.. cate:" +cate);
 		return dao.selectArticles(group, cate, start);
 	}
 	
@@ -55,9 +55,7 @@ public enum BoardService {
 		return dao.selectAllArticles(group, start);
 	}
 	
-	public List<BoardVO> selectNoticeArticles() {
-		return dao.selectNoticeArticles();
-	}
+	
 	
 	public List<BoardVO> selectQnaArticles() {
 		return dao.selectQnaArticles();
@@ -77,9 +75,7 @@ public enum BoardService {
 		return dao.selectAdminArticle(group, start, cate, cate2);
 	}
 	
-	public int selectCountTotal(String group) {
-		return dao.selectCountTotal(group);
-	}
+	
 	public int selectCountTotal(String cate, String group) {
 		return dao.selectCountTotal(cate, group);
 	}
@@ -108,6 +104,30 @@ public enum BoardService {
 	public int deleteArticle(String no) {
 		return dao.deleteArticle(no);
 	}
+	// 1.1v
+	public void insertQnaArticle(BoardVO vo) {
+		dao.insertQnaArticle(vo);
+	}
+	
+	public List<BoardVO> selectQnaArticles(String cate1, int start) {
+		return dao.selectQnaArticles(cate1, start);
+	}
+	public List<BoardVO> selectNoticeArticles() {
+		return dao.selectNoticeArticles();
+	}
+	
+	public int selectQnaCountTotal(String cate1) {
+		return dao.selectQnaCountTotal(cate1);
+	}
+	
+	public BoardVO selectQnaArticle(String no) {
+		return dao.selectQnaArticle(no);
+	}
+	
+	
+	
+	
+	
 	
 	// 현재 페이지 번호
 	public int getCurrentpage(String pg) {
