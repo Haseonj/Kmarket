@@ -31,6 +31,18 @@
 	                            	${articles.title}
 	                            </a>
                             </td>
+                            <c:if test="${group eq 'qna'}">
+                            <td>
+                            	<c:choose>
+	                            	<c:when test="${articles.comment == 0}">
+	                            		<p>검토중</p>
+	                            	</c:when>
+	                            	<c:otherwise>
+	                            		<p class="answer">답변완료</p>
+	                            	</c:otherwise>
+                            	</c:choose>
+                            </td>
+                            </c:if>
                             <td>${articles.uid.substring(0, 5)}<c:forEach begin="6" end="${articles.uid.length()}" step="1">*</c:forEach></td>
                             <td>${articles.rdate.substring(2, 10)}</td>
                         </tr>

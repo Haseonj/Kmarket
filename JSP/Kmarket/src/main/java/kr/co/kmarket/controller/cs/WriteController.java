@@ -34,12 +34,10 @@ public class WriteController extends HttpServlet {
 		String cate = req.getParameter("cate");
 		String type = req.getParameter("type");
 		
-		List<BoardVO> cate1 = service.selectCate1();
 		
 		req.setAttribute("group", group);
 		req.setAttribute("cate", cate);
 		req.setAttribute("type", type);
-		req.setAttribute("cate1", cate1);
 		
 		RequestDispatcher dispatcher = req.getRequestDispatcher("/cs/board/write.jsp");
 		dispatcher.forward(req, resp);

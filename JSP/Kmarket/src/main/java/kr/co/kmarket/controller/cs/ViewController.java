@@ -37,10 +37,12 @@ public class ViewController extends HttpServlet {
 		
 		req.setAttribute("group", group);
 		BoardVO vo = null; 
+		BoardVO answer = null;
 		if(type.equals("modify")) {
 			vo = service.selectArticle(no, cate);	
 		}else {
 			vo = service.selectArticle(no);
+			answer = service.selectAnswer(no);
 		}
 		req.setAttribute("group", group);
 		req.setAttribute("cate", cate);
@@ -48,6 +50,7 @@ public class ViewController extends HttpServlet {
 		req.setAttribute("type", type);
 		req.setAttribute("pg", pg);
 		req.setAttribute("no", no);
+		req.setAttribute("answer", answer);
 		
 		RequestDispatcher dispatcher = req.getRequestDispatcher("/cs/board/view.jsp");
 		dispatcher.forward(req, resp);

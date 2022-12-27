@@ -113,9 +113,13 @@
                                 <td>
                                     <select name="type1">
                                         <option value="0">문의유형 선택</option>
-                                        <c:forEach var="cate1" items="${cate1}">
-                                        <option value="${cate1.c1Name}">${cate1.cate1}</option>
-                                        </c:forEach>
+                                        <option value="user">회원</option>
+                                        <option value="event">쿠폰/이벤트</option>
+                                        <option value="order">주문/결제</option>
+                                        <option value="shipping">배송</option>
+                                        <option value="cancel">취소/반품/교한</option>
+                                        <option value="travel">여행/숙박/항공</option>
+                                        <option value="safe">안전거래</option>
                                     </select>
                                     <select name="type2">
                                 		<option value="0">상세유형 선택</option>
