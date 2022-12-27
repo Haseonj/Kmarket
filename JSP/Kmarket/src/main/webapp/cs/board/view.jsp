@@ -37,6 +37,15 @@
                         <br>
                     </p>
                 </div>
+                <c:if test="${vo.comment == 1}">
+	                <div class="answer">
+		                  	<h2>☞ [답변] ${vo.title}</h2>
+		                  	<br>
+		                    <p>
+		                    	${answer.content}
+		                    </p>
+	                </div>
+                </c:if>
                 <a href="/Kmarket/cs/board/list.do?group=${vo.group}&cate=${cate}&type=list" class="btnList">목록보기</a>
                 <c:if test="${group eq 'qna'}">
                 <a href="/Kmarket/cs/board/modify.do?group=${vo.group}&cate=${vo.c1Name}&type=modify&pg=${pg}&no=${vo.no}" class="btnModify">수정하기</a>

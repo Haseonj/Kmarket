@@ -820,6 +820,18 @@ footer p > strong {
     padding: 16px;
     border-bottom: 1px solid #ccc;
 }
+
+#cs > .qna > .list > article > table td > p {
+	text-align: center;
+	font-size: 14px;
+}
+#cs > .qna > .list > article > table td > .answer {
+	color: #67a9d9;
+}
+#cs > .qna > .list > article > table td:nth-child(3) {
+    text-align: center;
+    font-size: 14px
+}
 #cs > .qna > .list > article > table td:last-child {
     text-align: center;
     font-size: 14px
@@ -891,6 +903,24 @@ footer p > strong {
     box-sizing: border-box;
 }
 #cs > .qna > .view > article > .content * {
+    font-size: 16px;
+    line-height: 32px;
+}
+
+#cs > .qna > .view > article > .answer {
+    width: 100%;
+    height: 100%;
+    border-bottom: 1px solid #e9e9e9;
+    padding: 26px;
+    box-sizing: border-box;
+}
+#cs > .qna > .view > article > .answer > h2 {
+    margin-bottom: 6px;
+    font-size: 25px;
+    font-weight: bold;
+}
+#cs > .qna > .view > article > .answer > p  {
+	margin-left: 35px;
     font-size: 16px;
     line-height: 32px;
 }
