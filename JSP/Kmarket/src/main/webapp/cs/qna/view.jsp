@@ -49,6 +49,15 @@
                         <br>
                     </p>
                 </div>
+                <c:if test="${vo.comment == 1}">
+	                <div class="answer">
+		                  	<h2>☞ [답변] ${vo.title}</h2>
+		                  	<br>
+		                    <p>
+		                    	${reply.content}
+		                    </p>
+	                </div>
+                </c:if>
                 <a href="/Kmarket/cs/qna/list.do?cate1=${cate1}&pg=${pg}" class="btnList">목록보기</a>
             </article>
         </section>

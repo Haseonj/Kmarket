@@ -120,9 +120,9 @@
                         <li><a href="#" class="goDis">할인상품</a></li>
                     </ul>
                     <ul>
-                        <li><a href="/Kmarket/cs/board/list.do?group=notice&cate=all&type=list">공지사항</a></li>
-                        <li><a href="/Kmarket/cs/board/list.do?group=faq&cate=user&type=list">자주묻는질문</a></li>
-                        <li><a href="/Kmarket/cs/board/list.do?group=qna&cate=user&type=list">문의하기</a></li>
+                        <li><a href="/Kmarket/cs/notice/list.do?cate1=all">공지사항</a></li>
+                        <li><a href="/Kmarket/cs/faq/list.do?cate1=user">자주묻는질문</a></li>
+                        <li><a href="/Kmarket/cs/qna/list.do?cate1=user">문의하기</a></li>
                         <li><a href="/Kmarket/cs/index.do">고객센터</a></li>
                     </ul>
                 </div>

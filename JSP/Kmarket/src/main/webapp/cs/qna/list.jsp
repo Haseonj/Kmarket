@@ -33,6 +33,16 @@
                     <c:forEach var="articles" items="${articles}">
                         <tr>
                             <td><a href="/Kmarket/cs/qna/view.do?cate1=${cate1}&no=${articles.no}&pg=${currentPage}">[${articles.cate2}] ${articles.title}</a></td>
+                            <td>
+                            	<c:choose>
+	                            	<c:when test="${articles.comment == 0}">
+	                            		<p>검토중</p>
+	                            	</c:when>
+	                            	<c:otherwise>
+	                            		<p class="answer">답변완료</p>
+	                            	</c:otherwise>
+                            	</c:choose>
+                            </td>
                             <td>${articles.uid.substring(0, 5)}<c:forEach begin="6" end="${articles.uid.length()}" step="1">*</c:forEach></td>
                             <td>${articles.rdate.substring(2, 10)}</td>
                         </tr>
@@ -50,7 +60,7 @@
                     	<a href="/Kmarket/cs/qna/list.do?cate1=${cate1}&pg=${pageGroupEnd + 1}" class="next">다음</a>
                     </c:if>
                 </div>
-                <a href="./write.html" class="btnWrite">문의하기</a>
+                <a href="/Kmarket/cs/qna/write.do?cate1=${cate1}&pg=1" class="btnWrite">문의하기</a>
             </article>
         </section>
     </div>

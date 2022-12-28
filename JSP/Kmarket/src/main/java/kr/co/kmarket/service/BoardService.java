@@ -19,80 +19,12 @@ public enum BoardService {
 		dao = new BoardDAO();
 	}
 	
-	// 1.0v
-	public void insertArticle(BoardVO vo) {
-		dao.insertArticle(vo);
-	}
-	
+	// ------------------------------------------ 1.1v ---------------------------------------------
 	
 	public int insertAnswer(BoardVO vo) {
 		return dao.insertAnswer(vo);
 	}
 	
-	public BoardVO selectArticle(String no, String cate) {
-		return dao.selectArticle(no, cate);
-	}
-	
-	public BoardVO selectArticle(String no) {
-		return dao.selectArticle(no);
-	}
-	
-	
-	
-	public List<BoardVO> selectArticles(String group, String cate, int start) {
-		return dao.selectArticles(group, cate, start);
-	}
-	
-	public List<BoardVO> selectAllArticles(String group, int start) {
-		return dao.selectAllArticles(group, start);
-	}
-	
-	
-	
-	/*
-	public List<BoardVO> selectFaqArticles(String group, String cate){
-		return dao.selectFaqArticles(group, cate);
-	}
-	*/
-	
-	public List<BoardVO> selectAdminArticle(String group, int start) {
-		return dao.selectAdminArticle(group, start);
-	}
-	public List<BoardVO> selectAdminArticle(String group, int start, String cate) {
-		return dao.selectAdminArticle(group, start, cate);
-	}
-	public List<BoardVO> selectAdminArticle(String group, int start, String cate, String cate2) {
-		return dao.selectAdminArticle(group, start, cate, cate2);
-	}
-	
-	
-	public int selectCountTotal(String cate, String group) {
-		return dao.selectCountTotal(cate, group);
-	}
-	public int selectCountTotal(String cate, String cate2, String group) {
-		return dao.selectCountTotal(cate, cate2, group);
-	}
-	
-	public List<BoardVO> selectCate1() {
-		return dao.selectCate1();
-	}
-	
-	public List<BoardVO> selectCate2(String cate1) {
-		return dao.selectCate2(cate1);
-	}
-	
-	public void updateArticle(String no, String title, String content) {
-		dao.updateArticle(no, title, content);
-	}
-	public void updateArticle(String cate, String title, String content, String no) {
-		dao.updateArticle(cate, title, content, no);
-	}
-	public void updateArticle(String cate, String cate2, String title, String content, String no) {
-		dao.updateArticle(cate, cate2, title, content, no);
-	}
-	
-	
-	// ------------------------------------------ 1.1v ---------------------------------------------
 	public void insertQnaArticle(BoardVO vo) {
 		dao.insertQnaArticle(vo);
 	}
@@ -186,6 +118,13 @@ public enum BoardService {
 	
 	public BoardVO selectFaqArticle(String no) {
 		return dao.selectFaqArticle(no);
+	}
+	
+	public void updateArticle(String cate, String title, String content, String no) {
+		dao.updateArticle(cate, title, content, no);
+	}
+	public void updateArticle(String cate, String cate2, String title, String content, String no) {
+		dao.updateArticle(cate, cate2, title, content, no);
 	}
 	
 	public void updateNoticeArticle(String no, String cate1, String title, String content) {

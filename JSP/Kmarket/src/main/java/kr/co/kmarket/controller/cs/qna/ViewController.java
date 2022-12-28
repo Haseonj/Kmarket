@@ -32,9 +32,11 @@ public class ViewController extends HttpServlet {
 		String no = req.getParameter("no");
 		String pg = req.getParameter("pg");
 		
-		BoardVO vo =  service.selectQnaArticle(no);
+		BoardVO vo = service.selectQnaArticle(no);
+		BoardVO reply = service.selectAnswer(no);
 		
 		req.setAttribute("vo", vo);
+		req.setAttribute("reply", reply);
 		req.setAttribute("cate1", cate1);
 		req.setAttribute("pg", pg);
 		

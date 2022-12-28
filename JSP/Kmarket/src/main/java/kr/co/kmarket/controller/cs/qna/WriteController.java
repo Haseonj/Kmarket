@@ -28,6 +28,12 @@ public class WriteController extends HttpServlet {
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		String cate1 = req.getParameter("cate1");
+		String pg = req.getParameter("pg");
+		
+		req.setAttribute("cate1", cate1);
+		req.setAttribute("pg", pg);
+		
 		RequestDispatcher dispatcher = req.getRequestDispatcher("/cs/qna/write.jsp");
 		dispatcher.forward(req, resp);
 	}

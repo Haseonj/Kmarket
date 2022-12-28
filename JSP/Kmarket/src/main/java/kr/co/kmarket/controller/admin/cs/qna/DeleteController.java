@@ -1,4 +1,4 @@
-package kr.co.kmarket.controller.admin;
+package kr.co.kmarket.controller.admin.cs.qna;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -16,9 +16,8 @@ import com.google.gson.JsonObject;
 
 import kr.co.kmarket.service.BoardService;
 
-
-@WebServlet("/admin/cs/delete.do")
-public class CsDeleteController extends HttpServlet {
+@WebServlet("/admin/cs/qna/delete.do")
+public class DeleteController extends HttpServlet{
 
 	private static final long serialVersionUID = 1L;
 	private BoardService service = BoardService.INSTANCE;
@@ -30,7 +29,6 @@ public class CsDeleteController extends HttpServlet {
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		
 	}
 	
 	@Override
@@ -38,21 +36,20 @@ public class CsDeleteController extends HttpServlet {
 		String[] no = req.getParameterValues("checked");
 		String articleNo = req.getParameter("no");
 		
-		
 		JsonObject json = new JsonObject();
-		if(articleNo == "") {
+		if(articleNo == null) {
 			int result[] = new int [no.length];
-			
 			for(int i = 0; i < no.length; i++) {
-				result[i] = service.deleteArticle(no[i]);
+				result[i] = service.deleteFaqArticle(no[i]);
 				json.addProperty("result["+i+"]", result[i]);
 			}
 		}else {
-			int rs = service.deleteArticle(articleNo);
+			int rs = service.deleteFaqArticle(articleNo);
 			json.addProperty("rs", rs);
 		}
 		
 		PrintWriter writer = resp.getWriter();
 		writer.print(json.toString());
 	}
+
 }

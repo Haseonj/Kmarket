@@ -14,7 +14,7 @@
                     <ul>
                     <c:forEach var="notice" items="${notice}">
                         <li>
-                            <a href="/Kmarket/cs/board/view.do?cate1=${notice.cate1}&no=${notice.no}" class="title">${notice.title}</a>
+                            <a href="/Kmarket/cs/notice/view.do?cate1=${notice.cate1}&no=${notice.no}&pg=1" class="title">${notice.title}</a>
                             <span class="date">${notice.rdate.substring(2, 10)}</span>
                         </li>
                     </c:forEach>
@@ -23,7 +23,7 @@
                 <section class="faq">
                     <h1>
                         자주 묻는 질문
-                        <a href="/Kmarket/cs/board/list.do?group=faq&cate=user&type=list">전체보기</a>
+                        <a href="/Kmarket/cs/faq/list.do?cate1=user">전체보기</a>
                     </h1>
                     <ol>
                         <li><a href="/Kmarket/cs/faq/list.do?cate1=user"><span>회원</span></a></li>
@@ -43,7 +43,7 @@
                     <ul>
                     <c:forEach var="qna" items="${qna}">
                         <li>
-                            <a href="/Kmarket/cs/qna/view.do?group=qna&cate1=${qna.cate1}&no=${qna.no}" class="title">[${qna.cate2}] ${qna.title}</a>
+                            <a href="/Kmarket/cs/qna/view.do?group=qna&cate1=${qna.cate1}&no=${qna.no}&pg=1" class="title">[${qna.cate2}] ${qna.title}</a>
                             <p>
                                 <span class="uid">
                                 	${qna.uid.substring(0,5)}<c:forEach begin="6" end="${qna.uid.length()}" step="1">*</c:forEach>
