@@ -13,27 +13,21 @@
             <aside>
                 <h2>공지사항</h2>
                 <ul>
-                    <li class="on"><a href="#">전체</a></li>
-                    <li><a href="#">고객서비스</a></li>
-                    <li><a href="#">안전거래</a></li>
-                    <li><a href="#">위해상품</a></li>
-                    <li><a href="#">이벤트당첨</a></li>
+                    <li class="${cate1 eq 'all' ? 'on' : 'off'}"><a href="/Kmarket/cs/notice/list.do?cate1=all&pg=1">전체</a></li>
+                    <li class="${cate1 eq 'service' ? 'on' : 'off'}"><a href="/Kmarket/cs/notice/list.do?cate1=service&pg=1">고객서비스</a></li>
+                    <li class="${cate1 eq 'safe' ? 'on' : 'off'}"><a href="/Kmarket/cs/notice/list.do?cate1=safe&pg=1">안전거래</a></li>
+                    <li class="${cate1 eq 'danger' ? 'on' : 'off'}"><a href="/Kmarket/cs/notice/list.do?cate1=danger&pg=1">위해상품</a></li>
+                    <li class="${cate1 eq 'prize' ? 'on' : 'off'}"><a href="/Kmarket/cs/notice/list.do?cate1=prize&pg=1">이벤트당첨</a></li>
                 </ul>
             </aside>
             <article>
                 <nav>
-                    <h2 class="title">[안내] 해외결제 사칭 문자 주의</h2>
-                    <span class="date">2022.12.07</span>
+                    <h2 class="title">${vo.title}</h2>
+                    <span class="date">${vo.rdate.substring(2, 10)}</span>
                 </nav>
                 <div class="content">
                     <p>
-                        안녕하세요. G마켓입니다.
-                        <br>
-                        G마켓 해외직구를 사칭하는 피싱 문자가 최근 다시 신고되고 있어 주의 안내드립니다.
-                        <br>
-                        아래와 같이 G마켓 해외직구 승인결제 피싱 문자 또는 발신번호 006, 002 등으로 시작하는
-                        피싱 문자를 수신하신 고객님께서는 통화 또는 문자 내 기재된 번호/링크 등을 클릭하지
-                        않도록 주의하여 주시기 바랍니다.
+                    	${vo.content}
                         <br>
                         <br>
                     </p>
@@ -51,7 +45,7 @@
                         <br>
                     </p>
                 </div>
-                <a href="./list.html" class="btnList">목록보기</a>
+                <a href="/Kmarket/cs/notice/list.do?cate1=${cate1}&pg=${pg}" class="btnList">목록보기</a>
             </article>
         </section>
 </section>

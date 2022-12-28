@@ -24,12 +24,6 @@ public enum BoardService {
 		dao.insertArticle(vo);
 	}
 	
-	public void insertNoticeArticle(BoardVO vo) {
-		dao.insertNoticeArticle(vo);
-	}
-	public void insertFaqArticle(BoardVO vo) {
-		dao.insertFaqArticle(vo);
-	}
 	
 	public int insertAnswer(BoardVO vo) {
 		return dao.insertAnswer(vo);
@@ -43,9 +37,7 @@ public enum BoardService {
 		return dao.selectArticle(no);
 	}
 	
-	public BoardVO selectAnswer(String no) {
-		return dao.selectAnswer(no);
-	}
+	
 	
 	public List<BoardVO> selectArticles(String group, String cate, int start) {
 		return dao.selectArticles(group, cate, start);
@@ -57,13 +49,11 @@ public enum BoardService {
 	
 	
 	
-	public List<BoardVO> selectQnaArticles() {
-		return dao.selectQnaArticles();
-	}
-	
+	/*
 	public List<BoardVO> selectFaqArticles(String group, String cate){
 		return dao.selectFaqArticles(group, cate);
 	}
+	*/
 	
 	public List<BoardVO> selectAdminArticle(String group, int start) {
 		return dao.selectAdminArticle(group, start);
@@ -101,32 +91,116 @@ public enum BoardService {
 		dao.updateArticle(cate, cate2, title, content, no);
 	}
 	
-	public int deleteArticle(String no) {
-		return dao.deleteArticle(no);
-	}
-	// 1.1v
+	
+	// ------------------------------------------ 1.1v ---------------------------------------------
 	public void insertQnaArticle(BoardVO vo) {
 		dao.insertQnaArticle(vo);
 	}
 	
+	public void insertNoticeArticle(BoardVO vo) {
+		dao.insertNoticeArticle(vo);
+	}
+	
+	public void insertFaqArticle(BoardVO vo) {
+		dao.insertFaqArticle(vo);
+	}
+	
+	public List<BoardVO> selectQnaArticles() {
+		return dao.selectQnaArticles();
+	}
+	
+	public List<BoardVO> selectQnaArticles(int start) {
+		return dao.selectQnaArticles(start);
+	}
 	public List<BoardVO> selectQnaArticles(String cate1, int start) {
 		return dao.selectQnaArticles(cate1, start);
 	}
+	public List<BoardVO> selectQnaArticles(String cate1, String cate2, int start) {
+		return dao.selectQnaArticles(cate1, cate2, start);
+	}
+	
 	public List<BoardVO> selectNoticeArticles() {
 		return dao.selectNoticeArticles();
 	}
 	
+	public List<BoardVO> selectNoticeArticles(int start) {
+		return dao.selectNoticeArticles(start);
+	}
+	
+	public List<BoardVO> selectNoticeArticles(String cate1, int start) {
+		return dao.selectNoticeArticles(cate1, start);
+	}
+	
+	
+	public List<BoardVO> selectFaqArticlesAll(int start) {
+		return dao.selectFaqArticlesAll(start);
+	}
+	public List<BoardVO> selectFaqArticles(String cate1) {
+		return dao.selectFaqArticles(cate1);
+	}
+	public List<BoardVO> selectFaqArticles(String cate1, int start) {
+		return dao.selectFaqArticles(cate1, start);
+	}
+	public List<BoardVO> selectFaqArticles(String cate1, String cate2, int start) {
+		return dao.selectFaqArticles(cate1, cate2, start);
+	}
+	
+	public int selectQnaCountTotal() {
+		return dao.selectQnaCountTotal();
+	}
 	public int selectQnaCountTotal(String cate1) {
 		return dao.selectQnaCountTotal(cate1);
+	}
+	public int selectQnaCountTotal(String cate1, String cate2) {
+		return dao.selectQnaCountTotal(cate1, cate2);
+	}
+	
+	public int selectNoticeCountTotal() {
+		return dao.selectNoticeCountTotal();
+	}
+	public int selectNoticeCountTotal(String cate1) {
+		return dao.selectNoticeCountTotal(cate1);
+	}
+	
+	public int selectFaqCountTotal() {
+		return dao.selectFaqCountTotal();
+	}
+	public int selectFaqCountTotal(String cate1) {
+		return dao.selectFaqCountTotal(cate1);
+	}
+	public int selectFaqCountTotal(String cate1, String cate2) {
+		return dao.selectFaqCountTotal(cate1, cate2);
 	}
 	
 	public BoardVO selectQnaArticle(String no) {
 		return dao.selectQnaArticle(no);
 	}
 	
+	public BoardVO selectAnswer(String no) {
+		return dao.selectAnswer(no);
+	}
 	
+	public BoardVO selectNoticeArticle(String no) {
+		return dao.selectNoticeArticle(no);
+	}
 	
+	public BoardVO selectFaqArticle(String no) {
+		return dao.selectFaqArticle(no);
+	}
 	
+	public void updateNoticeArticle(String no, String cate1, String title, String content) {
+		dao.updateNoticeArticle(no, cate1, title, content);
+	}
+	public void updateFaqArticle(String no, String cate1, String cate2, String title, String content) {
+		dao.updateFaqArticle(no, cate1, cate2, title, content);
+	}
+	
+	public int deleteNoticeArticle(String no) {
+		return dao.deleteNoticeArticle(no);
+	}
+	public int deleteFaqArticle(String no) {
+		return dao.deleteFaqArticle(no);
+	}
 	
 	
 	// 현재 페이지 번호

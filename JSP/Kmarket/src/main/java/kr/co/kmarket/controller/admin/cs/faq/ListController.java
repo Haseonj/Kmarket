@@ -1,4 +1,4 @@
-package kr.co.kmarket.controller.cs.notice;
+package kr.co.kmarket.controller.admin.cs.faq;
 
 import java.io.IOException;
 import java.util.List;
@@ -16,8 +16,8 @@ import org.slf4j.LoggerFactory;
 import kr.co.kmarket.service.BoardService;
 import kr.co.kmarket.vo.BoardVO;
 
-@WebServlet("/cs/notice/list.do")
-public class ListController extends HttpServlet {
+@WebServlet("/admin/cs/faq/list.do")
+public class ListController extends HttpServlet{
 
 	private static final long serialVersionUID = 1L;
 	private BoardService service = BoardService.INSTANCE;
@@ -30,6 +30,7 @@ public class ListController extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		String cate1 = req.getParameter("cate1");
+		String cate2 = req.getParameter("cate2");
 		String pg = req.getParameter("pg");
 		
 		// 현재 페이지 번호
@@ -38,12 +39,12 @@ public class ListController extends HttpServlet {
 		// 전체 페이지 갯수
 		int total = 0;
 		if(cate1.equals("all")) {
-			total =	service.selectNoticeCountTotal();
+			total = service.selectFaqCountTotal();
+		}else if(cate2.equals("all")){
+			total = service.selectFaqCountTotal(cate1);
 		}else {
-			total =	service.selectNoticeCountTotal(cate1);
+			total = service.selectFaqCountTotal(cate1, cate2);
 		}
-		
-		logger.debug("total : " + total);
 		
 		// 마지막 페이지 번호
 		int lastPageNum = service.getLastPageNum(total);
@@ -56,26 +57,29 @@ public class ListController extends HttpServlet {
 		
 		// 시작 인덱스
 		int start = service.getStartNum(currentPage);
-		
-		List<BoardVO> notice = null;
-		if(cate1.equals("all")) {
-			notice = service.selectNoticeArticles(start);
-		}else {
-			notice = service.selectNoticeArticles(cate1, start);
-		}
 
-		req.setAttribute("notice", notice);
 		
+		List<BoardVO> faq = null;
+		
+		if(cate1.equals("all")) {
+			faq = service.selectFaqArticlesAll(start);
+		}else if(cate2.equals("all")){
+			faq = service.selectFaqArticles(cate1, start);
+		}else {
+			faq = service.selectFaqArticles(cate1, cate2, start);
+		}
+		
+		req.setAttribute("faq", faq);
 		req.setAttribute("cate1", cate1);
+		req.setAttribute("cate2", cate2);
+		req.setAttribute("pg", pg);
 		req.setAttribute("currentPage", currentPage);
 		req.setAttribute("lastPageNum", lastPageNum);
 		req.setAttribute("pageGroupStart", result[0]);
 		req.setAttribute("pageGroupEnd", result[1]);
 		req.setAttribute("pageStartNum", pageStartNum + 1);
 		
-		
-		
-		RequestDispatcher dispatcher = req.getRequestDispatcher("/cs/notice/list.jsp");
+		RequestDispatcher dispatcher = req.getRequestDispatcher("/admin/cs/faq/list.jsp");
 		dispatcher.forward(req, resp);
 	}
 	

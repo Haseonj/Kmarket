@@ -32,6 +32,8 @@
                 <div class="content">
                     <p>
                         ${vo.content}
+                        <br>
+                        <br>
                     </p>
                     <p>
                         ※ 피싱 관련 피해신고

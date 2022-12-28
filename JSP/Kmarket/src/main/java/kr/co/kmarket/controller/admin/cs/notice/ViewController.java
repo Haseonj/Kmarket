@@ -1,4 +1,4 @@
-package kr.co.kmarket.controller.cs.faq;
+package kr.co.kmarket.controller.admin.cs.notice;
 
 import java.io.IOException;
 
@@ -15,8 +15,8 @@ import org.slf4j.LoggerFactory;
 import kr.co.kmarket.service.BoardService;
 import kr.co.kmarket.vo.BoardVO;
 
-@WebServlet("/cs/faq/view.do")
-public class ViewController extends HttpServlet {
+@WebServlet("/admin/cs/notice/view.do")
+public class ViewController extends HttpServlet{
 
 	private static final long serialVersionUID = 1L;
 	private BoardService service = BoardService.INSTANCE;
@@ -30,13 +30,17 @@ public class ViewController extends HttpServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		String cate1 = req.getParameter("cate1");
 		String no = req.getParameter("no");
+		String pg = req.getParameter("pg");
 		
-		BoardVO faq = service.selectFaqArticle(no);
+		BoardVO notice = service.selectNoticeArticle(no);
 		
-		req.setAttribute("faq", faq);
+		req.setAttribute("notice", notice);
+		req.setAttribute("no", no);
+		req.setAttribute("pg", pg);
 		req.setAttribute("cate1", cate1);
 		
-		RequestDispatcher dispatcher = req.getRequestDispatcher("/cs/faq/view.jsp");
+		
+		RequestDispatcher dispatcher = req.getRequestDispatcher("/admin/cs/notice/view.jsp");
 		dispatcher.forward(req, resp);
 	}
 	

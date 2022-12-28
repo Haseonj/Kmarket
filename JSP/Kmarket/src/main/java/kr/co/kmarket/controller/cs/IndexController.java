@@ -27,7 +27,7 @@ public class IndexController extends HttpServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
 		List<BoardVO> notice = service.selectNoticeArticles();
-		List<BoardVO> qna = service.selectQnaArticles();
+		List<BoardVO> qna =  service.selectQnaArticles();
 		
 		req.setAttribute("notice", notice);
 		req.setAttribute("qna", qna);

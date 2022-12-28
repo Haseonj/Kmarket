@@ -1,8 +1,8 @@
-package kr.co.kmarket.controller.cs.faq;
+package kr.co.kmarket.controller.admin.cs.qna;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -12,11 +12,13 @@ import javax.servlet.http.HttpServletResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.google.gson.JsonObject;
+
 import kr.co.kmarket.service.BoardService;
 import kr.co.kmarket.vo.BoardVO;
 
-@WebServlet("/cs/faq/view.do")
-public class ViewController extends HttpServlet {
+@WebServlet("/admin/cs/qna/reply.do")
+public class ReplyController extends HttpServlet{
 
 	private static final long serialVersionUID = 1L;
 	private BoardService service = BoardService.INSTANCE;
@@ -28,16 +30,23 @@ public class ViewController extends HttpServlet {
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		String cate1 = req.getParameter("cate1");
-		String no = req.getParameter("no");
+		String uid = req.getParameter("uid");
+		String parent = req.getParameter("parent");
+		String content = req.getParameter("answer");
+		String regip = req.getRemoteAddr();
 		
-		BoardVO faq = service.selectFaqArticle(no);
+		BoardVO vo = new BoardVO();
+		vo.setUid(uid);
+		vo.setParent(parent);
+		vo.setContent(content);
+		vo.setRegip(regip);
+		 
+		int result = service.insertAnswer(vo);
 		
-		req.setAttribute("faq", faq);
-		req.setAttribute("cate1", cate1);
-		
-		RequestDispatcher dispatcher = req.getRequestDispatcher("/cs/faq/view.jsp");
-		dispatcher.forward(req, resp);
+		JsonObject json = new JsonObject();
+		json.addProperty("result", result);
+		PrintWriter writer = resp.getWriter();
+		writer.print(json.toString());
 	}
 	
 	@Override

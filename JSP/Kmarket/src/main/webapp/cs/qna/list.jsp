@@ -47,7 +47,7 @@
                     	<a href="/Kmarket/cs/qna/list.do?cate1=${cate1}&pg=${i}" class="num ${currentPage == i ? 'on' : 'off'}">${i}</a>
                     </c:forEach>
                     <c:if test="${pageGroupEnd < lastPageNum}">
-                    	<a href="/Kmarket/cs/qna/list.do?cate=${cate}&pg=${pageGroupEnd + 1}" class="next">다음</a>
+                    	<a href="/Kmarket/cs/qna/list.do?cate1=${cate1}&pg=${pageGroupEnd + 1}" class="next">다음</a>
                     </c:if>
                 </div>
                 <a href="./write.html" class="btnWrite">문의하기</a>

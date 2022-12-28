@@ -1,4 +1,4 @@
-package kr.co.kmarket.controller.cs.notice;
+package kr.co.kmarket.controller.admin.cs.notice;
 
 import java.io.IOException;
 import java.util.List;
@@ -16,8 +16,8 @@ import org.slf4j.LoggerFactory;
 import kr.co.kmarket.service.BoardService;
 import kr.co.kmarket.vo.BoardVO;
 
-@WebServlet("/cs/notice/list.do")
-public class ListController extends HttpServlet {
+@WebServlet("/admin/cs/notice/list.do")
+public class ListController extends HttpServlet{
 
 	private static final long serialVersionUID = 1L;
 	private BoardService service = BoardService.INSTANCE;
@@ -43,8 +43,6 @@ public class ListController extends HttpServlet {
 			total =	service.selectNoticeCountTotal(cate1);
 		}
 		
-		logger.debug("total : " + total);
-		
 		// 마지막 페이지 번호
 		int lastPageNum = service.getLastPageNum(total);
 		
@@ -56,6 +54,7 @@ public class ListController extends HttpServlet {
 		
 		// 시작 인덱스
 		int start = service.getStartNum(currentPage);
+
 		
 		List<BoardVO> notice = null;
 		if(cate1.equals("all")) {
@@ -63,19 +62,18 @@ public class ListController extends HttpServlet {
 		}else {
 			notice = service.selectNoticeArticles(cate1, start);
 		}
-
-		req.setAttribute("notice", notice);
 		
+		
+		req.setAttribute("notice", notice);
 		req.setAttribute("cate1", cate1);
+		req.setAttribute("pg", pg);
 		req.setAttribute("currentPage", currentPage);
 		req.setAttribute("lastPageNum", lastPageNum);
 		req.setAttribute("pageGroupStart", result[0]);
 		req.setAttribute("pageGroupEnd", result[1]);
 		req.setAttribute("pageStartNum", pageStartNum + 1);
 		
-		
-		
-		RequestDispatcher dispatcher = req.getRequestDispatcher("/cs/notice/list.jsp");
+		RequestDispatcher dispatcher = req.getRequestDispatcher("/admin/cs/notice/list.jsp");
 		dispatcher.forward(req, resp);
 	}
 	
