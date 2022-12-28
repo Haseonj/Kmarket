@@ -5,37 +5,48 @@
 	$(function(){
 		
 		$('select[name=type1]').change(function(){
-			
 			let cate1 = $('select[name=type1] > option:selected').val();
+			
+			let user = ['가입', '탈퇴', '회원정보', '로그인'];
+			let event = ['쿠폰/할인혜택', '포인트', '제휴', '이벤트'];
+			let order = ['상품', '결제', '구매내역', '영수증/증빙'];
+			let shipping = ['배송상태/기간', '배송정보확인/변경', '해외배송', '당일배송', '해외직구'];
+			let cancel = ['반품신청/철회', '반품정보확인/변경', '교환 AS신청/철회', '교환정보확인/변경', '취소신청/철회', '취소확인/환불정보'];
+			let travel = ['여행/숙박', '항공'];
+			let safe = ['서비스 이용규칙 위반', '지식재산권침해', '법령 및 정책위반 상품', '게시물 정책위반', '직거래/외부거래유도', '표시광고', '청소년 위해상품/이미지'];
+			let none = ['상세유형 선택'];
+			
 			let cate2;
 			
-			$.ajax({
-				url: '/Kmarket/cs/board/category.do',
-				method: 'get',
-				data: {'cate1': cate1},
-				dataType: 'json',
-				success: function(data){
-					$('select[name=type2]').empty();
-					let html;
-					
-					if(data == ""){
-						html = $("<option value="+0+">2차선택</option>");
-						$('select[name=type2]').append(html);
-					}
-
-					for(cate2 of data){
-						html = $("<option>"+cate2.cate2+"</option>");
-						$('select[name=type2]').append(html);
-					}
-					
-					cate2 = $('select[name=type2] > option:selected').val();
-					
-					console.log(cate2);
-					
+			if(cate1 == 'user'){
+				cate2 = user;
+			}else if(cate1 == 'event'){
+				cate2 = event;
+			}else if(cate1 == 'order'){
+				cate2 = order;
+			}else if(cate1 == 'shipping'){
+				cate2 = shipping;
+			}else if(cate1 == 'cancel'){
+				cate2 = cancel;
+			}else if(cate1 == 'travel'){
+				cate2 = travel;
+			}else if(cate1 == 'safe'){
+				cate2 = safe;
+			}else{
+				cate2 = none;
+			}
+			
+			$('select[name=type2]').empty();
+			
+			if(cate2 != 'none'){
+				for(let i = 0; i < cate2.length; i++){
+					let html = $("<option>"+cate2[i]+"</option>");
+					$('select[name=type2]').append(html);
 				}
-				
-				
-			});
+			}else{
+				let html = $("<option>"+cate2+"</option>");
+			}
+			
 		});
 		
 		$('select[name=type2]').change(function(){

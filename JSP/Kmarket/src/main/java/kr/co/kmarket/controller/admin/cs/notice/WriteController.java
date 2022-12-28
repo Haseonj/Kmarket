@@ -46,7 +46,6 @@ public class WriteController extends HttpServlet{
 		String content = req.getParameter("content");
 		String regip = req.getRemoteAddr();
 		
-		uid = "gktjswn11";
 		
 		BoardVO vo = new BoardVO();
 		vo.setUid(uid);
