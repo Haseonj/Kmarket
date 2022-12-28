@@ -9,12 +9,12 @@
                 <section class="notice">
                     <h1>
                         공지사항
-                        <a href="/Kmarket/cs/board/list.do?group=notice&cate=all&type=list">전체보기</a>
+                        <a href="/Kmarket/cs/notice/list.do?&cate1=all&pg=1">전체보기</a>
                     </h1>
                     <ul>
                     <c:forEach var="notice" items="${notice}">
                         <li>
-                            <a href="/Kmarket/cs/board/view.do?group=${notice.group}&cate=${notice.c1Name}&type=view&no=${notice.no}" class="title">${notice.title}</a>
+                            <a href="/Kmarket/cs/notice/view.do?cate1=${notice.cate1}&no=${notice.no}&pg=1" class="title">${notice.title}</a>
                             <span class="date">${notice.rdate.substring(2, 10)}</span>
                         </li>
                     </c:forEach>
@@ -23,27 +23,27 @@
                 <section class="faq">
                     <h1>
                         자주 묻는 질문
-                        <a href="/Kmarket/cs/board/list.do?group=faq&cate=user&type=list">전체보기</a>
+                        <a href="/Kmarket/cs/faq/list.do?cate1=user">전체보기</a>
                     </h1>
                     <ol>
-                        <li><a href="/Kmarket/cs/board/list.do?group=faq&cate=user&type=list"><span>회원</span></a></li>
-                        <li><a href="/Kmarket/cs/board/list.do?group=faq&cate=event&type=list"><span>쿠폰/이벤트</span></a></li>
-                        <li><a href="/Kmarket/cs/board/list.do?group=faq&cate=order&type=list"><span>주문/결제</span></a></li>
-                        <li><a href="/Kmarket/cs/board/list.do?group=faq&cate=shipping&type=list"><span>배송</span></a></li>
-                        <li><a href="/Kmarket/cs/board/list.do?group=faq&cate=cancel&type=list"><span>취소/반품/교환</span></a></li>
-                        <li><a href="/Kmarket/cs/board/list.do?group=faq&cate=travel&type=list"><span>여행/숙박/항공</span></a></li>
-                        <li><a href="/Kmarket/cs/board/list.do?group=faq&cate=safe&type=list"><span>안전거래</span></a></li>
+                        <li><a href="/Kmarket/cs/faq/list.do?cate1=user"><span>회원</span></a></li>
+                        <li><a href="/Kmarket/cs/faq/list.do?cate1=event"><span>쿠폰/이벤트</span></a></li>
+                        <li><a href="/Kmarket/cs/faq/list.do?cate1=order"><span>주문/결제</span></a></li>
+                        <li><a href="/Kmarket/cs/faq/list.do?cate1=shipping"><span>배송</span></a></li>
+                        <li><a href="/Kmarket/cs/faq/list.do?cate1=cancel"><span>취소/반품/교환</span></a></li>
+                        <li><a href="/Kmarket/cs/faq/list.do?cate1=travel"><span>여행/숙박/항공</span></a></li>
+                        <li><a href="/Kmarket/cs/faq/list.do?cate1=safe"><span>안전거래</span></a></li>
                     </ol>
                 </section>
                 <section class="qna">
                     <h1>
                         문의하기
-                        <a href="/Kmarket/cs/board/list.do?group=qna&cate=user&type=list">전체보기</a>
+                        <a href="/Kmarket/cs/qna/list.do?cate1=user&pg=1">전체보기</a>
                     </h1>
                     <ul>
                     <c:forEach var="qna" items="${qna}">
                         <li>
-                            <a href="/Kmarket/cs/board/view.do?group=qna&cate=${qna.c1Name}&type=view&no=${qna.no}" class="title">[${qna.cate2}] ${qna.title}</a>
+                            <a href="/Kmarket/cs/qna/view.do?group=qna&cate1=${qna.cate1}&no=${qna.no}&pg=1" class="title">[${qna.cate2}] ${qna.title}</a>
                             <p>
                                 <span class="uid">
                                 	${qna.uid.substring(0,5)}<c:forEach begin="6" end="${qna.uid.length()}" step="1">*</c:forEach>
@@ -53,7 +53,7 @@
                         </li>
                     </c:forEach>
                     </ul>
-                    <a href="/Kmarket/cs/board/write.do?group=qna&cate=user&type=write" class="ask">문의글 작성 ></a>
+                    <a href="/Kmarket/cs/qna/write.do?cate1=user" class="ask">문의글 작성 ></a>
                 </section>
                 <section class="tel">
                     <h1> 1:1 상담이 필요하신가요?</h1>

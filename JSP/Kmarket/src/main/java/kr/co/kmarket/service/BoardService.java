@@ -19,85 +19,107 @@ public enum BoardService {
 		dao = new BoardDAO();
 	}
 	
-	public void insertArticle(BoardVO vo) {
-		dao.insertArticle(vo);
-	}
-	
-	public void insertNoticeArticle(BoardVO vo) {
-		dao.insertNoticeArticle(vo);
-	}
-	public void insertFaqArticle(BoardVO vo) {
-		dao.insertFaqArticle(vo);
-	}
+	// ------------------------------------------ 1.1v ---------------------------------------------
 	
 	public int insertAnswer(BoardVO vo) {
 		return dao.insertAnswer(vo);
 	}
 	
-	public BoardVO selectArticle(String no, String cate) {
-		return dao.selectArticle(no, cate);
+	public void insertQnaArticle(BoardVO vo) {
+		dao.insertQnaArticle(vo);
 	}
 	
-	public BoardVO selectArticle(String no) {
-		return dao.selectArticle(no);
+	public void insertNoticeArticle(BoardVO vo) {
+		dao.insertNoticeArticle(vo);
 	}
 	
-	public BoardVO selectAnswer(String no) {
-		return dao.selectAnswer(no);
-	}
-	
-	public List<BoardVO> selectArticles(String group, String cate, int start) {
-		logger.info("selectArticlesService.. cate:" +cate);
-		return dao.selectArticles(group, cate, start);
-	}
-	
-	public List<BoardVO> selectAllArticles(String group, int start) {
-		return dao.selectAllArticles(group, start);
-	}
-	
-	public List<BoardVO> selectNoticeArticles() {
-		return dao.selectNoticeArticles();
+	public void insertFaqArticle(BoardVO vo) {
+		dao.insertFaqArticle(vo);
 	}
 	
 	public List<BoardVO> selectQnaArticles() {
 		return dao.selectQnaArticles();
 	}
 	
-	public List<BoardVO> selectFaqArticles(String group, String cate){
-		return dao.selectFaqArticles(group, cate);
+	public List<BoardVO> selectQnaArticles(int start) {
+		return dao.selectQnaArticles(start);
+	}
+	public List<BoardVO> selectQnaArticles(String cate1, int start) {
+		return dao.selectQnaArticles(cate1, start);
+	}
+	public List<BoardVO> selectQnaArticles(String cate1, String cate2, int start) {
+		return dao.selectQnaArticles(cate1, cate2, start);
 	}
 	
-	public List<BoardVO> selectAdminArticle(String group, int start) {
-		return dao.selectAdminArticle(group, start);
-	}
-	public List<BoardVO> selectAdminArticle(String group, int start, String cate) {
-		return dao.selectAdminArticle(group, start, cate);
-	}
-	public List<BoardVO> selectAdminArticle(String group, int start, String cate, String cate2) {
-		return dao.selectAdminArticle(group, start, cate, cate2);
+	public List<BoardVO> selectNoticeArticles() {
+		return dao.selectNoticeArticles();
 	}
 	
-	public int selectCountTotal(String group) {
-		return dao.selectCountTotal(group);
-	}
-	public int selectCountTotal(String cate, String group) {
-		return dao.selectCountTotal(cate, group);
-	}
-	public int selectCountTotal(String cate, String cate2, String group) {
-		return dao.selectCountTotal(cate, cate2, group);
+	public List<BoardVO> selectNoticeArticles(int start) {
+		return dao.selectNoticeArticles(start);
 	}
 	
-	public List<BoardVO> selectCate1() {
-		return dao.selectCate1();
+	public List<BoardVO> selectNoticeArticles(String cate1, int start) {
+		return dao.selectNoticeArticles(cate1, start);
 	}
 	
-	public List<BoardVO> selectCate2(String cate1) {
-		return dao.selectCate2(cate1);
+	
+	public List<BoardVO> selectFaqArticlesAll(int start) {
+		return dao.selectFaqArticlesAll(start);
+	}
+	public List<BoardVO> selectFaqArticles(String cate1) {
+		return dao.selectFaqArticles(cate1);
+	}
+	public List<BoardVO> selectFaqArticles(String cate1, int start) {
+		return dao.selectFaqArticles(cate1, start);
+	}
+	public List<BoardVO> selectFaqArticles(String cate1, String cate2, int start) {
+		return dao.selectFaqArticles(cate1, cate2, start);
 	}
 	
-	public void updateArticle(String no, String title, String content) {
-		dao.updateArticle(no, title, content);
+	public int selectQnaCountTotal() {
+		return dao.selectQnaCountTotal();
 	}
+	public int selectQnaCountTotal(String cate1) {
+		return dao.selectQnaCountTotal(cate1);
+	}
+	public int selectQnaCountTotal(String cate1, String cate2) {
+		return dao.selectQnaCountTotal(cate1, cate2);
+	}
+	
+	public int selectNoticeCountTotal() {
+		return dao.selectNoticeCountTotal();
+	}
+	public int selectNoticeCountTotal(String cate1) {
+		return dao.selectNoticeCountTotal(cate1);
+	}
+	
+	public int selectFaqCountTotal() {
+		return dao.selectFaqCountTotal();
+	}
+	public int selectFaqCountTotal(String cate1) {
+		return dao.selectFaqCountTotal(cate1);
+	}
+	public int selectFaqCountTotal(String cate1, String cate2) {
+		return dao.selectFaqCountTotal(cate1, cate2);
+	}
+	
+	public BoardVO selectQnaArticle(String no) {
+		return dao.selectQnaArticle(no);
+	}
+	
+	public BoardVO selectAnswer(String no) {
+		return dao.selectAnswer(no);
+	}
+	
+	public BoardVO selectNoticeArticle(String no) {
+		return dao.selectNoticeArticle(no);
+	}
+	
+	public BoardVO selectFaqArticle(String no) {
+		return dao.selectFaqArticle(no);
+	}
+	
 	public void updateArticle(String cate, String title, String content, String no) {
 		dao.updateArticle(cate, title, content, no);
 	}
@@ -105,9 +127,20 @@ public enum BoardService {
 		dao.updateArticle(cate, cate2, title, content, no);
 	}
 	
-	public int deleteArticle(String no) {
-		return dao.deleteArticle(no);
+	public void updateNoticeArticle(String no, String cate1, String title, String content) {
+		dao.updateNoticeArticle(no, cate1, title, content);
 	}
+	public void updateFaqArticle(String no, String cate1, String cate2, String title, String content) {
+		dao.updateFaqArticle(no, cate1, cate2, title, content);
+	}
+	
+	public int deleteNoticeArticle(String no) {
+		return dao.deleteNoticeArticle(no);
+	}
+	public int deleteFaqArticle(String no) {
+		return dao.deleteFaqArticle(no);
+	}
+	
 	
 	// 현재 페이지 번호
 	public int getCurrentpage(String pg) {

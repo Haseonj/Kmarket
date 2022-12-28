@@ -1,4 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri ="http://java.sun.com/jsp/jstl/core"%>
 <jsp:include page="../_header.jsp"/>
 <section id="cs">
     <div class="qna">
@@ -13,25 +14,26 @@
             <aside>
                 <h2>문의하기</h2>
                 <ul>
-                    <li class="on"><a href="#">회원</a></li>
-                    <li><a href="#">쿠폰/이벤트</a></li>
-                    <li><a href="#">주문/결제</a></li>
-                    <li><a href="#">배송</a></li>
-                    <li><a href="#">취소/반품/교환</a></li>
-                    <li><a href="#">여행/숙박/항공</a></li>
-                    <li><a href="#">안전거래</a></li>
+                    <li class="${cate1 eq 'user' ? 'on' : 'off'}"><a href="/Kmarket/cs/qna/list.do?cate1=user&pg=1">회원</a></li>
+                    <li class="${cate1 eq 'event' ? 'on' : 'off'}"><a href="/Kmarket/cs/qna/list.do?cate1=event&pg=1">쿠폰/이벤트</a></li>
+                    <li class="${cate1 eq 'order' ? 'on' : 'off'}"><a href="/Kmarket/cs/qna/list.do?cate1=order&pg=1">주문/결제</a></li>
+                    <li class="${cate1 eq 'shipping' ? 'on' : 'off'}"><a href="/Kmarket/cs/qna/list.do?cate1=shipping&pg=1">배송</a></li>
+                    <li class="${cate1 eq 'cancel' ? 'on' : 'off'}"><a href="/Kmarket/cs/qna/list.do?cate1=cancel&pg=1">취소/반품/교환</a></li>
+                    <li class="${cate1 eq 'travel' ? 'on' : 'off'}"><a href="/Kmarket/cs/qna/list.do?cate1=travel&pg=1">여행/숙박/항공</a></li>
+                    <li class="${cate1 eq 'safe' ? 'on' : 'off'}"><a href="/Kmarket/cs/qna/list.do?cate1=safe&pg=1">안전거래</a></li>
                 </ul>
             </aside>
             <article>
                 <nav>
-                    <h2 class="title">[가입] 가입 문의내용</h2>
-                    <span>has*****</span>
-                    <span class="date">2022.12.07</span>
+                    <h2 class="title">[${vo.cate2}] ${vo.title}</h2>
+                    <span>${vo.uid.substring(0, 5)}<c:forEach begin="6" end="${vo.uid.length()}" step="1">*</c:forEach></span>
+                    <span class="date">${vo.rdate.substring(2,10)}</span>
                 </nav>
                 <div class="content">
                     <p>
-                        개인회원에서 법인회원(사업자 회원)으로 전환은 불가하므로
-                        법인회원(사업자 회원) 전환은 신규 가입으로 진행을 해야 합니다.
+                        ${vo.content}
+                        <br>
+                        <br>
                     </p>
                     <p>
                         ※ 피싱 관련 피해신고
@@ -47,7 +49,16 @@
                         <br>
                     </p>
                 </div>
-                <a href="/Kmarket/cs/board/list.do" class="btnList">목록보기</a>
+                <c:if test="${vo.comment == 1}">
+	                <div class="answer">
+		                  	<h2>☞ [답변] ${vo.title}</h2>
+		                  	<br>
+		                    <p>
+		                    	${reply.content}
+		                    </p>
+	                </div>
+                </c:if>
+                <a href="/Kmarket/cs/qna/list.do?cate1=${cate1}&pg=${pg}" class="btnList">목록보기</a>
             </article>
         </section>
 </section>
