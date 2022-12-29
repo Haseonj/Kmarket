@@ -269,25 +269,25 @@
                 <section class="slider">
                     <ul class="bxslider">
                         <li>
-                            <a href="#"><img src="https://via.placeholder.com/985x447" alt="item5"></a>
+                            <a href="#"><img src="./img/mainslideimg.jpg" alt="item5"></a>
                         </li>
                         <li>
-                            <a href="#"><img src="https://via.placeholder.com/985x447" alt="item5"></a>
+                            <a href="#"><img src="./img/mainslideimgtwo.jpg" alt="item5"></a>
                         </li>
                         <li>
-                            <a href="#"><img src="https://via.placeholder.com/985x447" alt="item5"></a>
+                            <a href="#"><img src="./img/mainslideimgthree.jpg" alt="item5"></a>
                         </li>
                         <li>
-                            <a href="#"><img src="https://via.placeholder.com/985x447" alt="item5"></a>
+                            <a href="#"><img src="./img/mainslideimgfour.jpg" alt="item5"></a>
                         </li>
                         <li>
-                            <a href="#"><img src="https://via.placeholder.com/985x447" alt="item5"></a>
+                            <a href="#"><img src="./img/mainslideimgfive.jpg" alt="item5"></a>
                         </li> 
                         <li>
-                            <a href="#"><img src="https://via.placeholder.com/985x447" alt="item5"></a>
+                            <a href="#"><img src="./img/mainslideimgsix.jpg" alt="item5"></a>
                         </li>
                         <li class="bx-clone">
-                            <a href="#"><img src="https://via.placeholder.com/985x447" alt="item5"></a>
+                            <a href="#"><img src="./img/mainslideimgseven.jpg" alt="item5"></a>
                         </li>
                     </ul>
                 </section>
