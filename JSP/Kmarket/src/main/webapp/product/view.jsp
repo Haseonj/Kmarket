@@ -159,6 +159,7 @@
 					
 					let jsonData = {
 							"thumb1": thumb1,
+							"prodNo":prodNo,
 							"prodName": prodName,
 							"descript":descript,
 							"count":count,

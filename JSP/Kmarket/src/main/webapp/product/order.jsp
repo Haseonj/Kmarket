@@ -28,6 +28,8 @@
 				tr += "<td>"+order.pricetotal+"</td>"
 				tr += "</tr>"
 			
+			
+			
 			$('.productlist').append(tr);	
 				
 			let count = Number(order.count);
@@ -46,6 +48,16 @@
 			ordDiscount += discountprice;
 			ordDelivery += delivery;
 			ordPoint += point;
+			
+			
+			let cartvo = "<input type='hidden' name='prodNo' value='"+order.prodNo+"'>";
+			  		cartvo += "<input type='hidden' name='count' value='"+order.count+"'>";
+			  		cartvo += "<input type='hidden' name='price' value='"+order.price.replace(/,/g, "")+"'>";
+			  		cartvo += "<input type='hidden' name='discount' value='"+discountprice+"'>";
+			  		cartvo += "<input type='hidden' name='delivery' value='"+delivery+"'>";
+			  		cartvo += "<input type='hidden' name='total' value='"+order.pricetotal.replace(/,/g, "")+"'>";
+		
+			$('input[name=ordTotPrice]').after(cartvo);
 		}
 		let ordTotal = ordPrice - ordDiscount + ordDelivery;
 		
@@ -53,8 +65,6 @@
 		console.log(ordDiscount);
 		console.log(ordDelivery);
 		console.log(ordTotal);
-		
-		
 		
 		$('#ordCount').append(ordCount+"건");
 		$('#ordPrice').append(ordPrice.toLocaleString("ko-KR")+"원");
@@ -83,11 +93,13 @@
 			
 			
 			let recentpoint = '${recentpoint}';
+			let point = $('input[name=point]').val();
+			console.log(point);
 			
 			if(recentpoint < 5000){
 				$('input[name=usingpoint]').attr("disabled",true);
 			}else{
-				let usedPoint = Number($('input[name=point]').val());
+				let usedPoint = Number(point);
 				
 				console.log('usedPoint : ' + usedPoint);
 				
