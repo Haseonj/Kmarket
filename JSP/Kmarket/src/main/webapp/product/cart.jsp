@@ -146,6 +146,7 @@
 								
 					let tr = $(this).parents('tr');
 					let cartNo = $(this).val();
+					let prodNo = tr.find('.prodNo').val();
 					let thumb1 = tr.find('.thumb1 > img').attr('alt');
 					let prodName = tr.find('.prodName').text();
 					let descript = tr.find('.descript').text();
@@ -157,6 +158,7 @@
 					let pricetotal = tr.find('.pricetotal').text();
 					
 					let jsonData = {
+							"prodNo": prodNo,
 							"thumb1": thumb1,
 							"prodName": prodName,
 							"descript":descript,
@@ -227,7 +229,10 @@
             </tr>
             <c:forEach var="cart" items="${carts}">
             	<tr class="notempty">
-	              <td><input type="checkbox" name="cartlist" id="ck" value="${cart.cartNo}"></td>
+	              <td>
+	              	<input type="checkbox" name="cartlist" id="ck" value="${cart.cartNo}">
+	              	<input type="hidden" name="prodNo" class="prodNo" value="${cart.prodNo}"/>
+	              </td>
 	              <td>
 	                <article>
 	                  <a href="#" class="thumb1"><img src="http://3.39.231.136:8080/Kmarket/file/${cart.thumb1}" alt="${cart.thumb1}"></a>

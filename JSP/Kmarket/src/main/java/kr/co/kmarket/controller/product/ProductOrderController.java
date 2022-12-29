@@ -89,19 +89,27 @@ public class ProductOrderController extends HttpServlet{
 			ordComplete = 1;
 		}
 		
-		logger.debug(savePoint);
-		logger.debug(usedPoint);
+		logger.debug("1.savePoint : " + savePoint);
+		logger.debug("1.usedPoint : " + usedPoint);
 		
 		String uid = member.getUid();
 		int totalSavePoint = Integer.parseInt(savePoint);
 		int totalUsedPoint = Integer.parseInt(usedPoint);
 		
-		logger.debug("savePoint : "+savePoint);
-		logger.debug("usedPoint : "+usedPoint);
+		logger.debug("2.savePoint : "+savePoint);
+		logger.debug("2.usedPoint : "+usedPoint);
 		
 		String[] cartNos = req.getParameterValues("cartNo"); 
 		
-		logger.debug("here1");
+		String prodNo = req.getParameter("prodNo");
+		String count = req.getParameter("count");
+		String price = req.getParameter("price");
+		String discount = req.getParameter("discount");
+		String point = req.getParameter("point");
+		String delivery = req.getParameter("delivery");
+		String total = req.getParameter("total");
+		
+		logger.debug("here1 : " + prodNo);
 		
 		OrderVO vo = new OrderVO();
 		vo.setOrdNo(ordNo);
@@ -121,20 +129,36 @@ public class ProductOrderController extends HttpServlet{
 		vo.setOrdPayment(payment);
 		vo.setOrdComplete(ordComplete);
 		
+		CartVO cart1 = new CartVO();
+		cart1.setProdNo(prodNo);
+		cart1.setCount(count);
+		cart1.setPrice(price);
+		cart1.setDiscount(discount);
+		cart1.setPoint(point);
+		cart1.setDelivery(delivery);
+		cart1.setTotal(total);
+		
+		
 		service.insertOrder(vo);
 		
 		logger.debug("here2");
 		
-		for(String cartNo : cartNos) {
-			logger.debug("cartNo"+cartNo);
+		if(cartNos.length > 0) {
+			for(String cartNo : cartNos) {
+				logger.debug("cartNo"+cartNo);
+				
+				CartVO cart = service.selectCart(cartNo);
+				logger.debug("ProductOrderController...selectCart"+cart);
+				
+				service.insertOrderItem(cart, ordNo);
+				service.deleteCartList(uid, cartNo);
+				logger.debug("here3");
+			}
+		}else {
 			
-			CartVO cart = service.selectCart(cartNo);
-			logger.debug("ProductTestOrderController...selectCart"+cart);
-			
-			service.insertOrderItem(cart, ordNo);
-			service.deleteCartList(uid, cartNo);
-			logger.debug("here3");
+			service.insertOrderItem(cart1, ordNo);
 		}
+		
 		
 		logger.debug("here4");
 		service.insertMemberPoint(uid, ordNo, savePoint);
