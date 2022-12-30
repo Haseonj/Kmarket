@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -245,18 +246,18 @@
                     <ol>
                     <c:forEach var="bests" items="${bests}" varStatus="i">
                         <li>
-                            <a href="#">
+                            <a href="/Kmarket/product/view.do?pg=${pg}&cate1=${bests.prodCate1}&cate2=${bests.prodCate2}&prodNo=${bests.prodNo}">
                                 <div class="thumb">
                                     <i>${i.count}</i>
                                     <img src="http://3.39.231.136:8080/Kmarket/file/${bests.thumb1}" alt="item1">
                                 </div>
                                 <h2>${bests.prodName}</h2>
                                 <div class="org_price">
-                                    <del>${bests.price}</del>
-                                    <span>${bests.discount}</span>
+                                    <del><fmt:formatNumber value="${bests.price}" pattern="#,###"/></del>
+                                    <span>${bests.discount}%</span>
                                 </div>
                                 <div class="dis_price">
-                                    <ins>${bests.saleprice}</ins>
+                                    <ins><fmt:formatNumber value="${bests.saleprice}" pattern="#,###"/></ins>
                                 </div>
                             </a>
                         </li>
@@ -269,26 +270,20 @@
                 <section class="slider">
                     <ul class="bxslider">
                         <li>
-                            <a href="#"><img src="./img/mainslideimg.jpg" alt="item5"></a>
+                            <a href="#"><img src="./img/slider_item1.jpg" alt="item5"></a>
                         </li>
                         <li>
-                            <a href="#"><img src="./img/mainslideimgtwo.jpg" alt="item5"></a>
+                            <a href="#"><img src="./img/slider_item2.jpg" alt="item5"></a>
                         </li>
                         <li>
-                            <a href="#"><img src="./img/mainslideimgthree.jpg" alt="item5"></a>
+                            <a href="#"><img src="./img/slider_item3.jpg" alt="item5"></a>
                         </li>
                         <li>
-                            <a href="#"><img src="./img/mainslideimgfour.jpg" alt="item5"></a>
+                            <a href="#"><img src="./img/slider_item4.jpg" alt="item5"></a>
                         </li>
                         <li>
-                            <a href="#"><img src="./img/mainslideimgfive.jpg" alt="item5"></a>
+                            <a href="#"><img src="./img/slider_item5.jpg" alt="item5"></a>
                         </li> 
-                        <li>
-                            <a href="#"><img src="./img/mainslideimgsix.jpg" alt="item5"></a>
-                        </li>
-                        <li class="bx-clone">
-                            <a href="#"><img src="./img/mainslideimgseven.jpg" alt="item5"></a>
-                        </li>
                     </ul>
                 </section>
                 <!-- 히트상품 영역 -->
@@ -296,24 +291,24 @@
                     <h3><span>히트상품</span></h3>
                    	<c:forEach var="hit" items="${hits}">
                     <article>
-                        <a href="#">
+                        <a href="/Kmarket/product/view.do?pg=${pg}&cate1=${hit.prodCate1}&cate2=${hit.prodCate2}&prodNo=${hit.prodNo}">
                             <div class="thumb">
                                 <img src="http://3.39.231.136:8080/Kmarket/file/${hit.thumb1}" alt="t1">
                             </div>
                             <h2>${hit.prodName}</h2>
                             <p>간단한 상품 설명</p>
                             <div class="org_price">
-                                <del>${hit.price}</del>
-                                <span>${hit.discount}</span>
+                                <del><fmt:formatNumber value="${hit.price}" pattern="#,###"/></del>
+                                <span>${hit.discount}%</span>
                             </div>
                             <div class="dis_price">
-                                <ins>${hit.saleprice}</ins>
+                                <ins><fmt:formatNumber value="${hit.saleprice}" pattern="#,###"/></ins>
                                 <c:choose>
                                 <c:when test="${hit.delivery == '0'}">
                                 	<span class="free">무료배송</span>
                                 </c:when>
                                 <c:otherwise>
-                                	<span>배송비 ${hit.delivery}</span>
+                                	<span>배송비 <fmt:formatNumber value="${hit.delivery}" pattern="#,###"/></span>
                                 </c:otherwise>
                                 </c:choose>
                             </div>
@@ -326,24 +321,24 @@
                     <h3><span>추천상품</span></h3>
                     <c:forEach var="recommend" items="${recs}">
                     <article>
-                        <a href="#">
+                        <a href="/Kmarket/product/view.do?pg=${pg}&cate1=${recommend.prodCate1}&cate2=${recommend.prodCate2}&prodNo=${recommend.prodNo}">
                             <div class="thumb">
                                 <img src="http://3.39.231.136:8080/Kmarket/file/${recommend.thumb1}" alt="t1">
                             </div>
                             <h2>${recommend.prodName}</h2>
                             <p>간단한 상품 설명</p>
                             <div class="org_price">
-                                <del>${recommend.price}</del>
-                                <span>${recommend.discount}</span>
+                                <del><fmt:formatNumber value="${recommend.price}" pattern="#,###"/></del>
+                                <span>${recommend.discount}%</span>
                             </div>
                             <div class="dis_price">
-                                <ins>${recommend.saleprice}</ins>
+                                <ins><fmt:formatNumber value="${recommend.saleprice}" pattern="#,###"/></ins>
                                 <c:choose>
                                 <c:when test="${recommend.delivery == '0'}">
                                 	<span class="free">무료배송</span>
                                 </c:when>
                                 <c:otherwise>
-                                	<span>배송비 ${recommend.delivery}</span>
+                                	<span>배송비 <fmt:formatNumber value="${recommend.delivery}" pattern="#,###"/></span>
                                 </c:otherwise>
                                 </c:choose>
                             </div>
@@ -356,24 +351,24 @@
                     <h3><span>최신상품</span></h3>
                     <c:forEach var="latest" items="${latests}">
                     <article>
-                        <a href="#">
+                        <a href="/Kmarket/product/view.do?pg=${pg}&cate1=${latest.prodCate1}&cate2=${latest.prodCate2}&prodNo=${latest.prodNo}">
                             <div class="thumb">
                                 <img src="http://3.39.231.136:8080/Kmarket/file/${latest.thumb1}" alt="t1">
                             </div>
                             <h2>${latest.prodName}</h2>
                             <p>간단한 상품 설명</p>
                             <div class="org_price">
-                                <del>${latest.price}</del>
-                                <span>${latest.discount}</span>
+                                <del><fmt:formatNumber value="${latest.price}" pattern="#,###"/></del>
+                                <span>${latest.discount}%</span>
                             </div>
                             <div class="dis_price">
-                                <ins>${latest.saleprice}</ins>
+                                <ins><fmt:formatNumber value="${latest.saleprice}" pattern="#,###"/></ins>
                                 <c:choose>
                                 <c:when test="${latest.delivery == '0'}">
                                 	<span class="free">무료배송</span>
                                 </c:when>
                                 <c:otherwise>
-                                	<span>배송비 ${latest.delivery}</span>
+                                	<span>배송비 <fmt:formatNumber value="${latest.delivery}" pattern="#,###"/></span>
                                 </c:otherwise>
                                 </c:choose>
                             </div>
@@ -386,24 +381,24 @@
                     <h3><span>인기상품</span></h3>
                    	<c:forEach var="hot" items="${hots}">
                     <article>
-                        <a href="#">
+                        <a href="/Kmarket/product/view.do?pg=${pg}&cate1=${hot.prodCate1}&cate2=${hot.prodCate2}&prodNo=${hot.prodNo}">
                             <div class="thumb">
                                 <img src="http://3.39.231.136:8080/Kmarket/file/${hot.thumb1}" alt="t1">
                             </div>
                             <h2>${hot.prodName}</h2>
                             <p>간단한 상품 설명</p>
                             <div class="org_price">
-                                <del>${hot.price}</del>
-                                <span>${hot.discount}</span>
+                                <del><fmt:formatNumber value="${hot.price}" pattern="#,###"/></del>
+                                <span>${hot.discount}%</span>
                             </div>
                             <div class="dis_price">
-                                <ins>${hot.saleprice}</ins>
+                                <ins><fmt:formatNumber value="${hot.saleprice}" pattern="#,###"/></ins>
                                 <c:choose>
                                 <c:when test="${hot.delivery == '0'}">
                                 	<span class="free">무료배송</span>
                                 </c:when>
                                 <c:otherwise>
-                                	<span>배송비 ${hot.delivery}</span>
+                                	<span>배송비 <fmt:formatNumber value="${hot.delivery}" pattern="#,###"/></span>
                                 </c:otherwise>
                                 </c:choose>
                             </div>
@@ -416,24 +411,24 @@
                     <h3><span>할인상품</span></h3>
                     <c:forEach var="discount" items="${dis}">
                     <article>
-                        <a href="#">
+                        <a href="/Kmarket/product/view.do?pg=${pg}&cate1=${discount.prodCate1}&cate2=${discount.prodCate2}&prodNo=${discount.prodNo}">
                             <div class="thumb">
                                 <img src="http://3.39.231.136:8080/Kmarket/file/${discount.thumb1}" alt="t1">
                             </div>
                             <h2>${discount.prodName}</h2>
                             <p>간단한 상품 설명</p>
                             <div class="org_price">
-                                <del>${discount.price}</del>
-                                <span>${discount.discount}</span>
+                                <del><fmt:formatNumber value="${discount.price}" pattern="#,###"/></del>
+                                <span>${discount.discount}%</span>
                             </div>
                             <div class="dis_price">
-                                <ins>${discount.saleprice}</ins>
+                                <ins><fmt:formatNumber value="${discount.saleprice}" pattern="#,###"/></ins>
                                 <c:choose>
                                 <c:when test="${discount.delivery == '0'}">
                                 	<span class="free">무료배송</span>
                                 </c:when>
                                 <c:otherwise>
-                                	<span>배송비 ${discount.delivery}</span>
+                                	<span>배송비 <fmt:formatNumber value="${discount.delivery}" pattern="#,###"/></span>
                                 </c:otherwise>
                                 </c:choose>
                             </div>

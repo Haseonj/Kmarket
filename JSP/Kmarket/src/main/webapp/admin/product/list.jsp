@@ -80,7 +80,7 @@ $(function(){
                     <c:forEach items="${adpd}" var="prod" begin="${start}" end="${start+9}">
                     <tr>
                         <td><input type="checkbox" name="prodlist" value="${prod.prodNo}"></td>
-                        <td><img src="http://3.39.231.136:8080/Kmarket/file/${prod.thumb1}" alt="상품이미지"></td>
+                        <td><img src="http://3.39.231.136:8080/Kmarket/file/${prod.thumb1}" alt="상품이미지" style="width: 60px; height: 60px;"></td>
                         <td>${prod.prodNo}</td>
                         <td>${prod.prodName}</td>
                         <td>${prod.price}</td>

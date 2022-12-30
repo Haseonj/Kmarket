@@ -371,6 +371,8 @@ button[type=submit] {
 
 #admin-product-list > section > table img.thumb {width: 60px;}
 
+#admin-product-list > section > table > tr:nth-child(2) > td > img {width: 60px; height: 60px;}
+
 #admin-product-list > section input[type=button] {
     float: left;
     width: 100px;
